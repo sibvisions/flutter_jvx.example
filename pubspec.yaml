@@ -24,6 +24,11 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
 
+  jvx_mobile_v3:
+    git:
+      url: https://github.com/sibvisions/flutterclient.git
+      ref: custom-screen
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
