@@ -107,9 +107,11 @@ packages:
   flutter_barcode_scanner:
     dependency: transitive
     description:
-      name: flutter_barcode_scanner
-      url: "https://pub.dartlang.org"
-    source: hosted
+      path: "."
+      ref: HEAD
+      resolved-ref: d7ab6545dafca754f9a2da7722b3b3f3f1752b06
+      url: "git://github.com/AmolGangadhare/flutter_barcode_scanner.git"
+    source: git
     version: "0.1.7"
   flutter_bloc:
     dependency: transitive
@@ -238,7 +240,7 @@ packages:
     description:
       path: "."
       ref: custom-screen
-      resolved-ref: "4f6b737382bccfa2649eff18798afa5e30fe322b"
+      resolved-ref: "2e8f02a4f2795b30039e7d8dfc616087cdb6fe46"
       url: "https://github.com/sibvisions/flutterclient.git"
     source: git
     version: "1.0.0+1"
