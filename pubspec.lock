@@ -43,6 +43,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.2"
+  charts_common:
+    dependency: transitive
+    description:
+      name: charts_common
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.8.1"
+  charts_flutter:
+    dependency: "direct main"
+    description:
+      name: charts_flutter
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.8.1"
   collection:
     dependency: transitive
     description:
@@ -104,15 +118,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_barcode_scanner:
-    dependency: transitive
-    description:
-      path: "."
-      ref: HEAD
-      resolved-ref: d7ab6545dafca754f9a2da7722b3b3f3f1752b06
-      url: "git://github.com/AmolGangadhare/flutter_barcode_scanner.git"
-    source: git
-    version: "0.1.7"
   flutter_bloc:
     dependency: transitive
     description:
@@ -137,7 +142,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "5d71bdc5624a846a1e973a43018f7b17d636fdc8"
+      resolved-ref: "1c12fa71481295f01191f8ce9e4352cae2286b56"
       url: "https://github.com/btastic/flutter_native_image.git"
     source: git
     version: "0.0.4"
@@ -240,7 +245,7 @@ packages:
     description:
       path: "."
       ref: custom-screen
-      resolved-ref: "2e8f02a4f2795b30039e7d8dfc616087cdb6fe46"
+      resolved-ref: "2ffb477945e76a9224fd8eb09661811d7e2a7408"
       url: "https://github.com/sibvisions/flutterclient.git"
     source: git
     version: "1.0.0+1"
@@ -251,6 +256,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.2"
+  logging:
+    dependency: transitive
+    description:
+      name: logging
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.11.4"
   matcher:
     dependency: transitive
     description:
