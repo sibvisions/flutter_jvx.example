@@ -21,7 +21,9 @@ class TestCustomScreen extends CustomScreen {
   @override
   void update(Request request, List<JVxData> data, List<JVxMetaData> metaData, ScreenGeneric genericScreen) {
     if (data != null && data.length > 0) {
-      data[0].records.forEach((record) => countries.add(Country.fromJson(record)));
+      for (int i = 0; i <= 3; i++) {
+        countries.add(Country.fromJson(data[0].records[i]));
+      }
     }
   }
 }
