@@ -1,6 +1,6 @@
-# FlutterClient Example application
+# Example Flutter Client
 
-The example application demonstrates using the [FlutterClient](https://github.com/sibvisions/flutterclient) as external library. The app will add custom screens and will use other external libraties to demonstrate the full power.
+This example application demonstrates using the [FlutterClient](https://github.com/sibvisions/flutterclient) as external library. The app will add custom screens and will use other external libraties to demonstrate the full power.
 
 ## Getting Started
 
