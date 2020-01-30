@@ -1,3 +1,4 @@
+import 'package:flutterclient_example/screens/map_custom_screen.dart';
 import 'package:flutterclient_example/screens/telephone_call_custom_screen.dart';
 import 'package:jvx_mobile_v3/custom_screen/custom_screen_manager/custom_screen_manager.dart';
 import 'package:jvx_mobile_v3/model/action.dart';
@@ -13,12 +14,14 @@ const String CHART_COMP_ID =
     "com.sibvisions.apps.mobile.demo.screens.features.ChartWorkScreen:L1_MI_COM-SIB-APP-MOB-DEM-SCR-FEA-CHAWORSCR";
 const String HELLO_COMP_ID = "HELLO_CUSTOM_SCREEN";
 const String TELEPHONE_CALL_COMP_ID = "TELEPHONE_CALL_SCREEN";
+const String MAP_COMP_ID = "MAP_SCREEN";
 
 class ExampleCustomScreenManager extends CustomScreenManager {
   Map<String, IScreen> customScreens = <String, IScreen>{
     CHART_COMP_ID: ChartCustomScreen(ComponentCreator()),
     HELLO_COMP_ID: HelloCustomScreen(ComponentCreator()),
     TELEPHONE_CALL_COMP_ID: TelephoneCallCustomScreen(ComponentCreator()),
+    MAP_COMP_ID: MapCustomScreen(ComponentCreator())
   };
 
   @override
@@ -29,6 +32,8 @@ class ExampleCustomScreenManager extends CustomScreenManager {
       return customScreens[HELLO_COMP_ID];
     } else if (componentId == TELEPHONE_CALL_COMP_ID) {
       return customScreens[TELEPHONE_CALL_COMP_ID];
+    } else if (componentId == MAP_COMP_ID) {
+      return customScreens[MAP_COMP_ID];
     }
     return super.getScreen(componentId);
   }
@@ -46,8 +51,13 @@ class ExampleCustomScreenManager extends CustomScreenManager {
             label: 'Telephone Call Screen'),
         group: 'Customscreens');
 
+    MenuItem toAddMapCustomScreen = MenuItem(
+        action: Action(componentId: MAP_COMP_ID, label: 'Map Custom Screen'),
+        group: 'Customscreens');
+
     menu.add(toAddHelloCustomScreen);
     menu.add(toAddTelephoneCallCustomScreen);
+    menu.add(toAddMapCustomScreen);
     return menu;
   }
 
