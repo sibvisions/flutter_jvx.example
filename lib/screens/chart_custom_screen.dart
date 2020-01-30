@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
-import 'package:jvx_mobile_v3/utils/uidata.dart';
 
-import '../test_custom_screen.dart';
+import '../example_custom_screen.dart';
+
 
 class ChartCustomScreen extends StatefulWidget {
   final List<Country> countries;

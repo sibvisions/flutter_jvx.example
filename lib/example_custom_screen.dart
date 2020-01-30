@@ -8,10 +8,10 @@ import 'package:jvx_mobile_v3/model/api/response/meta_data/jvx_meta_data.dart';
 import 'package:jvx_mobile_v3/model/api/response/screen_generic.dart';
 import 'package:jvx_mobile_v3/ui/screen/component_creator.dart';
 
-class TestCustomScreen extends CustomScreen {
+class ExampleCustomScreen extends CustomScreen {
   List<Country> countries = <Country>[];
 
-  TestCustomScreen(ComponentCreator componentCreator) : super(componentCreator);
+  ExampleCustomScreen(ComponentCreator componentCreator) : super(componentCreator);
 
   @override
   Widget getWidget() {
@@ -25,6 +25,11 @@ class TestCustomScreen extends CustomScreen {
         countries.add(Country.fromJson(data[0].records[i]));
       }
     }
+  }
+  
+  @override
+  bool withServer() {
+    return true;
   }
 }
 

@@ -7,8 +7,8 @@ import 'package:jvx_mobile_v3/model/api/response/meta_data/jvx_meta_data.dart';
 import 'package:jvx_mobile_v3/model/api/response/screen_generic.dart';
 import 'package:jvx_mobile_v3/ui/screen/component_creator.dart';
 
-class TestCustomScreen2 extends CustomScreen {
-  TestCustomScreen2(ComponentCreator componentCreator)
+class ExampleCustomScreen2 extends CustomScreen {
+  ExampleCustomScreen2(ComponentCreator componentCreator)
       : super(componentCreator);
 
   @override
@@ -19,4 +19,9 @@ class TestCustomScreen2 extends CustomScreen {
   @override
   void update(Request request, List<JVxData> data, List<JVxMetaData> metaData,
       ScreenGeneric genericScreen) {}
+
+  @override
+  bool withServer() {
+    return false;
+  }
 }

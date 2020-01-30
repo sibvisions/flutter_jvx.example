@@ -245,7 +245,7 @@ packages:
     description:
       path: "."
       ref: custom-screen
-      resolved-ref: "2ffb477945e76a9224fd8eb09661811d7e2a7408"
+      resolved-ref: f8f4dd02c8b3d8822f0b0af179fb5df0441046b3
       url: "https://github.com/sibvisions/flutterclient.git"
     source: git
     version: "1.0.0+1"
@@ -297,7 +297,7 @@ packages:
       name: path_provider
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.5.1"
+    version: "1.6.0"
   pedantic:
     dependency: transitive
     description:
