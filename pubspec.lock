@@ -286,8 +286,8 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: custom-screen
-      resolved-ref: "8144af59300d48141296e379b20c6f0657bc30ca"
+      ref: HEAD
+      resolved-ref: "81562449025c33c7854bdd6c6da24dad6873045e"
       url: "https://github.com/sibvisions/flutterclient.git"
     source: git
     version: "1.0.0+1"
