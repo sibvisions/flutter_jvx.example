@@ -6,7 +6,7 @@ import 'package:jvx_mobile_v3/model/api/response/meta_data/jvx_meta_data.dart';
 import 'package:jvx_mobile_v3/model/api/response/screen_generic.dart';
 import 'package:jvx_mobile_v3/ui/screen/component_creator.dart';
 
-import '../widgets/chart_custom_screen.dart';
+import '../widgets/chart_custom_widget.dart';
 
 class ChartCustomScreen extends CustomScreen {
   List<Country> countries = <Country>[];
