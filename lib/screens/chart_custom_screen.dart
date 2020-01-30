@@ -1,42 +1,49 @@
 import 'package:flutter/material.dart';
-import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:jvx_mobile_v3/custom_screen/custom_screen.dart';
+import 'package:jvx_mobile_v3/model/api/request/request.dart';
+import 'package:jvx_mobile_v3/model/api/response/data/jvx_data.dart';
+import 'package:jvx_mobile_v3/model/api/response/meta_data/jvx_meta_data.dart';
+import 'package:jvx_mobile_v3/model/api/response/screen_generic.dart';
+import 'package:jvx_mobile_v3/ui/screen/component_creator.dart';
 
-import '../example_custom_screen.dart';
+import '../widgets/chart_custom_screen.dart';
 
+class ChartCustomScreen extends CustomScreen {
+  List<Country> countries = <Country>[];
 
-class ChartCustomScreen extends StatefulWidget {
-  final List<Country> countries;
-
-  const ChartCustomScreen({Key key, this.countries}) : super(key: key);
+  ChartCustomScreen(ComponentCreator componentCreator) : super(componentCreator);
 
   @override
-  _ChartCustomScreenState createState() => _ChartCustomScreenState();
+  Widget getWidget() {
+    return ChartCustomWidget(countries: countries,);
+  }
+
+  @override
+  void update(Request request, List<JVxData> data, List<JVxMetaData> metaData, ScreenGeneric genericScreen) {
+    if (data != null && data.length > 0) {
+      for (int i = 0; i <= 3; i++) {
+        countries.add(Country.fromJson(data[0].records[i]));
+      }
+    }
+  }
+  
+  @override
+  bool withServer() {
+    return true;
+  }
 }
 
-class _ChartCustomScreenState extends State<ChartCustomScreen> {
-  List<charts.Series> seriesList;
-  bool animate = false;
+class Country {
+  int id;
+  String name;
+  double litres;
+  double distance;
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: charts.PieChart(
-        [
-          new charts.Series<Country, int>(
-            id: 'Countries',
-            domainFn: (Country country, _) => country.litres.toInt(),
-            measureFn: (Country country, _) => country.distance,
-            data: widget.countries,
-            labelAccessorFn: (Country country, _) => '${country.name}',
-          ),
-        ],
-        animate: animate,
-        defaultRenderer: new charts.ArcRendererConfig(arcRendererDecorators: [
-          new charts.ArcLabelDecorator(
-            labelPosition: charts.ArcLabelPosition.auto
-          )
-        ]),
-      ),
-    );
-  }
+  Country(this.id, this.name, this.litres, this.distance);
+
+  Country.fromJson(List json)
+    : id = json[0],
+      name = json[1],
+      litres = json[2],
+      distance = json[3];
 }

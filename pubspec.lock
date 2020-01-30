@@ -245,7 +245,7 @@ packages:
     description:
       path: "."
       ref: custom-screen
-      resolved-ref: f8f4dd02c8b3d8822f0b0af179fb5df0441046b3
+      resolved-ref: "8144af59300d48141296e379b20c6f0657bc30ca"
       url: "https://github.com/sibvisions/flutterclient.git"
     source: git
     version: "1.0.0+1"

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class HelloCustomScreen extends StatefulWidget {
+class HelloCustomWidget extends StatefulWidget {
   @override
-  _HelloCustomScreenState createState() => _HelloCustomScreenState();
+  _HelloCustomWidgetState createState() => _HelloCustomWidgetState();
 }
 
-class _HelloCustomScreenState extends State<HelloCustomScreen> {
+class _HelloCustomWidgetState extends State<HelloCustomWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -1,5 +1,3 @@
-import 'package:flutterclient_example/example_custom_screeen_2.dart';
-import 'package:flutterclient_example/example_custom_screen.dart';
 import 'package:jvx_mobile_v3/custom_screen/custom_screen_manager/custom_screen_manager.dart';
 import 'package:jvx_mobile_v3/model/action.dart';
 import 'package:jvx_mobile_v3/model/api/response/user_data.dart';
@@ -7,14 +5,17 @@ import 'package:jvx_mobile_v3/model/menu_item.dart';
 import 'package:jvx_mobile_v3/ui/screen/component_creator.dart';
 import 'package:jvx_mobile_v3/ui/screen/i_screen.dart';
 
+import 'screens/chart_custom_screen.dart';
+import 'screens/hello_custom_screeen.dart';
+
 const String CHART_COMP_ID =
     "com.sibvisions.apps.mobile.demo.screens.features.ChartWorkScreen:L1_MI_COM-SIB-APP-MOB-DEM-SCR-FEA-CHAWORSCR";
 const String HELLO_COMP_ID = "HELLO_CUSTOM_SCREEN";
 
 class ExampleCustomScreenManager extends CustomScreenManager {
   Map<String, IScreen> customScreens = <String, IScreen>{
-    CHART_COMP_ID: ExampleCustomScreen(ComponentCreator()),
-    HELLO_COMP_ID: ExampleCustomScreen2(ComponentCreator()),
+    CHART_COMP_ID: ChartCustomScreen(ComponentCreator()),
+    HELLO_COMP_ID: HelloCustomScreen(ComponentCreator()),
   };
 
   @override
