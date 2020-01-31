@@ -10,30 +10,23 @@ import 'package:jvx_mobile_v3/ui/screen/i_screen.dart';
 import 'screens/chart_custom_screen.dart';
 import 'screens/hello_custom_screeen.dart';
 
-const String CHART_COMP_ID =
-    "com.sibvisions.apps.mobile.demo.screens.features.ChartWorkScreen:L1_MI_COM-SIB-APP-MOB-DEM-SCR-FEA-CHAWORSCR";
+const String CHART_COMP_ID = "com.sibvisions.apps.mobile.demo.screens.features.ChartWorkScreen:L1_MI_COM-SIB-APP-MOB-DEM-SCR-FEA-CHAWORSCR";
 const String HELLO_COMP_ID = "HELLO_CUSTOM_SCREEN";
 const String TELEPHONE_CALL_COMP_ID = "TELEPHONE_CALL_SCREEN";
 const String MAP_COMP_ID = "MAP_SCREEN";
 
 class ExampleCustomScreenManager extends CustomScreenManager {
-  Map<String, IScreen> customScreens = <String, IScreen>{
-    CHART_COMP_ID: ChartCustomScreen(ComponentCreator()),
-    HELLO_COMP_ID: HelloCustomScreen(ComponentCreator()),
-    TELEPHONE_CALL_COMP_ID: TelephoneCallCustomScreen(ComponentCreator()),
-    MAP_COMP_ID: MapCustomScreen(ComponentCreator())
-  };
 
   @override
   getScreen(String componentId) {
     if (componentId == CHART_COMP_ID) {
-      return customScreens[CHART_COMP_ID];
+      return ChartCustomScreen(ComponentCreator());
     } else if (componentId == HELLO_COMP_ID) {
-      return customScreens[HELLO_COMP_ID];
+      return HelloCustomScreen(ComponentCreator());
     } else if (componentId == TELEPHONE_CALL_COMP_ID) {
-      return customScreens[TELEPHONE_CALL_COMP_ID];
+      return TelephoneCallCustomScreen(ComponentCreator());
     } else if (componentId == MAP_COMP_ID) {
-      return customScreens[MAP_COMP_ID];
+      return MapCustomScreen(ComponentCreator());
     }
     return super.getScreen(componentId);
   }
@@ -55,9 +48,28 @@ class ExampleCustomScreenManager extends CustomScreenManager {
         action: Action(componentId: MAP_COMP_ID, label: 'Map Custom Screen'),
         group: 'Customscreens');
 
-    menu.add(toAddHelloCustomScreen);
-    menu.add(toAddTelephoneCallCustomScreen);
-    menu.add(toAddMapCustomScreen);
+    bool hello = false;
+    bool call = false;
+    bool map = false;
+
+    menu.forEach((item) {
+      hello |= identical(item.action.componentId, HELLO_COMP_ID);
+      call |= identical(item.action.componentId, TELEPHONE_CALL_COMP_ID);
+      map |= identical(item.action.componentId, MAP_COMP_ID);
+    });
+
+    if (!hello) {
+      menu.add(toAddHelloCustomScreen);
+    }
+
+    if (!call) {
+      menu.add(toAddTelephoneCallCustomScreen);
+    }
+
+    if (!map) {
+      menu.add(toAddMapCustomScreen);
+    }
+
     return menu;
   }
 
