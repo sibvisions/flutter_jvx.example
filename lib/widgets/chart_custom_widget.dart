@@ -16,11 +16,7 @@ class ChartCustomWidget extends StatefulWidget {
 class _ChartCustomWidgetState extends State<ChartCustomWidget> {
   List<charts.Series> seriesList;
   bool animate = false;
-  charts.Color color = charts.Color(
-      r: UIData.ui_kit_color_2.red,
-      g: UIData.ui_kit_color_2.green,
-      b: UIData.ui_kit_color_2.blue,
-      a: UIData.ui_kit_color_2.alpha);
+  charts.Color color = charts.Color(r: UIData.ui_kit_color_2.red, g: UIData.ui_kit_color_2.green, b: UIData.ui_kit_color_2.blue, a: UIData.ui_kit_color_2.alpha);
 
   @override
   Widget build(BuildContext context) {
@@ -28,21 +24,26 @@ class _ChartCustomWidgetState extends State<ChartCustomWidget> {
         length: 2,
         child: Scaffold(
           appBar: AppBar(
-            leading: Container(),
-            title: TabBar(
-              tabs: <Widget>[
-                Tab(
-                  text: 'Pie Chart',
+              leading: new Container(),
+              flexibleSpace: new Column(mainAxisAlignment: MainAxisAlignment.end, children: [
+                TabBar(
+                  tabs: <Widget>[
+                    Tab(
+                      text: 'Pie Chart',
+                    ),
+                    Tab(
+                      text: 'Bar Chart',
+                    ),
+                  ],
                 ),
-                Tab(
-                  text: 'Bar Chart',
-                ),
-              ],
-            ),
-          ),
+              ])),
           body: TabBarView(
             children: <Widget>[
-              PieChartWidget(widget: widget, animate: animate, color: color,),
+              PieChartWidget(
+                widget: widget,
+                animate: animate,
+                color: color,
+              ),
               BarChartWidget(widget: widget, color: color, animate: animate)
             ],
           ),
@@ -67,15 +68,7 @@ class BarChartWidget extends StatelessWidget {
     return Container(
       child: charts.BarChart(
         [
-          new charts.Series<Country, String>(
-            id: 'Countries',
-            domainFn: (Country country, _) => country.name,
-            measureFn: (Country country, _) => country.litres,
-            data: widget.countries,
-            labelAccessorFn: (Country country, _) =>
-                '${country.name}',
-            colorFn: (Country country, _) => charts.Color(a: color.a, b: color.b, g: color.g, r: country.litres.toInt())
-          ),
+          new charts.Series<Country, String>(id: 'Countries', domainFn: (Country country, _) => country.name, measureFn: (Country country, _) => country.litres, data: widget.countries, labelAccessorFn: (Country country, _) => '${country.name}', colorFn: (Country country, _) => charts.Color(a: color.a, b: color.b, g: color.g, r: country.litres.toInt())),
         ],
         animate: animate,
       ),
@@ -84,12 +77,7 @@ class BarChartWidget extends StatelessWidget {
 }
 
 class PieChartWidget extends StatelessWidget {
-  const PieChartWidget(
-      {Key key,
-      @required this.widget,
-      @required this.animate,
-      @required this.color})
-      : super(key: key);
+  const PieChartWidget({Key key, @required this.widget, @required this.animate, @required this.color}) : super(key: key);
 
   final ChartCustomWidget widget;
   final bool animate;
@@ -100,19 +88,10 @@ class PieChartWidget extends StatelessWidget {
     return Container(
       child: charts.PieChart(
         [
-          new charts.Series<Country, int>(
-              id: 'Countries',
-              domainFn: (Country country, _) => country.distance.toInt(),
-              measureFn: (Country country, _) => country.litres,
-              data: widget.countries,
-              labelAccessorFn: (Country country, _) => '${country.name}',
-              colorFn: (Country country, _) => charts.Color(a: color.a, b: color.b, g: color.g, r: country.litres.toInt())),
+          new charts.Series<Country, int>(id: 'Countries', domainFn: (Country country, _) => country.distance.toInt(), measureFn: (Country country, _) => country.litres, data: widget.countries, labelAccessorFn: (Country country, _) => '${country.name}', colorFn: (Country country, _) => charts.Color(a: color.a, b: color.b, g: color.g, r: country.litres.toInt())),
         ],
         animate: animate,
-        defaultRenderer: new charts.ArcRendererConfig(arcRendererDecorators: [
-          new charts.ArcLabelDecorator(
-              labelPosition: charts.ArcLabelPosition.auto)
-        ]),
+        defaultRenderer: new charts.ArcRendererConfig(arcRendererDecorators: [new charts.ArcLabelDecorator(labelPosition: charts.ArcLabelPosition.auto)]),
       ),
     );
   }
