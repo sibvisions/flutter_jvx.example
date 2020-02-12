@@ -62,16 +62,16 @@ flutter:
   # fonts:
   #   - family: Quicksand
   #     fonts:
-  #       - asset: packages/jvx_mobile_v3/assets/fonts/Quicksand-Medium.ttf
+  #       - asset: packages/jvx_flutterclient/assets/fonts/Quicksand-Medium.ttf
   #         style: normal
-  #       - asset: packages/jvx_mobile_v3/assets/fonts/Quicksand_Bold.otf
+  #       - asset: packages/jvx_flutterclient/assets/fonts/Quicksand_Bold.otf
   #         weight: 700
 
   #   - family: Raleway
   #     fonts:
-  #       - asset: packages/jvx_mobile_v3/assets/fonts/Raleway-Regular.ttf
+  #       - asset: packages/jvx_flutterclient/assets/fonts/Raleway-Regular.ttf
   #         style: normal
-  #       - asset: packages/jvx_mobile_v3/assets/fonts/Raleway-Medium.ttf
+  #       - asset: packages/jvx_flutterclient/assets/fonts/Raleway-Medium.ttf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

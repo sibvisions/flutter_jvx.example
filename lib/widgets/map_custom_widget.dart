@@ -31,7 +31,7 @@ class MapCustomWidget extends StatelessWidget {
                       height: 100.0,
                       point: new LatLng(48.246533, 16.380093),
                       builder: (ctx) => new Container(
-                        child: Image.asset("packages/jvx_mobile_v3/assets/images/sib_visions.jpg"),
+                        child: Image.asset("packages/jvx_flutterclient/assets/images/sib_visions.jpg"),
                       ),
                     ),
                   ],
