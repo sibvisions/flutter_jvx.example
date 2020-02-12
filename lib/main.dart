@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:jvx_mobile_v3/custom_screen/custom_application_widget.dart';
-import 'package:jvx_mobile_v3/utils/config.dart';
+import 'package:jvx_flutterclient/custom_screen/custom_application_widget.dart';
+import 'package:jvx_flutterclient/utils/config.dart';
 
 import 'example_custom_screen_manager.dart';
 

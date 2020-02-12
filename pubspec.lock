@@ -282,12 +282,12 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.4.0"
-  jvx_mobile_v3:
+  jvx_flutterclient:
     dependency: "direct main"
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "81562449025c33c7854bdd6c6da24dad6873045e"
+      resolved-ref: b0076aeee946e82c79dc956f3a91691bf4f3f7d8
       url: "https://github.com/sibvisions/flutterclient.git"
     source: git
     version: "1.0.0+1"

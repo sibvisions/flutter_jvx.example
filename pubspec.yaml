@@ -23,7 +23,7 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
-  jvx_mobile_v3:
+  jvx_flutterclient:
     git:
       url: https://github.com/sibvisions/flutterclient.git
   charts_flutter: ^0.8.1
