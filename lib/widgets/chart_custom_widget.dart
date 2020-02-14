@@ -119,7 +119,7 @@ class PieChartWidget extends StatelessWidget
                                                         => '${country.name}',
                                                         insideLabelStyleAccessorFn: (Country country, _) => charts.TextStyleSpec(
                                                             fontSize: 12, // size in Pts.
-                                                            color: charts.MaterialPalette.gray.shadeDefault),
+                                                            color: charts.MaterialPalette.gray.shade800),
                                                         colorFn: (Country country, _) => color.elementAt(_)),
                 ],
                 animate: animate,
