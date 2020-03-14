@@ -34,4 +34,4 @@ The example application uses [FlutterClient](https://github.com/sibvisions/flutt
 
 ## Preview
 
-<img src="readme_images/login.png" width="300" /> <img src="readme_images/menu.png" width="300" /> <img src="readme_images/userinfo.png" width="300" /> <img src="readme_images/piechart.png" width="300" /> <img src="readme_images/barchart.png" width="300" /> <img src="readme_images/contact.png" width="300" /> <img src="readme_images/form.png" width="300" />
+<img src="readme_images/login.png" width="280" /> <img src="readme_images/menu.png" width="280" /> <img src="readme_images/userinfo.png" width="280" /> <img src="readme_images/piechart.png" width="280" /> <img src="readme_images/barchart.png" width="280" /> <img src="readme_images/contact.png" width="280" /> <img src="readme_images/form.png" width="280" />
