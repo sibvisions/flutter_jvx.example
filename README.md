@@ -31,3 +31,7 @@ The new screens are simple Flutter widgets and don't use the JVx API. The Charts
 The example application uses [FlutterClient](https://github.com/sibvisions/flutterclient). So be sure that you upgrade the depencies from time to time:
 
 ``flutter pub upgrade``
+
+## Preview
+
+<img src="readme_images/login.png" width="300" /> <img src="readme_images/menu.png" width="300" /> <img src="readme_images/userinfo.png" width="300" /> <img src="readme_images/piechart.png" width="300" /> <img src="readme_images/barchart.png" width="300" /> <img src="readme_images/contact.png" width="300" /> <img src="readme_images/form.png" width="300" />
