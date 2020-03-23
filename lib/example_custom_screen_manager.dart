@@ -8,7 +8,7 @@ import 'package:jvx_flutterclient/ui/screen/component_creator.dart';
 import 'package:jvx_flutterclient/ui/screen/i_screen.dart';
 
 import 'screens/chart_custom_screen.dart';
-import 'screens/hello_custom_screeen.dart';
+import 'screens/hello_custom_screen.dart';
 
 const String CHART_COMP_ID = "com.sibvisions.apps.mobile.demo.screens.features.ChartWorkScreen:L1_MI_DOOPENWORKSCREEN_COM-SIB-APP-MOB-DEM-SCR-FEA-CHAWORSCR";
 const String HELLO_COMP_ID = "HELLO_CUSTOM_SCREEN";
