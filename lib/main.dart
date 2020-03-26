@@ -16,7 +16,6 @@ class MyApp extends StatelessWidget {
       config: Config(
           baseUrl: 'http://127.0.0.1:8080/JVx.mobile/services/mobile',
           appName: 'demo',
-          appMode: 'full',
           debug: true,
           username: 'layout',
           password: 'layout'),
