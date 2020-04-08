@@ -6,6 +6,7 @@ import 'package:jvx_flutterclient/model/api/response/user_data.dart';
 import 'package:jvx_flutterclient/model/menu_item.dart';
 import 'package:jvx_flutterclient/ui/screen/component_creator.dart';
 import 'package:jvx_flutterclient/ui/screen/i_screen.dart';
+import 'package:jvx_flutterclient/ui/screen/menu_manager.dart';
 
 import 'screens/chart_custom_screen.dart';
 import 'screens/hello_custom_screen.dart';
@@ -33,7 +34,7 @@ class ExampleCustomScreenManager extends CustomScreenManager {
   }
 
   @override
-  List<MenuItem> onMenu(List<MenuItem> menu) {
+  void onMenu(JVxMenuManager menuManager) {
     MenuItem toAddHelloCustomScreen = MenuItem(
         action:
             Action(componentId: HELLO_COMP_ID, label: 'Hello Custom Screen'),
@@ -49,29 +50,9 @@ class ExampleCustomScreenManager extends CustomScreenManager {
         action: Action(componentId: MAP_COMP_ID, label: 'Map Custom Screen'),
         group: 'Customscreens');
 
-    bool hello = false;
-    bool call = false;
-    bool map = false;
-
-    menu.forEach((item) {
-      hello |= identical(item.action.componentId, HELLO_COMP_ID);
-      call |= identical(item.action.componentId, TELEPHONE_CALL_COMP_ID);
-      map |= identical(item.action.componentId, MAP_COMP_ID);
-    });
-
-    if (!hello) {
-      menu.add(toAddHelloCustomScreen);
-    }
-
-    if (!call) {
-      menu.add(toAddTelephoneCallCustomScreen);
-    }
-
-    if (!map) {
-      menu.add(toAddMapCustomScreen);
-    }
-
-    return menu;
+    menuManager.addItem(toAddHelloCustomScreen);
+    menuManager.addItem(toAddTelephoneCallCustomScreen);
+    menuManager.addItem(toAddMapCustomScreen);
   }
 
   @override
