@@ -30,17 +30,21 @@ dependencies:
   charts_flutter: ^0.8.1
   url_launcher: ^5.4.1
   flutter_map: ^0.8.2
+  video_player: ^0.10.1+5
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter.
 flutter:
+
+  assets:
+    - assets/SIB.png
+    - assets/ic_marker.png
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
