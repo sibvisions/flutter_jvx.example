@@ -5,19 +5,21 @@ import 'package:jvx_flutterclient/model/action.dart';
 import 'package:jvx_flutterclient/model/api/response/user_data.dart';
 import 'package:jvx_flutterclient/model/menu_item.dart';
 import 'package:jvx_flutterclient/ui/screen/component_creator.dart';
-import 'package:jvx_flutterclient/ui/screen/i_screen.dart';
 import 'package:jvx_flutterclient/ui/screen/menu_manager.dart';
 
 import 'screens/chart_custom_screen.dart';
 import 'screens/hello_custom_screen.dart';
+import 'screens/signature_custom_screen.dart';
 
-const String CHART_COMP_ID = "com.sibvisions.apps.mobile.demo.screens.features.ChartWorkScreen:L1_MI_DOOPENWORKSCREEN_COM-SIB-APP-MOB-DEM-SCR-FEA-CHAWORSCR";
+const String CHART_COMP_ID =
+    "com.sibvisions.apps.mobile.demo.screens.features.ChartWorkScreen:L1_MI_DOOPENWORKSCREEN_COM-SIB-APP-MOB-DEM-SCR-FEA-CHAWORSCR";
+const String SIGNATURE_COMP_ID =
+    "com.sibvisions.apps.mobile.demo.screens.features.SignatureWorkScreen:L1_MI_DOOPENWORKSCREEN_COM-SIB-APP-MOB-DEM-SCR-FEA-SIGWORSCR";
 const String HELLO_COMP_ID = "HELLO_CUSTOM_SCREEN";
 const String TELEPHONE_CALL_COMP_ID = "TELEPHONE_CALL_SCREEN";
 const String MAP_COMP_ID = "MAP_SCREEN";
 
 class ExampleCustomScreenManager extends CustomScreenManager {
-
   @override
   getScreen(String componentId) {
     print(componentId);
@@ -29,6 +31,8 @@ class ExampleCustomScreenManager extends CustomScreenManager {
       return TelephoneCallCustomScreen(ComponentCreator());
     } else if (componentId == MAP_COMP_ID) {
       return MapCustomScreen(ComponentCreator());
+    } else if (componentId == SIGNATURE_COMP_ID) {
+      return SignatureCustomScreen(ComponentCreator());
     }
     return super.getScreen(componentId);
   }
