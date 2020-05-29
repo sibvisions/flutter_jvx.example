@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:jvx_flutterclient/ui/screen/component_data.dart';
 import 'package:signature/signature.dart';
 import 'package:jvx_flutterclient/utils/globals.dart' as globals;
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:jvx_flutterclient/ui/widgets/menu_drawer_widget.dart';
 
 class SignatureCustomWidget extends StatefulWidget {
+  final ComponentData componentData;
+
+  SignatureCustomWidget({Key key, this.componentData}) : super(key: key);
+
   @override
   _SignatureCustomWidgetState createState() => _SignatureCustomWidgetState();
 }
@@ -15,6 +20,14 @@ class _SignatureCustomWidgetState extends State<SignatureCustomWidget> {
     penColor: Colors.black,
     exportBackgroundColor: Colors.white,
   );
+
+  void selectRecord(int index) {
+    widget.componentData?.selectRecord(context, 0);
+  }
+
+  void setValues(List<dynamic> values) {
+    widget.componentData?.setValues(context, values);
+  }
 
   @override
   Widget build(BuildContext context) {
