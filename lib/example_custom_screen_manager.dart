@@ -1,6 +1,7 @@
 import 'package:flutterclient_example/screens/calendar_custom_screen.dart';
 import 'package:flutterclient_example/screens/map_custom_screen.dart';
 import 'package:flutterclient_example/screens/qr_scanner_custom_screen.dart';
+import 'package:flutterclient_example/screens/styled_table_custom_screen.dart';
 import 'package:flutterclient_example/screens/telephone_call_custom_screen.dart';
 import 'package:jvx_flutterclient/custom_screen/custom_screen_manager/custom_screen_manager.dart';
 import 'package:jvx_flutterclient/model/action.dart';
@@ -19,6 +20,8 @@ const String SIGNATURE_COMP_ID =
     "com.sibvisions.apps.mobile.demo.screens.features.SignatureWorkScreen:L1_MI_DOOPENWORKSCREEN_COM-SIB-APP-MOB-DEM-SCR-FEA-SIGWORSCR";
 const String CALENDAR_COMP_ID =
     "com.sibvisions.apps.mobile.demo.screens.features.CalendarWorkScreen:L1_MI_DOOPENWORKSCREEN_COM-SIB-APP-MOB-DEM-SCR-FEA-CALWORSCR";
+const String STYLED_TABLE_COMP_ID =
+    "com.sibvisions.apps.mobile.demo.screens.features.StyledTableWorkScreen:L1_MI_DOOPENWORKSCREEN_COM-SIB-APP-MOB-DEM-SCR-FEA-STYTABWORSCR";
 const String HELLO_COMP_ID = "HELLO_CUSTOM_SCREEN";
 const String TELEPHONE_CALL_COMP_ID = "TELEPHONE_CALL_SCREEN";
 const String MAP_COMP_ID = "MAP_SCREEN";
@@ -42,6 +45,8 @@ class ExampleCustomScreenManager extends CustomScreenManager {
       return QrScannerCustomScreen(ComponentCreator());
     } else if (componentId == CALENDAR_COMP_ID) {
       return CalendarCustomScreen(ComponentCreator());
+    } else if (componentId == STYLED_TABLE_COMP_ID) {
+      return StyledTableCustomScreen(ComponentCreator());
     }
     return super.getScreen(componentId);
   }
@@ -51,21 +56,25 @@ class ExampleCustomScreenManager extends CustomScreenManager {
     MenuItem toAddHelloCustomScreen = MenuItem(
         action:
             Action(componentId: HELLO_COMP_ID, label: 'Hello Custom Screen'),
+        image: 'FontAwesome.star-o',
         group: 'Customscreens');
 
     MenuItem toAddTelephoneCallCustomScreen = MenuItem(
         action: Action(
             componentId: TELEPHONE_CALL_COMP_ID,
             label: 'Telephone Call Screen'),
+        image: 'FontAwesome.phone',
         group: 'Customscreens');
 
     MenuItem toAddMapCustomScreen = MenuItem(
         action: Action(componentId: MAP_COMP_ID, label: 'Map Custom Screen'),
+        image: 'FontAwesome.map',
         group: 'Customscreens');
 
     MenuItem toAddQrScannerCustomScreen = MenuItem(
         action: Action(
             componentId: QR_SCANNER_COMP_ID, label: 'QR Scanner Custom Screen'),
+        image: 'FontAwesome.qrcode',
         group: 'Customscreens');
 
     menuManager.addItem(toAddHelloCustomScreen);
