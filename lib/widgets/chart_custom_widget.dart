@@ -1,6 +1,5 @@
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
-import 'package:jvx_flutterclient/utils/uidata.dart';
 
 import '../screens/chart_custom_screen.dart';
 
