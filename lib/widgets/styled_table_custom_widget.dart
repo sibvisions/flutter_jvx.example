@@ -56,21 +56,33 @@ class _StyledTableCustomWidgetState extends State<StyledTableCustomWidget> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(
-                            widget.contacts[index].firstname,
+                            '${widget.contacts[index].firstname} ${widget.contacts[index].lastname}',
                             style: Theme.of(context).textTheme.headline6,
                           ),
-                          Text(
-                            widget.contacts[index].lastname,
-                            style: TextStyle(color: Colors.grey),
+                          SizedBox(height: 10),
+                          Row(
+                            children: <Widget>[
+                              Icon(
+                                Icons.map,
+                                color: Colors.grey,
+                                size: 13.0,
+                              ),
+                              SizedBox(width: 5),
+                              Text(
+                                '${widget.contacts[index].street} ${widget.contacts[index].streetNr}, ${widget.contacts[index].zip} ${widget.contacts[index].town}',
+                                style:
+                                    TextStyle(color: Colors.grey, fontSize: 14),
+                              ),
+                            ],
                           )
                         ],
                       ),
                       Expanded(
                           child: Container(
-                            alignment: Alignment.centerRight,
-                            child: Icon(Icons.keyboard_arrow_right,
-                                color: Colors.black, size: 40.0),
-                          )),
+                        alignment: Alignment.centerRight,
+                        child: Icon(Icons.keyboard_arrow_right,
+                            color: Colors.black, size: 40.0),
+                      )),
                     ],
                   ),
                 );

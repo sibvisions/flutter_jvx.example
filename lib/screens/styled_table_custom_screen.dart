@@ -18,8 +18,12 @@ class StyledTableCustomScreen extends CustomScreen {
   @override
   void update(Request request, ResponseData responeData) {
     if (responeData != null && responeData.jVxData!=null && responeData.jVxData.length > 0) {
-      for (int i = 0; i <= 3; i++) {
+      for (int i = 0; i < responeData.jVxData[0].records.length; i++) {
         contacts.add(Contact.fromJson(responeData.jVxData[0].records[i]));
+        for(int j= 0; j < responeData.jVxData[0].records[i].length; j++)
+        {
+          print(responeData.jVxData[0].records[i][j]);
+        }
       }
     }
   }
@@ -35,12 +39,20 @@ class Contact {
   String firstname;
   String lastname;
   String image;
+  String street;
+  String streetNr;
+  String zip;
+  String town;
 
-  Contact(this.id, this.firstname, this.lastname, this.image);
+  Contact(this.id, this.firstname, this.lastname, this.image, this.street, this.streetNr, this.zip, this.town);
 
   Contact.fromJson(List json)
     : id = json[0],
       firstname = json[5],
       lastname = json[6],
+      street = json[7],
+      streetNr = json[8],
+      zip = json[9],
+      town = json[10],
       image = json[18];
 }
