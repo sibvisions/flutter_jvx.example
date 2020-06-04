@@ -18,7 +18,7 @@ class SignatureCustomScreen extends CustomScreen {
 
   @override
   Widget getWidget() {
-    ComponentData data = this.componentScreen.getComponentData("DataProviderName");
+    ComponentData data = this.componentScreen.getComponentData("JVxMobileDemo/Sig-3V/contacts#4");
     return SignatureCustomWidget(componentData: data);
   }
 

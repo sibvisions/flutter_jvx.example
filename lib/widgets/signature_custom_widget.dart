@@ -22,7 +22,7 @@ class _SignatureCustomWidgetState extends State<SignatureCustomWidget> {
   );
 
   void selectRecord(int index) {
-    widget.componentData?.selectRecord(context, 0);
+    widget.componentData?.selectRecord(context, index);
   }
 
   void setValues(List<dynamic> values) {
@@ -31,6 +31,10 @@ class _SignatureCustomWidgetState extends State<SignatureCustomWidget> {
 
   @override
   Widget build(BuildContext context) {
+    widget.componentData?.data = widget.componentData?.getData(context, 10);
+
+    print(widget.componentData?.data.toString());
+
     return Center(
       child: Column(
         children: <Widget>[
@@ -57,7 +61,9 @@ class _SignatureCustomWidgetState extends State<SignatureCustomWidget> {
                 child: IconButton(
                   icon: const Icon(Icons.save),
                   color: globals.applicationStyle.themeColor,
-                  onPressed: () {},
+                  onPressed: () {
+                    selectRecord(0);
+                  },
                 ),
               ),
               Expanded(
