@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jvx_flutterclient/ui/screen/component_data.dart';
+import 'package:jvx_flutterclient/utils/uidata.dart';
 import 'package:signature/signature.dart';
 import 'package:jvx_flutterclient/utils/globals.dart' as globals;
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -47,7 +48,7 @@ class _SignatureCustomWidgetState extends State<SignatureCustomWidget> {
             margin: const EdgeInsets.all(15.0),
             padding: const EdgeInsets.all(3.0),
             decoration: BoxDecoration(
-                border: Border.all(color: globals.applicationStyle.themeColor)),
+                border: Border.all(color: UIData.ui_kit_color_2)),
             child: Signature(
               controller: _controller,
               height: 200,
@@ -60,7 +61,7 @@ class _SignatureCustomWidgetState extends State<SignatureCustomWidget> {
               Expanded(
                 child: IconButton(
                   icon: const Icon(Icons.save),
-                  color: globals.applicationStyle.themeColor,
+                  color: UIData.ui_kit_color_2,
                   onPressed: () {
                     selectRecord(0);
                   },
@@ -69,7 +70,7 @@ class _SignatureCustomWidgetState extends State<SignatureCustomWidget> {
               Expanded(
                 child: IconButton(
                   icon: const Icon(Icons.delete),
-                  color: globals.applicationStyle.themeColor,
+                  color: UIData.ui_kit_color_2,
                   onPressed: () {
                     setState(() => _controller.clear());
                   },
