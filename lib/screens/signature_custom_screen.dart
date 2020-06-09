@@ -22,9 +22,11 @@ class SignatureCustomScreen extends CustomScreen {
     return SignatureCustomWidget(componentData: data);
   }
 
-  @override
-  void update(Request request, ResponseData responeData) {
-  }
+  // if overriden, you have to handle server responses by your self or optionally call super.update to let the customScreen class do the work.
+  // @override
+  // void update(Request request, ResponseData responeData) {
+  //   super.update(request, responeData);
+  // }
   
   @override
   bool withServer() {

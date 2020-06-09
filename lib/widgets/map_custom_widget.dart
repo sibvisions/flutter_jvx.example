@@ -5,6 +5,7 @@ import 'package:latlong/latlong.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:jvx_flutterclient/utils/globals.dart' as globals;
+import 'package:geolocation/geolocation.dart';
 
 import 'custom_popup.dart';
 import 'custom_rounded_button.dart';
@@ -17,6 +18,7 @@ class MapCustomWidget extends StatefulWidget {
 class MapCustomWidgetState extends State<MapCustomWidget> {
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   LatLng _center = LatLng(48.247533, 16.380093);
+  MapController mapController = MapController();
 
   List<Marker> _buildMarkersOnMap() {
     List<Marker> markers = List<Marker>();
@@ -77,7 +79,7 @@ class MapCustomWidgetState extends State<MapCustomWidget> {
       await launch(url);
     } else {
       throw 'Could not launch $url';
-    } 
+    }
   }
 
   void _launchCallUrl() async {
@@ -113,6 +115,7 @@ class MapCustomWidgetState extends State<MapCustomWidget> {
             height: MediaQuery.of(context).size.height -
                 AppBar().preferredSize.height,
             child: new FlutterMap(
+              mapController: mapController,
               options: new MapOptions(center: _center, zoom: 15.0),
               layers: [
                 new TileLayerOptions(
@@ -206,6 +209,26 @@ class MapCustomWidgetState extends State<MapCustomWidget> {
               ],
             ),
           ),
+          Container(
+            margin: EdgeInsets.only(
+              bottom: 10,
+              right: 10,
+            ),
+            child: Align(
+              alignment: Alignment.bottomRight,
+              child: FloatingActionButton(
+                onPressed: () async {
+                  LocationResult result = await Geolocation.lastKnownLocation();
+                  print(result.location.latitude.toString());
+                  _center = LatLng(
+                      result.location.latitude, result.location.longitude);
+                  mapController.move(_center, mapController.zoom);
+                },
+                child: const Icon(Icons.location_searching),
+                elevation: 5,
+              ),
+            ),
+          )
         ],
       ),
     );
