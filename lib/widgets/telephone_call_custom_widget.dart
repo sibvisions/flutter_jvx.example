@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:jvx_flutterclient/model/menu_item.dart';
 import 'package:jvx_flutterclient/ui/widgets/menu_drawer_widget.dart';
 import 'package:jvx_flutterclient/utils/globals.dart' as globals;
+import 'package:jvx_flutterclient/utils/uidata.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'custom_rounded_button.dart';
 
 class TelephoneCallCustomWidget extends StatelessWidget {
-  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +36,7 @@ class TelephoneCallCustomWidget extends StatelessWidget {
           margin: EdgeInsets.all(15),
           height: 150,
           decoration: BoxDecoration(
-            color: globals.applicationStyle.themeColor,
+            color: UIData.ui_kit_color_2,
             borderRadius: BorderRadius.all(Radius.circular(15)),
           ),
           child: Column(

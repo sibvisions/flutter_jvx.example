@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:jvx_flutterclient/utils/globals.dart' as globals;
+import 'package:jvx_flutterclient/utils/uidata.dart';
 
 import '../screens/styled_table_custom_screen.dart';
 
@@ -42,7 +42,7 @@ class _StyledTableCustomWidgetState extends State<StyledTableCustomWidget> {
                               )
                             : CircleAvatar(
                                 backgroundColor:
-                                    globals.applicationStyle.themeColor,
+                                    UIData.ui_kit_color_2,
                                 minRadius: 40,
                                 child: Text(
                                   '${widget.contacts[index].firstname[0]}${widget.contacts[index].lastname[0]}',

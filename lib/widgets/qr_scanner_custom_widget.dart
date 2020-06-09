@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:jvx_flutterclient/ui/widgets/menu_drawer_widget.dart';
 import 'package:jvx_flutterclient/utils/globals.dart' as globals;
-import 'package:url_launcher/url_launcher.dart';
+import 'package:jvx_flutterclient/utils/uidata.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'custom_rounded_button.dart';
@@ -99,7 +99,7 @@ class _QrScannerCustomWidgetState extends State<QrScannerCustomWidget> {
           margin: EdgeInsets.all(15),
           height: 150,
           decoration: BoxDecoration(
-            color: globals.applicationStyle.themeColor,
+            color: UIData.ui_kit_color_2,
             borderRadius: BorderRadius.all(Radius.circular(15)),
           ),
           child: Column(

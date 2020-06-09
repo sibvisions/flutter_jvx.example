@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jvx_flutterclient/utils/globals.dart' as globals;
+import 'package:jvx_flutterclient/utils/uidata.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -99,7 +99,7 @@ class _CalendarCustomWidgetState extends State<CalendarCustomWidget> {
       events: _events,
       startingDayOfWeek: StartingDayOfWeek.monday,
       calendarStyle: CalendarStyle(
-        selectedColor: globals.applicationStyle.themeColor,
+        selectedColor: UIData.ui_kit_color_2,
         todayColor: Colors.deepOrange[200],
         markersColor: Colors.deepOrange[700],
         outsideDaysVisible: false,
