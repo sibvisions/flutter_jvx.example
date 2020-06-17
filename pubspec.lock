@@ -371,7 +371,7 @@ packages:
     description:
       path: "."
       ref: master
-      resolved-ref: "0a0f8d0510fa0bfa2250ea6a6192d298e1055781"
+      resolved-ref: c637efcabe8773addbdc9d0d292eb302447dc6d6
       url: "https://github.com/sibvisions/flutterclient.git"
     source: git
     version: "1.0.0+1"
@@ -603,7 +603,7 @@ packages:
       name: sqflite_common
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.1"
+    version: "1.0.2+1"
   stack_trace:
     dependency: transitive
     description:
