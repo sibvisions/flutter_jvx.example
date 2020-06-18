@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:jvx_flutterclient/model/menu_item.dart';
@@ -77,6 +79,16 @@ class TelephoneCallCustomWidget extends StatelessWidget {
                       child: CustomRoundedButton(
                           "SMS", Icon(Icons.sms, color: Colors.white), () {
                         launch("sms://$numberToCall");
+                      }),
+                    ),
+                    Expanded(
+                      child: CustomRoundedButton(
+                          "WhatsApp", Icon(FontAwesomeIcons.whatsapp, color: Colors.white), () {
+                            if (!Platform.isIOS) {
+                              launch("whatsapp://send?phone=$numberToCall&text=");
+                            } else {
+                              launch("whatsapp://wa.me/$numberToCall/?text=");
+                            }
                       }),
                     ),
                   ],
