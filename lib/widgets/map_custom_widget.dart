@@ -140,7 +140,7 @@ class MapCustomWidgetState extends State<MapCustomWidget> {
               color: Colors.white,
               borderRadius: BorderRadius.all(Radius.circular(15)),
             ),
-            height: 170,
+            height: 175,
             width: double.infinity,
             child: Column(
               children: <Widget>[
