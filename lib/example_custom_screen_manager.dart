@@ -1,4 +1,5 @@
 import 'package:flutterclient_example/screens/calendar_custom_screen.dart';
+import 'package:flutterclient_example/screens/customer_custom_screen.dart';
 import 'package:flutterclient_example/screens/map_custom_screen.dart';
 import 'package:flutterclient_example/screens/qr_scanner_custom_screen.dart';
 import 'package:flutterclient_example/screens/styled_table_custom_screen.dart';
@@ -47,6 +48,9 @@ class ExampleCustomScreenManager extends CustomScreenManager {
       return CalendarCustomScreen(ComponentCreator());
     } else if (componentId == STYLED_TABLE_COMP_ID) {
       return StyledTableCustomScreen(ComponentCreator());
+    } else if (componentId ==
+        'com.sibvisions.apps.mobile.demo.screens.features.ContactsWorkScreen:L1_MI_DOOPENWORKSCREEN_COM-SIB-APP-MOB-DEM-SCR-FEA-CONWORSCR') {
+      return CustomerCustomScreen(ComponentCreator());
     }
     return super.getScreen(componentId);
   }
