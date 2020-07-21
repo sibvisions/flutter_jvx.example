@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:jvx_flutterclient/custom_screen/custom_screen.dart';
-import 'package:jvx_flutterclient/ui/screen/component_creator.dart';
-import 'package:jvx_flutterclient/ui/screen/component_data.dart';
+import 'package:jvx_flutterclient/ui/screen/so_component_creator.dart';
+import 'package:jvx_flutterclient/ui/screen/so_component_data.dart';
 
 import '../widgets/signature_custom_widget.dart';
 
 class SignatureCustomScreen extends CustomScreen {
+  SignatureCustomScreen(SoComponentCreator componentCreator)
+      : super(componentCreator);
 
-  SignatureCustomScreen(ComponentCreator componentCreator) : super(componentCreator);
-
-  void selectRecord() {
-    
-
-  }
+  void selectRecord() {}
 
   @override
   Widget getWidget() {
-    ComponentData data = this.componentScreen.getComponentData("JVxMobileDemo/Sig-3V/contacts#4");
+    SoComponentData data = this
+        .componentScreen
+        .getComponentData("JVxMobileDemo/Sig-3V/contacts#4");
     return SignatureCustomWidget(componentData: data);
   }
 
@@ -25,7 +24,7 @@ class SignatureCustomScreen extends CustomScreen {
   // void update(Request request, ResponseData responeData) {
   //   super.update(request, responeData);
   // }
-  
+
   @override
   bool withServer() {
     return true;

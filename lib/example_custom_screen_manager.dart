@@ -5,11 +5,11 @@ import 'package:flutterclient_example/screens/qr_scanner_custom_screen.dart';
 import 'package:flutterclient_example/screens/styled_table_custom_screen.dart';
 import 'package:flutterclient_example/screens/telephone_call_custom_screen.dart';
 import 'package:jvx_flutterclient/custom_screen/custom_screen_manager/custom_screen_manager.dart';
-import 'package:jvx_flutterclient/model/action.dart';
+import 'package:jvx_flutterclient/model/so_action.dart';
 import 'package:jvx_flutterclient/model/api/response/user_data.dart';
 import 'package:jvx_flutterclient/model/menu_item.dart';
-import 'package:jvx_flutterclient/ui/screen/component_creator.dart';
-import 'package:jvx_flutterclient/ui/screen/menu_manager.dart';
+import 'package:jvx_flutterclient/ui/screen/so_component_creator.dart';
+import 'package:jvx_flutterclient/ui/screen/so_menu_manager.dart';
 
 import 'screens/chart_custom_screen.dart';
 import 'screens/hello_custom_screen.dart';
@@ -33,50 +33,50 @@ class ExampleCustomScreenManager extends CustomScreenManager {
   getScreen(String componentId) {
     print(componentId);
     if (componentId == CHART_COMP_ID) {
-      return ChartCustomScreen(ComponentCreator());
+      return ChartCustomScreen(SoComponentCreator());
     } else if (componentId == HELLO_COMP_ID) {
-      return HelloCustomScreen(ComponentCreator());
+      return HelloCustomScreen(SoComponentCreator());
     } else if (componentId == TELEPHONE_CALL_COMP_ID) {
-      return TelephoneCallCustomScreen(ComponentCreator());
+      return TelephoneCallCustomScreen(SoComponentCreator());
     } else if (componentId == MAP_COMP_ID) {
-      return MapCustomScreen(ComponentCreator());
+      return MapCustomScreen(SoComponentCreator());
     } else if (componentId == SIGNATURE_COMP_ID) {
-      return SignatureCustomScreen(ComponentCreator());
+      return SignatureCustomScreen(SoComponentCreator());
     } else if (componentId == QR_SCANNER_COMP_ID) {
-      return QrScannerCustomScreen(ComponentCreator());
+      return QrScannerCustomScreen(SoComponentCreator());
     } else if (componentId == CALENDAR_COMP_ID) {
-      return CalendarCustomScreen(ComponentCreator());
+      return CalendarCustomScreen(SoComponentCreator());
     } else if (componentId == STYLED_TABLE_COMP_ID) {
-      return StyledTableCustomScreen(ComponentCreator());
+      return StyledTableCustomScreen(SoComponentCreator());
     } else if (componentId ==
         'com.sibvisions.apps.mobile.demo.screens.features.ContactsWorkScreen:L1_MI_DOOPENWORKSCREEN_COM-SIB-APP-MOB-DEM-SCR-FEA-CONWORSCR') {
-      return CustomerCustomScreen(ComponentCreator());
+      return CustomerCustomScreen(SoComponentCreator());
     }
     return super.getScreen(componentId);
   }
 
   @override
-  void onMenu(JVxMenuManager menuManager) {
+  void onMenu(SoMenuManager menuManager) {
     MenuItem toAddHelloCustomScreen = MenuItem(
         action:
-            Action(componentId: HELLO_COMP_ID, label: 'Hello Custom Screen'),
+            SoAction(componentId: HELLO_COMP_ID, label: 'Hello Custom Screen'),
         image: 'FontAwesome.star-o',
         group: 'Customscreens');
 
     MenuItem toAddTelephoneCallCustomScreen = MenuItem(
-        action: Action(
+        action: SoAction(
             componentId: TELEPHONE_CALL_COMP_ID,
             label: 'Telephone Call Screen'),
         image: 'FontAwesome.phone',
         group: 'Customscreens');
 
     MenuItem toAddMapCustomScreen = MenuItem(
-        action: Action(componentId: MAP_COMP_ID, label: 'Map Custom Screen'),
+        action: SoAction(componentId: MAP_COMP_ID, label: 'Map Custom Screen'),
         image: 'FontAwesome.map',
         group: 'Customscreens');
 
     MenuItem toAddQrScannerCustomScreen = MenuItem(
-        action: Action(
+        action: SoAction(
             componentId: QR_SCANNER_COMP_ID, label: 'QR Scanner Custom Screen'),
         image: 'FontAwesome.qrcode',
         group: 'Customscreens');

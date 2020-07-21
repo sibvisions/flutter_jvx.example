@@ -3,10 +3,10 @@ import 'package:flutterclient_example/widgets/telephone_call_custom_widget.dart'
 import 'package:jvx_flutterclient/custom_screen/custom_screen.dart';
 import 'package:jvx_flutterclient/model/api/request/request.dart';
 import 'package:jvx_flutterclient/model/api/response/response_data.dart';
-import 'package:jvx_flutterclient/ui/screen/component_creator.dart';
+import 'package:jvx_flutterclient/ui/screen/so_component_creator.dart';
 
 class TelephoneCallCustomScreen extends CustomScreen {
-  TelephoneCallCustomScreen(ComponentCreator componentCreator)
+  TelephoneCallCustomScreen(SoComponentCreator componentCreator)
       : super(componentCreator);
 
   @override

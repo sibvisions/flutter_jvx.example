@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:jvx_flutterclient/ui/screen/component_data.dart';
+import 'package:jvx_flutterclient/ui/screen/so_component_data.dart';
 import 'package:jvx_flutterclient/utils/uidata.dart';
 import 'package:signature/signature.dart';
 import 'dart:convert';
 
 class SignatureCustomWidget extends StatefulWidget {
-  final ComponentData componentData;
+  final SoComponentData componentData;
 
   SignatureCustomWidget({Key key, this.componentData}) : super(key: key);
 
