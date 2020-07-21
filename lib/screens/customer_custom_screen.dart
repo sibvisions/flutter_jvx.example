@@ -6,32 +6,40 @@ import 'package:jvx_flutterclient/custom_screen/custom_screen.dart';
 import 'package:jvx_flutterclient/model/api/request/request.dart';
 import 'package:jvx_flutterclient/model/api/response/response_data.dart';
 import 'package:jvx_flutterclient/ui/component/i_component.dart';
-import 'package:jvx_flutterclient/ui/screen/component_data.dart';
+import 'package:jvx_flutterclient/ui/screen/so_component_data.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:jvx_flutterclient/ui/component/jvx_custom_component.dart';
-import 'package:jvx_flutterclient/ui/container/jvx_panel.dart';
-import 'package:jvx_flutterclient/ui/screen/component_creator.dart';
+import 'package:jvx_flutterclient/ui/component/co_custom_component.dart';
+import 'package:jvx_flutterclient/ui/container/co_panel.dart';
+import 'package:jvx_flutterclient/ui/screen/so_component_creator.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-
 class CustomerCustomScreen extends CustomScreen {
-  CustomerCustomScreen(ComponentCreator componentCreator)
+  CustomerCustomScreen(SoComponentCreator componentCreator)
       : super(componentCreator);
 
   @override
   Widget getWidget() {
-    JVxCustomComponent headerLabel = new JVxCustomComponent(GlobalKey(debugLabel: 'header'), componentScreen.context);
-    headerLabel.widget = Text('Header', style: TextStyle(fontWeight: FontWeight.bold));
+    CoCustomComponent headerLabel = new CoCustomComponent(
+        GlobalKey(debugLabel: 'header'), componentScreen.context);
+    headerLabel.widget =
+        Text('Header', style: TextStyle(fontWeight: FontWeight.bold));
     this.componentScreen.setHeader(headerLabel);
-    JVxCustomComponent footerLabel = new JVxCustomComponent(GlobalKey(debugLabel: 'footer'), componentScreen.context);
-    footerLabel.widget =Text('Footer', style: TextStyle(fontWeight: FontWeight.bold));
+    CoCustomComponent footerLabel = new CoCustomComponent(
+        GlobalKey(debugLabel: 'footer'), componentScreen.context);
+    footerLabel.widget =
+        Text('Footer', style: TextStyle(fontWeight: FontWeight.bold));
     this.componentScreen.setFooter(footerLabel);
 
-    ComponentData data = this.componentScreen.getComponentData("JVxMobileDemo/Con-CG/contacts#4");
+    SoComponentData data = this
+        .componentScreen
+        .getComponentData("JVxMobileDemo/Con-CG/contacts#4");
 
     dynamic phone = data.getColumnData(componentScreen.context, "PHONE");
 
-    JVxCustomComponent contactComp = new JVxCustomComponent(GlobalKey(debugLabel: 'contact'), componentScreen.context,);
+    CoCustomComponent contactComp = new CoCustomComponent(
+      GlobalKey(debugLabel: 'contact'),
+      componentScreen.context,
+    );
     contactComp.widget = Center(
       child: Container(
         width: 300,
@@ -70,7 +78,7 @@ class CustomerCustomScreen extends CustomScreen {
       ),
     );
 
-    JVxPanel comp = this.componentScreen.getComponentFromName('contactPanel');
+    CoPanel comp = this.componentScreen.getComponentFromName('contactPanel');
     this.componentScreen.replaceComponent(comp, contactComp);
 
     IComponent component = this.componentScreen.getRootComponent();
