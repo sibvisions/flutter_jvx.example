@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutterclient_example/screens/calendar_custom_screen.dart';
 import 'package:flutterclient_example/screens/customer_custom_screen.dart';
 import 'package:flutterclient_example/screens/map_custom_screen.dart';
@@ -8,8 +9,10 @@ import 'package:jvx_flutterclient/custom_screen/custom_screen_manager/custom_scr
 import 'package:jvx_flutterclient/model/so_action.dart';
 import 'package:jvx_flutterclient/model/api/response/user_data.dart';
 import 'package:jvx_flutterclient/model/menu_item.dart';
+import 'package:jvx_flutterclient/ui/component/co_custom_component.dart';
 import 'package:jvx_flutterclient/ui/screen/so_component_creator.dart';
 import 'package:jvx_flutterclient/ui/screen/so_menu_manager.dart';
+import 'package:jvx_flutterclient/utils/uidata.dart';
 
 import 'screens/chart_custom_screen.dart';
 import 'screens/hello_custom_screen.dart';
@@ -50,7 +53,30 @@ class ExampleCustomScreenManager extends CustomScreenManager {
       return StyledTableCustomScreen(SoComponentCreator());
     } else if (componentId ==
         'com.sibvisions.apps.mobile.demo.screens.features.ContactsWorkScreen:L1_MI_DOOPENWORKSCREEN_COM-SIB-APP-MOB-DEM-SCR-FEA-CONWORSCR') {
-      return CustomerCustomScreen(SoComponentCreator());
+      CustomerCustomScreen customerScreen =
+          CustomerCustomScreen(SoComponentCreator());
+
+      CoCustomComponent headerLabel = new CoCustomComponent(
+          GlobalKey(debugLabel: 'header'),
+          customerScreen.componentScreen.context);
+      headerLabel.widget = Container(
+          margin: new EdgeInsets.all(20.0),
+          child: Text('This is a custom Header',
+              style: TextStyle(
+                  fontWeight: FontWeight.bold, color: UIData.ui_kit_color_2)));
+      customerScreen.setHeader(headerLabel);
+
+      CoCustomComponent footerLabel = new CoCustomComponent(
+          GlobalKey(debugLabel: 'footer'),
+          customerScreen.componentScreen.context);
+      footerLabel.widget = Container(
+          margin: new EdgeInsets.all(20.0),
+          child: Text('This is a custom Footer',
+              style: TextStyle(
+                  fontWeight: FontWeight.bold, color: UIData.ui_kit_color)));
+      customerScreen.setFooter(footerLabel);
+
+      return customerScreen;
     }
     return super.getScreen(componentId);
   }

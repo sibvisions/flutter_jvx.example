@@ -7,7 +7,6 @@ import 'package:jvx_flutterclient/model/api/request/request.dart';
 import 'package:jvx_flutterclient/model/api/response/response_data.dart';
 import 'package:jvx_flutterclient/ui/component/i_component.dart';
 import 'package:jvx_flutterclient/ui/screen/so_component_data.dart';
-import 'package:jvx_flutterclient/utils/uidata.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:jvx_flutterclient/ui/component/co_custom_component.dart';
 import 'package:jvx_flutterclient/ui/container/co_panel.dart';
@@ -20,17 +19,6 @@ class CustomerCustomScreen extends CustomScreen {
 
   @override
   Widget getWidget() {
-    CoCustomComponent headerLabel = new CoCustomComponent(
-        GlobalKey(debugLabel: 'header'), componentScreen.context);
-    headerLabel.widget =
-        Container(margin: new EdgeInsets.all(20.0), child: Text('This is a custom Header', style: TextStyle(fontWeight: FontWeight.bold, color: UIData.ui_kit_color_2)));
-    this.componentScreen.setHeader(headerLabel);
-    CoCustomComponent footerLabel = new CoCustomComponent(
-        GlobalKey(debugLabel: 'footer'), componentScreen.context);
-    footerLabel.widget =
-        Container(margin: new EdgeInsets.all(20.0), child: Text('This is a custom Footer', style: TextStyle(fontWeight: FontWeight.bold, color: UIData.ui_kit_color)));
-    this.componentScreen.setFooter(footerLabel);
-
     SoComponentData data = this
         .componentScreen
         .getComponentData("JVxMobileDemo/Con-CG/contacts#4");
