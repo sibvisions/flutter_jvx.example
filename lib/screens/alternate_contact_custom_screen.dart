@@ -13,8 +13,8 @@ import 'package:jvx_flutterclient/ui/screen/so_component_creator.dart';
 import 'package:jvx_flutterclient/utils/data_api.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class CustomerCustomScreen extends CustomScreen {
-  CustomerCustomScreen(SoComponentCreator componentCreator)
+class AlternateContactCustomScreen extends CustomScreen {
+  AlternateContactCustomScreen(SoComponentCreator componentCreator)
       : super(componentCreator);
 
   @override
@@ -66,7 +66,9 @@ class CustomerCustomScreen extends CustomScreen {
 
     CoPanel comp = this.componentScreen.getComponentFromName('contactPanel');
     this.componentScreen.replaceComponent(comp, contactComp);
-    
+
+    this.componentScreen.debugPrintCurrentWidgetTree();    
+
     IComponent component = this.componentScreen.getRootComponent();
     if (component != null) {
       return component.getWidget();

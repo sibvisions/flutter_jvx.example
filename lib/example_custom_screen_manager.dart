@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutterclient_example/screens/calendar_custom_screen.dart';
-import 'package:flutterclient_example/screens/customer_custom_screen.dart';
+import 'package:flutterclient_example/screens/contact_custom_screen.dart';
+import 'package:flutterclient_example/screens/alternate_contact_custom_screen.dart';
 import 'package:flutterclient_example/screens/map_custom_screen.dart';
 import 'package:flutterclient_example/screens/qr_scanner_custom_screen.dart';
 import 'package:flutterclient_example/screens/styled_table_custom_screen.dart';
@@ -13,6 +14,7 @@ import 'package:jvx_flutterclient/ui/component/co_custom_component.dart';
 import 'package:jvx_flutterclient/ui/screen/so_component_creator.dart';
 import 'package:jvx_flutterclient/ui/screen/so_menu_manager.dart';
 import 'package:jvx_flutterclient/utils/uidata.dart';
+import 'package:jvx_flutterclient/utils/globals.dart' as globals;
 
 import 'screens/chart_custom_screen.dart';
 import 'screens/hello_custom_screen.dart';
@@ -35,8 +37,9 @@ const String QR_SCANNER_COMP_ID = "QR_SCANNER_SCREEN";
 
 class ExampleCustomScreenManager extends CustomScreenManager {
   @override
-  getScreen(String componentId) {
+  getScreen(String componentId, {String templateName}) {
     print(componentId);
+    globals.currentTempalteName = templateName;
     if (componentId == CHART_COMP_ID) {
       return ChartCustomScreen(SoComponentCreator());
     } else if (componentId == HELLO_COMP_ID) {
@@ -54,30 +57,38 @@ class ExampleCustomScreenManager extends CustomScreenManager {
     } else if (componentId == STYLED_TABLE_COMP_ID) {
       return StyledTableCustomScreen(SoComponentCreator());
     } else if (componentId == CONTACTS_COMP_ID) {
-      CustomerCustomScreen customerScreen =
-          CustomerCustomScreen(SoComponentCreator());
+      if (templateName == null || templateName != 'ContactCustomTemplate') {
+        ContactCustomScreen customerScreen =
+            ContactCustomScreen(SoComponentCreator());
 
-      CoCustomComponent headerLabel = new CoCustomComponent(
-          GlobalKey(debugLabel: 'header'),
-          customerScreen.componentScreen.context);
-      headerLabel.widget = Container(
-          margin: new EdgeInsets.all(20.0),
-          child: Text('This is a custom Header',
-              style: TextStyle(
-                  fontWeight: FontWeight.bold, color: UIData.ui_kit_color_2)));
-      customerScreen.setHeader(headerLabel);
+        CoCustomComponent headerLabel = new CoCustomComponent(
+            GlobalKey(debugLabel: 'header'),
+            customerScreen.componentScreen.context);
+        headerLabel.widget = Container(
+            margin: new EdgeInsets.all(20.0),
+            child: Text('This is a custom Header',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: UIData.ui_kit_color_2)));
+        customerScreen.setHeader(headerLabel);
 
-      CoCustomComponent footerLabel = new CoCustomComponent(
-          GlobalKey(debugLabel: 'footer'),
-          customerScreen.componentScreen.context);
-      footerLabel.widget = Container(
-          margin: new EdgeInsets.all(20.0),
-          child: Text('This is a custom Footer',
-              style: TextStyle(
-                  fontWeight: FontWeight.bold, color: UIData.ui_kit_color)));
-      customerScreen.setFooter(footerLabel);
+        CoCustomComponent footerLabel = new CoCustomComponent(
+            GlobalKey(debugLabel: 'footer'),
+            customerScreen.componentScreen.context);
+        footerLabel.widget = Container(
+            margin: new EdgeInsets.all(20.0),
+            child: Text('This is a custom Footer',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold, color: UIData.ui_kit_color)));
+        customerScreen.setFooter(footerLabel);
 
-      return customerScreen;
+        return customerScreen;
+      } else {
+        AlternateContactCustomScreen customerScreen =
+            AlternateContactCustomScreen(SoComponentCreator());
+
+        return customerScreen;
+      }
     }
     return super.getScreen(componentId);
   }
@@ -108,10 +119,18 @@ class ExampleCustomScreenManager extends CustomScreenManager {
         image: 'FontAwesome.qrcode',
         group: 'Customscreens');
 
+    MenuItem toAddCustomContactScreen = MenuItem(
+        action: SoAction(
+            componentId: CONTACTS_COMP_ID, label: 'Contact Custom Screen'),
+        image: 'FontAwesome.map',
+        group: 'Customscreens',
+        templateName: 'ContactCustomTemplate');
+
     menuManager.addItem(toAddHelloCustomScreen);
     menuManager.addItem(toAddTelephoneCallCustomScreen);
     menuManager.addItem(toAddMapCustomScreen);
     menuManager.addItem(toAddQrScannerCustomScreen);
+    menuManager.addItem(toAddCustomContactScreen, checkUnique: false);
   }
 
   @override
