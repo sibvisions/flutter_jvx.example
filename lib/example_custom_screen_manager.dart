@@ -26,6 +26,8 @@ const String CALENDAR_COMP_ID =
     "com.sibvisions.apps.mobile.demo.screens.features.CalendarWorkScreen:L1_MI_DOOPENWORKSCREEN_COM-SIB-APP-MOB-DEM-SCR-FEA-CALWORSCR";
 const String STYLED_TABLE_COMP_ID =
     "com.sibvisions.apps.mobile.demo.screens.features.StyledTableWorkScreen:L1_MI_DOOPENWORKSCREEN_COM-SIB-APP-MOB-DEM-SCR-FEA-STYTABWORSCR";
+const String CONTACTS_COMP_ID =
+    "com.sibvisions.apps.mobile.demo.screens.features.ContactsWorkScreen:L1_MI_DOOPENWORKSCREEN_COM-SIB-APP-MOB-DEM-SCR-FEA-CONWORSCR";
 const String HELLO_COMP_ID = "HELLO_CUSTOM_SCREEN";
 const String TELEPHONE_CALL_COMP_ID = "TELEPHONE_CALL_SCREEN";
 const String MAP_COMP_ID = "MAP_SCREEN";
@@ -51,8 +53,7 @@ class ExampleCustomScreenManager extends CustomScreenManager {
       return CalendarCustomScreen(SoComponentCreator());
     } else if (componentId == STYLED_TABLE_COMP_ID) {
       return StyledTableCustomScreen(SoComponentCreator());
-    } else if (componentId ==
-        'com.sibvisions.apps.mobile.demo.screens.features.ContactsWorkScreen:L1_MI_DOOPENWORKSCREEN_COM-SIB-APP-MOB-DEM-SCR-FEA-CONWORSCR') {
+    } else if (componentId == CONTACTS_COMP_ID) {
       CustomerCustomScreen customerScreen =
           CustomerCustomScreen(SoComponentCreator());
 
