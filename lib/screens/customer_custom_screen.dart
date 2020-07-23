@@ -6,11 +6,11 @@ import 'package:jvx_flutterclient/custom_screen/custom_screen.dart';
 import 'package:jvx_flutterclient/model/api/request/request.dart';
 import 'package:jvx_flutterclient/model/api/response/response_data.dart';
 import 'package:jvx_flutterclient/ui/component/i_component.dart';
-import 'package:jvx_flutterclient/ui/screen/so_component_data.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:jvx_flutterclient/ui/component/co_custom_component.dart';
 import 'package:jvx_flutterclient/ui/container/co_panel.dart';
 import 'package:jvx_flutterclient/ui/screen/so_component_creator.dart';
+import 'package:jvx_flutterclient/utils/data_api.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class CustomerCustomScreen extends CustomScreen {
@@ -19,11 +19,8 @@ class CustomerCustomScreen extends CustomScreen {
 
   @override
   Widget getWidget() {
-    SoComponentData data = this
-        .componentScreen
-        .getComponentData("JVxMobileDemo/Con-CG/contacts#4");
-
-    dynamic phone = data.getColumnData(componentScreen.context, "PHONE");
+    DataApi dataApi = getDataApi('JVxMobileDemo/Con-CG/contacts#4');
+    dynamic phone = dataApi.getValue('PHONE');
 
     CoCustomComponent contactComp = new CoCustomComponent(
       GlobalKey(debugLabel: 'contact'),
@@ -38,7 +35,7 @@ class CustomerCustomScreen extends CustomScreen {
             Expanded(
               child: CustomRoundedButton(
                   "Call", Icon(Icons.call, color: Colors.white), () {
-                phone = data.getColumnData(componentScreen.context, "PHONE");
+                phone = dataApi.getValue("PHONE");
                 launch("tel://$phone");
               }),
             ),
@@ -46,7 +43,7 @@ class CustomerCustomScreen extends CustomScreen {
             Expanded(
               child: CustomRoundedButton(
                   "SMS", Icon(Icons.sms, color: Colors.white), () {
-                phone = data.getColumnData(componentScreen.context, "PHONE");
+                phone = dataApi.getValue("PHONE");
                 launch("sms://$phone");
               }),
             ),
@@ -54,7 +51,7 @@ class CustomerCustomScreen extends CustomScreen {
             Expanded(
               child: CustomRoundedButton("WhatsApp",
                   Icon(FontAwesomeIcons.whatsapp, color: Colors.white), () {
-                phone = data.getColumnData(componentScreen.context, "PHONE");
+                phone = dataApi.getValue("PHONE");
                 if (!Platform.isIOS) {
                   launch("whatsapp://send?phone=$phone&text=");
                 } else {
@@ -69,7 +66,7 @@ class CustomerCustomScreen extends CustomScreen {
 
     CoPanel comp = this.componentScreen.getComponentFromName('contactPanel');
     this.componentScreen.replaceComponent(comp, contactComp);
-
+    
     IComponent component = this.componentScreen.getRootComponent();
     if (component != null) {
       return component.getWidget();
