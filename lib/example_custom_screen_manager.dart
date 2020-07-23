@@ -90,42 +90,42 @@ class ExampleCustomScreenManager extends CustomScreenManager {
 
   @override
   void onMenu(SoMenuManager menuManager) {
+    //Add Item via your own MenuItem
     MenuItem toAddHelloCustomScreen = MenuItem(
         action:
             SoAction(componentId: HELLO_COMP_ID, label: 'Hello Custom Screen'),
         image: 'FontAwesome.star-o',
         group: 'Customscreens');
-
-    MenuItem toAddTelephoneCallCustomScreen = MenuItem(
-        action: SoAction(
-            componentId: TELEPHONE_CALL_COMP_ID,
-            label: 'Telephone Call Screen'),
-        image: 'FontAwesome.phone',
-        group: 'Customscreens');
-
-    MenuItem toAddMapCustomScreen = MenuItem(
-        action: SoAction(componentId: MAP_COMP_ID, label: 'Map Custom Screen'),
-        image: 'FontAwesome.map',
-        group: 'Customscreens');
-
-    MenuItem toAddQrScannerCustomScreen = MenuItem(
-        action: SoAction(
-            componentId: QR_SCANNER_COMP_ID, label: 'QR Scanner Custom Screen'),
-        image: 'FontAwesome.qrcode',
-        group: 'Customscreens');
-
-    MenuItem toAddCustomContactScreen = MenuItem(
-        action: SoAction(
-            componentId: CONTACTS_COMP_ID, label: 'Contact Custom Screen'),
-        image: 'FontAwesome.group',
-        group: 'Customscreens',
-        templateName: 'ContactCustomTemplate');
-
     menuManager.addItem(toAddHelloCustomScreen);
-    menuManager.addItem(toAddTelephoneCallCustomScreen);
-    menuManager.addItem(toAddMapCustomScreen);
-    menuManager.addItem(toAddQrScannerCustomScreen);
-    menuManager.addItem(toAddCustomContactScreen, checkUnique: false);
+
+    //Or directly via named parameters
+    menuManager.addItemToMenu(id: TELEPHONE_CALL_COMP_ID,
+      group: 'Customscreens',
+      text: 'Telephone Call Screen',
+      image: 'FontAwesome.phone',);
+
+    menuManager.addItemToMenu(
+      id: MAP_COMP_ID,
+      group: 'Customscreens',
+      text: 'Map Custom Screen',
+      image: 'FontAwesome.map',
+    );
+
+    menuManager.addItemToMenu(
+      id: QR_SCANNER_COMP_ID,
+      group: 'Customscreens',
+      text: 'QR Scanner Custom Screen',
+      image: 'FontAwesome.qrcode',
+    );
+    
+    menuManager.addItemToMenu(
+      id: CONTACTS_COMP_ID,
+      group: 'Customscreens',
+      text: 'Contact Custom Screen',
+      image: 'FontAwesome.group',
+      templateName: 'ContactCustomTemplate',
+      checkUnique: false,
+    );
   }
 
   @override
