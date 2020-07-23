@@ -67,8 +67,6 @@ class ContactCustomScreen extends CustomScreen {
     CoPanel comp = this.componentScreen.getComponentFromName('contactPanel');
     this.componentScreen.replaceComponent(comp, contactComp);
 
-    this.componentScreen.debugPrintCurrentWidgetTree();    
-
     IComponent component = this.componentScreen.getRootComponent();
     if (component != null) {
       return component.getWidget();
