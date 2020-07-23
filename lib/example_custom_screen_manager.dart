@@ -57,10 +57,11 @@ class ExampleCustomScreenManager extends CustomScreenManager {
     } else if (componentId == STYLED_TABLE_COMP_ID) {
       return StyledTableCustomScreen(SoComponentCreator());
     } else if (componentId == CONTACTS_COMP_ID) {
-      if (templateName == null || templateName != 'ContactCustomTemplate') {
-        ContactCustomScreen customerScreen =
-            ContactCustomScreen(SoComponentCreator());
+      ContactCustomScreen customerScreen =
+          ContactCustomScreen(SoComponentCreator());
 
+      //Add a header and a footer when the template is ContactCustomTemplate
+      if (templateName == null || templateName == 'ContactCustomTemplate') {
         CoCustomComponent headerLabel = new CoCustomComponent(
             GlobalKey(debugLabel: 'header'),
             customerScreen.componentScreen.context);
@@ -81,14 +82,9 @@ class ExampleCustomScreenManager extends CustomScreenManager {
                 style: TextStyle(
                     fontWeight: FontWeight.bold, color: UIData.ui_kit_color)));
         customerScreen.setFooter(footerLabel);
-
-        return customerScreen;
-      } else {
-        AlternateContactCustomScreen customerScreen =
-            AlternateContactCustomScreen(SoComponentCreator());
-
-        return customerScreen;
       }
+
+      return customerScreen;
     }
     return super.getScreen(componentId);
   }
@@ -122,7 +118,7 @@ class ExampleCustomScreenManager extends CustomScreenManager {
     MenuItem toAddCustomContactScreen = MenuItem(
         action: SoAction(
             componentId: CONTACTS_COMP_ID, label: 'Contact Custom Screen'),
-        image: 'FontAwesome.map',
+        image: 'FontAwesome.group',
         group: 'Customscreens',
         templateName: 'ContactCustomTemplate');
 
