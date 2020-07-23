@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutterclient_example/screens/calendar_custom_screen.dart';
 import 'package:flutterclient_example/screens/contact_custom_screen.dart';
-import 'package:flutterclient_example/screens/alternate_contact_custom_screen.dart';
 import 'package:flutterclient_example/screens/map_custom_screen.dart';
 import 'package:flutterclient_example/screens/qr_scanner_custom_screen.dart';
 import 'package:flutterclient_example/screens/styled_table_custom_screen.dart';
