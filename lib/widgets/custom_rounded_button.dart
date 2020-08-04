@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jvx_flutterclient/utils/uidata.dart';
+import 'package:jvx_flutterclient/jvx_flutterclient.dart';
 
 class CustomRoundedButton extends StatelessWidget {
   final Function onTapFunction;
@@ -14,15 +14,18 @@ class CustomRoundedButton extends StatelessWidget {
       size: Size(56, 56),
       child: ClipOval(
         child: Material(
-          color: UIData.ui_kit_color_2, 
+          color: UIData.ui_kit_color_2,
           child: InkWell(
-            splashColor: Colors.orange, 
-            onTap: onTapFunction, 
+            splashColor: Colors.orange,
+            onTap: onTapFunction,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                buttonIcon, 
-                Text(buttonText, style: TextStyle(color: Colors.white),), 
+                buttonIcon,
+                Text(
+                  buttonText,
+                  style: TextStyle(color: Colors.white),
+                ),
               ],
             ),
           ),

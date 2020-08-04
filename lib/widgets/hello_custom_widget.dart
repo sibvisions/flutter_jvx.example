@@ -10,7 +10,7 @@ class HelloCustomWidget extends StatefulWidget {
 
 class _HelloCustomWidgetState extends State<HelloCustomWidget> {
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,17 +18,17 @@ class _HelloCustomWidgetState extends State<HelloCustomWidget> {
       appBar: AppBar(
         title: Text('Hello'),
         actions: <Widget>[
-              IconButton(
-                icon: Icon(FontAwesomeIcons.ellipsisV),
-                onPressed: () =>
-                    _scaffoldKey.currentState.openEndDrawer(),
-              )
-            ],),
+          IconButton(
+            icon: Icon(FontAwesomeIcons.ellipsisV),
+            onPressed: () => _scaffoldKey.currentState.openEndDrawer(),
+          )
+        ],
+      ),
       endDrawer: MenuDrawerWidget(
-        menuItems: globals.items,
-        listMenuItems: true,
-        currentTitle: 'Telephone Call',
-        groupedMenuMode: true),
+          menuItems: globals.items,
+          listMenuItems: true,
+          currentTitle: 'Telephone Call',
+          groupedMenuMode: true),
       body: Center(
         child: FlatButton(
           child: Text('Press this to get back to the Menu'),

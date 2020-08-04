@@ -1,23 +1,16 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutterclient_example/screens/calendar_custom_screen.dart';
-import 'package:flutterclient_example/screens/contact_custom_screen.dart';
-import 'package:flutterclient_example/screens/map_custom_screen.dart';
-import 'package:flutterclient_example/screens/qr_scanner_custom_screen.dart';
-import 'package:flutterclient_example/screens/styled_table_custom_screen.dart';
-import 'package:flutterclient_example/screens/telephone_call_custom_screen.dart';
-import 'package:jvx_flutterclient/custom_screen/custom_screen_manager/custom_screen_manager.dart';
-import 'package:jvx_flutterclient/model/so_action.dart';
-import 'package:jvx_flutterclient/model/api/response/user_data.dart';
-import 'package:jvx_flutterclient/model/menu_item.dart';
-import 'package:jvx_flutterclient/ui/component/co_custom_component.dart';
-import 'package:jvx_flutterclient/ui/screen/so_component_creator.dart';
-import 'package:jvx_flutterclient/ui/screen/so_menu_manager.dart';
-import 'package:jvx_flutterclient/utils/uidata.dart';
+import 'package:jvx_flutterclient/jvx_flutterclient.dart';
 import 'package:jvx_flutterclient/utils/globals.dart' as globals;
 
+import 'screens/calendar_custom_screen.dart';
 import 'screens/chart_custom_screen.dart';
+import 'screens/contact_custom_screen.dart';
 import 'screens/hello_custom_screen.dart';
+import 'screens/map_custom_screen.dart';
+import 'screens/qr_scanner_custom_screen.dart';
 import 'screens/signature_custom_screen.dart';
+import 'screens/styled_table_custom_screen.dart';
+import 'screens/telephone_call_custom_screen.dart';
 
 const String CHART_COMP_ID =
     "com.sibvisions.apps.mobile.demo.screens.features.ChartWorkScreen:L1_MI_DOOPENWORKSCREEN_COM-SIB-APP-MOB-DEM-SCR-FEA-CHAWORSCR";
@@ -99,10 +92,12 @@ class ExampleCustomScreenManager extends CustomScreenManager {
     menuManager.addItem(toAddHelloCustomScreen);
 
     //Or directly via named parameters
-    menuManager.addItemToMenu(id: TELEPHONE_CALL_COMP_ID,
+    menuManager.addItemToMenu(
+      id: TELEPHONE_CALL_COMP_ID,
       group: 'Customscreens',
       text: 'Telephone Call Screen',
-      image: 'FontAwesome.phone',);
+      image: 'FontAwesome.phone',
+    );
 
     menuManager.addItemToMenu(
       id: MAP_COMP_ID,
@@ -117,7 +112,7 @@ class ExampleCustomScreenManager extends CustomScreenManager {
       text: 'QR Scanner Custom Screen',
       image: 'FontAwesome.qrcode',
     );
-    
+
     menuManager.addItemToMenu(
       id: CONTACTS_COMP_ID,
       group: 'Customscreens',

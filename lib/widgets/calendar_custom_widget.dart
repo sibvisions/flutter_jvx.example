@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jvx_flutterclient/utils/uidata.dart';
+import 'package:jvx_flutterclient/jvx_flutterclient.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -34,15 +34,16 @@ class _CalendarCustomWidgetState extends State<CalendarCustomWidget> {
     set.forEach((element) {
       print("Element" + element.daysFromToday.toString() + ":" + element.event);
       CalendarData currentCalData = element;
-      if(!_events.containsKey(_selectedDay.add(Duration(days :currentCalData.daysFromToday))))
-      {
-        _events.putIfAbsent(_selectedDay.add(Duration(days :currentCalData.daysFromToday)), () => [currentCalData.event]);
+      if (!_events.containsKey(
+          _selectedDay.add(Duration(days: currentCalData.daysFromToday)))) {
+        _events.putIfAbsent(
+            _selectedDay.add(Duration(days: currentCalData.daysFromToday)),
+            () => [currentCalData.event]);
+      } else {
+        _events[_selectedDay.add(Duration(days: currentCalData.daysFromToday))]
+            .add(currentCalData.event);
       }
-      else
-      {
-        _events[_selectedDay.add(Duration(days :currentCalData.daysFromToday))].add(currentCalData.event);
-      }
-    });    
+    });
 
     _selectedEvents = _events[_selectedDay] ?? [];
     _calendarController = CalendarController();

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:jvx_flutterclient/ui/widgets/menu_drawer_widget.dart';
-import 'package:latlong/latlong.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:jvx_flutterclient/utils/globals.dart' as globals;
 import 'package:geolocation/geolocation.dart';
+import 'package:jvx_flutterclient/ui/widgets/menu_drawer_widget.dart';
+import 'package:jvx_flutterclient/utils/globals.dart' as globals;
+import 'package:latlong/latlong.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'custom_popup.dart';
 import 'custom_rounded_button.dart';

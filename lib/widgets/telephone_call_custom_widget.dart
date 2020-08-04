@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:jvx_flutterclient/ui/widgets/menu_drawer_widget.dart';
 import 'package:jvx_flutterclient/utils/globals.dart' as globals;
-import 'package:jvx_flutterclient/utils/uidata.dart';
+import 'package:jvx_flutterclient/jvx_flutterclient.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -82,13 +82,14 @@ class TelephoneCallCustomWidget extends StatelessWidget {
                       }),
                     ),
                     Expanded(
-                      child: CustomRoundedButton(
-                          "WhatsApp", Icon(FontAwesomeIcons.whatsapp, color: Colors.white), () {
-                            if (!Platform.isIOS) {
-                              launch("whatsapp://send?phone=$numberToCall&text=");
-                            } else {
-                              launch("whatsapp://wa.me/$numberToCall/?text=");
-                            }
+                      child: CustomRoundedButton("WhatsApp",
+                          Icon(FontAwesomeIcons.whatsapp, color: Colors.white),
+                          () {
+                        if (!Platform.isIOS) {
+                          launch("whatsapp://send?phone=$numberToCall&text=");
+                        } else {
+                          launch("whatsapp://wa.me/$numberToCall/?text=");
+                        }
                       }),
                     ),
                   ],

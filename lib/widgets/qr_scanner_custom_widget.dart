@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:jvx_flutterclient/ui/widgets/menu_drawer_widget.dart';
 import 'package:jvx_flutterclient/utils/globals.dart' as globals;
-import 'package:jvx_flutterclient/utils/uidata.dart';
+import 'package:jvx_flutterclient/jvx_flutterclient.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'custom_rounded_button.dart';
