@@ -60,7 +60,7 @@ class ExampleCustomScreenManager extends CustomScreenManager {
           ContactCustomScreen(SoComponentCreator());
 
       //Add a header and a footer when the template is ContactCustomTemplate
-      if (templateName == null || templateName == 'ContactCustomTemplate') {
+      if (templateName != null && templateName == 'ContactCustomTemplate') {
         CoCustomComponent headerLabel = new CoCustomComponent(
             GlobalKey(debugLabel: 'header'),
             customerScreen.componentScreen.context);
