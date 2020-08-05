@@ -124,7 +124,6 @@ class ExampleCustomScreenManager extends CustomScreenManager {
       text: 'Contact Custom Screen',
       image: 'FontAwesome.group',
       templateName: 'ContactCustomTemplate',
-      checkUnique: false,
     );
   }
 
