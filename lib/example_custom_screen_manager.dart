@@ -5,6 +5,7 @@ import 'package:flutterclient_example/screens/map_custom_screen.dart';
 import 'package:flutterclient_example/screens/qr_scanner_custom_screen.dart';
 import 'package:flutterclient_example/screens/styled_table_custom_screen.dart';
 import 'package:flutterclient_example/screens/telephone_call_custom_screen.dart';
+import 'package:flutterclient_example/screens/user_data_custom_screen.dart';
 import 'package:jvx_flutterclient/custom_screen/custom_screen_manager/custom_screen_manager.dart';
 import 'package:jvx_flutterclient/model/so_action.dart';
 import 'package:jvx_flutterclient/model/api/response/user_data.dart';
@@ -33,6 +34,7 @@ const String HELLO_COMP_ID = "HELLO_CUSTOM_SCREEN";
 const String TELEPHONE_CALL_COMP_ID = "TELEPHONE_CALL_SCREEN";
 const String MAP_COMP_ID = "MAP_SCREEN";
 const String QR_SCANNER_COMP_ID = "QR_SCANNER_SCREEN";
+const String USER_DATA_COMP_ID = "USER_DATA_SCREEN";
 
 class ExampleCustomScreenManager extends CustomScreenManager {
   @override
@@ -51,6 +53,8 @@ class ExampleCustomScreenManager extends CustomScreenManager {
       return SignatureCustomScreen(SoComponentCreator());
     } else if (componentId == QR_SCANNER_COMP_ID) {
       return QrScannerCustomScreen(SoComponentCreator());
+    } else if (componentId == USER_DATA_COMP_ID) {
+      return UserDataCustomScreen(SoComponentCreator());
     } else if (componentId == CALENDAR_COMP_ID) {
       return CalendarCustomScreen(SoComponentCreator());
     } else if (componentId == STYLED_TABLE_COMP_ID) {
@@ -99,10 +103,12 @@ class ExampleCustomScreenManager extends CustomScreenManager {
     menuManager.addItem(toAddHelloCustomScreen);
 
     //Or directly via named parameters
-    menuManager.addItemToMenu(id: TELEPHONE_CALL_COMP_ID,
+    menuManager.addItemToMenu(
+      id: TELEPHONE_CALL_COMP_ID,
       group: 'Customscreens',
       text: 'Telephone Call Screen',
-      image: 'FontAwesome.phone',);
+      image: 'FontAwesome.phone',
+    );
 
     menuManager.addItemToMenu(
       id: MAP_COMP_ID,
@@ -117,13 +123,21 @@ class ExampleCustomScreenManager extends CustomScreenManager {
       text: 'QR Scanner Custom Screen',
       image: 'FontAwesome.qrcode',
     );
-    
+
+    menuManager.addItemToMenu(
+      id: USER_DATA_COMP_ID,
+      group: 'Customscreens',
+      text: 'User Data Screen',
+      image: 'FontAwesome.user',
+    );
+
     menuManager.addItemToMenu(
       id: CONTACTS_COMP_ID,
       group: 'Customscreens',
       text: 'Contact Custom Screen',
       image: 'FontAwesome.group',
       templateName: 'ContactCustomTemplate',
+      checkUnique: true,
     );
   }
 
