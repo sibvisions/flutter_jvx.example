@@ -11,6 +11,7 @@ import 'screens/qr_scanner_custom_screen.dart';
 import 'screens/signature_custom_screen.dart';
 import 'screens/styled_table_custom_screen.dart';
 import 'screens/telephone_call_custom_screen.dart';
+import 'screens/user_data_custom_screen.dart';
 
 const String CHART_COMP_ID =
     "com.sibvisions.apps.mobile.demo.screens.features.ChartWorkScreen:L1_MI_DOOPENWORKSCREEN_COM-SIB-APP-MOB-DEM-SCR-FEA-CHAWORSCR";
@@ -26,6 +27,7 @@ const String HELLO_COMP_ID = "HELLO_CUSTOM_SCREEN";
 const String TELEPHONE_CALL_COMP_ID = "TELEPHONE_CALL_SCREEN";
 const String MAP_COMP_ID = "MAP_SCREEN";
 const String QR_SCANNER_COMP_ID = "QR_SCANNER_SCREEN";
+const String USER_DATA_COMP_ID = "USER_DATA_SCREEN";
 
 class ExampleCustomScreenManager extends CustomScreenManager {
   @override
@@ -44,6 +46,8 @@ class ExampleCustomScreenManager extends CustomScreenManager {
       return SignatureCustomScreen(SoComponentCreator());
     } else if (componentId == QR_SCANNER_COMP_ID) {
       return QrScannerCustomScreen(SoComponentCreator());
+    } else if (componentId == USER_DATA_COMP_ID) {
+      return UserDataCustomScreen(SoComponentCreator());
     } else if (componentId == CALENDAR_COMP_ID) {
       return CalendarCustomScreen(SoComponentCreator());
     } else if (componentId == STYLED_TABLE_COMP_ID) {
@@ -53,7 +57,7 @@ class ExampleCustomScreenManager extends CustomScreenManager {
           ContactCustomScreen(SoComponentCreator());
 
       //Add a header and a footer when the template is ContactCustomTemplate
-      if (templateName == null || templateName == 'ContactCustomTemplate') {
+      if (templateName != null && templateName == 'ContactCustomTemplate') {
         CoCustomComponent headerLabel = new CoCustomComponent(
             GlobalKey(debugLabel: 'header'),
             customerScreen.componentScreen.context);
@@ -114,12 +118,19 @@ class ExampleCustomScreenManager extends CustomScreenManager {
     );
 
     menuManager.addItemToMenu(
+      id: USER_DATA_COMP_ID,
+      group: 'Customscreens',
+      text: 'User Data Screen',
+      image: 'FontAwesome.user',
+    );
+
+    menuManager.addItemToMenu(
       id: CONTACTS_COMP_ID,
       group: 'Customscreens',
       text: 'Contact Custom Screen',
       image: 'FontAwesome.group',
       templateName: 'ContactCustomTemplate',
-      checkUnique: false,
+      checkUnique: true,
     );
   }
 
