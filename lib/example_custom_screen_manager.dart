@@ -31,31 +31,40 @@ const String USER_DATA_COMP_ID = "USER_DATA_SCREEN";
 
 class ExampleCustomScreenManager extends CustomScreenManager {
   @override
+  void initScreenManager() {
+    super
+        .registerScreen(CHART_COMP_ID, ChartCustomScreen(SoComponentCreator()));
+    super
+        .registerScreen(HELLO_COMP_ID, HelloCustomScreen(SoComponentCreator()));
+    super.registerScreen(TELEPHONE_CALL_COMP_ID,
+        TelephoneCallCustomScreen(SoComponentCreator()));
+    super.registerScreen(MAP_COMP_ID, MapCustomScreen(SoComponentCreator()));
+    super.registerScreen(
+        SIGNATURE_COMP_ID, SignatureCustomScreen(SoComponentCreator()));
+    super.registerScreen(
+        QR_SCANNER_COMP_ID, QrScannerCustomScreen(SoComponentCreator()));
+    super.registerScreen(
+        USER_DATA_COMP_ID, UserDataCustomScreen(SoComponentCreator()));
+    super.registerScreen(
+        CALENDAR_COMP_ID, CalendarCustomScreen(SoComponentCreator()));
+    super.registerScreen(
+        STYLED_TABLE_COMP_ID, StyledTableCustomScreen(SoComponentCreator()));
+    super.registerScreen(
+        CONTACTS_COMP_ID, ContactCustomScreen(SoComponentCreator()));
+  }
+
+  @override
   getScreen(String componentId, {String templateName}) {
     print(componentId);
     globals.currentTempalteName = templateName;
-    if (componentId == CHART_COMP_ID) {
-      return ChartCustomScreen(SoComponentCreator());
-    } else if (componentId == HELLO_COMP_ID) {
-      return HelloCustomScreen(SoComponentCreator());
-    } else if (componentId == TELEPHONE_CALL_COMP_ID) {
-      return TelephoneCallCustomScreen(SoComponentCreator());
-    } else if (componentId == MAP_COMP_ID) {
-      return MapCustomScreen(SoComponentCreator());
-    } else if (componentId == SIGNATURE_COMP_ID) {
-      return SignatureCustomScreen(SoComponentCreator());
-    } else if (componentId == QR_SCANNER_COMP_ID) {
-      return QrScannerCustomScreen(SoComponentCreator());
-    } else if (componentId == USER_DATA_COMP_ID) {
-      return UserDataCustomScreen(SoComponentCreator());
-    } else if (componentId == CALENDAR_COMP_ID) {
-      return CalendarCustomScreen(SoComponentCreator());
-    } else if (componentId == STYLED_TABLE_COMP_ID) {
-      return StyledTableCustomScreen(SoComponentCreator());
-    } else if (componentId == CONTACTS_COMP_ID) {
-      ContactCustomScreen customerScreen =
-          ContactCustomScreen(SoComponentCreator());
 
+    CustomScreen customerScreen = super.findScreen(componentId);
+
+    if (customerScreen == null) {
+      return super.getScreen(componentId);
+    }
+
+    if (customerScreen is ContactCustomScreen) {
       //Add a header and a footer when the template is ContactCustomTemplate
       if (templateName != null && templateName == 'ContactCustomTemplate') {
         CoCustomComponent headerLabel = new CoCustomComponent(
@@ -79,10 +88,9 @@ class ExampleCustomScreenManager extends CustomScreenManager {
                     fontWeight: FontWeight.bold, color: UIData.ui_kit_color)));
         customerScreen.setFooter(footerLabel);
       }
-
-      return customerScreen;
     }
-    return super.getScreen(componentId);
+
+    return customerScreen;
   }
 
   @override
