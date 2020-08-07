@@ -64,10 +64,7 @@ class ExampleCustomScreenManager extends CustomScreenManager {
       return super.getScreen(componentId);
     }
 
-    if (customerScreen is ContactCustomScreen) {
-      //Add a header and a footer when the template is ContactCustomTemplate
-
-    }
+    customerScreen.setTemplateName(templateName);
 
     return customerScreen;
   }

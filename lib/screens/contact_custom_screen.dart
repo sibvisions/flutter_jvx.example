@@ -23,7 +23,10 @@ class ContactCustomScreen extends CustomScreen {
     DataApi dataApi = getDataApi('JVxMobileDemo/Con-CG/contacts#4');
     dynamic phone = dataApi.getValue('PHONE');
 
-    if (templateName != null && templateName == 'ContactCustomTemplate') {
+    String tempName = super.getTemplateName();
+
+    if (tempName != null && tempName == 'ContactCustomTemplate') {
+      //Add a header and a footer when the template is ContactCustomTemplate
       CoCustomComponent headerLabel = new CoCustomComponent(
           GlobalKey(debugLabel: 'header'), this.componentScreen.context);
       headerLabel.widget = Container(
