@@ -66,28 +66,7 @@ class ExampleCustomScreenManager extends CustomScreenManager {
 
     if (customerScreen is ContactCustomScreen) {
       //Add a header and a footer when the template is ContactCustomTemplate
-      if (templateName != null && templateName == 'ContactCustomTemplate') {
-        CoCustomComponent headerLabel = new CoCustomComponent(
-            GlobalKey(debugLabel: 'header'),
-            customerScreen.componentScreen.context);
-        headerLabel.widget = Container(
-            margin: new EdgeInsets.all(20.0),
-            child: Text('This is a custom Header',
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: UIData.ui_kit_color_2)));
-        customerScreen.setHeader(headerLabel);
 
-        CoCustomComponent footerLabel = new CoCustomComponent(
-            GlobalKey(debugLabel: 'footer'),
-            customerScreen.componentScreen.context);
-        footerLabel.widget = Container(
-            margin: new EdgeInsets.all(20.0),
-            child: Text('This is a custom Footer',
-                style: TextStyle(
-                    fontWeight: FontWeight.bold, color: UIData.ui_kit_color)));
-        customerScreen.setFooter(footerLabel);
-      }
     }
 
     return customerScreen;

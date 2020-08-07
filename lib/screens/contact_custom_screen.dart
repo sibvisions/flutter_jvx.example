@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutterclient_example/widgets/custom_rounded_button.dart';
 import 'package:jvx_flutterclient/custom_screen/custom_screen.dart';
+import 'package:jvx_flutterclient/jvx_flutterclient.dart';
 import 'package:jvx_flutterclient/model/api/request/request.dart';
 import 'package:jvx_flutterclient/model/api/response/response_data.dart';
 import 'package:jvx_flutterclient/ui/component/i_component.dart';
@@ -21,6 +22,26 @@ class ContactCustomScreen extends CustomScreen {
   Widget getWidget() {
     DataApi dataApi = getDataApi('JVxMobileDemo/Con-CG/contacts#4');
     dynamic phone = dataApi.getValue('PHONE');
+
+    if (templateName != null && templateName == 'ContactCustomTemplate') {
+      CoCustomComponent headerLabel = new CoCustomComponent(
+          GlobalKey(debugLabel: 'header'), this.componentScreen.context);
+      headerLabel.widget = Container(
+          margin: new EdgeInsets.all(20.0),
+          child: Text('This is a custom Header',
+              style: TextStyle(
+                  fontWeight: FontWeight.bold, color: UIData.ui_kit_color_2)));
+      this.setHeader(headerLabel);
+
+      CoCustomComponent footerLabel = new CoCustomComponent(
+          GlobalKey(debugLabel: 'footer'), this.componentScreen.context);
+      footerLabel.widget = Container(
+          margin: new EdgeInsets.all(20.0),
+          child: Text('This is a custom Footer',
+              style: TextStyle(
+                  fontWeight: FontWeight.bold, color: UIData.ui_kit_color)));
+      this.setFooter(footerLabel);
+    }
 
     CoCustomComponent contactComp = new CoCustomComponent(
       GlobalKey(debugLabel: 'contact'),
