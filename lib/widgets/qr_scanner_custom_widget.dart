@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:jvx_flutterclient/ui/widgets/menu_drawer_widget.dart';
 import 'package:jvx_flutterclient/utils/globals.dart' as globals;
-import 'package:jvx_flutterclient/jvx_flutterclient.dart';
+import 'package:jvx_flutterclient/utils/uidata.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'custom_rounded_button.dart';
@@ -80,15 +80,19 @@ class _QrScannerCustomWidgetState extends State<QrScannerCustomWidget> {
 
     return Scaffold(
       key: _scaffoldKey,
-      appBar: AppBar(
-        title: Text('Scan QR Code'),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(FontAwesomeIcons.ellipsisV),
-            onPressed: () => _scaffoldKey.currentState.openEndDrawer(),
-          )
-        ],
-      ),
+
+      appBar: globals.appFrame.showScreenHeader
+          ? AppBar(
+              title: Text('Scan QR Code'),
+              actions: <Widget>[
+                IconButton(
+                  icon: Icon(FontAwesomeIcons.ellipsisV),
+                  onPressed: () => _scaffoldKey.currentState.openEndDrawer(),
+                )
+              ],
+
+            )
+          : null,
       endDrawer: MenuDrawerWidget(
           menuItems: globals.items,
           listMenuItems: true,

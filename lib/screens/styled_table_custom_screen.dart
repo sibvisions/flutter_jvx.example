@@ -25,9 +25,6 @@ class StyledTableCustomScreen extends CustomScreen {
         responeData.dataBooks.length > 0) {
       for (int i = 0; i < responeData.dataBooks[0].records.length; i++) {
         contacts.add(Contact.fromJson(responeData.dataBooks[0].records[i]));
-        for (int j = 0; j < responeData.dataBooks[0].records[i].length; j++) {
-          print(responeData.dataBooks[0].records[i][j]);
-        }
       }
     }
   }
