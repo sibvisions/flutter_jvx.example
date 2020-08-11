@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -105,25 +106,28 @@ class MapCustomWidgetState extends State<MapCustomWidget> {
         },
         child: Scaffold(
           key: _scaffoldKey,
-          appBar: AppBar(
-            leading: IconButton(
-              icon: Icon(Icons.arrow_back),
-              onPressed: () {
-                Navigator.of(context).pushReplacement(MaterialPageRoute(
-                    settings: RouteSettings(name: '/Menu'),
-                    builder: (_) => MenuPage(
-                          menuItems: globals.items,
-                        )));
-              },
-            ),
-            title: Text('Map Custom Screen'),
-            actions: <Widget>[
-              IconButton(
-                icon: Icon(FontAwesomeIcons.ellipsisV),
-                onPressed: () => _scaffoldKey.currentState.openEndDrawer(),
-              )
-            ],
-          ),
+          appBar: globals.appFrame.showScreenHeader
+              ? AppBar(
+                  leading: IconButton(
+                    icon: Icon(Icons.arrow_back),
+                    onPressed: () {
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(
+                          settings: RouteSettings(name: '/Menu'),
+                          builder: (_) => MenuPage(
+                                menuItems: globals.items,
+                              )));
+                    },
+                  ),
+                  title: Text('Map Custom Screen'),
+                  actions: <Widget>[
+                    IconButton(
+                      icon: Icon(FontAwesomeIcons.ellipsisV),
+                      onPressed: () =>
+                          _scaffoldKey.currentState.openEndDrawer(),
+                    )
+                  ],
+                )
+              : null,
           endDrawer: MenuDrawerWidget(
               menuItems: globals.items,
               listMenuItems: true,
@@ -146,6 +150,7 @@ class MapCustomWidgetState extends State<MapCustomWidget> {
                             'pk.eyJ1IjoibG9yZW56bXVla3NjaCIsImEiOiJjamV6aG15eHAwZDQ3MnFwYW1yMmt4ajI0In0.g_r3IeL9KgarsZAahvoaJQ',
                         'id': 'mapbox.streets',
                       },
+                      tileProvider: NonCachingNetworkTileProvider(),
                     ),
                     new MarkerLayerOptions(
                       markers: _buildMarkersOnMap(),
@@ -236,18 +241,20 @@ class MapCustomWidgetState extends State<MapCustomWidget> {
                 ),
                 child: Align(
                   alignment: Alignment.bottomRight,
-                  child: FloatingActionButton(
-                    onPressed: () async {
-                      LocationResult result =
-                          await Geolocation.lastKnownLocation();
-                      print(result.location.latitude.toString());
-                      _center = LatLng(
-                          result.location.latitude, result.location.longitude);
-                      mapController.move(_center, mapController.zoom);
-                    },
-                    child: const Icon(Icons.location_searching),
-                    elevation: 5,
-                  ),
+                  child: !kIsWeb
+                      ? FloatingActionButton(
+                          onPressed: () async {
+                            LocationResult result =
+                                await Geolocation.lastKnownLocation();
+                            print(result.location.latitude.toString());
+                            _center = LatLng(result.location.latitude,
+                                result.location.longitude);
+                            mapController.move(_center, mapController.zoom);
+                          },
+                          child: const Icon(Icons.location_searching),
+                          elevation: 5,
+                        )
+                      : null,
                 ),
               )
             ],
