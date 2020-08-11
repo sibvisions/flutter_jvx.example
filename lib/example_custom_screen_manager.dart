@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:jvx_flutterclient/jvx_flutterclient.dart';
+import 'package:jvx_flutterclient/ui/editor/celleditor/co_text_cell_editor.dart';
 import 'package:jvx_flutterclient/utils/globals.dart' as globals;
 
 import 'screens/calendar_custom_screen.dart';
@@ -32,25 +33,30 @@ const String USER_DATA_COMP_ID = "USER_DATA_SCREEN";
 class ExampleCustomScreenManager extends CustomScreenManager {
   @override
   void initScreenManager() {
-    super
-        .registerScreen(CHART_COMP_ID, ChartCustomScreen(SoComponentCreator()));
-    super
-        .registerScreen(HELLO_COMP_ID, HelloCustomScreen(SoComponentCreator()));
-    super.registerScreen(TELEPHONE_CALL_COMP_ID,
-        TelephoneCallCustomScreen(SoComponentCreator()));
-    super.registerScreen(MAP_COMP_ID, MapCustomScreen(SoComponentCreator()));
+    SoComponentCreator componentCreator = SoComponentCreator();
+
+    // The method is for setting the standard of each CellEditor or Component,
+    // which is being used to build the screen.
+    // componentCreator.setStandardCellEditors('TextCellEditor', (cellEditor, context) => CustomCellEditor(cellEditor, context));
+    // componentCreator.setStandardComponent('Panel', (globalKey, context) => CustomComponent(globalKey, context));
+
+    super.registerScreen(CHART_COMP_ID, ChartCustomScreen(componentCreator));
+    super.registerScreen(HELLO_COMP_ID, HelloCustomScreen(componentCreator));
     super.registerScreen(
-        SIGNATURE_COMP_ID, SignatureCustomScreen(SoComponentCreator()));
+        TELEPHONE_CALL_COMP_ID, TelephoneCallCustomScreen(componentCreator));
+    super.registerScreen(MAP_COMP_ID, MapCustomScreen(componentCreator));
     super.registerScreen(
-        QR_SCANNER_COMP_ID, QrScannerCustomScreen(SoComponentCreator()));
+        SIGNATURE_COMP_ID, SignatureCustomScreen(componentCreator));
     super.registerScreen(
-        USER_DATA_COMP_ID, UserDataCustomScreen(SoComponentCreator()));
+        QR_SCANNER_COMP_ID, QrScannerCustomScreen(componentCreator));
     super.registerScreen(
-        CALENDAR_COMP_ID, CalendarCustomScreen(SoComponentCreator()));
+        USER_DATA_COMP_ID, UserDataCustomScreen(componentCreator));
     super.registerScreen(
-        STYLED_TABLE_COMP_ID, StyledTableCustomScreen(SoComponentCreator()));
+        CALENDAR_COMP_ID, CalendarCustomScreen(componentCreator));
     super.registerScreen(
-        CONTACTS_COMP_ID, ContactCustomScreen(SoComponentCreator()));
+        STYLED_TABLE_COMP_ID, StyledTableCustomScreen(componentCreator));
+    super.registerScreen(
+        CONTACTS_COMP_ID, ContactCustomScreen(componentCreator));
   }
 
   @override
