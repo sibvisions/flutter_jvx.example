@@ -54,22 +54,6 @@ class ExampleCustomScreenManager extends CustomScreenManager {
   }
 
   @override
-  getScreen(String componentId, {String templateName}) {
-    print(componentId);
-    globals.currentTempalteName = templateName;
-
-    CustomScreen customerScreen = super.findScreen(componentId);
-
-    if (customerScreen == null) {
-      return super.getScreen(componentId);
-    }
-
-    customerScreen.setTemplateName(templateName);
-
-    return customerScreen;
-  }
-
-  @override
   void onMenu(SoMenuManager menuManager) {
     //Add Item via your own MenuItem
     MenuItem toAddHelloCustomScreen = MenuItem(
@@ -117,7 +101,4 @@ class ExampleCustomScreenManager extends CustomScreenManager {
       checkUnique: true,
     );
   }
-
-  @override
-  onUserData(UserData userData) {}
 }
