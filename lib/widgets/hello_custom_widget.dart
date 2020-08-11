@@ -15,15 +15,19 @@ class _HelloCustomWidgetState extends State<HelloCustomWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      appBar: AppBar(
-        title: Text('Hello'),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(FontAwesomeIcons.ellipsisV),
-            onPressed: () => _scaffoldKey.currentState.openEndDrawer(),
-          )
-        ],
-      ),
+
+      appBar: globals.appFrame.showScreenHeader
+          ? AppBar(
+              title: Text('Hello'),
+              actions: <Widget>[
+                IconButton(
+                  icon: Icon(FontAwesomeIcons.ellipsisV),
+                  onPressed: () => _scaffoldKey.currentState.openEndDrawer(),
+                )
+              ],
+
+            )
+          : null,
       endDrawer: MenuDrawerWidget(
           menuItems: globals.items,
           listMenuItems: true,

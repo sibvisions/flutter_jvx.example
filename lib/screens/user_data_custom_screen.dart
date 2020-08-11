@@ -20,15 +20,17 @@ class UserDataCustomScreen extends CustomScreen {
     return Scaffold(
         backgroundColor: UIData.ui_kit_color,
         key: _scaffoldKey,
-        appBar: AppBar(
-          title: Text('User Data'),
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(FontAwesomeIcons.ellipsisV),
-              onPressed: () => _scaffoldKey.currentState.openEndDrawer(),
-            )
-          ],
-        ),
+        appBar: globals.appFrame.showScreenHeader
+            ? AppBar(
+                title: Text('User Data'),
+                actions: <Widget>[
+                  IconButton(
+                    icon: Icon(FontAwesomeIcons.ellipsisV),
+                    onPressed: () => _scaffoldKey.currentState.openEndDrawer(),
+                  )
+                ],
+              )
+            : null,
         endDrawer: MenuDrawerWidget(
             menuItems: globals.items,
             listMenuItems: true,
@@ -72,7 +74,8 @@ class UserDataCustomScreen extends CustomScreen {
                     fontSize: 20,
                   )),
               SizedBox(height: 20),
-              Text(globals.roles.join(', '), style: TextStyle(
+              Text(globals.roles.join(', '),
+                  style: TextStyle(
                     color: UIData.textColor,
                     fontSize: 16,
                   )),
