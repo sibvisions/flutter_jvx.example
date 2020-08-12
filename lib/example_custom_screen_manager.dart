@@ -37,8 +37,11 @@ class ExampleCustomScreenManager extends CustomScreenManager {
 
     // The method is for setting the standard of each CellEditor or Component,
     // which is being used to build the screen.
-    // componentCreator.setStandardCellEditors('TextCellEditor', (cellEditor, context) => CustomCellEditor(cellEditor, context));
-    // componentCreator.setStandardComponent('Panel', (globalKey, context) => CustomComponent(globalKey, context));
+    componentCreator.setStandardComponent(
+        'Table',
+        (ComponentContext context) =>
+            // Normally you would change the Component to a custom one.
+            CoTable(context.globalKey, context.context));
 
     super.registerScreen(CHART_COMP_ID, ChartCustomScreen(componentCreator));
     super.registerScreen(HELLO_COMP_ID, HelloCustomScreen(componentCreator));
