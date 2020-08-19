@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:jvx_flutterclient/jvx_flutterclient.dart';
 import 'package:jvx_flutterclient/ui/editor/celleditor/co_text_cell_editor.dart';
 import 'package:jvx_flutterclient/utils/globals.dart' as globals;
@@ -37,11 +38,8 @@ class ExampleCustomScreenManager extends CustomScreenManager {
 
     // The method is for setting the standard of each CellEditor or Component,
     // which is being used to build the screen.
-    componentCreator.setStandardComponent(
-        'Table',
-        (ComponentContext context) =>
-            // Normally you would change the Component to a custom one.
-            CoTable(context.globalKey, context.context));
+    // An example for a panel
+    componentCreator.setStandardComponent('Panel', getCustomComponent);
 
     super.registerScreen(CHART_COMP_ID, ChartCustomScreen(componentCreator));
     super.registerScreen(HELLO_COMP_ID, HelloCustomScreen(componentCreator));
@@ -109,5 +107,20 @@ class ExampleCustomScreenManager extends CustomScreenManager {
       templateName: 'ContactCustomTemplate',
       checkUnique: true,
     );
+  }
+
+  getCustomComponent(ComponentContext componentContext) {
+    // Creating a custom component
+    CoCustomComponent contactComp = new CoCustomComponent(
+      componentContext.globalKey,
+      componentContext.context,
+    );
+    contactComp.widget = Container(
+      decoration: BoxDecoration(
+          border: Border.all(
+              color: Colors.green, width: 10, style: BorderStyle.solid)),
+    );
+
+    return contactComp;
   }
 }
