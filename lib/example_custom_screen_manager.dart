@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:jvx_flutterclient/jvx_flutterclient.dart';
-import 'package:jvx_flutterclient/ui/editor/celleditor/co_text_cell_editor.dart';
-import 'package:jvx_flutterclient/utils/globals.dart' as globals;
 
 import 'screens/calendar_custom_screen.dart';
 import 'screens/chart_custom_screen.dart';
@@ -33,7 +31,7 @@ const String USER_DATA_COMP_ID = "USER_DATA_SCREEN";
 
 class ExampleCustomScreenManager extends CustomScreenManager {
   @override
-  void initScreenManager() {
+  void init() {
     SoComponentCreator componentCreator = SoComponentCreator();
 
     // The method is for setting the standard of each CellEditor or Component,
