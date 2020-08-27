@@ -15,9 +15,8 @@ class TelephoneCallCustomWidget extends StatelessWidget {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   _launchWhatapp(String numberToCall, String text) async {
-    String url = 'whatsapp://send?phone=$numberToCall&text=$text';
-    if (await canLaunch(url)) {
-      await launch(url);
+    if (!Platform.isIOS) {
+      await launch("whatsapp://send?phone=$numberToCall&text=");
     } else {
       await launch('https://wa.me/$numberToCall?text=$text');
     }
