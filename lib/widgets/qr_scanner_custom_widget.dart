@@ -16,61 +16,59 @@ class QrScannerCustomWidget extends StatefulWidget {
 
 class _QrScannerCustomWidgetState extends State<QrScannerCustomWidget> {
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  ScanResult scanResult;
+  String scanResult;
 
-  static final _possibleFormats = BarcodeFormat.values.toList()
-    ..removeWhere((e) => e == BarcodeFormat.unknown);
-  final _flashOnController = TextEditingController(text: "Flash on");
-  final _flashOffController = TextEditingController(text: "Flash off");
-  final _cancelController = TextEditingController(text: "Cancel");
+  // static final _possibleFormats = BarcodeFormat.values.toList()
+  //   ..removeWhere((e) => e == BarcodeFormat.unknown);
+  // final _flashOnController = TextEditingController(text: "Flash on");
+  // final _flashOffController = TextEditingController(text: "Flash off");
+  // final _cancelController = TextEditingController(text: "Cancel");
 
-  var _aspectTolerance = 0.00;
-  var _numberOfCameras = 0;
-  var _selectedCamera = -1;
-  var _useAutoFocus = true;
-  var _autoEnableFlash = false;
+  // var _aspectTolerance = 0.00;
+  // var _numberOfCameras = 0;
+  // var _selectedCamera = -1;
+  // var _useAutoFocus = true;
+  // var _autoEnableFlash = false;
 
-  List<BarcodeFormat> selectedFormats = _possibleFormats.toList();
+  // List<BarcodeFormat> selectedFormats = _possibleFormats.toList();
 
   Future scan() async {
     try {
-      var options = ScanOptions(
-        strings: {
-          "cancel": _cancelController.text,
-          "flash_on": _flashOnController.text,
-          "flash_off": _flashOffController.text,
-        },
-        restrictFormat: selectedFormats,
-        useCamera: _selectedCamera,
-        autoEnableFlash: _autoEnableFlash,
-        android: AndroidOptions(
-          aspectTolerance: _aspectTolerance,
-          useAutoFocus: _useAutoFocus,
-        ),
-      );
+      // var options = ScanOptions(
+      //   strings: {
+      //     "cancel": _cancelController.text,
+      //     "flash_on": _flashOnController.text,
+      //     "flash_off": _flashOffController.text,
+      //   },
+      //   restrictFormat: selectedFormats,
+      //   useCamera: _selectedCamera,
+      //   autoEnableFlash: _autoEnableFlash,
+      //   android: AndroidOptions(
+      //     aspectTolerance: _aspectTolerance,
+      //     useAutoFocus: _useAutoFocus,
+      //   ),
+      // );
 
-      var result = await BarcodeScanner.scan(options: options);
+      // var result = await BarcodeScanner.scan(options: options);
+
+      var result = await BarcodeScanner.scan();
 
       setState(() {
         scanResult = result;
-        print("THIS WAS SCANNED" + scanResult.rawContent);
+        print("THIS WAS SCANNED" + scanResult);
       });
     } on PlatformException catch (e) {
-      var result = ScanResult(
-        type: ResultType.Error,
-        format: BarcodeFormat.unknown,
-      );
-
-      if (e.code == BarcodeScanner.cameraAccessDenied) {
+      var result = 'Error';
+      if (e.code == BarcodeScanner.CameraAccessDenied) {
         setState(() {
-          result.rawContent = 'The user did not grant the camera permission!';
+          result = 'The user did not grant the camera permission!';
         });
       } else {
-        result.rawContent = 'Unknown error: $e';
+        result = 'Unknown error: $e';
       }
       setState(() {
         scanResult = result;
-        print("THIS WAS SCANNED" + scanResult.rawContent);
+        print("THIS WAS SCANNED" + scanResult);
       });
     }
   }
@@ -142,7 +140,7 @@ class _QrScannerCustomWidgetState extends State<QrScannerCustomWidget> {
                     child: Text(
                       scanResult == null
                           ? 'Nothing scanned yet!'
-                          : scanResult.rawContent?.toString(),
+                          : scanResult?.toString(),
                     ),
                   ),
                   Container(
