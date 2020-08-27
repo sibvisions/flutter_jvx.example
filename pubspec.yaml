@@ -28,7 +28,7 @@ dependencies:
       url: https://github.com/sibvisions/flutterclient.git
       ref: master
   charts_flutter: ^0.8.1
-  url_launcher: ^5.4.1
+  url_launcher: ^5.5.0
   flutter_map: ^0.8.2 
   video_player: ^0.10.1+5
   signature: ^3.1.1

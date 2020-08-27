@@ -14,11 +14,17 @@ import 'custom_rounded_button.dart';
 class TelephoneCallCustomWidget extends StatelessWidget {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  _launchWhatapp(String numberToCall, String text) async {
-    if (!Platform.isIOS) {
-      await launch("whatsapp://send?phone=$numberToCall&text=");
+  _launchWhatsApp(String numberToCall, String text) async {
+    String number = numberToCall;
+
+    if (number.startsWith('0')) {
+      number = number.replaceFirst('0', '43');
+    }
+
+    if (Platform.isIOS || Platform.isAndroid) {
+      await launch("whatsapp://send?phone=$number&text=${Uri.parse(text)}");
     } else {
-      await launch('https://wa.me/$numberToCall?text=$text');
+      await launch('https://wa.me/$number/?text=${Uri.parse(text)}');
     }
   }
 
@@ -118,7 +124,7 @@ class TelephoneCallCustomWidget extends StatelessWidget {
                               "WhatsApp",
                               Icon(FontAwesomeIcons.whatsapp,
                                   color: Colors.white), () {
-                            _launchWhatapp(numberToCall, "");
+                            _launchWhatsApp(numberToCall, "");
                           }),
                         ),
                       ],

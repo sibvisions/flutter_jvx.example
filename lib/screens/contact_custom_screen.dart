@@ -76,7 +76,12 @@ class ContactCustomScreen extends CustomScreen {
               child: CustomRoundedButton("WhatsApp",
                   Icon(FontAwesomeIcons.whatsapp, color: Colors.white), () {
                 phone = dataApi.getValue("PHONE");
-                if (!Platform.isIOS) {
+
+                if (phone.startsWith('0')) {
+                  phone = phone.replaceFirst('0', '43');
+                }
+
+                if (Platform.isIOS || Platform.isAndroid) {
                   launch("whatsapp://send?phone=$phone&text=");
                 } else {
                   launch("whatsapp://wa.me/$phone/?text=");
