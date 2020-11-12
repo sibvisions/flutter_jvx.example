@@ -1,6 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:jvx_flutterclient/jvx_flutterclient.dart';
+import 'package:jvx_flutterclient/core/models/api/response/menu_item.dart';
+import 'package:jvx_flutterclient/core/models/api/so_action.dart';
+import 'package:jvx_flutterclient/core/ui/screen/i_screen.dart';
+import 'package:jvx_flutterclient/core/models/api/response/user_data.dart';
+import 'package:jvx_flutterclient/core/ui/screen/i_screen_manager.dart';
+import 'package:jvx_flutterclient/core/ui/screen/screen_manager.dart';
+import 'package:jvx_flutterclient/core/ui/screen/so_component_creator.dart';
+import 'package:jvx_flutterclient/core/ui/screen/so_menu_manager.dart';
+import 'package:jvx_flutterclient/core/ui/screen/so_screen.dart';
 
 import 'screens/calendar_custom_screen.dart';
 import 'screens/chart_custom_screen.dart';
@@ -29,43 +37,30 @@ const String MAP_COMP_ID = "MAP_SCREEN";
 const String QR_SCANNER_COMP_ID = "QR_SCANNER_SCREEN";
 const String USER_DATA_COMP_ID = "USER_DATA_SCREEN";
 
-class ExampleCustomScreenManager extends CustomScreenManager {
+class ExampleCustomScreenManager extends ScreenManager {
   @override
   void init() {
-    SoComponentCreator componentCreator = SoComponentCreator();
-
     // The method is for setting the standard of each CellEditor or Component,
     // which is being used to build the screen.
     // An example for a panel
-    componentCreator.setStandardComponent('Panel', getCustomComponent);
 
-    super.registerScreen(CHART_COMP_ID, ChartCustomScreen(componentCreator));
-    super.registerScreen(HELLO_COMP_ID, HelloCustomScreen(componentCreator));
-    super.registerScreen(
-        TELEPHONE_CALL_COMP_ID, TelephoneCallCustomScreen(componentCreator));
-    super.registerScreen(MAP_COMP_ID, MapCustomScreen(componentCreator));
-    super.registerScreen(
-        SIGNATURE_COMP_ID, SignatureCustomScreen(componentCreator));
-    super.registerScreen(
-        QR_SCANNER_COMP_ID, QrScannerCustomScreen(componentCreator));
-    super.registerScreen(
-        USER_DATA_COMP_ID, UserDataCustomScreen(componentCreator));
-    super.registerScreen(
-        CALENDAR_COMP_ID, CalendarCustomScreen(componentCreator));
-    super.registerScreen(
-        STYLED_TABLE_COMP_ID, StyledTableCustomScreen(componentCreator));
-    super.registerScreen(
-        CONTACTS_COMP_ID, ContactCustomScreen(componentCreator));
+    this.registerScreen(
+        TELEPHONE_CALL_COMP_ID, TelephoneCallCustomScreen(null));
+
+    this.registerScreen(USER_DATA_COMP_ID, UserDataCustomScreen(null));
+
+    this.registerScreen(HELLO_COMP_ID, HelloCustomScreen(null));
   }
 
   @override
   void onMenu(SoMenuManager menuManager) {
     //Add Item via your own MenuItem
     MenuItem toAddHelloCustomScreen = MenuItem(
-        action:
-            SoAction(componentId: HELLO_COMP_ID, label: 'Hello Custom Screen'),
+        componentId: HELLO_COMP_ID,
+        text: 'Hello Custom Screen',
         image: 'FontAwesome.star-o',
-        group: 'Customscreens');
+        group: 'Customscreens',);
+
     menuManager.addItem(toAddHelloCustomScreen);
 
     //Or directly via named parameters
@@ -76,19 +71,19 @@ class ExampleCustomScreenManager extends CustomScreenManager {
       image: 'FontAwesome.phone',
     );
 
-    menuManager.addItemToMenu(
-      id: MAP_COMP_ID,
-      group: 'Customscreens',
-      text: 'Map Custom Screen',
-      image: 'FontAwesome.map',
-    );
+    // menuManager.addItemToMenu(
+    //   id: MAP_COMP_ID,
+    //   group: 'Customscreens',
+    //   text: 'Map Custom Screen',
+    //   image: 'FontAwesome.map',
+    // );
 
-    menuManager.addItemToMenu(
-      id: QR_SCANNER_COMP_ID,
-      group: 'Customscreens',
-      text: 'QR Scanner Custom Screen',
-      image: 'FontAwesome.qrcode',
-    );
+    // menuManager.addItemToMenu(
+    //   id: QR_SCANNER_COMP_ID,
+    //   group: 'Customscreens',
+    //   text: 'QR Scanner Custom Screen',
+    //   image: 'FontAwesome.qrcode',
+    // );
 
     menuManager.addItemToMenu(
       id: USER_DATA_COMP_ID,
@@ -97,28 +92,13 @@ class ExampleCustomScreenManager extends CustomScreenManager {
       image: 'FontAwesome.user',
     );
 
-    menuManager.addItemToMenu(
-      id: CONTACTS_COMP_ID,
-      group: 'Customscreens',
-      text: 'Contact Custom Screen',
-      image: 'FontAwesome.group',
-      templateName: 'ContactCustomTemplate',
-      checkUnique: true,
-    );
-  }
-
-  getCustomComponent(ComponentContext componentContext) {
-    // Creating a custom component
-    CoCustomComponent contactComp = new CoCustomComponent(
-      componentContext.globalKey,
-      componentContext.context,
-    );
-    contactComp.widget = Container(
-      decoration: BoxDecoration(
-          border: Border.all(
-              color: Colors.green, width: 10, style: BorderStyle.solid)),
-    );
-
-    return contactComp;
+    // menuManager.addItemToMenu(
+    //   id: CONTACTS_COMP_ID,
+    //   group: 'Customscreens',
+    //   text: 'Contact Custom Screen',
+    //   image: 'FontAwesome.group',
+    //   templateName: 'ContactCustomTemplate',
+    //   checkUnique: true,
+    // );
   }
 }

@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:geolocation/geolocation.dart';
-import 'package:jvx_flutterclient/ui/page/menu_page.dart';
-import 'package:jvx_flutterclient/ui/widgets/menu_drawer_widget.dart';
-import 'package:jvx_flutterclient/utils/globals.dart' as globals;
+import 'package:jvx_flutterclient/core/models/app/app_state.dart';
+import 'package:jvx_flutterclient/core/models/app/menu_arguments.dart';
+import 'package:jvx_flutterclient/core/ui/widgets/menu/menu_drawer_widget.dart';
+import 'package:jvx_flutterclient/core/ui/widgets/util/app_state_provider.dart';
 import 'package:latlong/latlong.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -95,27 +96,23 @@ class MapCustomWidgetState extends State<MapCustomWidget> {
 
   @override
   Widget build(BuildContext context) {
+    AppState appState = AppStateProvider.of(context).appState;
+
     return WillPopScope(
         onWillPop: () async {
-          Navigator.of(context).pushReplacement(MaterialPageRoute(
-              settings: RouteSettings(name: '/Menu'),
-              builder: (_) => MenuPage(
-                    menuItems: globals.items,
-                  )));
+          Navigator.of(context).pushReplacementNamed('/menu',
+              arguments: MenuArguments(appState.items, true, null));
           return false;
         },
         child: Scaffold(
           key: _scaffoldKey,
-          appBar: globals.appFrame.showScreenHeader
+          appBar: appState.appFrame.showScreenHeader
               ? AppBar(
                   leading: IconButton(
                     icon: Icon(Icons.arrow_back),
                     onPressed: () {
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          settings: RouteSettings(name: '/Menu'),
-                          builder: (_) => MenuPage(
-                                menuItems: globals.items,
-                              )));
+                      Navigator.of(context).pushReplacementNamed('/menu',
+                          arguments: MenuArguments(appState.items, true, null));
                     },
                   ),
                   title: Text('Map Custom Screen'),
@@ -129,7 +126,8 @@ class MapCustomWidgetState extends State<MapCustomWidget> {
                 )
               : null,
           endDrawer: MenuDrawerWidget(
-              menuItems: globals.items,
+              appState: appState,
+              menuItems: appState.items,
               listMenuItems: true,
               currentTitle: 'Telephone Call',
               groupedMenuMode: true),

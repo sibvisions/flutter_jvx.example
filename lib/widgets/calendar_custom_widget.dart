@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:jvx_flutterclient/utils/uidata.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -28,28 +27,20 @@ class _CalendarCustomWidgetState extends State<CalendarCustomWidget> {
     final _selectedDay = DateTime.now();
     final List<CalendarData> calendarDataToGroup = widget.calendarData;
 
-
-
     Set<CalendarData> set = Set.from(calendarDataToGroup);
     set.forEach((element) {
-
       CalendarData currentCalData = element;
 
-
-
-
-
-
-      if(!_events.containsKey(_selectedDay.add(Duration(days :currentCalData.daysFromToday))))
-
-      {
-        _events.putIfAbsent(_selectedDay.add(Duration(days :currentCalData.daysFromToday)), () => [currentCalData.event]);
+      if (!_events.containsKey(
+          _selectedDay.add(Duration(days: currentCalData.daysFromToday)))) {
+        _events.putIfAbsent(
+            _selectedDay.add(Duration(days: currentCalData.daysFromToday)),
+            () => [currentCalData.event]);
+      } else {
+        _events[_selectedDay.add(Duration(days: currentCalData.daysFromToday))]
+            .add(currentCalData.event);
       }
-      else
-      {
-        _events[_selectedDay.add(Duration(days :currentCalData.daysFromToday))].add(currentCalData.event);
-      }
-    });    
+    });
 
     _selectedEvents = _events[_selectedDay] ?? [];
     _calendarController = CalendarController();
@@ -62,22 +53,17 @@ class _CalendarCustomWidgetState extends State<CalendarCustomWidget> {
     super.dispose();
   }
 
-  void _onDaySelected(DateTime day, List events) {
-
+  void _onDaySelected(DateTime day, List events, List other) {
     setState(() {
       _selectedEvents = events;
     });
   }
 
   void _onVisibleDaysChanged(
-      DateTime first, DateTime last, CalendarFormat format) {
-
-  }
+      DateTime first, DateTime last, CalendarFormat format) {}
 
   void _onCalendarCreated(
-      DateTime first, DateTime last, CalendarFormat format) {
-
-  }
+      DateTime first, DateTime last, CalendarFormat format) {}
 
   @override
   Widget build(BuildContext context) {
@@ -107,7 +93,7 @@ class _CalendarCustomWidgetState extends State<CalendarCustomWidget> {
       events: _events,
       startingDayOfWeek: StartingDayOfWeek.monday,
       calendarStyle: CalendarStyle(
-        selectedColor: UIData.ui_kit_color_2,
+        selectedColor: Theme.of(context).primaryColor,
         todayColor: Colors.deepOrange[200],
         markersColor: Colors.deepOrange[700],
         outsideDaysVisible: false,

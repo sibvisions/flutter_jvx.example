@@ -2,10 +2,10 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:jvx_flutterclient/ui/page/menu_page.dart';
-import 'package:jvx_flutterclient/ui/widgets/menu_drawer_widget.dart';
-import 'package:jvx_flutterclient/utils/globals.dart' as globals;
-import 'package:jvx_flutterclient/jvx_flutterclient.dart';
+import 'package:jvx_flutterclient/core/models/app/app_state.dart';
+import 'package:jvx_flutterclient/core/models/app/menu_arguments.dart';
+import 'package:jvx_flutterclient/core/ui/widgets/menu/menu_drawer_widget.dart';
+import 'package:jvx_flutterclient/core/ui/widgets/util/app_state_provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -31,28 +31,23 @@ class TelephoneCallCustomWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String numberToCall;
+    AppState appState = AppStateProvider.of(context).appState;
 
     return WillPopScope(
         onWillPop: () async {
-          Navigator.of(context).pushReplacement(MaterialPageRoute(
-              settings: RouteSettings(name: '/Menu'),
-              builder: (_) => MenuPage(
-                    menuItems: globals.items,
-                  )));
+          Navigator.of(context).pushReplacementNamed('/menu',
+              arguments: MenuArguments(appState.items, true, null));
           return false;
         },
         child: Scaffold(
           key: _scaffoldKey,
-          appBar: globals.appFrame.showScreenHeader
+          appBar: appState.appFrame.showScreenHeader
               ? AppBar(
                   leading: IconButton(
                     icon: Icon(Icons.arrow_back),
                     onPressed: () {
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          settings: RouteSettings(name: '/Menu'),
-                          builder: (_) => MenuPage(
-                                menuItems: globals.items,
-                              )));
+                      Navigator.of(context).pushReplacementNamed('/menu',
+                          arguments: MenuArguments(appState.items, true, null));
                     },
                   ),
                   title: Text('Telephone Call'),
@@ -66,7 +61,8 @@ class TelephoneCallCustomWidget extends StatelessWidget {
                 )
               : null,
           endDrawer: MenuDrawerWidget(
-              menuItems: globals.items,
+              appState: appState,
+              menuItems: appState.items,
               listMenuItems: true,
               currentTitle: 'Telephone Call',
               groupedMenuMode: true),
@@ -75,7 +71,7 @@ class TelephoneCallCustomWidget extends StatelessWidget {
               margin: EdgeInsets.all(15),
               height: 150,
               decoration: BoxDecoration(
-                color: UIData.ui_kit_color_2,
+                color: Theme.of(context).primaryColor,
                 borderRadius: BorderRadius.all(Radius.circular(15)),
               ),
               child: Column(

@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:jvx_flutterclient/custom_screen/custom_screen.dart';
-import 'package:jvx_flutterclient/model/api/request/request.dart';
-import 'package:jvx_flutterclient/model/api/response/response_data.dart';
-import 'package:jvx_flutterclient/ui/screen/so_component_creator.dart';
+import 'package:jvx_flutterclient/core/models/api/request.dart';
+import 'package:jvx_flutterclient/core/models/api/response/response_data.dart';
+import 'package:jvx_flutterclient/features/custom_screen/ui/screen/custom_screen.dart';
 
 import '../widgets/chart_custom_widget.dart';
 
 class ChartCustomScreen extends CustomScreen {
-  List<Country> countries = <Country>[];
+  final List<Country> countries = <Country>[];
 
-  ChartCustomScreen(SoComponentCreator componentCreator)
-      : super(componentCreator);
+  ChartCustomScreen(String templateName) : super(templateName);
 
   @override
-  Widget getWidget() {
+  Widget build(BuildContext context) {
     return ChartCustomWidget(
       countries: countries,
     );

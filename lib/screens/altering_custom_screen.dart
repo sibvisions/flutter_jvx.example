@@ -1,34 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:jvx_flutterclient/custom_screen/custom_screen.dart';
-import 'package:jvx_flutterclient/model/api/request/request.dart';
-import 'package:jvx_flutterclient/model/api/response/response_data.dart';
-import 'package:jvx_flutterclient/ui/component/i_component.dart';
-import 'package:jvx_flutterclient/ui/screen/so_component_creator.dart';
+import 'package:jvx_flutterclient/core/models/api/request.dart';
+import 'package:jvx_flutterclient/core/models/api/response/response_data.dart';
+import 'package:jvx_flutterclient/features/custom_screen/ui/screen/custom_screen.dart';
 
 class AlteringCustomScreen extends CustomScreen {
-  AlteringCustomScreen(SoComponentCreator componentCreator)
-      : super(componentCreator);
+  AlteringCustomScreen(String templateName) : super(templateName);
 
   @override
-  Widget getWidget() {
-    IComponent component = this.componentScreen.getRootComponent();
+  Widget build(BuildContext context) {
+    return super.build(context);
+    // IComponent component = this.componentScreen.getRootComponent();
 
-    if (component != null) {
-      return component.getWidget();
-    } else {
-      return Container(
-        alignment: Alignment.center,
-        child: Text('No root component defined'),
-      );
-    }
+    // if (component != null) {
+    //   return component.getWidget();
+    // } else {
+    //   return Container(
+    //     alignment: Alignment.center,
+    //     child: Text('No root component defined'),
+    //   );
+    // }
   }
 
   @override
   void update(Request request, ResponseData responeData) {
-    componentScreen.updateData(request, responeData);
-    if (responeData.screenGeneric != null)
-      componentScreen
-          .updateComponents(responeData.screenGeneric.changedComponents);
+    // componentScreen.updateData(request, responeData);
+    // if (responeData.screenGeneric != null)
+    //   componentScreen
+    //       .updateComponents(responeData.screenGeneric.changedComponents);
   }
 
   @override

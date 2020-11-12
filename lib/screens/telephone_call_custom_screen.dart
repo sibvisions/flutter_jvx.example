@@ -1,18 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutterclient_example/widgets/telephone_call_custom_widget.dart';
-import 'package:jvx_flutterclient/custom_screen/custom_screen.dart';
-import 'package:jvx_flutterclient/model/api/request/request.dart';
-import 'package:jvx_flutterclient/model/api/response/response_data.dart';
-import 'package:jvx_flutterclient/ui/screen/so_component_creator.dart';
+import 'package:jvx_flutterclient/core/models/api/request.dart';
+import 'package:jvx_flutterclient/core/models/api/response/response_data.dart';
+import 'package:jvx_flutterclient/features/custom_screen/ui/screen/custom_screen.dart';
 
 class TelephoneCallCustomScreen extends CustomScreen {
-  TelephoneCallCustomScreen(SoComponentCreator componentCreator)
-      : super(componentCreator);
-
-  @override
-  Widget getWidget() {
-    return TelephoneCallCustomWidget();
-  }
+  TelephoneCallCustomScreen(String templateName) : super(templateName);
 
   @override
   void update(Request request, ResponseData responseData) {}
@@ -20,5 +13,10 @@ class TelephoneCallCustomScreen extends CustomScreen {
   @override
   bool withServer() {
     return false;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return TelephoneCallCustomWidget();
   }
 }

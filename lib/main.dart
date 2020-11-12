@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:jvx_flutterclient/jvx_flutterclient.dart';
+import 'package:jvx_flutterclient/core/utils/config/config.dart';
+import 'package:jvx_flutterclient/features/custom_screen/ui/screen/custom_application_widget.dart';
+import 'package:jvx_flutterclient/injection_container.dart' as di;
 
 import 'example_custom_screen_manager.dart';
 
-void main() => runApp(MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await di.init();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
@@ -13,7 +19,7 @@ class MyApp extends StatelessWidget {
     return CustomApplicationWidget(
       // Also if you want to run with a Developer Config you can pass one as a parameter
       config: Config(
-          baseUrl: 'http://127.0.0.1:8080/JVx.mobile/services/mobile',
+          baseUrl: 'http://192.168.0.60:8080/JVx.mobile/services/mobile',
           appName: 'demo',
           debug: true,
           username: 'layout',

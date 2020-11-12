@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:jvx_flutterclient/custom_screen/custom_screen.dart';
-import 'package:jvx_flutterclient/model/api/request/request.dart';
-import 'package:jvx_flutterclient/model/api/response/response_data.dart';
-import 'package:jvx_flutterclient/ui/screen/so_component_creator.dart';
+import 'package:jvx_flutterclient/core/models/api/request.dart';
+import 'package:jvx_flutterclient/core/models/api/response/response_data.dart';
+import 'package:jvx_flutterclient/features/custom_screen/ui/screen/custom_screen.dart';
 
 import '../widgets/hello_custom_widget.dart';
 
 class HelloCustomScreen extends CustomScreen {
-  HelloCustomScreen(SoComponentCreator componentCreator)
-      : super(componentCreator);
+  HelloCustomScreen(String templateName) : super(templateName);
 
   @override
   Widget getWidget() {

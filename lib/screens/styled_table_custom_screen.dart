@@ -1,22 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutterclient_example/widgets/styled_table_custom_widget.dart';
-import 'package:jvx_flutterclient/custom_screen/custom_screen.dart';
-import 'package:jvx_flutterclient/model/api/request/request.dart';
-import 'package:jvx_flutterclient/model/api/response/response_data.dart';
-import 'package:jvx_flutterclient/ui/screen/so_component_creator.dart';
+import 'package:jvx_flutterclient/core/models/api/request.dart';
+import 'package:jvx_flutterclient/core/models/api/response/response_data.dart';
+import 'package:jvx_flutterclient/features/custom_screen/ui/screen/custom_screen.dart';
 
 class StyledTableCustomScreen extends CustomScreen {
-  List<Contact> contacts = <Contact>[];
+  final List<Contact> contacts = <Contact>[];
 
-  StyledTableCustomScreen(SoComponentCreator componentCreator)
-      : super(componentCreator);
-
-  @override
-  Widget getWidget() {
-    return StyledTableCustomWidget(
-      contacts: contacts,
-    );
-  }
+  StyledTableCustomScreen(String templateName) : super(templateName);
 
   @override
   void update(Request request, ResponseData responeData) {
@@ -32,6 +23,13 @@ class StyledTableCustomScreen extends CustomScreen {
   @override
   bool withServer() {
     return true;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return StyledTableCustomWidget(
+      contacts: contacts,
+    );
   }
 }
 
