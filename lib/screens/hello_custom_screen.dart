@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:jvx_flutterclient/core/models/api/request.dart';
-import 'package:jvx_flutterclient/core/models/api/response/response_data.dart';
+import 'package:jvx_flutterclient/core/models/api/response.dart';
 import 'package:jvx_flutterclient/features/custom_screen/ui/screen/custom_screen.dart';
 
 import '../widgets/hello_custom_widget.dart';
 
 class HelloCustomScreen extends CustomScreen {
-  HelloCustomScreen(String templateName) : super(templateName);
+  HelloCustomScreen(String componentId, String templateName) : super(componentId, templateName);
 
   @override
-  Widget getWidget() {
+  Widget build(BuildContext context) {
     return HelloCustomWidget();
   }
 
   @override
-  void update(Request request, ResponseData responeData) {}
+  void update(Response response) {
+    super.update(response);
+  }
 
   @override
   bool withServer() {

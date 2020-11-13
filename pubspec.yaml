@@ -27,6 +27,7 @@ dependencies:
     git:
       url: https://github.com/sibvisions/flutterclient.git
       ref: feature/refactor
+    # path: ../flutterclient
   charts_flutter: ^0.8.1
   url_launcher: ^5.5.0
   flutter_map: ^0.8.2 

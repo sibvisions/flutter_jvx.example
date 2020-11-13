@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:jvx_flutterclient/features/custom_screen/ui/screen/custom_screen.dart';
 
 class SignatureCustomScreen extends CustomScreen {
-  SignatureCustomScreen(String templateName) : super(templateName);
+  SignatureCustomScreen(String componentId, String templateName) : super(componentId, templateName);
 
   void selectRecord() {}
 

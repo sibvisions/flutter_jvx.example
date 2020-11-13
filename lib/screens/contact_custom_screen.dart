@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutterclient_example/widgets/custom_rounded_button.dart';
 import 'package:jvx_flutterclient/core/models/api/request.dart';
+import 'package:jvx_flutterclient/core/models/api/response.dart';
 import 'package:jvx_flutterclient/core/models/api/response/response_data.dart';
 import 'package:jvx_flutterclient/core/utils/app/listener/data_api.dart';
 import 'package:jvx_flutterclient/features/custom_screen/ui/screen/custom_screen.dart';
@@ -10,7 +11,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ContactCustomScreen extends CustomScreen {
-  ContactCustomScreen(String templateName) : super(templateName);
+  ContactCustomScreen(String componentId, String templateName) : super(componentId, templateName);
 
   @override
   Widget build(BuildContext context) {
@@ -106,7 +107,9 @@ class ContactCustomScreen extends CustomScreen {
   Widget getWidget() {}
 
   @override
-  void update(Request request, ResponseData responeData) {}
+  void update(Response response) {
+    super.update(response);
+  }
 
   @override
   bool withServer() {

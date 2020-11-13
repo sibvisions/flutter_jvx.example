@@ -45,21 +45,24 @@ class ExampleCustomScreenManager extends ScreenManager {
     // An example for a panel
 
     this.registerScreen(
-        TELEPHONE_CALL_COMP_ID, TelephoneCallCustomScreen(null));
+        TelephoneCallCustomScreen(TELEPHONE_CALL_COMP_ID, null));
 
-    this.registerScreen(USER_DATA_COMP_ID, UserDataCustomScreen(null));
+    this.registerScreen(UserDataCustomScreen(USER_DATA_COMP_ID, null));
 
-    this.registerScreen(HELLO_COMP_ID, HelloCustomScreen(null));
+    this.registerScreen(HelloCustomScreen(HELLO_COMP_ID, null));
+
+    this.registerScreen(MapCustomScreen(MAP_COMP_ID, null));
   }
 
   @override
   void onMenu(SoMenuManager menuManager) {
     //Add Item via your own MenuItem
     MenuItem toAddHelloCustomScreen = MenuItem(
-        componentId: HELLO_COMP_ID,
-        text: 'Hello Custom Screen',
-        image: 'FontAwesome.star-o',
-        group: 'Customscreens',);
+      componentId: HELLO_COMP_ID,
+      text: 'Hello Custom Screen',
+      image: 'FontAwesome.star-o',
+      group: 'Customscreens',
+    );
 
     menuManager.addItem(toAddHelloCustomScreen);
 
@@ -71,12 +74,12 @@ class ExampleCustomScreenManager extends ScreenManager {
       image: 'FontAwesome.phone',
     );
 
-    // menuManager.addItemToMenu(
-    //   id: MAP_COMP_ID,
-    //   group: 'Customscreens',
-    //   text: 'Map Custom Screen',
-    //   image: 'FontAwesome.map',
-    // );
+    menuManager.addItemToMenu(
+      id: MAP_COMP_ID,
+      group: 'Customscreens',
+      text: 'Map Custom Screen',
+      image: 'FontAwesome.map',
+    );
 
     // menuManager.addItemToMenu(
     //   id: QR_SCANNER_COMP_ID,
