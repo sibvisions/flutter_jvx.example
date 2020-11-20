@@ -78,12 +78,12 @@ class ExampleCustomScreenManager extends ScreenManager {
       image: 'FontAwesome.phone',
     );
 
-    // menuManager.addItemToMenu(
-    //   id: CHART_COMP_ID,
-    //   group: 'Customscreens',
-    //   text: 'Chart Custom Screen',
-    //   image: 'FontAwesome.sms'
-    // );
+    menuManager.addItemToMenu(
+      id: CHART_COMP_ID,
+      group: 'Customscreens',
+      text: 'Chart Custom Screen',
+      image: 'FontAwesome.sms'
+    );
 
     menuManager.addItemToMenu(
       id: MAP_COMP_ID,
@@ -106,13 +106,13 @@ class ExampleCustomScreenManager extends ScreenManager {
       image: 'FontAwesome.user',
     );
 
-    // menuManager.addItemToMenu(
-    //   id: CONTACTS_COMP_ID,
-    //   group: 'Customscreens',
-    //   text: 'Contact Custom Screen',
-    //   image: 'FontAwesome.group',
-    //   templateName: 'ContactCustomTemplate',
-    //   checkUnique: true,
-    // );
+    menuManager.addItemToMenu(
+      id: CONTACTS_COMP_ID,
+      group: 'Customscreens',
+      text: 'Contact Custom Screen',
+      image: 'FontAwesome.group',
+      templateName: 'ContactCustomTemplate',
+      checkUnique: true,
+    );
   }
 }

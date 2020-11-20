@@ -26,7 +26,7 @@ dependencies:
   jvx_flutterclient:
     git:
       url: https://github.com/sibvisions/flutterclient.git
-      ref: feature/refactor
+      ref: dev
     # path: ../flutterclient
   charts_flutter: ^0.8.1
   url_launcher: ^5.5.0

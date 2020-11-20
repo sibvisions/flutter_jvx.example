@@ -7,7 +7,7 @@ packages:
       name: ansicolor
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.5"
+    version: "1.1.0"
   archive:
     dependency: transitive
     description:
@@ -410,8 +410,8 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: "feature/refactor"
-      resolved-ref: fffaf7343cc83c19c10b55f9cef70f23062ae923
+      ref: dev
+      resolved-ref: "695860666b23ce0beb079b79886a1750df544ec6"
       url: "https://github.com/sibvisions/flutterclient.git"
     source: git
     version: "1.0.0+1"

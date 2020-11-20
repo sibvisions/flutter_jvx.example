@@ -10,24 +10,10 @@ class AlteringCustomScreen extends CustomScreen {
   @override
   Widget build(BuildContext context) {
     return super.build(context);
-    // IComponent component = this.componentScreen.getRootComponent();
-
-    // if (component != null) {
-    //   return component.getWidget();
-    // } else {
-    //   return Container(
-    //     alignment: Alignment.center,
-    //     child: Text('No root component defined'),
-    //   );
-    // }
   }
 
   @override
   void update(Response response) {
-    // componentScreen.updateData(request, responeData);
-    // if (responeData.screenGeneric != null)
-    //   componentScreen
-    //       .updateComponents(responeData.screenGeneric.changedComponents);
     super.update(response);
   }
 
