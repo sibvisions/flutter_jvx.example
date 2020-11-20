@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class CustomPopup extends StatefulWidget {
   static CustomPopupState of(BuildContext context) =>
-      context.ancestorStateOfType(const TypeMatcher<CustomPopupState>());
+      context.findAncestorStateOfType<CustomPopupState>();
 
   CustomPopup({Key key}) : super(key: key);
 

@@ -19,11 +19,11 @@ class MyApp extends StatelessWidget {
     return CustomApplicationWidget(
       // Also if you want to run with a Developer Config you can pass one as a parameter
       config: Config(
-          baseUrl: 'http://192.168.0.60:8080/JVx.mobile/services/mobile',
-          appName: 'demo',
+          baseUrl: 'http://localhost/services/mobile',
+          appName: 'Einkaufsliste',
           debug: true,
-          username: 'layout',
-          password: 'layout'),
+          username: 'admin',
+          password: 'admin'),
       // To add a Custom Screen pass it as an parameter here:
       screenManager: ExampleCustomScreenManager(),
     );

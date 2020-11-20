@@ -126,7 +126,7 @@ packages:
       name: connectivity
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.1"
+    version: "2.0.2"
   connectivity_for_web:
     dependency: transitive
     description:
@@ -411,7 +411,7 @@ packages:
     description:
       path: "."
       ref: "feature/refactor"
-      resolved-ref: b317cc2e892199a466610e0b067b29e77eb07db9
+      resolved-ref: fffaf7343cc83c19c10b55f9cef70f23062ae923
       url: "https://github.com/sibvisions/flutterclient.git"
     source: git
     version: "1.0.0+1"
@@ -923,7 +923,7 @@ packages:
       name: win32
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.7.3"
+    version: "1.7.4"
   xdg_directories:
     dependency: transitive
     description:

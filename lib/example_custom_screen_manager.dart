@@ -52,6 +52,10 @@ class ExampleCustomScreenManager extends ScreenManager {
     this.registerScreen(HelloCustomScreen(HELLO_COMP_ID, null));
 
     this.registerScreen(MapCustomScreen(MAP_COMP_ID, null));
+
+    this.registerScreen(QrScannerCustomScreen(QR_SCANNER_COMP_ID, null));
+    
+    this.registerScreen(ChartCustomScreen(CHART_COMP_ID, null));
   }
 
   @override
@@ -74,6 +78,13 @@ class ExampleCustomScreenManager extends ScreenManager {
       image: 'FontAwesome.phone',
     );
 
+    // menuManager.addItemToMenu(
+    //   id: CHART_COMP_ID,
+    //   group: 'Customscreens',
+    //   text: 'Chart Custom Screen',
+    //   image: 'FontAwesome.sms'
+    // );
+
     menuManager.addItemToMenu(
       id: MAP_COMP_ID,
       group: 'Customscreens',
@@ -81,12 +92,12 @@ class ExampleCustomScreenManager extends ScreenManager {
       image: 'FontAwesome.map',
     );
 
-    // menuManager.addItemToMenu(
-    //   id: QR_SCANNER_COMP_ID,
-    //   group: 'Customscreens',
-    //   text: 'QR Scanner Custom Screen',
-    //   image: 'FontAwesome.qrcode',
-    // );
+    menuManager.addItemToMenu(
+      id: QR_SCANNER_COMP_ID,
+      group: 'Customscreens',
+      text: 'QR Scanner Custom Screen',
+      image: 'FontAwesome.qrcode',
+    );
 
     menuManager.addItemToMenu(
       id: USER_DATA_COMP_ID,

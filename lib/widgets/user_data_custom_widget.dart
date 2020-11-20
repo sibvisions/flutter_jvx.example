@@ -57,10 +57,10 @@ class UserDataCustomWidget extends StatelessWidget {
                   ),
                   CircleAvatar(
                       radius: 70,
-                      backgroundImage: appState.profileImage.isNotEmpty
+                      backgroundImage: appState.profileImage != null && appState.profileImage.isNotEmpty
                           ? MemoryImage(base64Decode(appState.profileImage))
                           : null,
-                      child: appState.profileImage.isNotEmpty
+                      child: appState.profileImage != null && appState.profileImage.isNotEmpty
                           ? null
                           : Icon(
                               FontAwesomeIcons.userTie,
