@@ -2,6 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:jvx_flutterclient/core/models/api/response/menu_item.dart';
 import 'package:jvx_flutterclient/core/models/api/so_action.dart';
+import 'package:jvx_flutterclient/core/ui/component/component_model.dart';
+import 'package:jvx_flutterclient/core/ui/component/component_widget.dart';
+import 'package:jvx_flutterclient/core/ui/container/co_panel_widget.dart';
 import 'package:jvx_flutterclient/core/ui/screen/i_screen.dart';
 import 'package:jvx_flutterclient/core/models/api/response/user_data.dart';
 import 'package:jvx_flutterclient/core/ui/screen/i_screen_manager.dart';
@@ -40,22 +43,27 @@ const String USER_DATA_COMP_ID = "USER_DATA_SCREEN";
 class ExampleCustomScreenManager extends ScreenManager {
   @override
   void init() {
+    SoComponentCreator creator = SoComponentCreator();
+
     // The method is for setting the standard of each CellEditor or Component,
     // which is being used to build the screen.
     // An example for a panel
+    // creator.replaceComponent('Panel', getCustomComponent);
 
     this.registerScreen(
-        TelephoneCallCustomScreen(TELEPHONE_CALL_COMP_ID, null));
+        TelephoneCallCustomScreen(TELEPHONE_CALL_COMP_ID, null, creator));
 
-    this.registerScreen(UserDataCustomScreen(USER_DATA_COMP_ID, null));
+    this.registerScreen(UserDataCustomScreen(USER_DATA_COMP_ID, null, creator));
 
-    this.registerScreen(HelloCustomScreen(HELLO_COMP_ID, null));
+    this.registerScreen(HelloCustomScreen(HELLO_COMP_ID, null, creator));
 
-    this.registerScreen(MapCustomScreen(MAP_COMP_ID, null));
+    this.registerScreen(MapCustomScreen(MAP_COMP_ID, null, creator));
 
-    this.registerScreen(QrScannerCustomScreen(QR_SCANNER_COMP_ID, null));
-    
-    this.registerScreen(ChartCustomScreen(CHART_COMP_ID, null));
+    this.registerScreen(QrScannerCustomScreen(QR_SCANNER_COMP_ID, null, creator));
+
+    this.registerScreen(ChartCustomScreen(CHART_COMP_ID, null, creator));
+
+    this.registerScreen(ContactCustomScreen(CONTACTS_COMP_ID, 'ContactCustomTemplate', creator));
   }
 
   @override
@@ -76,13 +84,6 @@ class ExampleCustomScreenManager extends ScreenManager {
       group: 'Customscreens',
       text: 'Telephone Call Screen',
       image: 'FontAwesome.phone',
-    );
-
-    menuManager.addItemToMenu(
-      id: CHART_COMP_ID,
-      group: 'Customscreens',
-      text: 'Chart Custom Screen',
-      image: 'FontAwesome.sms'
     );
 
     menuManager.addItemToMenu(
@@ -113,6 +114,31 @@ class ExampleCustomScreenManager extends ScreenManager {
       image: 'FontAwesome.group',
       templateName: 'ContactCustomTemplate',
       checkUnique: true,
+    );
+  }
+
+  ComponentWidget getCustomComponent(ComponentModel componentModel) =>
+      CoGreenPanelWidget(
+        componentModel: componentModel,
+      );
+}
+
+class CoGreenPanelWidget extends CoPanelWidget {
+  CoGreenPanelWidget({ComponentModel componentModel})
+      : super(componentModel: componentModel);
+
+  @override
+  State<StatefulWidget> createState() => CoGreenPanelWidgetState();
+}
+
+class CoGreenPanelWidgetState extends CoPanelWidgetState {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+          border: Border.all(
+              color: Colors.green, width: 10, style: BorderStyle.solid)),
+      child: super.build(context),
     );
   }
 }

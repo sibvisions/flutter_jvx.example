@@ -8,31 +8,31 @@ import 'package:jvx_flutterclient/core/ui/screen/so_component_data.dart';
 import 'package:jvx_flutterclient/features/custom_screen/ui/screen/custom_screen.dart';
 
 class SignatureCustomScreen extends CustomScreen {
-  SignatureCustomScreen(String componentId, String templateName)
-      : super(componentId, templateName);
+  SignatureCustomScreen(String componentId, String templateName,
+      SoComponentCreator componentCreator)
+      : super(templateName,
+            componentId: componentId, creator: componentCreator);
 
   @override
-  Widget build(BuildContext context) {
-    SoComponentCreator creator = SoComponentCreator();
-    SoComponentData data =
-        this.getComponentData("JVxMobileDemo/Sig-3V/contacts#4");
-
-    creator.replaceComponent(
-        'Panel',
-        (ComponentModel componentModel) => CoCustomPanelWidget(
-              componentModel: componentModel,
-              child: SignatureCustomWidget(componentData: data),
-            ));
-
+  Widget getWidget(BuildContext context) {
     return ComponentScreenWidget(
       response: this.currentResponse,
-      closeCurrentScreen: false,
-      componentCreator: creator,
-      footerComponent: customHeaderAndFooter.footerComponent,
-      headerComponent: customHeaderAndFooter.headerComponent,
+      closeCurrentScreen: this.closeCurrentScreen,
+      componentCreator: this.creator,
+      footerComponent: this.footer,
+      headerComponent: this.header,
       onData: (List<SoComponentData> data) {
-        this.componentData.clear();
-        this.componentData.addAll(data);
+        this.data = data;
+
+        SoComponentData componentData =
+            this.getComponentData("JVxMobileDemo/Sig-3V/contacts#4");
+
+        this.replaceComponent(
+            'signaturePanel',
+            CoCustomPanelWidget(
+              componentModel: ComponentModel(null),
+              child: SignatureCustomWidget(componentData: componentData),
+            ));
       },
     );
   }

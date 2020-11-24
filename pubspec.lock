@@ -7,7 +7,7 @@ packages:
       name: ansicolor
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.1.0"
+    version: "1.1.1"
   archive:
     dependency: transitive
     description:
@@ -411,7 +411,7 @@ packages:
     description:
       path: "."
       ref: dev
-      resolved-ref: "695860666b23ce0beb079b79886a1750df544ec6"
+      resolved-ref: "8cd067e72fd6c7d17005c44d5530ccca1e067b8a"
       url: "https://github.com/sibvisions/flutterclient.git"
     source: git
     version: "1.0.0+1"
@@ -755,7 +755,7 @@ packages:
       name: table_calendar
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.3.0"
+    version: "2.3.1"
   term_glyph:
     dependency: transitive
     description:

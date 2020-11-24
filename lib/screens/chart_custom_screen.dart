@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jvx_flutterclient/core/models/api/response.dart';
+import 'package:jvx_flutterclient/core/ui/screen/so_component_creator.dart';
 import 'package:jvx_flutterclient/features/custom_screen/ui/screen/custom_screen.dart';
 
 import '../widgets/chart_custom_widget.dart';
@@ -7,10 +8,13 @@ import '../widgets/chart_custom_widget.dart';
 class ChartCustomScreen extends CustomScreen {
   final List<Country> countries = <Country>[];
 
-  ChartCustomScreen(String componentId, String templateName) : super(componentId, templateName);
+  ChartCustomScreen(String componentId, String templateName,
+      SoComponentCreator componentCreator)
+      : super(templateName,
+            componentId: componentId, creator: componentCreator);
 
   @override
-  Widget build(BuildContext context) {
+  Widget getWidget(BuildContext context) {
     return ChartCustomWidget(
       countries: countries,
     );
@@ -23,7 +27,8 @@ class ChartCustomScreen extends CustomScreen {
         response.responseData.dataBooks != null &&
         response.responseData.dataBooks.length > 0) {
       for (int i = 0; i <= 3; i++) {
-        countries.add(Country.fromJson(response.responseData.dataBooks[0].records[i]));
+        countries.add(
+            Country.fromJson(response.responseData.dataBooks[0].records[i]));
       }
     }
   }

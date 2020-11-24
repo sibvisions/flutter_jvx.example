@@ -3,15 +3,20 @@ import 'package:flutterclient_example/widgets/calendar_custom_widget.dart';
 import 'package:jvx_flutterclient/core/models/api/request.dart';
 import 'package:jvx_flutterclient/core/models/api/response.dart';
 import 'package:jvx_flutterclient/core/models/api/response/response_data.dart';
+import 'package:jvx_flutterclient/core/ui/screen/so_component_creator.dart';
 import 'package:jvx_flutterclient/features/custom_screen/ui/screen/custom_screen.dart';
 
 class CalendarCustomScreen extends CustomScreen {
   final List<CalendarData> calendarData = <CalendarData>[];
 
-  CalendarCustomScreen(String componentId, String templateName) : super(componentId, templateName);
+  CalendarCustomScreen(String componentId, String templateName,
+      SoComponentCreator componentCreator, Key key)
+      : super(templateName,
+            componentId: componentId, creator: componentCreator);
+
 
   @override
-  Widget build(BuildContext context) {
+  Widget getWidget(BuildContext context) {
     return CalendarCustomWidget(
       calendarData: calendarData,
     );
