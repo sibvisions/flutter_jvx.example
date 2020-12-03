@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:jvx_flutterclient/core/models/api/response.dart';
-import 'package:jvx_flutterclient/core/ui/component/component_model.dart';
 import 'package:jvx_flutterclient/core/ui/component/component_widget.dart';
+import 'package:jvx_flutterclient/core/ui/component/models/component_model.dart';
 import 'package:jvx_flutterclient/core/ui/screen/component_screen_widget.dart';
 import 'package:jvx_flutterclient/core/ui/screen/so_component_creator.dart';
 import 'package:jvx_flutterclient/core/ui/screen/so_component_data.dart';
@@ -27,11 +27,11 @@ class ContactCustomScreen extends CustomScreen {
       //Add a header and a footer when the template is ContactCustomTemplate
       this.setHeader(CustomHeaderAndFooterWidget(
         text: 'This is a custom header',
-        componentModel: ComponentModel(null)..compId = 'header',
+        componentModel: ComponentModel(null)..componentId = 'header',
       ));
       this.setFooter(CustomHeaderAndFooterWidget(
         text: 'This is a custom footer',
-        componentModel: ComponentModel(null)..compId = 'footer',
+        componentModel: ComponentModel(null)..componentId = 'footer',
       ));
     }
 

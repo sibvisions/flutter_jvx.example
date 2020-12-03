@@ -1,26 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:jvx_flutterclient/core/models/api/response/menu_item.dart';
-import 'package:jvx_flutterclient/core/models/api/so_action.dart';
-import 'package:jvx_flutterclient/core/ui/component/component_model.dart';
 import 'package:jvx_flutterclient/core/ui/component/component_widget.dart';
+import 'package:jvx_flutterclient/core/ui/component/models/component_model.dart';
 import 'package:jvx_flutterclient/core/ui/container/co_panel_widget.dart';
-import 'package:jvx_flutterclient/core/ui/screen/i_screen.dart';
-import 'package:jvx_flutterclient/core/models/api/response/user_data.dart';
-import 'package:jvx_flutterclient/core/ui/screen/i_screen_manager.dart';
 import 'package:jvx_flutterclient/core/ui/screen/screen_manager.dart';
 import 'package:jvx_flutterclient/core/ui/screen/so_component_creator.dart';
 import 'package:jvx_flutterclient/core/ui/screen/so_menu_manager.dart';
-import 'package:jvx_flutterclient/core/ui/screen/so_screen.dart';
 
-import 'screens/calendar_custom_screen.dart';
 import 'screens/chart_custom_screen.dart';
 import 'screens/contact_custom_screen.dart';
 import 'screens/hello_custom_screen.dart';
 import 'screens/map_custom_screen.dart';
 import 'screens/qr_scanner_custom_screen.dart';
-import 'screens/signature_custom_screen.dart';
-import 'screens/styled_table_custom_screen.dart';
 import 'screens/telephone_call_custom_screen.dart';
 import 'screens/user_data_custom_screen.dart';
 

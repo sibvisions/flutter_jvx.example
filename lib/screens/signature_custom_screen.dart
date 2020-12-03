@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterclient_example/widgets/signature_custom_widget.dart';
-import 'package:jvx_flutterclient/core/ui/component/component_model.dart';
+import 'package:jvx_flutterclient/core/ui/component/models/component_model.dart';
 import 'package:jvx_flutterclient/core/ui/container/co_panel_widget.dart';
 import 'package:jvx_flutterclient/core/ui/screen/component_screen_widget.dart';
 import 'package:jvx_flutterclient/core/ui/screen/so_component_creator.dart';
@@ -17,7 +17,6 @@ class SignatureCustomScreen extends CustomScreen {
   Widget getWidget(BuildContext context) {
     return ComponentScreenWidget(
       response: this.currentResponse,
-      closeCurrentScreen: this.closeCurrentScreen,
       componentCreator: this.creator,
       footerComponent: this.footer,
       headerComponent: this.header,
