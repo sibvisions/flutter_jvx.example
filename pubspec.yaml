@@ -1,5 +1,8 @@
 name: flutterclient_example
-description: A new Flutter project.
+description: A sample app for JVx applications.
+homepage: https://www.sibvisions.com
+repository: https://github.com/sibvisions/flutterclient.example.git
+issue_tracker: https://github.com/sibvisions/flutterclient.example/issues
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
