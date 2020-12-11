@@ -4,19 +4,36 @@ import 'package:jvx_flutterclient/core/models/api/request.dart';
 import 'package:jvx_flutterclient/core/models/api/response.dart';
 import 'package:jvx_flutterclient/core/models/api/response/response_data.dart';
 import 'package:jvx_flutterclient/core/ui/screen/so_component_creator.dart';
+import 'package:jvx_flutterclient/core/ui/screen/so_screen_configuration.dart';
 import 'package:jvx_flutterclient/features/custom_screen/ui/screen/custom_screen.dart';
 
 class StyledTableCustomScreen extends CustomScreen {
-  final List<Contact> contacts = <Contact>[];
-
-  StyledTableCustomScreen(String componentId, String templateName,
-      SoComponentCreator componentCreator)
-      : super(templateName,
-            componentId: componentId, creator: componentCreator);
+  StyledTableCustomScreen(
+      {Key key,
+      String templateName,
+      @required SoScreenConfiguration configuration,
+      SoComponentCreator creator})
+      : super(
+            key: key,
+            templateName: templateName,
+            configuration: configuration,
+            creator: creator);
 
   @override
-  void update(Response response) {
-    super.update(response);
+  StyledTableCustomScreenState createState() => StyledTableCustomScreenState();
+}
+
+class StyledTableCustomScreenState extends CustomScreenState {
+  List<Contact> contacts = <Contact>[];
+
+  @override
+  Widget build(BuildContext context) {
+    return StyledTableCustomWidget(contacts: contacts);
+  }
+
+  @override
+  void onResponse(Response response) {
+    super.onResponse(response);
     if (response.responseData != null &&
         response.responseData.dataBooks != null &&
         response.responseData.dataBooks.length > 0) {
@@ -27,16 +44,6 @@ class StyledTableCustomScreen extends CustomScreen {
             Contact.fromJson(response.responseData.dataBooks[0].records[i]));
       }
     }
-  }
-
-  @override
-  bool withServer() {
-    return true;
-  }
-
-  @override
-  Widget getWidget(BuildContext context) {
-    return StyledTableCustomWidget(contacts: contacts);
   }
 }
 

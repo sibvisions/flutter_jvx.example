@@ -1,50 +1,48 @@
 import 'package:flutter/material.dart';
 import 'package:flutterclient_example/widgets/signature_custom_widget.dart';
+import 'package:jvx_flutterclient/core/models/api/response.dart';
 import 'package:jvx_flutterclient/core/ui/component/models/component_model.dart';
 import 'package:jvx_flutterclient/core/ui/container/co_panel_widget.dart';
-import 'package:jvx_flutterclient/core/ui/screen/component_screen_widget.dart';
 import 'package:jvx_flutterclient/core/ui/screen/so_component_creator.dart';
 import 'package:jvx_flutterclient/core/ui/screen/so_component_data.dart';
+import 'package:jvx_flutterclient/core/ui/screen/so_screen_configuration.dart';
 import 'package:jvx_flutterclient/features/custom_screen/ui/screen/custom_screen.dart';
 
 class SignatureCustomScreen extends CustomScreen {
-  SignatureCustomScreen(String componentId, String templateName,
-      SoComponentCreator componentCreator)
-      : super(templateName,
-            componentId: componentId, creator: componentCreator);
+  SignatureCustomScreen(
+      {Key key,
+      String templateName,
+      @required SoScreenConfiguration configuration,
+      SoComponentCreator creator})
+      : super(
+            key: key,
+            templateName: templateName,
+            configuration: configuration,
+            creator: creator);
 
   @override
-  Widget getWidget(BuildContext context) {
-    return ComponentScreenWidget(
-      response: this.currentResponse,
-      componentCreator: this.creator,
-      footerComponent: this.footer,
-      headerComponent: this.header,
-      onData: (List<SoComponentData> data) {
-        this.data = data;
+  SignatureCustomScreenState createState() => SignatureCustomScreenState();
+}
 
-        SoComponentData componentData =
-            this.getComponentData("JVxMobileDemo/Sig-3V/contacts#4");
-
-        this.replaceComponent(
-            'signaturePanel',
-            CoCustomPanelWidget(
-              componentModel: ComponentModel(null),
-              child: SignatureCustomWidget(componentData: componentData),
-            ));
-      },
-    );
+class SignatureCustomScreenState extends CustomScreenState {
+  @override
+  Widget build(BuildContext context) {
+    return super.build(context);
   }
 
-  // if overriden, you have to handle server responses by your self or optionally call super.update to let the customScreen class do the work.
-  // @override
-  // void update(Request request, ResponseData responeData) {
-  //   super.update(request, responeData);
-  // }
-
   @override
-  bool withServer() {
-    return true;
+  void update(Response response) {
+    super.update(response);
+
+    SoComponentData componentData =
+        this.getComponentData("JVxMobileDemo/Sig-3V/contacts#4");
+
+    this.replaceComponentByName(
+        'signaturePanel',
+        CoCustomPanelWidget(
+          componentModel: ComponentModel(null),
+          child: SignatureCustomWidget(componentData: componentData),
+        ));
   }
 }
 

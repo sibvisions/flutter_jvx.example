@@ -5,26 +5,44 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:jvx_flutterclient/core/models/api/response.dart';
 import 'package:jvx_flutterclient/core/ui/component/component_widget.dart';
 import 'package:jvx_flutterclient/core/ui/component/models/component_model.dart';
-import 'package:jvx_flutterclient/core/ui/screen/component_screen_widget.dart';
 import 'package:jvx_flutterclient/core/ui/screen/so_component_creator.dart';
 import 'package:jvx_flutterclient/core/ui/screen/so_component_data.dart';
+import 'package:jvx_flutterclient/core/ui/screen/so_screen.dart';
+import 'package:jvx_flutterclient/core/ui/screen/so_screen_configuration.dart';
 import 'package:jvx_flutterclient/features/custom_screen/ui/screen/custom_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../widgets/custom_rounded_button.dart';
 
 class ContactCustomScreen extends CustomScreen {
-  ContactCustomScreen(String componentId, String templateName,
-      SoComponentCreator componentCreator)
-      : super(templateName,
-            componentId: componentId, creator: componentCreator);
+  ContactCustomScreen(
+      {Key key,
+      String templateName,
+      @required SoScreenConfiguration configuration,
+      SoComponentCreator creator})
+      : super(
+            key: key,
+            templateName: templateName,
+            configuration: configuration,
+            creator: creator);
 
   @override
-  Widget getWidget(BuildContext context) {
-    String tempName = super.getTemplateName();
+  ContactCustomScreenState createState() => ContactCustomScreenState();
+}
+
+class ContactCustomScreenState extends CustomScreenState {
+  @override
+  Widget build(BuildContext context) {
+    return super.build(context);
+  }
+
+  @override
+  void update(Response response) {
+    super.update(response);
+
+    String tempName = this.getTemplateName();
 
     if (tempName != null && tempName == 'ContactCustomTemplate') {
-      //Add a header and a footer when the template is ContactCustomTemplate
       this.setHeader(CustomHeaderAndFooterWidget(
         text: 'This is a custom header',
         componentModel: ComponentModel(null)..componentId = 'header',
@@ -35,27 +53,16 @@ class ContactCustomScreen extends CustomScreen {
       ));
     }
 
-    this.replaceComponent('contactPanel',
+    this.replaceComponentByName('contactPanel',
         CoCustomComponentWidget(componentModel: ComponentModel(null)));
-
-    return super.getWidget(context);
-  }
-
-  @override
-  void update(Response response) {
-    super.update(response);
-  }
-
-  @override
-  bool withServer() {
-    return true;
   }
 }
 
 class CustomHeaderAndFooterWidget extends ComponentWidget {
   final String text;
 
-  CustomHeaderAndFooterWidget({this.text, ComponentModel componentModel}) : super(componentModel: componentModel);
+  CustomHeaderAndFooterWidget({this.text, ComponentModel componentModel})
+      : super(componentModel: componentModel);
 
   @override
   State<StatefulWidget> createState() => CustomHeaderAndFooterWidgetState();
@@ -84,7 +91,7 @@ class CoCustomComponentWidget extends ComponentWidget {
 class CoCustomComponentWidgetState extends ComponentWidgetState {
   @override
   Widget build(BuildContext context) {
-    SoComponentData data = ComponentScreenWidget.of(context)
+    SoComponentData data = SoScreen.of(context)
         .getComponentData('JVxMobileDemo/Con-CG/contacts#4');
     dynamic phone = data.getColumnData(context, 'PHONE');
 

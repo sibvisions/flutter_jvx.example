@@ -1,28 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:jvx_flutterclient/core/models/api/response.dart';
 import 'package:jvx_flutterclient/core/ui/screen/so_component_creator.dart';
+import 'package:jvx_flutterclient/core/ui/screen/so_screen_configuration.dart';
 import 'package:jvx_flutterclient/features/custom_screen/ui/screen/custom_screen.dart';
 
 import '../widgets/hello_custom_widget.dart';
 
 class HelloCustomScreen extends CustomScreen {
-  HelloCustomScreen(String componentId, String templateName,
-      SoComponentCreator componentCreator)
-      : super(templateName,
-            componentId: componentId, creator: componentCreator);
+  HelloCustomScreen(
+      {Key key,
+      String templateName,
+      @required SoScreenConfiguration configuration,
+      SoComponentCreator creator})
+      : super(
+            key: key,
+            templateName: templateName,
+            configuration: configuration,
+            creator: creator);
 
   @override
-  Widget getWidget(BuildContext context) {
+  HelloCustomScreenState createState() => HelloCustomScreenState();
+}
+
+class HelloCustomScreenState extends CustomScreenState {
+  @override
+  Widget build(BuildContext context) {
     return HelloCustomWidget();
-  }
-
-  @override
-  void update(Response response) {
-    super.update(response);
-  }
-
-  @override
-  bool withServer() {
-    return false;
   }
 }

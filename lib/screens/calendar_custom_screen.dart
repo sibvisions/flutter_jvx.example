@@ -1,30 +1,33 @@
 import 'package:flutter/material.dart';
-import 'package:flutterclient_example/widgets/calendar_custom_widget.dart';
-import 'package:jvx_flutterclient/core/models/api/request.dart';
 import 'package:jvx_flutterclient/core/models/api/response.dart';
-import 'package:jvx_flutterclient/core/models/api/response/response_data.dart';
 import 'package:jvx_flutterclient/core/ui/screen/so_component_creator.dart';
+import 'package:jvx_flutterclient/core/ui/screen/so_screen_configuration.dart';
 import 'package:jvx_flutterclient/features/custom_screen/ui/screen/custom_screen.dart';
 
+import '../widgets/calendar_custom_widget.dart';
+
 class CalendarCustomScreen extends CustomScreen {
-  final List<CalendarData> calendarData = <CalendarData>[];
-
-  CalendarCustomScreen(String componentId, String templateName,
-      SoComponentCreator componentCreator, Key key)
-      : super(templateName,
-            componentId: componentId, creator: componentCreator);
-
-
-  @override
-  Widget getWidget(BuildContext context) {
-    return CalendarCustomWidget(
-      calendarData: calendarData,
-    );
-  }
+  CalendarCustomScreen(
+      {Key key,
+      String templateName,
+      @required SoScreenConfiguration configuration,
+      SoComponentCreator creator})
+      : super(
+            key: key,
+            templateName: templateName,
+            configuration: configuration,
+            creator: creator);
 
   @override
-  void update(Response response) {
-    super.update(response);
+  CalendarCustomScreenState createState() => CalendarCustomScreenState();
+}
+
+class CalendarCustomScreenState extends CustomScreenState {
+  List<CalendarData> calendarData = <CalendarData>[];
+
+  @override
+  void onResponse(Response response) {
+    super.onResponse(response);
     if (response.responseData != null &&
         response.responseData.dataBooks != null &&
         response.responseData.dataBooks.length > 0) {
@@ -38,8 +41,8 @@ class CalendarCustomScreen extends CustomScreen {
   }
 
   @override
-  bool withServer() {
-    return true;
+  Widget build(BuildContext context) {
+    return CalendarCustomWidget(calendarData: this.calendarData);
   }
 }
 
