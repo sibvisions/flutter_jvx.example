@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:jvx_flutterclient/core/models/api/response/menu_item.dart';
+import 'package:jvx_flutterclient/core/models/api/response/user_data.dart';
 import 'package:jvx_flutterclient/core/ui/component/component_widget.dart';
 import 'package:jvx_flutterclient/core/ui/component/models/component_model.dart';
 import 'package:jvx_flutterclient/core/ui/container/co_panel_widget.dart';
@@ -104,8 +105,16 @@ class ExampleCustomScreenManager extends ScreenManager {
   }
 
   @override
+  void onUserData(UserData userData) {
+    super.onUserData(userData);
+  }
+
+  @override
   void onMenu(SoMenuManager menuManager) {
-    //Add Item via your own MenuItem
+    // If you need userData you just need to call the getter
+    print(this.userData?.displayName);
+
+    // Add Item via your own MenuItem
     MenuItem toAddHelloCustomScreen = MenuItem(
       componentId: HELLO_COMP_ID,
       text: 'Hello Custom Screen',
@@ -115,7 +124,7 @@ class ExampleCustomScreenManager extends ScreenManager {
 
     menuManager.addItem(toAddHelloCustomScreen);
 
-    //Or directly via named parameters
+    // Or directly via named parameters
     menuManager.addItemToMenu(
       id: TELEPHONE_CALL_COMP_ID,
       group: 'Customscreens',
