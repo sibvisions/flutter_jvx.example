@@ -411,7 +411,7 @@ packages:
     description:
       path: "."
       ref: dev
-      resolved-ref: "6564d877d68d7ce540a9b083f35155caf9708d74"
+      resolved-ref: "622513e96fe365ac86a2c20b18d57b5a93f212ca"
       url: "https://github.com/sibvisions/flutterclient.git"
     source: git
     version: "1.0.0+1"
