@@ -38,7 +38,7 @@ class ChartCustomScreenState extends CustomScreenState {
     if (response.responseData != null &&
         response.responseData.dataBooks != null &&
         response.responseData.dataBooks.length > 0) {
-      for (int i = 0; i <= 3; i++) {
+      for (int i = 0; i <= 3; i++) { 
         countries.add(
             Country.fromJson(response.responseData.dataBooks[0].records[i]));
       }

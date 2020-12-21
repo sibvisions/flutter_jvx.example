@@ -152,15 +152,6 @@ class ExampleCustomScreenManager extends ScreenManager {
       text: 'User Data Screen',
       image: 'FontAwesome.user',
     );
-
-    menuManager.addItemToMenu(
-      id: CONTACTS_COMP_ID,
-      group: 'Customscreens',
-      text: 'Contact Custom Screen',
-      image: 'FontAwesome.group',
-      templateName: 'ContactCustomTemplate',
-      checkUnique: true,
-    );
   }
 
   ComponentWidget getCustomComponent(ComponentModel componentModel) =>

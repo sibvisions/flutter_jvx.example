@@ -45,16 +45,20 @@ class ContactCustomScreenState extends CustomScreenState {
     if (tempName != null && tempName == 'ContactCustomTemplate') {
       this.setHeader(CustomHeaderAndFooterWidget(
         text: 'This is a custom header',
-        componentModel: ComponentModel(null)..componentId = 'header',
+        componentModel: ComponentModel(null)
+          ..componentId = 'header'
+          ..preferredSize = Size(100, 70),
       ));
       this.setFooter(CustomHeaderAndFooterWidget(
         text: 'This is a custom footer',
-        componentModel: ComponentModel(null)..componentId = 'footer',
+        componentModel: ComponentModel(null)
+          ..componentId = 'footer'
+          ..preferredSize = Size(100, 70),
       ));
     }
 
-    this.replaceComponentByName('contactPanel',
-        CoCustomComponentWidget(componentModel: ComponentModel(null)));
+    // this.replaceComponentByName('contactPanel',
+    //     CoCustomComponentWidget(componentModel: ComponentModel(null)..componentId = 'contactPanel'));
   }
 }
 
