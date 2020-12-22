@@ -14,6 +14,10 @@ import 'custom_popup.dart';
 import 'custom_rounded_button.dart';
 
 class MapCustomWidget extends StatefulWidget {
+  final String apiKey;
+
+  const MapCustomWidget({Key key, @required this.apiKey}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() => MapCustomWidgetState();
 }
@@ -144,8 +148,7 @@ class MapCustomWidgetState extends State<MapCustomWidget> {
                       urlTemplate: "https://api.tiles.mapbox.com/v4/"
                           "{id}/{z}/{x}/{y}@2x.png?access_token={accessToken}",
                       additionalOptions: {
-                        'accessToken':
-                            'pk.eyJ1IjoibG9yZW56bXVla3NjaCIsImEiOiJjamV6aG15eHAwZDQ3MnFwYW1yMmt4ajI0In0.g_r3IeL9KgarsZAahvoaJQ',
+                        'accessToken': widget.apiKey,
                         'id': 'mapbox.streets',
                       },
                       tileProvider: NonCachingNetworkTileProvider(),

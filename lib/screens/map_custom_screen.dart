@@ -4,6 +4,7 @@ import 'package:jvx_flutterclient/core/models/api/response.dart';
 import 'package:jvx_flutterclient/core/models/api/response/response_data.dart';
 import 'package:jvx_flutterclient/core/ui/screen/so_component_creator.dart';
 import 'package:jvx_flutterclient/core/ui/screen/so_screen_configuration.dart';
+import 'package:jvx_flutterclient/core/ui/widgets/util/app_state_provider.dart';
 import 'package:jvx_flutterclient/features/custom_screen/ui/screen/custom_screen.dart';
 
 import '../widgets/map_custom_widget.dart';
@@ -27,6 +28,8 @@ class MapCustomScreen extends CustomScreen {
 class MapCustomScreenState extends CustomScreenState {
   @override
   Widget build(BuildContext context) {
-    return MapCustomWidget();
+    String apiKey = AppStateProvider.of(context).appState.config.properties['apiKey'];
+    
+    return MapCustomWidget(apiKey: apiKey,);
   }
 }

@@ -18,8 +18,6 @@ class MyApp extends StatelessWidget {
       future: Config.loadFile(path: 'env/dev.conf.json'),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          print(snapshot.data.properties['CUSTOM_PARAMETER']);
-
           // To use the JVx flutter application you need to return the CustomApplicationWidget
           // This manages all the Utils needed for the App to run.
           return CustomApplicationWidget(
