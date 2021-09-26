@@ -29,22 +29,17 @@ class ChartCustomScreenState extends CustomScreenState {
     super.onState(state);
     if (state != null && state is ApiResponse && mounted) {
       // Updating the data objects
-      if (state.hasDataBook) {}
+      if (state.hasDataBook) {
+        // toDo set dataProvider
+        DataBook? dataBook = state.getDataBookByProvider('');
+        if (dataBook != null) {
+          for (int i = 0; i < dataBook.records.length; i++) {
+            countries.add(Country.fromJson(dataBook.records[i]));
+          }
+        }
+      }
     }
   }
-
-  // @override
-  // void onResponse(Response response) {
-  //   super.onResponse(response);
-  //   if (response.responseData != null &&
-  //       response.responseData.dataBooks != null &&
-  //       response.responseData.dataBooks.length > 0) {
-  //     for (int i = 0; i <= 3; i++) {
-  //       countries.add(
-  //           Country.fromJson(response.responseData.dataBooks[0].records[i]));
-  //     }
-  //   }
-  // }
 }
 
 class Country {

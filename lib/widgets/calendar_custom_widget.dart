@@ -16,7 +16,6 @@ class CalendarCustomWidget extends StatefulWidget {
 }
 
 class _CalendarCustomWidgetState extends State<CalendarCustomWidget> {
-  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   Map<DateTime, List> _events = Map<DateTime, List>();
   List? _selectedEvents;
   AnimationController? _animationController;
