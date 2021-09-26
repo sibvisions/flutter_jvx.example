@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CustomRoundedButton extends StatelessWidget {
-  final Function onTapFunction;
+  final Function()? onTapFunction;
   final String buttonText;
   final Icon buttonIcon;
 

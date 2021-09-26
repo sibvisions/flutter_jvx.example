@@ -1,14 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:jvx_flutterclient/core/models/api/response/menu_item.dart';
-import 'package:jvx_flutterclient/core/models/api/response/user_data.dart';
-import 'package:jvx_flutterclient/core/ui/component/component_widget.dart';
-import 'package:jvx_flutterclient/core/ui/component/models/component_model.dart';
-import 'package:jvx_flutterclient/core/ui/container/co_panel_widget.dart';
-import 'package:jvx_flutterclient/core/ui/screen/screen_manager.dart';
-import 'package:jvx_flutterclient/core/ui/screen/so_component_creator.dart';
-import 'package:jvx_flutterclient/core/ui/screen/so_menu_manager.dart';
-import 'package:jvx_flutterclient/core/ui/screen/so_screen_configuration.dart';
+import 'package:flutterclient/flutterclient.dart';
 
 import 'screens/altering_custom_screen.dart';
 import 'screens/chart_custom_screen.dart';
@@ -38,7 +30,7 @@ const String ALTERING_COMP_ID = "ALTERING_COMP_ID";
 
 class ExampleCustomScreenManager extends ScreenManager {
   @override
-  void init() {
+  void init(Key navigatorKey) {
     SoComponentCreator creator = SoComponentCreator();
 
     // The method is for setting the standard of each CellEditor or Component,
@@ -47,14 +39,18 @@ class ExampleCustomScreenManager extends ScreenManager {
     // creator.replaceComponent('Panel', getCustomComponent);
 
     this.registerScreen(AlteringCustomScreen(
-        configuration: SoScreenConfiguration(null,
+        configuration: SoScreenConfiguration(
+            response: ApiInitial(),
+            screenComponentId: 'ALT',
             componentId: ALTERING_COMP_ID,
             screenTitle: 'Altering Custom Screen'),
         creator: creator));
 
     this.registerScreen(
       TelephoneCallCustomScreen(
-          configuration: SoScreenConfiguration(null,
+          configuration: SoScreenConfiguration(
+              response: ApiInitial(),
+              screenComponentId: 'TELEPHONE',
               componentId: TELEPHONE_CALL_COMP_ID,
               screenTitle: 'Telephone',
               withServer: false),
@@ -62,55 +58,65 @@ class ExampleCustomScreenManager extends ScreenManager {
     );
 
     this.registerScreen(UserDataCustomScreen(
-        configuration: SoScreenConfiguration(null,
+        configuration: SoScreenConfiguration(
+            response: ApiInitial(),
+            screenComponentId: 'USER_DATA',
             componentId: USER_DATA_COMP_ID,
             screenTitle: 'Userdata',
             withServer: false),
         creator: creator));
 
     this.registerScreen(HelloCustomScreen(
-        configuration: SoScreenConfiguration(null,
+        configuration: SoScreenConfiguration(
+            response: ApiInitial(),
+            screenComponentId: 'HELLO',
             componentId: HELLO_COMP_ID,
             screenTitle: 'Hello',
             withServer: false),
         creator: creator));
 
     this.registerScreen(MapCustomScreen(
-        configuration: SoScreenConfiguration(null,
-            componentId: MAP_COMP_ID, screenTitle: 'Map', withServer: false),
+        configuration: SoScreenConfiguration(
+            response: ApiInitial(),
+            screenComponentId: 'MAP',
+            componentId: MAP_COMP_ID,
+            screenTitle: 'Map',
+            withServer: false),
         creator: creator));
 
     this.registerScreen(QrScannerCustomScreen(
-        configuration: SoScreenConfiguration(null,
+        configuration: SoScreenConfiguration(
+            response: ApiInitial(),
+            screenComponentId: 'QR_SCANNER',
             componentId: QR_SCANNER_COMP_ID,
             screenTitle: 'Qr Scanner',
             withServer: false),
         creator: creator));
 
     this.registerScreen(ChartCustomScreen(
-        configuration: SoScreenConfiguration(null,
+        configuration: SoScreenConfiguration(
+            response: ApiInitial(),
+            screenComponentId: 'CHART',
             componentId: CHART_COMP_ID,
             screenTitle: 'Charts',
             withServer: true),
         creator: creator));
 
     this.registerScreen(ContactCustomScreen(
-      configuration: SoScreenConfiguration(null,
-          componentId: CONTACTS_COMP_ID,
-          screenTitle: 'Contacts',
-          withServer: true),
+      configuration: SoScreenConfiguration(
+        screenComponentId: 'CONTACT',
+        response: ApiInitial(),
+        componentId: CONTACTS_COMP_ID,
+        screenTitle: 'Contacts',
+        withServer: true,
+        templateName: 'ContactCustomTemplate',
+      ),
       creator: creator,
-      templateName: 'ContactCustomTemplate',
     ));
   }
 
   @override
-  void onUserData(UserData userData) {
-    super.onUserData(userData);
-  }
-
-  @override
-  void onMenu(SoMenuManager menuManager) {
+  SoMenuManager onMenu(SoMenuManager menuManager) {
     // If you need userData you just need to call the getter
     print(this.userData?.displayName);
 
@@ -152,16 +158,18 @@ class ExampleCustomScreenManager extends ScreenManager {
       text: 'User Data Screen',
       image: 'FontAwesome.user',
     );
+
+    return menuManager;
   }
 
-  ComponentWidget getCustomComponent(ComponentModel componentModel) =>
+  ComponentWidget getCustomComponent(ContainerComponentModel componentModel) =>
       CoGreenPanelWidget(
         componentModel: componentModel,
       );
 }
 
 class CoGreenPanelWidget extends CoPanelWidget {
-  CoGreenPanelWidget({ComponentModel componentModel})
+  CoGreenPanelWidget({required ContainerComponentModel componentModel})
       : super(componentModel: componentModel);
 
   @override

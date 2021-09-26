@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 class CustomPopup extends StatefulWidget {
   static CustomPopupState of(BuildContext context) =>
-      context.findAncestorStateOfType<CustomPopupState>();
+      context.findAncestorStateOfType<CustomPopupState>()!;
 
-  CustomPopup({Key key}) : super(key: key);
+  CustomPopup({Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -13,7 +13,7 @@ class CustomPopup extends StatefulWidget {
 }
 
 class CustomPopupState extends State<CustomPopup> {
-  Future<void> _initializeVideoPlayerFuture;
+  Future<void>? _initializeVideoPlayerFuture;
   IconData playerIcon = Icons.play_arrow;
 
   @override
@@ -82,7 +82,7 @@ class CustomPopupState extends State<CustomPopup> {
                 )),
               ],
             ),
-            SizedBox(height:5),
+            SizedBox(height: 5),
             Row(
               children: <Widget>[
                 Icon(

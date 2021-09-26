@@ -6,14 +6,15 @@ import '../screens/chart_custom_screen.dart';
 class ChartCustomWidget extends StatefulWidget {
   final List<Country> countries;
 
-  const ChartCustomWidget({Key key, this.countries}) : super(key: key);
+  const ChartCustomWidget({Key? key, required this.countries})
+      : super(key: key);
 
   @override
   _ChartCustomWidgetState createState() => _ChartCustomWidgetState();
 }
 
 class _ChartCustomWidgetState extends State<ChartCustomWidget> {
-  List<charts.Series> seriesList;
+  List<charts.Series>? seriesList;
   bool animate = false;
   List<charts.Color> color = [
     charts.Color(r: 48, g: 144, b: 240, a: 220),
@@ -62,10 +63,10 @@ class _ChartCustomWidgetState extends State<ChartCustomWidget> {
 
 class BarChartWidget extends StatelessWidget {
   const BarChartWidget({
-    Key key,
-    @required this.widget,
-    @required this.color,
-    @required this.animate,
+    Key? key,
+    required this.widget,
+    required this.color,
+    required this.animate,
   }) : super(key: key);
 
   final ChartCustomWidget widget;
@@ -93,10 +94,10 @@ class BarChartWidget extends StatelessWidget {
 
 class PieChartWidget extends StatelessWidget {
   const PieChartWidget(
-      {Key key,
-      @required this.widget,
-      @required this.animate,
-      @required this.color})
+      {Key? key,
+      required this.widget,
+      required this.animate,
+      required this.color})
       : super(key: key);
 
   final ChartCustomWidget widget;

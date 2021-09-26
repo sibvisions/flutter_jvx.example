@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:jvx_flutterclient/core/ui/screen/so_component_data.dart';
+import 'package:flutterclient/flutterclient.dart';
 import 'package:signature/signature.dart';
 import 'dart:convert';
 
 class SignatureCustomWidget extends StatefulWidget {
   final SoComponentData componentData;
 
-  SignatureCustomWidget({Key key, this.componentData}) : super(key: key);
+  SignatureCustomWidget({Key? key, required this.componentData})
+      : super(key: key);
 
   @override
   _SignatureCustomWidgetState createState() => _SignatureCustomWidgetState();
@@ -60,7 +61,7 @@ class _SignatureCustomWidgetState extends State<SignatureCustomWidget> {
                     onPressed: () async {
                       if (_controller.isNotEmpty) {
                         var data = await _controller.toPngBytes();
-                        setValues([base64Encode(data)]);
+                        setValues([base64Encode(data!)]);
                       }
                     },
                   ),
