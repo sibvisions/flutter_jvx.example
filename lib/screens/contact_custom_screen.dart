@@ -45,8 +45,12 @@ class ContactCustomScreenState extends CustomScreenState {
       ));
     }
 
-    // this.replaceComponentByName('contactPanel',
-    //     CoCustomComponentWidget(componentModel: ComponentModel(null)..componentId = 'contactPanel'));
+    // ToDo: uncomment
+    this.replaceComponentByName(
+        'contactPanel',
+        CoCustomComponentWidget(
+            componentModel: ComponentModel(changedComponent: ChangedComponent())
+              ..componentId = 'contactPanel'));
   }
 }
 
@@ -86,6 +90,8 @@ class CoCustomComponentWidgetState extends ComponentWidgetState {
   Widget build(BuildContext context) {
     SoComponentData? data = SoScreen.of(context)!
         .getComponentData('JVxMobileDemo/Con-CG/contacts#4');
+
+    // ToDo Nur einmal
     dynamic phone = data.getColumnData(context, 'PHONE');
 
     return Center(

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutterclient/flutterclient.dart';
 import 'package:flutterclient_example/widgets/signature_custom_widget.dart';
 
+const String CONTACT_DATAPROVIDER = "JVxMobileDemo/Sig-3V/contacts#4";
+
 class SignatureCustomScreen extends CustomScreen {
   SignatureCustomScreen(
       {Key? key,
@@ -20,17 +22,22 @@ class SignatureCustomScreenState extends CustomScreenState {
   }
 
   @override
+  void onState(ApiState? state) {
+    super.onState(state);
+  }
+
+  @override
   void update(ApiResponse response) {
     super.update(response);
 
-    SoComponentData componentData =
-        this.getComponentData("JVxMobileDemo/Sig-3V/contacts#4");
+    SoComponentData componentData = this.getComponentData(CONTACT_DATAPROVIDER);
 
     this.replaceComponentByName(
         'signaturePanel',
         CoCustomPanelWidget(
-          componentModel:
-              ContainerComponentModel(changedComponent: ChangedComponent()),
+          componentModel: ContainerComponentModel(
+              changedComponent:
+                  ChangedComponent(id: "SIGPAN_01", name: "signaturePanel")),
           child: SignatureCustomWidget(componentData: componentData),
         ));
   }

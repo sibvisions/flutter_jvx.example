@@ -77,14 +77,16 @@ packages:
       name: charts_common
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.10.0"
+    version: "0.11.0"
   charts_flutter:
     dependency: "direct main"
     description:
-      name: charts_flutter
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.10.0"
+      path: charts_flutter
+      ref: HEAD
+      resolved-ref: "30477090290b348ed3101bc13017aae465f59017"
+      url: "https://github.com/google/charts"
+    source: git
+    version: "0.11.0"
   chewie:
     dependency: transitive
     description:
@@ -203,7 +205,7 @@ packages:
       name: file_picker
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.4"
+    version: "4.1.3"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -248,7 +250,7 @@ packages:
       name: flutter_map
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.13.1"
+    version: "0.14.0"
   flutter_math_fork:
     dependency: transitive
     description:
@@ -313,10 +315,10 @@ packages:
     description:
       path: "."
       ref: dev
-      resolved-ref: f89fcec232e15c6caa80db0cda0bb8bfe3043986
+      resolved-ref: "0608b070c5c6a4e0cae5604c6e62cd6e98a9d731"
       url: "https://github.com/sibvisions/flutterclient.git"
     source: git
-    version: "1.1.0+15"
+    version: "1.1.0+22"
   font_awesome_flutter:
     dependency: transitive
     description:

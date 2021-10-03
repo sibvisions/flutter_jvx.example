@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterclient/flutterclient.dart';
+import 'package:flutterclient_example/screens/calendar_custom_screen.dart';
+import 'package:flutterclient_example/screens/signature_custom_screen.dart';
+import 'package:flutterclient_example/screens/styled_table_custom_screen.dart';
 
 import 'screens/altering_custom_screen.dart';
 import 'screens/chart_custom_screen.dart';
@@ -41,8 +44,8 @@ class ExampleCustomScreenManager extends ScreenManager {
     this.registerScreen(AlteringCustomScreen(
         configuration: SoScreenConfiguration(
             response: ApiInitial(),
-            screenComponentId: 'ALT',
-            componentId: ALTERING_COMP_ID,
+            screenComponentId: ALTERING_COMP_ID,
+            componentId: 'ALT',
             screenTitle: 'Altering Custom Screen'),
         creator: creator));
 
@@ -50,18 +53,51 @@ class ExampleCustomScreenManager extends ScreenManager {
       TelephoneCallCustomScreen(
           configuration: SoScreenConfiguration(
               response: ApiInitial(),
-              screenComponentId: 'TELEPHONE',
-              componentId: TELEPHONE_CALL_COMP_ID,
+              screenComponentId: TELEPHONE_CALL_COMP_ID,
+              componentId: 'TELEPHONE',
               screenTitle: 'Telephone',
               withServer: false),
+          creator: creator),
+    );
+
+    this.registerScreen(
+      CalendarCustomScreen(
+          configuration: SoScreenConfiguration(
+              response: ApiInitial(),
+              screenComponentId: CALENDAR_COMP_ID,
+              componentId: 'CALENDAR',
+              screenTitle: 'Calendar',
+              withServer: true),
+          creator: creator),
+    );
+
+    this.registerScreen(
+      StyledTableCustomScreen(
+          configuration: SoScreenConfiguration(
+              response: ApiInitial(),
+              screenComponentId: STYLED_TABLE_COMP_ID,
+              componentId: 'STYLED',
+              screenTitle: 'Styled Table',
+              withServer: true),
+          creator: creator),
+    );
+
+    this.registerScreen(
+      SignatureCustomScreen(
+          configuration: SoScreenConfiguration(
+              response: ApiInitial(),
+              screenComponentId: SIGNATURE_COMP_ID,
+              componentId: 'Sig-3V',
+              screenTitle: 'Signature',
+              withServer: true),
           creator: creator),
     );
 
     this.registerScreen(UserDataCustomScreen(
         configuration: SoScreenConfiguration(
             response: ApiInitial(),
-            screenComponentId: 'USER_DATA',
-            componentId: USER_DATA_COMP_ID,
+            screenComponentId: USER_DATA_COMP_ID,
+            componentId: 'USER_DATA',
             screenTitle: 'Userdata',
             withServer: false),
         creator: creator));
@@ -69,8 +105,8 @@ class ExampleCustomScreenManager extends ScreenManager {
     this.registerScreen(HelloCustomScreen(
         configuration: SoScreenConfiguration(
             response: ApiInitial(),
-            screenComponentId: 'HELLO',
-            componentId: HELLO_COMP_ID,
+            screenComponentId: HELLO_COMP_ID,
+            componentId: 'HELLO',
             screenTitle: 'Hello',
             withServer: false),
         creator: creator));
@@ -78,8 +114,8 @@ class ExampleCustomScreenManager extends ScreenManager {
     this.registerScreen(MapCustomScreen(
         configuration: SoScreenConfiguration(
             response: ApiInitial(),
-            screenComponentId: 'MAP',
-            componentId: MAP_COMP_ID,
+            screenComponentId: MAP_COMP_ID,
+            componentId: 'MAP',
             screenTitle: 'Map',
             withServer: false),
         creator: creator));
@@ -87,8 +123,8 @@ class ExampleCustomScreenManager extends ScreenManager {
     this.registerScreen(QrScannerCustomScreen(
         configuration: SoScreenConfiguration(
             response: ApiInitial(),
-            screenComponentId: 'QR_SCANNER',
-            componentId: QR_SCANNER_COMP_ID,
+            screenComponentId: QR_SCANNER_COMP_ID,
+            componentId: 'QR_SCANNER',
             screenTitle: 'Qr Scanner',
             withServer: false),
         creator: creator));
@@ -96,17 +132,17 @@ class ExampleCustomScreenManager extends ScreenManager {
     this.registerScreen(ChartCustomScreen(
         configuration: SoScreenConfiguration(
             response: ApiInitial(),
-            screenComponentId: 'CHART',
-            componentId: CHART_COMP_ID,
+            screenComponentId: CHART_COMP_ID,
+            componentId: 'CHART',
             screenTitle: 'Charts',
             withServer: true),
         creator: creator));
 
     this.registerScreen(ContactCustomScreen(
       configuration: SoScreenConfiguration(
-        screenComponentId: 'CONTACT',
         response: ApiInitial(),
-        componentId: CONTACTS_COMP_ID,
+        screenComponentId: CONTACTS_COMP_ID,
+        componentId: 'CONTACT',
         screenTitle: 'Contacts',
         withServer: true,
         templateName: 'ContactCustomTemplate',

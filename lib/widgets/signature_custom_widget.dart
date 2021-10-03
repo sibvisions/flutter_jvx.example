@@ -21,11 +21,11 @@ class _SignatureCustomWidgetState extends State<SignatureCustomWidget> {
   );
 
   void selectRecord(int index) {
-    widget.componentData?.selectRecord(context, index);
+    widget.componentData.selectRecord(context, index);
   }
 
   void setValues(List<dynamic> values) {
-    widget.componentData?.setValues(context, values, ['SIGNATURE']);
+    widget.componentData.setValues(context, values, ['SIGNATURE']);
   }
 
   @override

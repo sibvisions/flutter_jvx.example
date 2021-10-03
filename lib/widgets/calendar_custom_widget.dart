@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterclient/flutterclient.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -67,22 +68,33 @@ class _CalendarCustomWidgetState extends State<CalendarCustomWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.max,
-      children: <Widget>[
-        _buildTableCalendar(),
-        const SizedBox(height: 8.0),
-        _buildButtons(),
-        const SizedBox(height: 8.0),
-        Text('Events:',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            )),
-        const SizedBox(height: 8.0),
-        Expanded(child: _buildEventList()),
-      ],
-    );
+    return Scaffold(
+        appBar: AppBar(
+            title: Text('Calendar'),
+            automaticallyImplyLeading: true,
+            leading: IconButton(
+                icon: Icon(
+                  Icons.arrow_back,
+                ),
+                onPressed: () {
+                  Navigator.of(context).pop(OpenScreenPagePopStyle.CLOSE);
+                })),
+        body: Column(
+          mainAxisSize: MainAxisSize.max,
+          children: <Widget>[
+            _buildTableCalendar(),
+            const SizedBox(height: 8.0),
+            _buildButtons(),
+            const SizedBox(height: 8.0),
+            Text('Events:',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                )),
+            const SizedBox(height: 8.0),
+            Expanded(child: _buildEventList()),
+          ],
+        ));
   }
 
   // Simple TableCalendar configuration (using Styles)
@@ -119,7 +131,7 @@ class _CalendarCustomWidgetState extends State<CalendarCustomWidget> {
   }
 
   Widget _buildButtons() {
-    final dateTime = _events.keys.elementAt(_events.length - 2);
+    //final dateTime = _events.keys.elementAt(_events.length - 2);
 
     return Column(
       children: <Widget>[

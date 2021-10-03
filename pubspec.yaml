@@ -32,9 +32,12 @@ dependencies:
       url: https://github.com/sibvisions/flutterclient.git
       ref: dev
     # path: ../flutterclient
-  charts_flutter: ^0.10.0
+  charts_flutter:
+    git:
+      url: https://github.com/google/charts
+      path: charts_flutter
   url_launcher: ^6.0.3
-  flutter_map: ^0.13.1
+  flutter_map: ^0.14.0
   video_player: ^2.1.1
   signature: ^4.1.1
   barcode_scan: ^2.0.0

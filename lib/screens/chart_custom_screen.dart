@@ -3,6 +3,12 @@ import 'package:flutterclient/flutterclient.dart';
 
 import '../widgets/chart_custom_widget.dart';
 
+const String CHART_DATAPROVIDER = "JVxMobileDemo/Cha-OL/chartData#0";
+const String COLUMNAME_ID = "ID";
+const String COLUMNAME_NAME = "COUNTRY";
+const String COLUMNAME_LITRES = "LITRES";
+const String COLUMNAME_DISTANCE = "DISTANCE";
+
 class ChartCustomScreen extends CustomScreen {
   ChartCustomScreen(
       {Key? key,
@@ -30,11 +36,15 @@ class ChartCustomScreenState extends CustomScreenState {
     if (state != null && state is ApiResponse && mounted) {
       // Updating the data objects
       if (state.hasDataBook) {
-        // toDo set dataProvider
-        DataBook? dataBook = state.getDataBookByProvider('');
+        DataBook? dataBook = state.getDataBookByProvider(CHART_DATAPROVIDER);
         if (dataBook != null) {
-          for (int i = 0; i < dataBook.records.length; i++) {
-            countries.add(Country.fromJson(dataBook.records[i]));
+          for (int i = 0; i <= 3; i++) {
+            int id = dataBook.getValue(COLUMNAME_ID, i);
+            String name = dataBook.getValue(COLUMNAME_NAME, i);
+            double litres = dataBook.getValue(COLUMNAME_LITRES, i);
+            double distance = dataBook.getValue(COLUMNAME_DISTANCE, i);
+
+            countries.add(Country(id, name, litres, distance));
           }
         }
       }
@@ -49,10 +59,4 @@ class Country {
   double distance;
 
   Country(this.id, this.name, this.litres, this.distance);
-
-  Country.fromJson(List json)
-      : id = json[0],
-        name = json[1],
-        litres = json[2],
-        distance = json[3];
 }

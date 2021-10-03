@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutterclient/flutterclient.dart';
 import '../widgets/calendar_custom_widget.dart';
 
+const String CONTACT_DATAPROVIDER = "JVxMobileDemo/Cal-7V/contacts#+";
+const String COLUMNAME_EVENT = "EVENT";
+const String COLUMNAME_DAYS_FROM_TODAY = "DAYS_FROM_TODAY";
+
 class CalendarCustomScreen extends CustomScreen {
   CalendarCustomScreen(
       {Key? key,
@@ -22,11 +26,11 @@ class CalendarCustomScreenState extends CustomScreenState {
     if (state != null && state is ApiResponse && mounted) {
       // Updating the data objects
       if (state.hasDataBook) {
-        // toDo set dataProvider
-        DataBook? dataBook = state.getDataBookByProvider('');
+        DataBook? dataBook = state.getDataBookByProvider(CONTACT_DATAPROVIDER);
         if (dataBook != null) {
           for (int i = 0; i < dataBook.records.length; i++) {
-            calendarData.add(CalendarData.fromJson(dataBook.records[i]));
+            calendarData.add(CalendarData(dataBook.getValue(COLUMNAME_EVENT, i),
+                dataBook.getValue(COLUMNAME_DAYS_FROM_TODAY, i)));
           }
         }
       }
@@ -44,8 +48,4 @@ class CalendarData {
   int daysFromToday;
 
   CalendarData(this.event, this.daysFromToday);
-
-  CalendarData.fromJson(List json)
-      : event = json[0],
-        daysFromToday = json[1];
 }
