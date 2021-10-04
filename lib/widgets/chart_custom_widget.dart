@@ -84,7 +84,7 @@ class BarChartWidget extends StatelessWidget {
               measureFn: (Country country, _) => country.litres,
               data: widget.countries,
               labelAccessorFn: (Country country, _) => '${country.name}',
-              colorFn: (Country country, _) => color.elementAt(_!)),
+              colorFn: (Country country, _) => color.elementAt(_)),
         ],
         animate: animate,
       ),
@@ -119,7 +119,7 @@ class PieChartWidget extends StatelessWidget {
                   charts.TextStyleSpec(
                       fontSize: 12, // size in Pts.
                       color: charts.MaterialPalette.gray.shade800),
-              colorFn: (Country country, _) => color.elementAt(_!)),
+              colorFn: (Country country, _) => color.elementAt(_)),
         ],
         animate: animate,
         defaultRenderer: new charts.ArcRendererConfig(arcRendererDecorators: [

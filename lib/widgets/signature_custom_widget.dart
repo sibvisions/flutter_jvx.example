@@ -31,7 +31,7 @@ class _SignatureCustomWidgetState extends State<SignatureCustomWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width,
+      width: MediaQuery.of(context).size.width - 30,
       child: Center(
         child: Column(
           children: <Widget>[
