@@ -25,9 +25,22 @@ class ChartCustomScreenState extends CustomScreenState {
 
   @override
   Widget build(BuildContext context) {
-    return ChartCustomWidget(
-      countries: countries,
-    );
+    return Scaffold(
+        appBar: AppBar(
+            title: Text('Charts'),
+            automaticallyImplyLeading: true,
+            leading: IconButton(
+                icon: Icon(
+                  Icons.arrow_back,
+                ),
+                onPressed: () {
+                  getApplicationApi(context)
+                      .closeScreen(widget.configuration.componentId);
+                })),
+        endDrawer: widget.configuration.drawer,
+        body: ChartCustomWidget(
+          countries: countries,
+        ));
   }
 
   @override
@@ -39,12 +52,7 @@ class ChartCustomScreenState extends CustomScreenState {
         DataBook? dataBook = state.getDataBookByProvider(CHART_DATAPROVIDER);
         if (dataBook != null) {
           for (int i = 0; i <= 3; i++) {
-            int id = dataBook.getValue(COLUMNAME_ID, i);
-            String name = dataBook.getValue(COLUMNAME_NAME, i);
-            double litres = dataBook.getValue(COLUMNAME_LITRES, i);
-            double distance = dataBook.getValue(COLUMNAME_DISTANCE, i);
-
-            countries.add(Country(id, name, litres, distance));
+            countries.add(Country.fromDataBook(dataBook, i));
           }
         }
       }
@@ -59,4 +67,12 @@ class Country {
   double distance;
 
   Country(this.id, this.name, this.litres, this.distance);
+
+  static Country fromDataBook(DataBook dataBook, int index) {
+    int id = dataBook.getValue(COLUMNAME_ID, index);
+    String name = dataBook.getValue(COLUMNAME_NAME, index);
+    double litres = dataBook.getValue(COLUMNAME_LITRES, index);
+    double distance = dataBook.getValue(COLUMNAME_DISTANCE, index);
+    return Country(id, name, litres, distance);
+  }
 }

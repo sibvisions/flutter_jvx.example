@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
         // Also if you want to run with a Developer Config you can pass one as a parameter
         config: DevConfig(
             appMode: 'full',
-            baseUrl: 'http://192.168.1.106:8888/JVx.mobile/services/mobile',
+            baseUrl: 'http://172.20.0.119:8888/JVx.mobile/services/mobile',
             appName: 'demo',
             username: 'features',
             password: 'features'),

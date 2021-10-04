@@ -91,7 +91,6 @@ class CoCustomComponentWidgetState extends ComponentWidgetState {
     SoComponentData? data = SoScreen.of(context)!
         .getComponentData('JVxMobileDemo/Con-CG/contacts#4');
 
-    // ToDo Nur einmal
     dynamic phone = data.getColumnData(context, 'PHONE');
 
     return Center(
@@ -103,7 +102,6 @@ class CoCustomComponentWidgetState extends ComponentWidgetState {
             Expanded(
               child: CustomRoundedButton(
                   "Call", Icon(Icons.call, color: Colors.white), () {
-                phone = data.getColumnData(context, 'PHONE');
                 launch("tel://$phone");
               }),
             ),
@@ -111,7 +109,6 @@ class CoCustomComponentWidgetState extends ComponentWidgetState {
             Expanded(
               child: CustomRoundedButton(
                   "SMS", Icon(Icons.sms, color: Colors.white), () {
-                phone = data.getColumnData(context, 'PHONE');
                 launch("sms://$phone");
               }),
             ),
@@ -119,8 +116,6 @@ class CoCustomComponentWidgetState extends ComponentWidgetState {
             Expanded(
               child: CustomRoundedButton("WhatsApp",
                   Icon(FontAwesomeIcons.whatsapp, color: Colors.white), () {
-                phone = data.getColumnData(context, 'PHONE');
-
                 if (phone.startsWith('0')) {
                   phone = phone.replaceFirst('0', '43');
                 }

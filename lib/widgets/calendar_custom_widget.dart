@@ -68,33 +68,22 @@ class _CalendarCustomWidgetState extends State<CalendarCustomWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-            title: Text('Calendar'),
-            automaticallyImplyLeading: true,
-            leading: IconButton(
-                icon: Icon(
-                  Icons.arrow_back,
-                ),
-                onPressed: () {
-                  Navigator.of(context).pop(OpenScreenPagePopStyle.CLOSE);
-                })),
-        body: Column(
-          mainAxisSize: MainAxisSize.max,
-          children: <Widget>[
-            _buildTableCalendar(),
-            const SizedBox(height: 8.0),
-            _buildButtons(),
-            const SizedBox(height: 8.0),
-            Text('Events:',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                )),
-            const SizedBox(height: 8.0),
-            Expanded(child: _buildEventList()),
-          ],
-        ));
+    return Column(
+      mainAxisSize: MainAxisSize.max,
+      children: <Widget>[
+        _buildTableCalendar(),
+        const SizedBox(height: 8.0),
+        _buildButtons(),
+        const SizedBox(height: 8.0),
+        Text('Events:',
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            )),
+        const SizedBox(height: 8.0),
+        Expanded(child: _buildEventList()),
+      ],
+    );
   }
 
   // Simple TableCalendar configuration (using Styles)

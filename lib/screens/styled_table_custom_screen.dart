@@ -28,7 +28,20 @@ class StyledTableCustomScreenState extends CustomScreenState {
 
   @override
   Widget build(BuildContext context) {
-    return StyledTableCustomWidget(contacts: contacts);
+    return Scaffold(
+        appBar: AppBar(
+            title: Text('Styled Table'),
+            automaticallyImplyLeading: true,
+            leading: IconButton(
+                icon: Icon(
+                  Icons.arrow_back,
+                ),
+                onPressed: () {
+                  getApplicationApi(context)
+                      .closeScreen(widget.configuration.componentId);
+                })),
+        endDrawer: widget.configuration.drawer,
+        body: StyledTableCustomWidget(contacts: contacts));
   }
 
   @override

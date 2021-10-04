@@ -29,8 +29,7 @@ class CalendarCustomScreenState extends CustomScreenState {
         DataBook? dataBook = state.getDataBookByProvider(CONTACT_DATAPROVIDER);
         if (dataBook != null) {
           for (int i = 0; i < dataBook.records.length; i++) {
-            calendarData.add(CalendarData(dataBook.getValue(COLUMNAME_EVENT, i),
-                dataBook.getValue(COLUMNAME_DAYS_FROM_TODAY, i)));
+            calendarData.add(CalendarData.fromDataBook(dataBook, i));
           }
         }
       }
@@ -39,7 +38,20 @@ class CalendarCustomScreenState extends CustomScreenState {
 
   @override
   Widget build(BuildContext context) {
-    return CalendarCustomWidget(calendarData: this.calendarData);
+    return Scaffold(
+        appBar: AppBar(
+            title: Text('Calendar'),
+            automaticallyImplyLeading: true,
+            leading: IconButton(
+                icon: Icon(
+                  Icons.arrow_back,
+                ),
+                onPressed: () {
+                  getApplicationApi(context)
+                      .closeScreen(widget.configuration.componentId);
+                })),
+        endDrawer: widget.configuration.drawer,
+        body: CalendarCustomWidget(calendarData: this.calendarData));
   }
 }
 
@@ -48,4 +60,10 @@ class CalendarData {
   int daysFromToday;
 
   CalendarData(this.event, this.daysFromToday);
+
+  static CalendarData fromDataBook(DataBook dataBook, int index) {
+    String event = dataBook.getValue(COLUMNAME_EVENT, index);
+    int daysFromToday = dataBook.getValue(COLUMNAME_DAYS_FROM_TODAY, index);
+    return CalendarData(event, daysFromToday);
+  }
 }

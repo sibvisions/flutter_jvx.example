@@ -32,14 +32,27 @@ class SignatureCustomScreenState extends CustomScreenState {
 
     SoComponentData componentData = this.getComponentData(CONTACT_DATAPROVIDER);
 
-    this.replaceComponentByName(
-        'signaturePanel',
-        CoCustomPanelWidget(
-          componentModel: ContainerComponentModel(
-              changedComponent:
-                  ChangedComponent(id: "SIGPAN_01", name: "signaturePanel")),
-          child: SignatureCustomWidget(componentData: componentData),
-        ));
+    ComponentWidget? comp;
+    try {
+      comp = components.values.toList().firstWhere((component) =>
+          component.componentModel.componentId == 'signaturePanel');
+    } catch (e) {}
+
+    if (comp == null || !(comp is CoCustomPanelWidget))
+      // var rng = new Random();
+      this.replaceComponentByName(
+          'signaturePanel',
+          CoCustomPanelWidget(
+            componentModel: ContainerComponentModel(
+                changedComponent:
+                    ChangedComponent(id: "SIGPAN_01", name: "signaturePanel")),
+            child: SignatureCustomWidget(componentData: componentData),
+          ));
+
+    try {
+      comp = components.values.toList().firstWhere(
+          (component) => component.componentModel.name == 'signaturePanel');
+    } catch (e) {}
   }
 }
 

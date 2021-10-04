@@ -65,7 +65,7 @@ class ExampleCustomScreenManager extends ScreenManager {
           configuration: SoScreenConfiguration(
               response: ApiInitial(),
               screenComponentId: CALENDAR_COMP_ID,
-              componentId: 'CALENDAR',
+              componentId: 'Cal-7V',
               screenTitle: 'Calendar',
               withServer: true),
           creator: creator),
@@ -76,7 +76,7 @@ class ExampleCustomScreenManager extends ScreenManager {
           configuration: SoScreenConfiguration(
               response: ApiInitial(),
               screenComponentId: STYLED_TABLE_COMP_ID,
-              componentId: 'STYLED',
+              componentId: 'StyTab-2G',
               screenTitle: 'Styled Table',
               withServer: true),
           creator: creator),
@@ -133,7 +133,7 @@ class ExampleCustomScreenManager extends ScreenManager {
         configuration: SoScreenConfiguration(
             response: ApiInitial(),
             screenComponentId: CHART_COMP_ID,
-            componentId: 'CHART',
+            componentId: 'Cha-OL',
             screenTitle: 'Charts',
             withServer: true),
         creator: creator));
@@ -142,7 +142,7 @@ class ExampleCustomScreenManager extends ScreenManager {
       configuration: SoScreenConfiguration(
         response: ApiInitial(),
         screenComponentId: CONTACTS_COMP_ID,
-        componentId: 'CONTACT',
+        componentId: 'Con-CG',
         screenTitle: 'Contacts',
         withServer: true,
         templateName: 'ContactCustomTemplate',
