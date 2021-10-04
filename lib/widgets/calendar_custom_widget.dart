@@ -90,13 +90,13 @@ class _CalendarCustomWidgetState extends State<CalendarCustomWidget> {
   Widget _buildTableCalendar() {
     return TableCalendar(
       rowHeight: 60,
-      calendarController: _calendarController,
+      calendarController: _calendarController!,
       events: _events,
       startingDayOfWeek: StartingDayOfWeek.monday,
       calendarStyle: CalendarStyle(
         selectedColor: Theme.of(context).primaryColor,
-        todayColor: Colors.deepOrange[200],
-        markersColor: Colors.deepOrange[700],
+        todayColor: Colors.deepOrange[200]!,
+        markersColor: Colors.deepOrange[700]!,
         outsideDaysVisible: false,
       ),
       headerStyle: HeaderStyle(

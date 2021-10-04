@@ -8,6 +8,8 @@ import 'package:url_launcher/url_launcher.dart';
 import '../widgets/custom_rounded_button.dart';
 
 class ContactCustomScreen extends CustomScreen {
+  bool replaced = false;
+
   ContactCustomScreen(
       {Key? key,
       required SoScreenConfiguration configuration,
@@ -19,6 +21,8 @@ class ContactCustomScreen extends CustomScreen {
 }
 
 class ContactCustomScreenState extends CustomScreenState {
+  bool replaced = false;
+
   @override
   Widget build(BuildContext context) {
     return super.build(context);
@@ -45,12 +49,14 @@ class ContactCustomScreenState extends CustomScreenState {
       ));
     }
 
-    // ToDo: uncomment
-    this.replaceComponentByName(
-        'contactPanel',
-        CoCustomComponentWidget(
-            componentModel: ComponentModel(changedComponent: ChangedComponent())
-              ..componentId = 'contactPanel'));
+    if (!replaced) {
+      replaced = this.replaceComponentByName(
+          'contactPanel',
+          CoCustomComponentWidget(
+              componentModel:
+                  ComponentModel(changedComponent: ChangedComponent())
+                    ..componentId = 'contactPanel'));
+    }
   }
 }
 
