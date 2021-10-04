@@ -44,12 +44,12 @@ class ChartCustomScreenState extends CustomScreenState {
   }
 
   @override
-  void onState(ApiState? state) {
-    super.onState(state);
-    if (state != null && state is ApiResponse && mounted) {
+  void update(ApiResponse response) {
+    super.update(response);
+    if (mounted) {
       // Updating the data objects
-      if (state.hasDataBook) {
-        DataBook? dataBook = state.getDataBookByProvider(CHART_DATAPROVIDER);
+      if (response.hasDataBook) {
+        DataBook? dataBook = response.getDataBookByProvider(CHART_DATAPROVIDER);
         if (dataBook != null) {
           for (int i = 0; i <= 3; i++) {
             countries.add(Country.fromDataBook(dataBook, i));

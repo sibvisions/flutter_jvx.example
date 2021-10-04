@@ -159,9 +159,9 @@ class ExampleCustomScreenManager extends ScreenManager {
     // Add Item via your own MenuItem
     MenuItem toAddHelloCustomScreen = MenuItem(
       componentId: HELLO_COMP_ID,
+      group: 'Customscreens',
       text: 'Hello Custom Screen',
       image: 'FontAwesome.star-o',
-      group: 'Customscreens',
     );
 
     menuManager.addItem(toAddHelloCustomScreen);

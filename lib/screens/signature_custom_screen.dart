@@ -24,11 +24,6 @@ class SignatureCustomScreenState extends CustomScreenState {
   }
 
   @override
-  void onState(ApiState? state) {
-    super.onState(state);
-  }
-
-  @override
   void update(ApiResponse response) {
     super.update(response);
 
@@ -36,31 +31,12 @@ class SignatureCustomScreenState extends CustomScreenState {
 
     if (!replaced) {
       replaced = this.replaceComponentByName(
-          'signaturePanel',
-          CoCustomPanelWidget(
-            componentModel: ContainerComponentModel(
-                changedComponent:
-                    ChangedComponent(id: "SIGPAN_01", name: "signaturePanel")),
-            child: SignatureCustomWidget(componentData: componentData),
-          ));
+        'signaturePanel',
+        SignatureCustomWidget(
+            componentData: componentData,
+            componentModel: ComponentModel(changedComponent: ChangedComponent())
+              ..componentId = 'SIGPAN_01'),
+      );
     }
-  }
-}
-
-class CoCustomPanelWidget extends CoPanelWidget {
-  final Widget child;
-
-  CoCustomPanelWidget(
-      {required this.child, required ContainerComponentModel componentModel})
-      : super(componentModel: componentModel);
-
-  @override
-  State<StatefulWidget> createState() => CoCustomPanelWidgetState();
-}
-
-class CoCustomPanelWidgetState extends CoPanelWidgetState {
-  @override
-  Widget build(BuildContext context) {
-    return (widget as CoCustomPanelWidget).child;
   }
 }

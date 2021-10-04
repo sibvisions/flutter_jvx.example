@@ -3,11 +3,14 @@ import 'package:flutterclient/flutterclient.dart';
 import 'package:signature/signature.dart';
 import 'dart:convert';
 
-class SignatureCustomWidget extends StatefulWidget {
+class SignatureCustomWidget extends ComponentWidget {
   final SoComponentData componentData;
 
-  SignatureCustomWidget({Key? key, required this.componentData})
-      : super(key: key);
+  SignatureCustomWidget(
+      {Key? key,
+      required this.componentData,
+      required ComponentModel componentModel})
+      : super(key: key, componentModel: componentModel);
 
   @override
   _SignatureCustomWidgetState createState() => _SignatureCustomWidgetState();
@@ -19,10 +22,6 @@ class _SignatureCustomWidgetState extends State<SignatureCustomWidget> {
     penColor: Colors.black,
     exportBackgroundColor: Colors.white,
   );
-
-  void selectRecord(int index) {
-    widget.componentData.selectRecord(context, index);
-  }
 
   void setValues(List<dynamic> values) {
     widget.componentData.setValues(context, values, ['SIGNATURE']);
