@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jvx_flutterclient/utils/uidata.dart';
+import 'package:flutterclient/flutterclient.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -9,18 +9,18 @@ import 'custom_rounded_button.dart';
 class CalendarCustomWidget extends StatefulWidget {
   final List<CalendarData> calendarData;
 
-  const CalendarCustomWidget({Key key, this.calendarData}) : super(key: key);
+  const CalendarCustomWidget({Key? key, required this.calendarData})
+      : super(key: key);
 
   @override
   _CalendarCustomWidgetState createState() => _CalendarCustomWidgetState();
 }
 
 class _CalendarCustomWidgetState extends State<CalendarCustomWidget> {
-  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   Map<DateTime, List> _events = Map<DateTime, List>();
-  List _selectedEvents;
-  AnimationController _animationController;
-  CalendarController _calendarController;
+  List? _selectedEvents;
+  AnimationController? _animationController;
+  CalendarController? _calendarController;
 
   @override
   void initState() {
@@ -28,28 +28,20 @@ class _CalendarCustomWidgetState extends State<CalendarCustomWidget> {
     final _selectedDay = DateTime.now();
     final List<CalendarData> calendarDataToGroup = widget.calendarData;
 
-
-
     Set<CalendarData> set = Set.from(calendarDataToGroup);
     set.forEach((element) {
-
       CalendarData currentCalData = element;
 
-
-
-
-
-
-      if(!_events.containsKey(_selectedDay.add(Duration(days :currentCalData.daysFromToday))))
-
-      {
-        _events.putIfAbsent(_selectedDay.add(Duration(days :currentCalData.daysFromToday)), () => [currentCalData.event]);
+      if (!_events.containsKey(
+          _selectedDay.add(Duration(days: currentCalData.daysFromToday)))) {
+        _events.putIfAbsent(
+            _selectedDay.add(Duration(days: currentCalData.daysFromToday)),
+            () => [currentCalData.event]);
+      } else {
+        _events[_selectedDay.add(Duration(days: currentCalData.daysFromToday))]!
+            .add(currentCalData.event);
       }
-      else
-      {
-        _events[_selectedDay.add(Duration(days :currentCalData.daysFromToday))].add(currentCalData.event);
-      }
-    });    
+    });
 
     _selectedEvents = _events[_selectedDay] ?? [];
     _calendarController = CalendarController();
@@ -62,22 +54,17 @@ class _CalendarCustomWidgetState extends State<CalendarCustomWidget> {
     super.dispose();
   }
 
-  void _onDaySelected(DateTime day, List events) {
-
+  void _onDaySelected(DateTime day, List events, List other) {
     setState(() {
       _selectedEvents = events;
     });
   }
 
   void _onVisibleDaysChanged(
-      DateTime first, DateTime last, CalendarFormat format) {
-
-  }
+      DateTime first, DateTime last, CalendarFormat format) {}
 
   void _onCalendarCreated(
-      DateTime first, DateTime last, CalendarFormat format) {
-
-  }
+      DateTime first, DateTime last, CalendarFormat format) {}
 
   @override
   Widget build(BuildContext context) {
@@ -103,13 +90,13 @@ class _CalendarCustomWidgetState extends State<CalendarCustomWidget> {
   Widget _buildTableCalendar() {
     return TableCalendar(
       rowHeight: 60,
-      calendarController: _calendarController,
+      calendarController: _calendarController!,
       events: _events,
       startingDayOfWeek: StartingDayOfWeek.monday,
       calendarStyle: CalendarStyle(
-        selectedColor: UIData.ui_kit_color_2,
-        todayColor: Colors.deepOrange[200],
-        markersColor: Colors.deepOrange[700],
+        selectedColor: Theme.of(context).primaryColor,
+        todayColor: Colors.deepOrange[200]!,
+        markersColor: Colors.deepOrange[700]!,
         outsideDaysVisible: false,
       ),
       headerStyle: HeaderStyle(
@@ -128,12 +115,12 @@ class _CalendarCustomWidgetState extends State<CalendarCustomWidget> {
 
   void _setCalendarFormat(CalendarFormat calFormat) {
     setState(() {
-      _calendarController.setCalendarFormat(calFormat);
+      _calendarController!.setCalendarFormat(calFormat);
     });
   }
 
   Widget _buildButtons() {
-    final dateTime = _events.keys.elementAt(_events.length - 2);
+    //final dateTime = _events.keys.elementAt(_events.length - 2);
 
     return Column(
       children: <Widget>[
@@ -157,7 +144,7 @@ class _CalendarCustomWidgetState extends State<CalendarCustomWidget> {
 
   Widget _buildEventList() {
     return ListView(
-      children: _selectedEvents
+      children: _selectedEvents!
           .map((event) => Card(
                 color: Colors.orange[100],
                 margin:

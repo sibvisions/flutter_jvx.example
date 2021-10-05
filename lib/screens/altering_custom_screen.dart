@@ -1,38 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:jvx_flutterclient/custom_screen/custom_screen.dart';
-import 'package:jvx_flutterclient/model/api/request/request.dart';
-import 'package:jvx_flutterclient/model/api/response/response_data.dart';
-import 'package:jvx_flutterclient/ui/component/i_component.dart';
-import 'package:jvx_flutterclient/ui/screen/so_component_creator.dart';
+import 'package:flutterclient/flutterclient.dart';
 
 class AlteringCustomScreen extends CustomScreen {
-  AlteringCustomScreen(SoComponentCreator componentCreator)
-      : super(componentCreator);
+  AlteringCustomScreen(
+      {Key? key,
+      required SoScreenConfiguration configuration,
+      required SoComponentCreator creator})
+      : super(key: key, configuration: configuration, creator: creator);
 
   @override
-  Widget getWidget() {
-    IComponent component = this.componentScreen.getRootComponent();
+  AlteringCustomScreenState createState() => AlteringCustomScreenState();
+}
 
-    if (component != null) {
-      return component.getWidget();
-    } else {
-      return Container(
-        alignment: Alignment.center,
-        child: Text('No root component defined'),
-      );
-    }
-  }
-
+class AlteringCustomScreenState extends CustomScreenState {
   @override
-  void update(Request request, ResponseData responeData) {
-    componentScreen.updateData(request, responeData);
-    if (responeData.screenGeneric != null)
-      componentScreen
-          .updateComponents(responeData.screenGeneric.changedComponents);
-  }
-
-  @override
-  bool withServer() {
-    return true;
+  Widget build(BuildContext context) {
+    return super.build(context);
   }
 }

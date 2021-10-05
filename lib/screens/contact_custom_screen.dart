@@ -1,56 +1,103 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutterclient_example/widgets/custom_rounded_button.dart';
-import 'package:jvx_flutterclient/custom_screen/custom_screen.dart';
-import 'package:jvx_flutterclient/jvx_flutterclient.dart';
-import 'package:jvx_flutterclient/model/api/request/request.dart';
-import 'package:jvx_flutterclient/model/api/response/response_data.dart';
-import 'package:jvx_flutterclient/ui/component/i_component.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:jvx_flutterclient/ui/component/co_custom_component.dart';
-import 'package:jvx_flutterclient/ui/container/co_panel.dart';
-import 'package:jvx_flutterclient/ui/screen/so_component_creator.dart';
-import 'package:jvx_flutterclient/utils/data_api.dart';
+import 'package:flutterclient/flutterclient.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+import '../widgets/custom_rounded_button.dart';
 
 class ContactCustomScreen extends CustomScreen {
-  ContactCustomScreen(SoComponentCreator componentCreator)
-      : super(componentCreator);
+  ContactCustomScreen(
+      {Key? key,
+      required SoScreenConfiguration configuration,
+      required SoComponentCreator creator})
+      : super(key: key, configuration: configuration, creator: creator);
 
   @override
-  Widget getWidget() {
-    DataApi dataApi = getDataApi('JVxMobileDemo/Con-CG/contacts#4');
-    dynamic phone = dataApi.getValue('PHONE');
+  ContactCustomScreenState createState() => ContactCustomScreenState();
+}
 
-    String tempName = super.getTemplateName();
+class ContactCustomScreenState extends CustomScreenState {
+  bool replaced = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return super.build(context);
+  }
+
+  @override
+  void update(ApiResponse response) {
+    super.update(response);
+
+    String? tempName = this.getTemplateName();
 
     if (tempName != null && tempName == 'ContactCustomTemplate') {
-      //Add a header and a footer when the template is ContactCustomTemplate
-      CoCustomComponent headerLabel = new CoCustomComponent(
-          GlobalKey(debugLabel: 'header'), this.componentScreen.context);
-      headerLabel.widget = Container(
-          margin: new EdgeInsets.all(20.0),
-          child: Text('This is a custom Header',
-              style: TextStyle(
-                  fontWeight: FontWeight.bold, color: UIData.ui_kit_color_2)));
-      this.setHeader(headerLabel);
-
-      CoCustomComponent footerLabel = new CoCustomComponent(
-          GlobalKey(debugLabel: 'footer'), this.componentScreen.context);
-      footerLabel.widget = Container(
-          margin: new EdgeInsets.all(20.0),
-          child: Text('This is a custom Footer',
-              style: TextStyle(
-                  fontWeight: FontWeight.bold, color: UIData.ui_kit_color)));
-      this.setFooter(footerLabel);
+      this.setHeader(CustomHeaderAndFooterWidget(
+        text: 'This is a custom header',
+        componentModel: ComponentModel(changedComponent: ChangedComponent())
+          ..componentId = 'header'
+          ..preferredSize = Size(100, 70),
+      ));
+      this.setFooter(CustomHeaderAndFooterWidget(
+        text: 'This is a custom footer',
+        componentModel: ComponentModel(changedComponent: ChangedComponent())
+          ..componentId = 'footer'
+          ..preferredSize = Size(100, 70),
+      ));
     }
 
-    CoCustomComponent contactComp = new CoCustomComponent(
-      GlobalKey(debugLabel: 'contact'),
-      componentScreen.context,
-    );
-    contactComp.widget = Center(
+    if (!replaced) {
+      replaced = this.replaceComponentByName(
+          'contactPanel',
+          CoCustomComponentWidget(
+              componentModel:
+                  ComponentModel(changedComponent: ChangedComponent())
+                    ..componentId = 'contactPanel'));
+    }
+  }
+}
+
+class CustomHeaderAndFooterWidget extends ComponentWidget {
+  final String text;
+
+  CustomHeaderAndFooterWidget(
+      {required this.text, required ComponentModel componentModel})
+      : super(componentModel: componentModel);
+
+  @override
+  State<StatefulWidget> createState() => CustomHeaderAndFooterWidgetState();
+}
+
+class CustomHeaderAndFooterWidgetState extends ComponentWidgetState {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        margin: new EdgeInsets.all(20.0),
+        child: Text((widget as CustomHeaderAndFooterWidget).text,
+            style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Theme.of(context).primaryColor)));
+  }
+}
+
+class CoCustomComponentWidget extends ComponentWidget {
+  CoCustomComponentWidget({required ComponentModel componentModel})
+      : super(componentModel: componentModel);
+
+  @override
+  State<StatefulWidget> createState() => CoCustomComponentWidgetState();
+}
+
+class CoCustomComponentWidgetState extends ComponentWidgetState {
+  @override
+  Widget build(BuildContext context) {
+    SoComponentData? data = SoScreen.of(context)!
+        .getComponentData('JVxMobileDemo/Con-CG/contacts#4');
+
+    dynamic phone = data.getColumnData(context, 'PHONE');
+
+    return Center(
       child: Container(
         width: 300,
         height: 100,
@@ -59,7 +106,6 @@ class ContactCustomScreen extends CustomScreen {
             Expanded(
               child: CustomRoundedButton(
                   "Call", Icon(Icons.call, color: Colors.white), () {
-                phone = dataApi.getValue("PHONE");
                 launch("tel://$phone");
               }),
             ),
@@ -67,7 +113,6 @@ class ContactCustomScreen extends CustomScreen {
             Expanded(
               child: CustomRoundedButton(
                   "SMS", Icon(Icons.sms, color: Colors.white), () {
-                phone = dataApi.getValue("PHONE");
                 launch("sms://$phone");
               }),
             ),
@@ -75,8 +120,6 @@ class ContactCustomScreen extends CustomScreen {
             Expanded(
               child: CustomRoundedButton("WhatsApp",
                   Icon(FontAwesomeIcons.whatsapp, color: Colors.white), () {
-                phone = dataApi.getValue("PHONE");
-
                 if (phone.startsWith('0')) {
                   phone = phone.replaceFirst('0', '43');
                 }
@@ -92,31 +135,5 @@ class ContactCustomScreen extends CustomScreen {
         ),
       ),
     );
-
-    CoPanel comp = this.componentScreen.getComponentFromName('contactPanel');
-    this.componentScreen.replaceComponent(comp, contactComp);
-
-    IComponent component = this.componentScreen.getRootComponent();
-    if (component != null) {
-      return component.getWidget();
-    } else {
-      return Container(
-        alignment: Alignment.center,
-        child: Text('No root component defined'),
-      );
-    }
-  }
-
-  @override
-  void update(Request request, ResponseData responeData) {
-    componentScreen.updateData(request, responeData);
-    if (responeData.screenGeneric != null)
-      componentScreen
-          .updateComponents(responeData.screenGeneric.changedComponents);
-  }
-
-  @override
-  bool withServer() {
-    return true;
   }
 }

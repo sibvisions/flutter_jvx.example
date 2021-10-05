@@ -1,24 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:flutterclient_example/widgets/map_custom_widget.dart';
-import 'package:jvx_flutterclient/custom_screen/custom_screen.dart';
-import 'package:jvx_flutterclient/model/api/request/request.dart';
-import 'package:jvx_flutterclient/model/api/response/response_data.dart';
-import 'package:jvx_flutterclient/ui/screen/so_component_creator.dart';
+import 'package:flutterclient/flutterclient.dart';
+import '../widgets/map_custom_widget.dart';
 
 class MapCustomScreen extends CustomScreen {
-  MapCustomScreen(SoComponentCreator componentCreator)
-      : super(componentCreator);
+  MapCustomScreen(
+      {Key? key,
+      required SoScreenConfiguration configuration,
+      required SoComponentCreator creator})
+      : super(key: key, configuration: configuration, creator: creator);
 
   @override
-  Widget getWidget() {
-    return MapCustomWidget();
-  }
+  MapCustomScreenState createState() => MapCustomScreenState();
+}
 
+class MapCustomScreenState extends CustomScreenState {
   @override
-  void update(Request request, ResponseData responseData) {}
+  Widget build(BuildContext context) {
+    String apiKey = '';
+    //AppStateProvider.of(context).appState.config.properties['apiKey'];
 
-  @override
-  bool withServer() {
-    return false;
+    return MapCustomWidget(
+      apiKey: apiKey,
+    );
   }
 }

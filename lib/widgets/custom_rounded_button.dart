@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:jvx_flutterclient/jvx_flutterclient.dart';
 
 class CustomRoundedButton extends StatelessWidget {
-  final Function onTapFunction;
+  final Function()? onTapFunction;
   final String buttonText;
   final Icon buttonIcon;
 
@@ -14,7 +13,7 @@ class CustomRoundedButton extends StatelessWidget {
       size: Size(56, 56),
       child: ClipOval(
         child: Material(
-          color: UIData.ui_kit_color_2,
+          color: Theme.of(context).primaryColor,
           child: InkWell(
             splashColor: Colors.orange,
             onTap: onTapFunction,

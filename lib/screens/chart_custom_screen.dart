@@ -1,38 +1,62 @@
 import 'package:flutter/material.dart';
-import 'package:jvx_flutterclient/custom_screen/custom_screen.dart';
-import 'package:jvx_flutterclient/model/api/request/request.dart';
-import 'package:jvx_flutterclient/model/api/response/response_data.dart';
-import 'package:jvx_flutterclient/ui/screen/so_component_creator.dart';
+import 'package:flutterclient/flutterclient.dart';
 
 import '../widgets/chart_custom_widget.dart';
 
+const String CHART_DATAPROVIDER = "JVxMobileDemo/Cha-OL/chartData#0";
+const String COLUMNAME_ID = "ID";
+const String COLUMNAME_NAME = "COUNTRY";
+const String COLUMNAME_LITRES = "LITRES";
+const String COLUMNAME_DISTANCE = "DISTANCE";
+
 class ChartCustomScreen extends CustomScreen {
+  ChartCustomScreen(
+      {Key? key,
+      required SoScreenConfiguration configuration,
+      required SoComponentCreator creator})
+      : super(key: key, configuration: configuration, creator: creator);
+
+  @override
+  ChartCustomScreenState createState() => ChartCustomScreenState();
+}
+
+class ChartCustomScreenState extends CustomScreenState {
   List<Country> countries = <Country>[];
 
-  ChartCustomScreen(SoComponentCreator componentCreator)
-      : super(componentCreator);
-
   @override
-  Widget getWidget() {
-    return ChartCustomWidget(
-      countries: countries,
-    );
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+            title: Text('Charts'),
+            automaticallyImplyLeading: true,
+            leading: IconButton(
+                icon: Icon(
+                  Icons.arrow_back,
+                ),
+                onPressed: () {
+                  getApplicationApi(context)
+                      .closeScreen(widget.configuration.componentId);
+                })),
+        endDrawer: widget.configuration.drawer,
+        body: ChartCustomWidget(
+          countries: countries,
+        ));
   }
 
   @override
-  void update(Request request, ResponseData responeData) {
-    if (responeData != null &&
-        responeData.dataBooks != null &&
-        responeData.dataBooks.length > 0) {
-      for (int i = 0; i <= 3; i++) {
-        countries.add(Country.fromJson(responeData.dataBooks[0].records[i]));
+  void update(ApiResponse response) {
+    super.update(response);
+    if (mounted) {
+      // Updating the data objects
+      if (response.hasDataBook) {
+        DataBook? dataBook = response.getDataBookByProvider(CHART_DATAPROVIDER);
+        if (dataBook != null) {
+          for (int i = 0; i <= 3; i++) {
+            countries.add(Country.fromDataBook(dataBook, i));
+          }
+        }
       }
     }
-  }
-
-  @override
-  bool withServer() {
-    return true;
   }
 }
 
@@ -44,9 +68,11 @@ class Country {
 
   Country(this.id, this.name, this.litres, this.distance);
 
-  Country.fromJson(List json)
-      : id = json[0],
-        name = json[1],
-        litres = json[2],
-        distance = json[3];
+  static Country fromDataBook(DataBook dataBook, int index) {
+    int id = dataBook.getValue(COLUMNAME_ID, index);
+    String name = dataBook.getValue(COLUMNAME_NAME, index);
+    double litres = dataBook.getValue(COLUMNAME_LITRES, index);
+    double distance = dataBook.getValue(COLUMNAME_DISTANCE, index);
+    return Country(id, name, litres, distance);
+  }
 }

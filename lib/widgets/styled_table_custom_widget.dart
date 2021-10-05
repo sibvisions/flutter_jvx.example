@@ -1,14 +1,14 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:jvx_flutterclient/jvx_flutterclient.dart';
 
 import '../screens/styled_table_custom_screen.dart';
 
 class StyledTableCustomWidget extends StatefulWidget {
   final List<Contact> contacts;
 
-  const StyledTableCustomWidget({Key key, this.contacts}) : super(key: key);
+  const StyledTableCustomWidget({Key? key, required this.contacts})
+      : super(key: key);
 
   @override
   _StyledTableCustomWidgetState createState() =>
@@ -36,12 +36,12 @@ class _StyledTableCustomWidgetState extends State<StyledTableCustomWidget> {
                         padding: EdgeInsets.all(10),
                         child: widget.contacts[index].image != null
                             ? CircleAvatar(
-                                backgroundImage: MemoryImage(
-                                    base64Decode(widget.contacts[index].image)),
+                                backgroundImage: MemoryImage(base64Decode(
+                                    widget.contacts[index].image!)),
                                 minRadius: 40,
                               )
                             : CircleAvatar(
-                                backgroundColor: UIData.ui_kit_color_2,
+                                backgroundColor: Theme.of(context).primaryColor,
                                 minRadius: 40,
                                 child: Text(
                                   '${widget.contacts[index].firstname[0]}${widget.contacts[index].lastname[0]}',

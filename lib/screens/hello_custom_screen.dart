@@ -1,25 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:jvx_flutterclient/custom_screen/custom_screen.dart';
-import 'package:jvx_flutterclient/model/api/request/request.dart';
-import 'package:jvx_flutterclient/model/api/response/response_data.dart';
-import 'package:jvx_flutterclient/ui/screen/so_component_creator.dart';
-
+import 'package:flutterclient/flutterclient.dart';
 import '../widgets/hello_custom_widget.dart';
 
 class HelloCustomScreen extends CustomScreen {
-  HelloCustomScreen(SoComponentCreator componentCreator)
-      : super(componentCreator);
+  HelloCustomScreen(
+      {Key? key,
+      required SoScreenConfiguration configuration,
+      required SoComponentCreator creator})
+      : super(key: key, configuration: configuration, creator: creator);
 
   @override
-  Widget getWidget() {
+  HelloCustomScreenState createState() => HelloCustomScreenState();
+}
+
+class HelloCustomScreenState extends CustomScreenState {
+  @override
+  Widget build(BuildContext context) {
     return HelloCustomWidget();
-  }
-
-  @override
-  void update(Request request, ResponseData responeData) {}
-
-  @override
-  bool withServer() {
-    return false;
   }
 }

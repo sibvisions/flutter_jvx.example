@@ -38,3 +38,6 @@ lib/generated_plugin_registrant.dart
 
 # For deploying
 deploy/
+
+# For config
+env/

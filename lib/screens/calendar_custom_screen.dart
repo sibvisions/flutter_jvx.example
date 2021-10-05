@@ -1,38 +1,57 @@
 import 'package:flutter/material.dart';
-import 'package:flutterclient_example/widgets/calendar_custom_widget.dart';
-import 'package:jvx_flutterclient/custom_screen/custom_screen.dart';
-import 'package:jvx_flutterclient/model/api/request/request.dart';
-import 'package:jvx_flutterclient/model/api/response/response_data.dart';
-import 'package:jvx_flutterclient/ui/screen/so_component_creator.dart';
+import 'package:flutterclient/flutterclient.dart';
+import '../widgets/calendar_custom_widget.dart';
+
+const String CONTACT_DATAPROVIDER = "JVxMobileDemo/Cal-7V/contacts#+";
+const String COLUMNAME_EVENT = "EVENT";
+const String COLUMNAME_DAYS_FROM_TODAY = "DAYS_FROM_TODAY";
 
 class CalendarCustomScreen extends CustomScreen {
+  CalendarCustomScreen(
+      {Key? key,
+      required SoScreenConfiguration configuration,
+      required SoComponentCreator creator})
+      : super(key: key, configuration: configuration, creator: creator);
+
+  @override
+  CalendarCustomScreenState createState() => CalendarCustomScreenState();
+}
+
+class CalendarCustomScreenState extends CustomScreenState {
   List<CalendarData> calendarData = <CalendarData>[];
 
-  CalendarCustomScreen(SoComponentCreator componentCreator)
-      : super(componentCreator);
-
   @override
-  Widget getWidget() {
-    return CalendarCustomWidget(
-      calendarData: calendarData,
-    );
-  }
-
-  @override
-  void update(Request request, ResponseData responseData) {
-    if (responseData != null &&
-        responseData.dataBooks != null &&
-        responseData.dataBooks.length > 0) {
-      for (int i = 0; i < responseData.dataBooks[0].records.length; i++) {
-        calendarData
-            .add(CalendarData.fromJson(responseData.dataBooks[0].records[i]));
+  void onState(ApiState? state) {
+    super.onState(state);
+    if (state != null && state is ApiResponse && mounted) {
+      // Updating the data objects
+      if (state.hasDataBook) {
+        DataBook? dataBook = state.getDataBookByProvider(CONTACT_DATAPROVIDER);
+        if (dataBook != null) {
+          for (int i = 0; i < dataBook.records.length; i++) {
+            calendarData.add(CalendarData.fromDataBook(dataBook, i));
+          }
+        }
       }
     }
   }
 
   @override
-  bool withServer() {
-    return true;
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+            title: Text('Calendar'),
+            automaticallyImplyLeading: true,
+            leading: IconButton(
+                icon: Icon(
+                  Icons.arrow_back,
+                ),
+                onPressed: () {
+                  getApplicationApi(context)
+                      .closeScreen(widget.configuration.componentId);
+                })),
+        endDrawer: widget.configuration.drawer,
+        body: CalendarCustomWidget(calendarData: this.calendarData));
   }
 }
 
@@ -42,7 +61,9 @@ class CalendarData {
 
   CalendarData(this.event, this.daysFromToday);
 
-  CalendarData.fromJson(List json)
-      : event = json[0],
-        daysFromToday = json[1];
+  static CalendarData fromDataBook(DataBook dataBook, int index) {
+    String event = dataBook.getValue(COLUMNAME_EVENT, index);
+    int daysFromToday = dataBook.getValue(COLUMNAME_DAYS_FROM_TODAY, index);
+    return CalendarData(event, daysFromToday);
+  }
 }

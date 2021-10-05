@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:jvx_flutterclient/ui/screen/so_component_data.dart';
-import 'package:jvx_flutterclient/jvx_flutterclient.dart';
+import 'package:flutterclient/flutterclient.dart';
 import 'package:signature/signature.dart';
 import 'dart:convert';
 
-class SignatureCustomWidget extends StatefulWidget {
+class SignatureCustomWidget extends ComponentWidget {
   final SoComponentData componentData;
 
-  SignatureCustomWidget({Key key, this.componentData}) : super(key: key);
+  SignatureCustomWidget(
+      {Key? key,
+      required this.componentData,
+      required ComponentModel componentModel})
+      : super(key: key, componentModel: componentModel);
 
   @override
   _SignatureCustomWidgetState createState() => _SignatureCustomWidgetState();
@@ -20,18 +23,14 @@ class _SignatureCustomWidgetState extends State<SignatureCustomWidget> {
     exportBackgroundColor: Colors.white,
   );
 
-  void selectRecord(int index) {
-    widget.componentData?.selectRecord(context, index);
-  }
-
   void setValues(List<dynamic> values) {
-    widget.componentData?.setValues(context, values, ['SIGNATURE']);
+    widget.componentData.setValues(context, values, ['SIGNATURE']);
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width,
+      width: MediaQuery.of(context).size.width - 30,
       child: Center(
         child: Column(
           children: <Widget>[
@@ -44,7 +43,7 @@ class _SignatureCustomWidgetState extends State<SignatureCustomWidget> {
               margin: const EdgeInsets.all(15.0),
               padding: const EdgeInsets.all(3.0),
               decoration: BoxDecoration(
-                  border: Border.all(color: UIData.ui_kit_color_2)),
+                  border: Border.all(color: Theme.of(context).primaryColor)),
               child: Signature(
                 controller: _controller,
                 height: 200,
@@ -57,11 +56,11 @@ class _SignatureCustomWidgetState extends State<SignatureCustomWidget> {
                 Expanded(
                   child: IconButton(
                     icon: const Icon(Icons.save),
-                    color: UIData.ui_kit_color_2,
+                    color: Theme.of(context).primaryColor,
                     onPressed: () async {
                       if (_controller.isNotEmpty) {
                         var data = await _controller.toPngBytes();
-                        setValues([base64Encode(data)]);
+                        setValues([base64Encode(data!)]);
                       }
                     },
                   ),
@@ -69,7 +68,7 @@ class _SignatureCustomWidgetState extends State<SignatureCustomWidget> {
                 Expanded(
                   child: IconButton(
                     icon: const Icon(Icons.delete),
-                    color: UIData.ui_kit_color_2,
+                    color: Theme.of(context).primaryColor,
                     onPressed: () {
                       setState(() => _controller.clear());
                     },
