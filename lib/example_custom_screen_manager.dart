@@ -198,6 +198,17 @@ class ExampleCustomScreenManager extends ScreenManager {
     return menuManager;
   }
 
+  @override
+  Future<ApiState?> onResponse(Request request, String responseBody,
+      Future<ApiState> Function() callback) async {
+    return super.onResponse(request, responseBody, callback);
+  }
+
+  @override
+  String onCookie(String cookie) {
+    return super.onCookie(cookie);
+  }
+
   ComponentWidget getCustomComponent(ContainerComponentModel componentModel) =>
       CoGreenPanelWidget(
         componentModel: componentModel,

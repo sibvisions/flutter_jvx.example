@@ -12,7 +12,7 @@ class QrScannerCustomWidget extends StatefulWidget {
 }
 
 class _QrScannerCustomWidgetState extends State<QrScannerCustomWidget> {
-  String? scanResult;
+  ScanResult? scanResult;
 
   // static final _possibleFormats = BarcodeFormat.values.toList()
   //   ..removeWhere((e) => e == BarcodeFormat.unknown);
@@ -51,11 +51,11 @@ class _QrScannerCustomWidgetState extends State<QrScannerCustomWidget> {
 
       setState(() {
         scanResult = result;
-        print("THIS WAS SCANNED" + scanResult!);
+        print("THIS WAS SCANNED " + scanResult!.rawContent);
       });
     } on PlatformException catch (e) {
       var result = 'Error';
-      if (e.code == BarcodeScanner.CameraAccessDenied) {
+      if (e.code == BarcodeScanner.cameraAccessDenied) {
         setState(() {
           result = 'The user did not grant the camera permission!';
         });
@@ -63,8 +63,7 @@ class _QrScannerCustomWidgetState extends State<QrScannerCustomWidget> {
         result = 'Unknown error: $e';
       }
       setState(() {
-        scanResult = result;
-        print("THIS WAS SCANNED" + scanResult!);
+        print("THIS WAS SCANNED " + result);
       });
     }
   }
@@ -107,7 +106,7 @@ class _QrScannerCustomWidgetState extends State<QrScannerCustomWidget> {
                 child: Text(
                   scanResult == null
                       ? 'Nothing scanned yet!'
-                      : scanResult!.toString(),
+                      : scanResult!.rawContent,
                 ),
               ),
               Container(
