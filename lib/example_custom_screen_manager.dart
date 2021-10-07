@@ -34,6 +34,7 @@ const String ALTERING_COMP_ID = "ALTERING_COMP_ID";
 class ExampleCustomScreenManager extends ScreenManager {
   @override
   void init(Key navigatorKey) {
+    super.init(navigatorKey);
     SoComponentCreator creator = SoComponentCreator();
 
     // The method is for setting the standard of each CellEditor or Component,
