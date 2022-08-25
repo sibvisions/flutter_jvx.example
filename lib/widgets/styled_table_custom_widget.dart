@@ -1,76 +1,131 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-
-import '../screens/styled_table_custom_screen.dart';
+import 'package:flutter_jvx/data.dart';
+import 'package:flutter_jvx/mixin/ui_service_mixin.dart';
 
 class StyledTableCustomWidget extends StatefulWidget {
-  final List<Contact> contacts;
-
-  const StyledTableCustomWidget({Key? key, required this.contacts})
-      : super(key: key);
+  const StyledTableCustomWidget({Key? key}) : super(key: key);
 
   @override
   _StyledTableCustomWidgetState createState() =>
       _StyledTableCustomWidgetState();
 }
 
-class _StyledTableCustomWidgetState extends State<StyledTableCustomWidget> {
+class _StyledTableCustomWidgetState extends State<StyledTableCustomWidget>
+    with UiServiceGetterMixin {
+  static const String CONTACT_DATA_PROVIDER =
+      "JVxMobileDemo/StyTab-2G/contacts#4";
+  static const String COLUMN_NAME_ID = "ID";
+  static const String COLUMN_NAME_FIRSTNAME = "FIRSTNAME";
+  static const String COLUMN_NAME_LASTNAME = "LASTNAME";
+  static const String COLUMN_NAME_STREET = "STREET";
+  static const String COLUMN_NAME_STREET_NO = "NR";
+  static const String COLUMN_NAME_ZIP = "ZIP";
+  static const String COLUMN_NAME_TOWN = "TOWN";
+  static const String COLUMN_NAME_IMAGE = "IMAGE";
+
+  final List<Contact> contacts = [];
+
+  @override
+  void initState() {
+    super.initState();
+    getUiService().registerDataSubscription(
+      pDataSubscription: DataSubscription(
+        subbedObj: this,
+        dataProvider: CONTACT_DATA_PROVIDER,
+        from: 0,
+        dataColumns: [
+          COLUMN_NAME_ID,
+          COLUMN_NAME_FIRSTNAME,
+          COLUMN_NAME_LASTNAME,
+          COLUMN_NAME_IMAGE,
+          COLUMN_NAME_STREET,
+          COLUMN_NAME_STREET_NO,
+          COLUMN_NAME_ZIP,
+          COLUMN_NAME_TOWN,
+        ],
+        onDataChunk: (DataChunk dataChunk) {
+          contacts.clear();
+          for (int i = 0; i < dataChunk.data.length; i++) {
+            contacts.add(Contact(
+              dataChunk.data[i]![0],
+              dataChunk.data[i]![1],
+              dataChunk.data[i]![2],
+              dataChunk.data[i]![3],
+              dataChunk.data[i]![4],
+              dataChunk.data[i]![5],
+              dataChunk.data[i]![6],
+              dataChunk.data[i]![7],
+            ));
+          }
+          setState(() {});
+        },
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    getUiService().disposeDataSubscription(pSubscriber: this);
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Column(
-        children: <Widget>[
-          SizedBox(height: 10),
+        children: [
+          const SizedBox(height: 10),
           Expanded(
             child: ListView.builder(
               itemBuilder: (ctx, index) {
                 return Card(
                   child: Row(
-                    children: <Widget>[
+                    children: [
                       Container(
-                        margin: EdgeInsets.symmetric(
+                        margin: const EdgeInsets.symmetric(
                           vertical: 10,
                           horizontal: 15,
                         ),
-                        padding: EdgeInsets.all(10),
-                        child: widget.contacts[index].image != null
+                        padding: const EdgeInsets.all(10),
+                        child: contacts[index].image != null
                             ? CircleAvatar(
-                                backgroundImage: MemoryImage(base64Decode(
-                                    widget.contacts[index].image!)),
+                                backgroundImage: MemoryImage(
+                                    base64Decode(contacts[index].image!)),
                                 minRadius: 40,
                               )
                             : CircleAvatar(
                                 backgroundColor: Theme.of(context).primaryColor,
                                 minRadius: 40,
                                 child: Text(
-                                  '${widget.contacts[index].firstname[0]}${widget.contacts[index].lastname[0]}',
-                                  style: TextStyle(
+                                  '${contacts[index].firstname[0]}${contacts[index].lastname[0]}',
+                                  style: const TextStyle(
                                       fontSize: 40, color: Colors.white),
                                 ),
                               ),
                       ),
-                      VerticalDivider(),
+                      const VerticalDivider(),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
+                        children: [
                           Text(
-                            '${widget.contacts[index].firstname} ${widget.contacts[index].lastname}',
+                            '${contacts[index].firstname} ${contacts[index].lastname}',
                             style: Theme.of(context).textTheme.headline6,
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           Row(
-                            children: <Widget>[
-                              Icon(
+                            children: [
+                              const Icon(
                                 Icons.map,
                                 color: Colors.grey,
                                 size: 13.0,
                               ),
-                              SizedBox(width: 5),
+                              const SizedBox(width: 5),
                               Text(
-                                '${widget.contacts[index].street} ${widget.contacts[index].streetNr}, ${widget.contacts[index].zip} ${widget.contacts[index].town}',
-                                style:
-                                    TextStyle(color: Colors.grey, fontSize: 14),
+                                '${contacts[index].street} ${contacts[index].streetNr}, ${contacts[index].zip} ${contacts[index].town}',
+                                style: const TextStyle(
+                                    color: Colors.grey, fontSize: 14),
                               ),
                             ],
                           )
@@ -79,18 +134,32 @@ class _StyledTableCustomWidgetState extends State<StyledTableCustomWidget> {
                       Expanded(
                           child: Container(
                         alignment: Alignment.centerRight,
-                        child: Icon(Icons.keyboard_arrow_right,
+                        child: const Icon(Icons.keyboard_arrow_right,
                             color: Colors.black, size: 40.0),
                       )),
                     ],
                   ),
                 );
               },
-              itemCount: widget.contacts.length,
+              itemCount: contacts.length,
             ),
           ),
         ],
       ),
     );
   }
+}
+
+class Contact {
+  final int id;
+  final String firstname;
+  final String lastname;
+  final String? image;
+  final String street;
+  final String streetNr;
+  final String zip;
+  final String town;
+
+  Contact(this.id, this.firstname, this.lastname, this.image, this.street,
+      this.streetNr, this.zip, this.town);
 }

@@ -1,53 +1,26 @@
 import 'package:flutter/material.dart';
 
-class CustomPopup extends StatefulWidget {
-  static CustomPopupState of(BuildContext context) =>
-      context.findAncestorStateOfType<CustomPopupState>()!;
-
-  CustomPopup({Key? key}) : super(key: key);
-
-  @override
-  State<StatefulWidget> createState() {
-    return CustomPopupState();
-  }
-}
-
-class CustomPopupState extends State<CustomPopup> {
-  Future<void>? _initializeVideoPlayerFuture;
-  IconData playerIcon = Icons.play_arrow;
-
-  @override
-  void initState() {
-    super.initState();
-  }
+class CustomPopup extends StatelessWidget {
+  const CustomPopup({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return _buildDialogContent();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
-  Container _buildDialogContent() {
     return Container(
-      margin: EdgeInsets.all(5.0),
+      margin: const EdgeInsets.all(5.0),
       width: 279.0,
       height: 121.0,
       child: Stack(
-        children: <Widget>[
+        children: [
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Colors.black54,
               borderRadius: BorderRadius.all(Radius.circular(15)),
             ),
             margin: const EdgeInsets.only(top: 40.0),
-            padding: EdgeInsets.all(5),
+            padding: const EdgeInsets.all(5),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
+              children: [
                 _buildNameAndLocation(),
               ],
             ),
@@ -63,9 +36,9 @@ class CustomPopupState extends State<CustomPopup> {
         margin: const EdgeInsets.only(left: 6.0, top: 8, right: 6.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
+          children: [
             Row(
-              children: <Widget>[
+              children: const [
                 Icon(
                   Icons.work,
                   color: Colors.grey,
@@ -82,9 +55,9 @@ class CustomPopupState extends State<CustomPopup> {
                 )),
               ],
             ),
-            SizedBox(height: 5),
+            const SizedBox(height: 5),
             Row(
-              children: <Widget>[
+              children: const [
                 Icon(
                   Icons.location_on,
                   color: Colors.red,

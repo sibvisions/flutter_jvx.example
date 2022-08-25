@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Modify this file to customize your launch splash screen -->
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item>
-        <bitmap
-            android:tileMode="disabled" android:gravity="top"
-            android:src="@mipmap/bg" />
-    </item>
-
-    <item android:top="100dp"
-        android:width="138dp"
-        android:height="145dp"
-        android:drawable="@mipmap/ss"
-        android:gravity="center|top" />
-
+    <item android:drawable="@android:color/white" />
+    <item
+        android:width="3072dp"
+        android:height="3072dp"
+        android:drawable="@drawable/ic_jvx_bg" />
     <item android:bottom="50dp">
         <bitmap
-            android:gravity="bottom"
-            android:src="@mipmap/logo" />
+            android:gravity="center|bottom"
+            android:src="@mipmap/sib_visions" />
     </item>
+    <item
+        android:width="138dp"
+        android:height="145dp"
+        android:drawable="@drawable/ic_jvx_ss"
+        android:gravity="center|top"
+        android:top="100dp" />
 </layer-list>

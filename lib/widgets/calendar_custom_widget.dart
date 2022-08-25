@@ -1,81 +1,83 @@
-import 'package:flutter/material.dart';
-import 'package:flutterclient/flutterclient.dart';
-import 'package:table_calendar/table_calendar.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'dart:developer';
 
-import '../screens/calendar_custom_screen.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_jvx/data.dart';
+import 'package:flutter_jvx/mixin/ui_service_mixin.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:table_calendar/table_calendar.dart';
+
 import 'custom_rounded_button.dart';
 
 class CalendarCustomWidget extends StatefulWidget {
-  final List<CalendarData> calendarData;
-
-  const CalendarCustomWidget({Key? key, required this.calendarData})
-      : super(key: key);
+  const CalendarCustomWidget({Key? key}) : super(key: key);
 
   @override
   _CalendarCustomWidgetState createState() => _CalendarCustomWidgetState();
 }
 
-class _CalendarCustomWidgetState extends State<CalendarCustomWidget> {
-  Map<DateTime, List> _events = Map<DateTime, List>();
-  List? _selectedEvents;
+class _CalendarCustomWidgetState extends State<CalendarCustomWidget>
+    with UiServiceGetterMixin {
+  static const String CONTACT_DATA_PROVIDER = "JVxMobileDemo/Cal-7V/contacts#+";
+  static const String COLUMN_NAME_EVENT = "EVENT";
+  static const String COLUMN_NAME_DAYS_FROM_TODAY = "DAYS_FROM_TODAY";
+
+  final Map<int, List<String>> _events = {};
   AnimationController? _animationController;
-  CalendarController? _calendarController;
+  DateTime _focusedDay = DateTime.now();
+  DateTime _selectedDay = DateTime.now();
+  List<String> _selectedEvents = [];
+
+  CalendarFormat _calendarFormat = CalendarFormat.month;
 
   @override
   void initState() {
     super.initState();
-    final _selectedDay = DateTime.now();
-    final List<CalendarData> calendarDataToGroup = widget.calendarData;
+    getUiService().registerDataSubscription(
+      pDataSubscription: DataSubscription(
+        subbedObj: this,
+        dataProvider: CONTACT_DATA_PROVIDER,
+        from: 0,
+        dataColumns: [COLUMN_NAME_EVENT, COLUMN_NAME_DAYS_FROM_TODAY],
+        onDataChunk: (DataChunk dataChunk) {
+          _events.clear();
+          DateTime now = DateTime.now().toUtc();
+          DateTime currentDay = DateTime.utc(now.year, now.month, now.day);
+          for (int i = 0; i < dataChunk.data.length; i++) {
+            String event = dataChunk.data[i]![0];
+            int daysFromToday = dataChunk.data[i]![1];
 
-    Set<CalendarData> set = Set.from(calendarDataToGroup);
-    set.forEach((element) {
-      CalendarData currentCalData = element;
-
-      if (!_events.containsKey(
-          _selectedDay.add(Duration(days: currentCalData.daysFromToday)))) {
-        _events.putIfAbsent(
-            _selectedDay.add(Duration(days: currentCalData.daysFromToday)),
-            () => [currentCalData.event]);
-      } else {
-        _events[_selectedDay.add(Duration(days: currentCalData.daysFromToday))]!
-            .add(currentCalData.event);
-      }
-    });
-
-    _selectedEvents = _events[_selectedDay] ?? [];
-    _calendarController = CalendarController();
+            var dateTime = currentDay
+                .add(Duration(days: daysFromToday))
+                .millisecondsSinceEpoch;
+            if (!_events.containsKey(dateTime)) {
+              _events.putIfAbsent(dateTime, () => [event]);
+            } else {
+              _events[dateTime]!.add(event);
+            }
+          }
+          setState(() {});
+        },
+      ),
+    );
   }
 
   @override
   void dispose() {
     _animationController?.dispose();
-    _calendarController?.dispose();
+    getUiService().disposeDataSubscription(pSubscriber: this);
     super.dispose();
   }
-
-  void _onDaySelected(DateTime day, List events, List other) {
-    setState(() {
-      _selectedEvents = events;
-    });
-  }
-
-  void _onVisibleDaysChanged(
-      DateTime first, DateTime last, CalendarFormat format) {}
-
-  void _onCalendarCreated(
-      DateTime first, DateTime last, CalendarFormat format) {}
 
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.max,
-      children: <Widget>[
+      children: [
         _buildTableCalendar(),
         const SizedBox(height: 8.0),
         _buildButtons(),
         const SizedBox(height: 8.0),
-        Text('Events:',
+        const Text('Events:',
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
@@ -88,54 +90,78 @@ class _CalendarCustomWidgetState extends State<CalendarCustomWidget> {
 
   // Simple TableCalendar configuration (using Styles)
   Widget _buildTableCalendar() {
-    return TableCalendar(
+    return TableCalendar<String>(
       rowHeight: 60,
-      calendarController: _calendarController!,
-      events: _events,
+      firstDay: DateTime.utc(DateTime.now().year - 20, 1, 1),
+      lastDay: DateTime.utc(DateTime.now().year + 20, 12, 31),
+      focusedDay: _focusedDay,
+      eventLoader: (DateTime day) => _events[day] ?? [],
       startingDayOfWeek: StartingDayOfWeek.monday,
       calendarStyle: CalendarStyle(
-        selectedColor: Theme.of(context).primaryColor,
-        todayColor: Colors.deepOrange[200]!,
-        markersColor: Colors.deepOrange[700]!,
+        rangeHighlightColor: Theme.of(context).primaryColor,
+        todayTextStyle: TextStyle(color: Colors.deepOrange[200]),
+        markerDecoration: BoxDecoration(color: Colors.deepOrange[700]),
         outsideDaysVisible: false,
       ),
       headerStyle: HeaderStyle(
         formatButtonTextStyle:
-            TextStyle().copyWith(color: Colors.white, fontSize: 15.0),
+            const TextStyle().copyWith(color: Colors.white, fontSize: 15.0),
         formatButtonDecoration: BoxDecoration(
           color: Colors.deepOrange[400],
           borderRadius: BorderRadius.circular(16.0),
         ),
       ),
-      onDaySelected: _onDaySelected,
-      onVisibleDaysChanged: _onVisibleDaysChanged,
-      onCalendarCreated: _onCalendarCreated,
+      calendarFormat: _calendarFormat,
+      onFormatChanged: (format) => _setCalendarFormat(format),
+      onPageChanged: (focusedDay) {
+        _focusedDay = focusedDay;
+      },
+      selectedDayPredicate: (day) {
+        return isSameDay(_selectedDay, day);
+      },
+      onDaySelected: (selectedDay, focusedDay) {
+        if (!isSameDay(_selectedDay, selectedDay)) {
+          setState(() {
+            _focusedDay = focusedDay;
+            _selectedDay = selectedDay;
+            _selectedEvents =
+                _events[_selectedDay.millisecondsSinceEpoch] ?? [];
+          });
+        }
+      },
     );
   }
 
-  void _setCalendarFormat(CalendarFormat calFormat) {
-    setState(() {
-      _calendarController!.setCalendarFormat(calFormat);
-    });
+  void _setCalendarFormat(CalendarFormat format) {
+    _calendarFormat = format;
+    setState(() {});
   }
 
   Widget _buildButtons() {
     //final dateTime = _events.keys.elementAt(_events.length - 2);
 
     return Column(
-      children: <Widget>[
+      children: [
         Row(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
+          children: [
             CustomRoundedButton(
-                "Month",
-                Icon(FontAwesomeIcons.calendar, color: Colors.white),
-                () => _setCalendarFormat(CalendarFormat.month)),
+              text: "Month",
+              icon: const Icon(
+                FontAwesomeIcons.calendar,
+                color: Colors.white,
+              ),
+              onTap: () => _setCalendarFormat(CalendarFormat.month),
+            ),
             CustomRoundedButton(
-                "Week",
-                Icon(FontAwesomeIcons.calendarWeek, color: Colors.white),
-                () => _setCalendarFormat(CalendarFormat.week)),
+              text: "Week",
+              icon: const Icon(
+                FontAwesomeIcons.calendarWeek,
+                color: Colors.white,
+              ),
+              onTap: () => _setCalendarFormat(CalendarFormat.week),
+            ),
           ],
         ),
       ],
@@ -144,15 +170,15 @@ class _CalendarCustomWidgetState extends State<CalendarCustomWidget> {
 
   Widget _buildEventList() {
     return ListView(
-      children: _selectedEvents!
+      children: _selectedEvents
           .map((event) => Card(
                 color: Colors.orange[100],
                 margin:
                     const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
                 child: ListTile(
-                  leading: Icon(FontAwesomeIcons.clock),
+                  leading: const Icon(FontAwesomeIcons.clock),
                   title: Text(event.toString()),
-                  onTap: () => print('$event tapped!'),
+                  onTap: () => log('$event tapped!'),
                 ),
               ))
           .toList(),

@@ -1,240 +1,253 @@
+import 'dart:developer';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import "package:latlong2/latlong.dart" as latLng;
-import "package:flutter_map/flutter_map.dart" as map;
-import 'package:flutterclient/flutterclient.dart';
+import 'package:flutter_jvx/mixin/config_service_mixin.dart';
+import 'package:flutter_map/flutter_map.dart';
 import 'package:geolocator/geolocator.dart';
+import "package:latlong2/latlong.dart";
 import 'package:url_launcher/url_launcher.dart';
 
 import 'custom_popup.dart';
 import 'custom_rounded_button.dart';
 
 class MapCustomWidget extends StatefulWidget {
-  final String apiKey;
-
-  const MapCustomWidget({Key? key, required this.apiKey}) : super(key: key);
+  const MapCustomWidget({Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => MapCustomWidgetState();
 }
 
-class MapCustomWidgetState extends State<MapCustomWidget> {
-  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  latLng.LatLng _center = latLng.LatLng(48.247533, 16.380093);
-  map.MapController mapController = map.MapController();
+class MapCustomWidgetState extends State<MapCustomWidget>
+    with ConfigServiceGetterMixin {
+  late final String? apiKey;
+  final LatLng initialPosition = LatLng(48.247533, 16.380093);
+  MapController mapController = MapController();
+  bool infoWindowVisible = false;
 
-  List<map.Marker> _buildMarkersOnMap() {
-    List<map.Marker> markers = <map.Marker>[];
-    var marker = new map.Marker(
-      point: _center,
-      width: 279.0,
-      height: 121.0,
-      builder: (context) => GestureDetector(
-          onTap: () {
-            setState(() {
-              infoWindowVisible = !infoWindowVisible;
-            });
-          },
-          child: _buildCustomMarker()),
-    );
-    markers.add(marker);
-
-    return markers;
-  }
-
-  var infoWindowVisible = false;
-  GlobalKey<State> key = new GlobalKey();
-  Container _buildCustomMarker() {
-    return Container(child: infoWindowVisible ? popup() : marker());
-  }
-
-  Opacity popup() {
-    return Opacity(
-      opacity: infoWindowVisible ? 1.0 : 0.0,
-      child: Container(
-        alignment: Alignment.bottomCenter,
+  List<Marker> _buildMarker() {
+    return [
+      Marker(
+        point: initialPosition,
         width: 279.0,
         height: 121.0,
-        child: CustomPopup(key: key),
+        anchorPos: AnchorPos.align(AnchorAlign.top),
+        builder: (context) => GestureDetector(
+            onTap: () {
+              setState(() {
+                infoWindowVisible = !infoWindowVisible;
+              });
+            },
+            child: infoWindowVisible ? popup() : marker()),
       ),
+    ];
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    apiKey = getConfigService().getAppConfig()?.startupParameters?["apiKey"];
+  }
+
+  Container popup() {
+    return Container(
+      alignment: Alignment.bottomCenter,
+      width: 279.0,
+      height: 121.0,
+      child: const CustomPopup(),
     );
   }
 
-  Opacity marker() {
-    return Opacity(
-      child: Container(
-        alignment: Alignment.bottomCenter,
-        child: Image.asset(
-          'assets/ic_marker.png',
-          height: 60,
-        ),
-        width: 20,
-        height: 25,
+  Container marker() {
+    return Container(
+      alignment: Alignment.bottomCenter,
+      width: 20,
+      height: 25,
+      child: Image.asset(
+        "assets/images/ic_marker.png",
+        height: 60,
       ),
-      opacity: infoWindowVisible ? 0.0 : 1.0,
     );
   }
 
   void _launchMapsUrl() async {
-    final url =
-        'https://www.google.com/maps/search/?api=1&query=Wehlistraße29, 1200 Wien';
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
+    const url =
+        "https://www.google.com/maps/search/?api=1&query=SIB Visions GmbH";
+    await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
   }
 
   void _launchCallUrl() async {
-    final url = 'tel://+43 (0) 1 934 6009 0';
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
+    const url = "tel://+43 (0) 1 934 6009 0";
+    await launchUrl(Uri.parse(url));
   }
 
   @override
   Widget build(BuildContext context) {
-    AppState appState = AppStateProvider.of(context)!.appState;
-
-    return Scaffold(
-      appBar: AppBar(
-          title: Text('Map Custom Screen'),
-          automaticallyImplyLeading: true,
-          leading: IconButton(
-              icon: Icon(
-                Icons.arrow_back,
+    return Stack(
+      children: [
+        SizedBox(
+          height: MediaQuery.of(context).size.height -
+              AppBar().preferredSize.height,
+          child: FlutterMap(
+            mapController: mapController,
+            options: MapOptions(
+              center: initialPosition,
+              zoom: 15,
+              minZoom: 0,
+              maxZoom: 18,
+            ),
+            layers: [
+              TileLayerOptions(
+                urlTemplate: "https://api.mapbox.com/styles/v1/"
+                    "{id}/tiles/{z}/{x}/{y}?access_token={accessToken}",
+                additionalOptions: {
+                  "id": "mapbox/streets-v11",
+                  "accessToken": apiKey ?? "",
+                },
               ),
-              onPressed: () {
-                Navigator.of(context).pop(OpenScreenPagePopStyle.CLOSE);
-              })),
-      body: Stack(
-        children: <Widget>[
-          Container(
-            height: MediaQuery.of(context).size.height -
-                AppBar().preferredSize.height,
-            child: new map.FlutterMap(
-              mapController: mapController,
-              options: new map.MapOptions(center: _center, zoom: 15.0),
-              layers: [
-                new map.TileLayerOptions(
-                  urlTemplate: "https://api.tiles.mapbox.com/v4/"
-                      "{id}/{z}/{x}/{y}@2x.png?access_token={accessToken}",
-                  additionalOptions: {
-                    'accessToken': widget.apiKey,
-                    'id': 'mapbox.streets',
-                  },
-                  tileProvider: map.NonCachingNetworkTileProvider(),
-                ),
-                new map.MarkerLayerOptions(
-                  markers: _buildMarkersOnMap(),
-                ),
-              ],
-            ),
+              MarkerLayerOptions(
+                markers: _buildMarker(),
+              ),
+            ],
           ),
-          Container(
-            margin: EdgeInsets.all(10),
-            padding: EdgeInsets.all(5),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.all(Radius.circular(15)),
-            ),
-            height: 175,
-            width: double.infinity,
-            child: Column(
-              children: <Widget>[
-                SizedBox(height: 10),
-                Center(
-                  child: Container(
-                    height: 40,
-                    child: Image.asset(
-                        'packages/flutterclient/assets/images/logo.png'),
-                  ),
-                ),
-                SizedBox(height: 10),
-                Container(
-                  padding: EdgeInsets.all(10),
-                  child: Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text(
-                              'SIB Visions GmbH',
-                              style: TextStyle(
-                                fontSize: 20,
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            SizedBox(height: 10),
-                            Text(
-                              'Wehlistraße 29',
-                              style: TextStyle(
-                                fontSize: 20,
-                                color: Colors.black,
-                              ),
-                            ),
-                            Text(
-                              '1200 Wien',
-                              style: TextStyle(
-                                fontSize: 20,
-                                color: Colors.black,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(top: 15),
-                        child: CustomRoundedButton(
-                            "Maps",
-                            Icon(Icons.map, color: Colors.white),
-                            _launchMapsUrl),
-                      ),
-                      SizedBox(width: 10),
-                      Container(
-                        margin: EdgeInsets.only(top: 15),
-                        child: CustomRoundedButton(
-                            "Call",
-                            Icon(Icons.call, color: Colors.white),
-                            _launchCallUrl),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+        ),
+        Container(
+          margin: const EdgeInsets.all(10),
+          padding: const EdgeInsets.all(5),
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.all(Radius.circular(15)),
           ),
-          Container(
-            margin: EdgeInsets.only(
-              bottom: 10,
-              right: 10,
-            ),
-            child: Align(
-              alignment: Alignment.bottomRight,
-              child: !kIsWeb
-                  ? FloatingActionButton(
-                      onPressed: () async {
-                        var position = await Geolocator.getLastKnownPosition();
+          height: 175,
+          width: double.infinity,
+          child: Column(
+            children: [
+              const SizedBox(height: 10),
+              Center(
+                child: SizedBox(
+                  height: 40,
+                  child: Image.asset("assets/images/sib_visions_logo.png"),
+                ),
+              ),
+              const SizedBox(height: 10),
+              Container(
+                padding: const EdgeInsets.all(10),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: const [
+                          Text(
+                            "SIB Visions GmbH",
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(height: 10),
+                          Text(
+                            "Wehlistraße 29",
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.black,
+                            ),
+                          ),
+                          Text(
+                            "1200 Wien",
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.only(top: 15),
+                      child: CustomRoundedButton(
+                        text: "Maps",
+                        icon: const Icon(Icons.map, color: Colors.white),
+                        onTap: _launchMapsUrl,
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    Container(
+                      margin: const EdgeInsets.only(top: 15),
+                      child: CustomRoundedButton(
+                        text: "Call",
+                        icon: const Icon(Icons.call, color: Colors.white),
+                        onTap: _launchCallUrl,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+        Container(
+          margin: const EdgeInsets.only(
+            bottom: 10,
+            right: 10,
+          ),
+          child: Align(
+            alignment: Alignment.bottomRight,
+            child: !kIsWeb
+                ? FloatingActionButton(
+                    onPressed: () {
+                      getPosition().then((position) {
                         if (position != null) {
-                          print(position.latitude.toString());
-                          _center = latLng.LatLng(
-                              position.latitude, position.longitude);
-                          mapController.move(_center, mapController.zoom);
+                          log(position.toString());
+                          mapController.move(
+                              LatLng(position.latitude, position.longitude),
+                              mapController.zoom);
+                        } else {
+                          log("No last known location");
                         }
-                      },
-                      child: const Icon(Icons.location_searching),
-                      elevation: 5,
-                    )
-                  : null,
-            ),
-          )
-        ],
-      ),
+                      }).catchError((e) {
+                        log("Failed to obtain user location", error: e);
+                        return null;
+                      });
+                    },
+                    elevation: 5,
+                    child: const Icon(Icons.location_searching),
+                  )
+                : null,
+          ),
+        )
+      ],
     );
+  }
+
+  @override
+  void dispose() {
+    mapController.dispose();
+    super.dispose();
+  }
+
+  Future<Position?> getPosition() async {
+    bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      return Future.error("Location services are disabled.");
+    }
+
+    LocationPermission permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        return Future.error("Location permissions are denied");
+      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      // Permissions are denied forever, handle appropriately.
+      return Future.error(
+          "Location permissions are permanently denied, we cannot request permissions.");
+    }
+
+    return Geolocator.getLastKnownPosition();
   }
 }

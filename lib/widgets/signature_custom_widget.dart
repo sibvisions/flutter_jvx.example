@@ -1,41 +1,37 @@
-import 'package:flutter/material.dart';
-import 'package:flutterclient/flutterclient.dart';
-import 'package:signature/signature.dart';
 import 'dart:convert';
 
-class SignatureCustomWidget extends ComponentWidget {
-  final SoComponentData componentData;
+import 'package:flutter/material.dart';
+import 'package:flutter_jvx/data.dart';
+import 'package:signature/signature.dart';
 
-  SignatureCustomWidget(
-      {Key? key,
-      required this.componentData,
-      required ComponentModel componentModel})
-      : super(key: key, componentModel: componentModel);
+class SignatureCustomWidget extends StatefulWidget {
+  const SignatureCustomWidget({
+    Key? key,
+  }) : super(key: key);
 
   @override
   _SignatureCustomWidgetState createState() => _SignatureCustomWidgetState();
 }
 
 class _SignatureCustomWidgetState extends State<SignatureCustomWidget> {
+  static const String CONTACT_DATA_PROVIDER = "JVxMobileDemo/Sig-3V/contacts#4";
+  static const String COLUMN_NAME_SIGNATURE = "SIGNATURE";
+
   final SignatureController _controller = SignatureController(
     penStrokeWidth: 2,
     penColor: Colors.black,
     exportBackgroundColor: Colors.white,
   );
 
-  void setValues(List<dynamic> values) {
-    widget.componentData.setValues(context, values, ['SIGNATURE']);
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: MediaQuery.of(context).size.width - 30,
       child: Center(
         child: Column(
-          children: <Widget>[
-            SizedBox(height: 10),
-            Text(
+          children: [
+            const SizedBox(height: 10),
+            const Text(
               'Sign here:',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
@@ -52,7 +48,7 @@ class _SignatureCustomWidgetState extends State<SignatureCustomWidget> {
             ),
             //CLEAR CANVAS
             Row(
-              children: <Widget>[
+              children: [
                 Expanded(
                   child: IconButton(
                     icon: const Icon(Icons.save),
@@ -60,7 +56,11 @@ class _SignatureCustomWidgetState extends State<SignatureCustomWidget> {
                     onPressed: () async {
                       if (_controller.isNotEmpty) {
                         var data = await _controller.toPngBytes();
-                        setValues([base64Encode(data!)]);
+                        await DataBook.updateRecord(
+                          pDataProvider: CONTACT_DATA_PROVIDER,
+                          pColumnNames: [COLUMN_NAME_SIGNATURE],
+                          pValues: [base64Encode(data!)],
+                        );
                       }
                     },
                   ),
