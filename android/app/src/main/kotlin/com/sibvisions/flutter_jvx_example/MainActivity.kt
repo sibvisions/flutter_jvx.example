@@ -1,4 +1,4 @@
-package at.sibvisions.flutter_jvx_example
+package com.sibvisions.flutter_jvx_example
 
 import android.os.Build
 import android.os.Bundle
