@@ -1,8 +1,8 @@
-name: flutter_jvx_example
+name: flutter_jvx.example
 description: A sample app for JVx applications.
 homepage: https://www.sibvisions.com/
-repository: https://github.com/sibvisions/flutterclient.example.git
-issue_tracker: https://github.com/sibvisions/flutterclient.example/issues
+repository: https://github.com/sibvisions/flutter_jvx.example.git
+issue_tracker: https://github.com/sibvisions/flutter_jvx.example/issues
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -35,7 +35,7 @@ dependencies:
 
   flutter_jvx:
     git:
-      url: https://github.com/sibvisions/flutterclient.git
+      url: https://github.com/sibvisions/flutter_jvx.git
       ref: main
 
   url_launcher: ^6.1.5
