@@ -1,6 +1,6 @@
-# Example Flutter Client
+# Example Flutter JVx Client
 
-This example application demonstrates using the [FlutterClient](https://github.com/sibvisions/flutterclient) as external library. The app will add custom screens and will use other external libraties to demonstrate the full power.
+This example application demonstrates using the [Flutter JVx Client](https://github.com/sibvisions/flutter_jvx) as external library. The app will add custom screens and will use other external libraties to demonstrate the full power.
 
 ## Getting Started
 
@@ -28,7 +28,7 @@ The new screens are simple Flutter widgets and don't use the JVx API. The Charts
 
 ## Dependencies
 
-The example application uses [FlutterClient](https://github.com/sibvisions/flutterclient). So be sure that you upgrade the depencies from time to time:
+The example application uses [Flutter JVx Client](https://github.com/sibvisions/flutter_jvx). So be sure that you upgrade the depencies from time to time:
 
 ``flutter pub upgrade``
 
