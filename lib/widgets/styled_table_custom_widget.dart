@@ -8,7 +8,7 @@ class StyledTableCustomWidget extends StatefulWidget {
   const StyledTableCustomWidget({Key? key}) : super(key: key);
 
   @override
-  _StyledTableCustomWidgetState createState() =>
+  State<StyledTableCustomWidget> createState() =>
       _StyledTableCustomWidgetState();
 }
 

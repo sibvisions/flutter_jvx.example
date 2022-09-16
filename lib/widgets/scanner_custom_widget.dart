@@ -11,7 +11,7 @@ class ScannerCustomWidget extends StatefulWidget {
   const ScannerCustomWidget({Key? key}) : super(key: key);
 
   @override
-  _ScannerCustomWidgetState createState() => _ScannerCustomWidgetState();
+  State<ScannerCustomWidget> createState() => _ScannerCustomWidgetState();
 }
 
 class _ScannerCustomWidgetState extends State<ScannerCustomWidget> {

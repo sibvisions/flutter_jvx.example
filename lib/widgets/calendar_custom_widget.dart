@@ -12,7 +12,7 @@ class CalendarCustomWidget extends StatefulWidget {
   const CalendarCustomWidget({Key? key}) : super(key: key);
 
   @override
-  _CalendarCustomWidgetState createState() => _CalendarCustomWidgetState();
+  State<CalendarCustomWidget> createState() => _CalendarCustomWidgetState();
 }
 
 class _CalendarCustomWidgetState extends State<CalendarCustomWidget>

@@ -14,8 +14,7 @@
   },
   "versionConfig": {
     "commit": "f63c85b2",
-    "buildDate": 1659080940038,
-    "version": "1.0.1"
+    "buildDate": 1659080940038
   },
   "startupParameters": {
     "apiKey": "<insert token here>"

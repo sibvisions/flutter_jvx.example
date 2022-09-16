@@ -1,11 +1,11 @@
-import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_jvx/flutter_jvx.dart';
 
 class HelloCustomWidget extends StatefulWidget {
   const HelloCustomWidget({Key? key}) : super(key: key);
 
   @override
-  _HelloCustomWidgetState createState() => _HelloCustomWidgetState();
+  State<HelloCustomWidget> createState() => _HelloCustomWidgetState();
 }
 
 class _HelloCustomWidgetState extends State<HelloCustomWidget> {

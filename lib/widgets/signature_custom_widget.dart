@@ -10,7 +10,7 @@ class SignatureCustomWidget extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _SignatureCustomWidgetState createState() => _SignatureCustomWidgetState();
+  State<SignatureCustomWidget> createState() => _SignatureCustomWidgetState();
 }
 
 class _SignatureCustomWidgetState extends State<SignatureCustomWidget> {

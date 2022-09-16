@@ -3,16 +3,16 @@ import 'package:flutter_jvx/custom/app_manager.dart';
 import 'package:flutter_jvx/custom/custom_component.dart';
 import 'package:flutter_jvx/custom/custom_menu_item.dart';
 import 'package:flutter_jvx/custom/custom_screen.dart';
-import 'package:flutter_jvx_example/screens/contact_custom_screen.dart';
-import 'package:flutter_jvx_example/widgets/chart_custom_widget.dart';
-import 'package:flutter_jvx_example/widgets/signature_custom_widget.dart';
-import 'package:flutter_jvx_example/widgets/styled_table_custom_widget.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import 'screens/contact_custom_screen.dart';
 import 'widgets/calendar_custom_widget.dart';
+import 'widgets/chart_custom_widget.dart';
 import 'widgets/hello_custom_widget.dart';
 import 'widgets/map_custom_widget.dart';
 import 'widgets/scanner_custom_widget.dart';
+import 'widgets/signature_custom_widget.dart';
+import 'widgets/styled_table_custom_widget.dart';
 import 'widgets/telephone_call_custom_widget.dart';
 import 'widgets/user_data_custom_widget.dart';
 
@@ -48,13 +48,9 @@ class ExampleCustomScreenManager extends AppManager {
         label: "Hello",
         group: "Example",
         // faIcon: FontAwesomeIcons.star,
-        iconBuilder: (size, color) => CircleAvatar(
+        iconBuilder: () => const CircleAvatar(
           backgroundColor: Colors.transparent,
-          child: FaIcon(
-            FontAwesomeIcons.ello,
-            size: size,
-            color: color,
-          ),
+          child: FaIcon(FontAwesomeIcons.ello),
         ),
       ),
       screenBuilder: (context, screen) => const HelloCustomWidget(),

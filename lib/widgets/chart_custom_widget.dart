@@ -7,7 +7,7 @@ class ChartCustomWidget extends StatefulWidget {
   const ChartCustomWidget({Key? key}) : super(key: key);
 
   @override
-  _ChartCustomWidgetState createState() => _ChartCustomWidgetState();
+  State<ChartCustomWidget> createState() => _ChartCustomWidgetState();
 }
 
 class _ChartCustomWidgetState extends State<ChartCustomWidget>
