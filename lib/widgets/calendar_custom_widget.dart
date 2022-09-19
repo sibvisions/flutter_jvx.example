@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_jvx/data.dart';
-import 'package:flutter_jvx/mixin/ui_service_mixin.dart';
+import 'package:flutter_jvx/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -15,8 +15,7 @@ class CalendarCustomWidget extends StatefulWidget {
   State<CalendarCustomWidget> createState() => _CalendarCustomWidgetState();
 }
 
-class _CalendarCustomWidgetState extends State<CalendarCustomWidget>
-    with UiServiceGetterMixin {
+class _CalendarCustomWidgetState extends State<CalendarCustomWidget> {
   static const String CONTACT_DATA_PROVIDER = "JVxMobileDemo/Cal-7V/contacts#+";
   static const String COLUMN_NAME_EVENT = "EVENT";
   static const String COLUMN_NAME_DAYS_FROM_TODAY = "DAYS_FROM_TODAY";
@@ -32,7 +31,7 @@ class _CalendarCustomWidgetState extends State<CalendarCustomWidget>
   @override
   void initState() {
     super.initState();
-    getUiService().registerDataSubscription(
+    IUiService().registerDataSubscription(
       pDataSubscription: DataSubscription(
         subbedObj: this,
         dataProvider: CONTACT_DATA_PROVIDER,
@@ -64,7 +63,7 @@ class _CalendarCustomWidgetState extends State<CalendarCustomWidget>
   @override
   void dispose() {
     _animationController?.dispose();
-    getUiService().disposeDataSubscription(pSubscriber: this);
+    IUiService().disposeDataSubscription(pSubscriber: this);
     super.dispose();
   }
 

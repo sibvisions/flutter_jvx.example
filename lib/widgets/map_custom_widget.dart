@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_jvx/mixin/config_service_mixin.dart';
+import 'package:flutter_jvx/services.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:geolocator/geolocator.dart';
 import "package:latlong2/latlong.dart";
@@ -18,8 +18,7 @@ class MapCustomWidget extends StatefulWidget {
   State<StatefulWidget> createState() => MapCustomWidgetState();
 }
 
-class MapCustomWidgetState extends State<MapCustomWidget>
-    with ConfigServiceGetterMixin {
+class MapCustomWidgetState extends State<MapCustomWidget> {
   late final String? apiKey;
   final LatLng initialPosition = LatLng(48.247533, 16.380093);
   MapController mapController = MapController();
@@ -46,7 +45,7 @@ class MapCustomWidgetState extends State<MapCustomWidget>
   @override
   void initState() {
     super.initState();
-    apiKey = getConfigService().getAppConfig()?.startupParameters?["apiKey"];
+    apiKey = IConfigService().getAppConfig()?.startupParameters?["apiKey"];
   }
 
   Container popup() {
@@ -96,8 +95,8 @@ class MapCustomWidgetState extends State<MapCustomWidget>
               minZoom: 0,
               maxZoom: 18,
             ),
-            layers: [
-              TileLayerOptions(
+            children: [
+              TileLayer(
                 urlTemplate: "https://api.mapbox.com/styles/v1/"
                     "{id}/tiles/{z}/{x}/{y}?access_token={accessToken}",
                 additionalOptions: {
@@ -105,7 +104,7 @@ class MapCustomWidgetState extends State<MapCustomWidget>
                   "accessToken": apiKey ?? "",
                 },
               ),
-              MarkerLayerOptions(
+              MarkerLayer(
                 markers: _buildMarker(),
               ),
             ],

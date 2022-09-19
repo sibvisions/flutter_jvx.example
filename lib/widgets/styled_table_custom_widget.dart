@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_jvx/data.dart';
-import 'package:flutter_jvx/mixin/ui_service_mixin.dart';
+import 'package:flutter_jvx/services.dart';
 
 class StyledTableCustomWidget extends StatefulWidget {
   const StyledTableCustomWidget({Key? key}) : super(key: key);
@@ -12,8 +12,7 @@ class StyledTableCustomWidget extends StatefulWidget {
       _StyledTableCustomWidgetState();
 }
 
-class _StyledTableCustomWidgetState extends State<StyledTableCustomWidget>
-    with UiServiceGetterMixin {
+class _StyledTableCustomWidgetState extends State<StyledTableCustomWidget> {
   static const String CONTACT_DATA_PROVIDER =
       "JVxMobileDemo/StyTab-2G/contacts#4";
   static const String COLUMN_NAME_ID = "ID";
@@ -30,7 +29,7 @@ class _StyledTableCustomWidgetState extends State<StyledTableCustomWidget>
   @override
   void initState() {
     super.initState();
-    getUiService().registerDataSubscription(
+    IUiService().registerDataSubscription(
       pDataSubscription: DataSubscription(
         subbedObj: this,
         dataProvider: CONTACT_DATA_PROVIDER,
@@ -67,7 +66,7 @@ class _StyledTableCustomWidgetState extends State<StyledTableCustomWidget>
 
   @override
   void dispose() {
-    getUiService().disposeDataSubscription(pSubscriber: this);
+    IUiService().disposeDataSubscription(pSubscriber: this);
     super.dispose();
   }
 

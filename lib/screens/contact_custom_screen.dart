@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_jvx/data.dart';
-import 'package:flutter_jvx/mixin/ui_service_mixin.dart';
+import 'package:flutter_jvx/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -39,8 +39,7 @@ class CoCustomComponentWidget extends StatefulWidget {
       _CoCustomComponentWidgetState();
 }
 
-class _CoCustomComponentWidgetState extends State<CoCustomComponentWidget>
-    with UiServiceGetterMixin {
+class _CoCustomComponentWidgetState extends State<CoCustomComponentWidget> {
   static const String CONTACT_DATA_PROVIDER = "JVxMobileDemo/Con-CG/contacts#4";
   static const String COLUMN_NAME_PHONE = "PHONE";
 
@@ -49,7 +48,7 @@ class _CoCustomComponentWidgetState extends State<CoCustomComponentWidget>
   @override
   void initState() {
     super.initState();
-    getUiService().registerDataSubscription(
+    IUiService().registerDataSubscription(
       pDataSubscription: DataSubscription(
         subbedObj: this,
         dataProvider: CONTACT_DATA_PROVIDER,
@@ -64,7 +63,7 @@ class _CoCustomComponentWidgetState extends State<CoCustomComponentWidget>
 
   @override
   void dispose() {
-    getUiService().disposeDataSubscription(pSubscriber: this);
+    IUiService().disposeDataSubscription(pSubscriber: this);
     super.dispose();
   }
 

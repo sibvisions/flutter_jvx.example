@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_jvx/mixin/config_service_mixin.dart';
+import 'package:flutter_jvx/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class UserDataCustomWidget extends StatelessWidget
-    with ConfigServiceGetterMixin {
+class UserDataCustomWidget extends StatelessWidget {
   const UserDataCustomWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var profileImage = getConfigService().getUserInfo()?.profileImage;
+    var profileImage = IConfigService().getUserInfo()?.profileImage;
 
     return Center(
       child: Column(
@@ -31,7 +30,7 @@ class UserDataCustomWidget extends StatelessWidget
             height: 15,
           ),
           Text(
-            'User: ${getConfigService().getUserInfo()!.displayName!}',
+            'User: ${IConfigService().getUserInfo()!.displayName!}',
             style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 20,

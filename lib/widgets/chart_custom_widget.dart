@@ -1,7 +1,7 @@
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
 import 'package:flutter_jvx/data.dart';
-import 'package:flutter_jvx/mixin/ui_service_mixin.dart';
+import 'package:flutter_jvx/services.dart';
 
 class ChartCustomWidget extends StatefulWidget {
   const ChartCustomWidget({Key? key}) : super(key: key);
@@ -10,8 +10,7 @@ class ChartCustomWidget extends StatefulWidget {
   State<ChartCustomWidget> createState() => _ChartCustomWidgetState();
 }
 
-class _ChartCustomWidgetState extends State<ChartCustomWidget>
-    with UiServiceGetterMixin {
+class _ChartCustomWidgetState extends State<ChartCustomWidget> {
   static const String CHART_DATA_PROVIDER = "JVxMobileDemo/Cha-OL/chartData#0";
   static const String COLUMN_NAME_ID = "ID";
   static const String COLUMN_NAME_NAME = "COUNTRY";
@@ -32,7 +31,7 @@ class _ChartCustomWidgetState extends State<ChartCustomWidget>
   @override
   void initState() {
     super.initState();
-    getUiService().registerDataSubscription(
+    IUiService().registerDataSubscription(
       pDataSubscription: DataSubscription(
         subbedObj: this,
         dataProvider: CHART_DATA_PROVIDER,
@@ -61,7 +60,7 @@ class _ChartCustomWidgetState extends State<ChartCustomWidget>
 
   @override
   void dispose() {
-    getUiService().disposeDataSubscription(pSubscriber: this);
+    IUiService().disposeDataSubscription(pSubscriber: this);
     super.dispose();
   }
 
