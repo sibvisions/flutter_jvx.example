@@ -8,13 +8,11 @@ class StyledTableCustomWidget extends StatefulWidget {
   const StyledTableCustomWidget({Key? key}) : super(key: key);
 
   @override
-  State<StyledTableCustomWidget> createState() =>
-      _StyledTableCustomWidgetState();
+  State<StyledTableCustomWidget> createState() => _StyledTableCustomWidgetState();
 }
 
 class _StyledTableCustomWidgetState extends State<StyledTableCustomWidget> {
-  static const String CONTACT_DATA_PROVIDER =
-      "JVxMobileDemo/StyTab-2G/contacts#4";
+  static const String CONTACT_DATA_PROVIDER = "JVxMobileDemo/StyTab-2G/contacts#4";
   static const String COLUMN_NAME_ID = "ID";
   static const String COLUMN_NAME_FIRSTNAME = "FIRSTNAME";
   static const String COLUMN_NAME_LASTNAME = "LASTNAME";
@@ -90,8 +88,7 @@ class _StyledTableCustomWidgetState extends State<StyledTableCustomWidget> {
                         padding: const EdgeInsets.all(10),
                         child: contacts[index].image != null
                             ? CircleAvatar(
-                                backgroundImage: MemoryImage(
-                                    base64Decode(contacts[index].image!)),
+                                backgroundImage: MemoryImage(base64Decode(contacts[index].image!)),
                                 minRadius: 40,
                               )
                             : CircleAvatar(
@@ -99,43 +96,45 @@ class _StyledTableCustomWidgetState extends State<StyledTableCustomWidget> {
                                 minRadius: 40,
                                 child: Text(
                                   '${contacts[index].firstname[0]}${contacts[index].lastname[0]}',
-                                  style: const TextStyle(
-                                      fontSize: 40, color: Colors.white),
+                                  style: const TextStyle(fontSize: 40, color: Colors.white),
                                 ),
                               ),
                       ),
                       const VerticalDivider(),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            '${contacts[index].firstname} ${contacts[index].lastname}',
-                            style: Theme.of(context).textTheme.headline6,
-                          ),
-                          const SizedBox(height: 10),
-                          Row(
-                            children: [
-                              const Icon(
-                                Icons.map,
-                                color: Colors.grey,
-                                size: 13.0,
-                              ),
-                              const SizedBox(width: 5),
-                              Text(
-                                '${contacts[index].street} ${contacts[index].streetNr}, ${contacts[index].zip} ${contacts[index].town}',
-                                style: const TextStyle(
-                                    color: Colors.grey, fontSize: 14),
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
                       Expanded(
-                          child: Container(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              '${contacts[index].firstname} ${contacts[index].lastname}',
+                              style: Theme.of(context).textTheme.headline6,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            const SizedBox(height: 10),
+                            Row(
+                              children: [
+                                const Icon(
+                                  Icons.map,
+                                  color: Colors.grey,
+                                  size: 13.0,
+                                ),
+                                const SizedBox(width: 5),
+                                Expanded(
+                                  child: Text(
+                                    '${contacts[index].street} ${contacts[index].streetNr}, ${contacts[index].zip} ${contacts[index].town}',
+                                    style: const TextStyle(color: Colors.grey, fontSize: 14),
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                      Container(
                         alignment: Alignment.centerRight,
-                        child: const Icon(Icons.keyboard_arrow_right,
-                            color: Colors.black, size: 40.0),
-                      )),
+                        child: const Icon(Icons.keyboard_arrow_right, color: Colors.black, size: 40.0),
+                      ),
                     ],
                   ),
                 );
@@ -159,6 +158,5 @@ class Contact {
   final String zip;
   final String town;
 
-  Contact(this.id, this.firstname, this.lastname, this.image, this.street,
-      this.streetNr, this.zip, this.town);
+  Contact(this.id, this.firstname, this.lastname, this.image, this.street, this.streetNr, this.zip, this.town);
 }
