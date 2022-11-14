@@ -42,6 +42,7 @@ class ExampleCustomScreenManager extends AppManager {
 
     registerScreen(CustomScreen(
       screenLongName: HELLO_COMP_ID,
+      sendOpenScreenRequests: false,
       screenTitle: 'Hello',
       menuItemModel: CustomMenuItem(
         screenLongName: HELLO_COMP_ID,
@@ -58,6 +59,7 @@ class ExampleCustomScreenManager extends AppManager {
 
     registerScreen(CustomScreen(
       screenLongName: ALTERING_COMP_ID,
+      sendOpenScreenRequests: false,
       screenTitle: 'Altering Custom Screen',
       menuItemModel: CustomMenuItem(
         screenLongName: ALTERING_COMP_ID,
@@ -120,6 +122,7 @@ class ExampleCustomScreenManager extends AppManager {
 
     registerScreen(CustomScreen(
       screenLongName: MAP_COMP_ID,
+      sendOpenScreenRequests: false,
       menuItemModel: CustomMenuItem(
         screenLongName: MAP_COMP_ID,
         label: 'Map',
@@ -132,6 +135,7 @@ class ExampleCustomScreenManager extends AppManager {
     registerScreen(CustomScreen(
       screenLongName: QR_SCANNER_COMP_ID,
       showOffline: true,
+      sendOpenScreenRequests: false,
       menuItemModel: CustomMenuItem(
         screenLongName: QR_SCANNER_COMP_ID,
         label: 'QR Scanner',
@@ -170,6 +174,7 @@ class ExampleCustomScreenManager extends AppManager {
 
     registerScreen(CustomScreen(
       screenLongName: TELEPHONE_CALL_COMP_ID,
+      sendOpenScreenRequests: false,
       screenTitle: 'Telephone',
       menuItemModel: CustomMenuItem(
         screenLongName: TELEPHONE_CALL_COMP_ID,
@@ -183,6 +188,7 @@ class ExampleCustomScreenManager extends AppManager {
     registerScreen(CustomScreen(
       screenLongName: USER_DATA_COMP_ID,
       showOffline: true,
+      sendOpenScreenRequests: false,
       menuItemModel: CustomMenuItem(
         screenLongName: USER_DATA_COMP_ID,
         label: 'Userdata',
