@@ -70,7 +70,10 @@ class ExampleCustomScreenManager extends AppManager {
       screenBuilder: (context, screen) => Container(
         decoration: BoxDecoration(
           border: Border.all(
-              color: Colors.green, width: 10, style: BorderStyle.solid),
+            color: Colors.green,
+            width: 10,
+            style: BorderStyle.solid,
+          ),
         ),
         child: screen,
       ),

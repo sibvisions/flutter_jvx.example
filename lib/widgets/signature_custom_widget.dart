@@ -39,11 +39,13 @@ class _SignatureCustomWidgetState extends State<SignatureCustomWidget> {
               margin: const EdgeInsets.all(15.0),
               padding: const EdgeInsets.all(3.0),
               decoration: BoxDecoration(
-                  border: Border.all(color: Theme.of(context).primaryColor)),
+                border: Border.all(color: Theme.of(context).primaryColor),
+                color: Colors.white,
+              ),
               child: Signature(
                 controller: _controller,
                 height: 200,
-                backgroundColor: Colors.white,
+                backgroundColor: Colors.transparent,
               ),
             ),
             //CLEAR CANVAS
