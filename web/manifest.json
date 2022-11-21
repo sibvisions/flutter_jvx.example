@@ -1,11 +1,11 @@
 {
-    "name": "JVx FlutterClient example",
-    "short_name": "FlutterClient example",
+    "name": "JVx Example",
+    "short_name": "Example",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "JVx FlutterClient example.",
+    "description": "JVx Example",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
