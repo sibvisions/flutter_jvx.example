@@ -5,6 +5,7 @@ import 'package:flutter_jvx/config/version_config.dart';
 import 'package:flutter_jvx/flutter_jvx.dart';
 
 import 'example_custom_screen_manager.dart';
+import 'example_login.dart';
 
 void main() async {
   await FlutterJVx.start(FlutterJVx(
@@ -29,5 +30,6 @@ void main() async {
           "apiKey": "<insert token here>",
         }),
     appManager: ExampleCustomScreenManager(),
+    loginBuilder: (context, mode) => ExampleLogin(mode: mode),
   ));
 }
