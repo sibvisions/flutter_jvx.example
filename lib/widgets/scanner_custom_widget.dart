@@ -4,8 +4,7 @@ import 'package:mobile_scanner/mobile_scanner.dart';
 
 import 'custom_rounded_button.dart';
 
-typedef QRCallback = void Function(
-    Barcode barcode, MobileScannerArguments? arguments);
+typedef QRCallback = void Function(Barcode barcode, MobileScannerArguments? arguments);
 
 class ScannerCustomWidget extends StatefulWidget {
   const ScannerCustomWidget({Key? key}) : super(key: key);
@@ -81,8 +80,7 @@ class _ScannerCustomWidgetState extends State<ScannerCustomWidget> {
                                 flex: 1,
                                 child: CustomRoundedButton(
                                     text: "Scan",
-                                    icon: const Icon(FontAwesomeIcons.qrcode,
-                                        color: Colors.white),
+                                    icon: const Icon(FontAwesomeIcons.qrcode, color: Colors.white),
                                     onTap: () {
                                       scanResult = null;
                                       setState(() {});

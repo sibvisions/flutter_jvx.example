@@ -17,11 +17,9 @@ class TelephoneCallCustomWidget extends StatelessWidget {
     }
 
     if (Platform.isIOS || Platform.isAndroid) {
-      await launchUrl(
-          Uri.parse("whatsapp://send?phone=$number&text=${Uri.parse(text)}"));
+      await launchUrl(Uri.parse("whatsapp://send?phone=$number&text=${Uri.parse(text)}"));
     } else {
-      await launchUrl(
-          Uri.parse('https://wa.me/$number/?text=${Uri.parse(text)}'));
+      await launchUrl(Uri.parse('https://wa.me/$number/?text=${Uri.parse(text)}'));
     }
   }
 
@@ -96,8 +94,7 @@ class TelephoneCallCustomWidget extends StatelessWidget {
                         Expanded(
                           child: CustomRoundedButton(
                               text: "WhatsApp",
-                              icon: const Icon(FontAwesomeIcons.whatsapp,
-                                  color: Colors.white),
+                              icon: const Icon(FontAwesomeIcons.whatsapp, color: Colors.white),
                               onTap: () {
                                 _launchWhatsApp(numberToCall, "");
                               }),

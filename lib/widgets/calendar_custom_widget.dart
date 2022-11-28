@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_jvx/data.dart';
-import 'package:flutter_jvx/services.dart';
+import 'package:flutter_jvx/flutter_jvx.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -45,9 +45,7 @@ class _CalendarCustomWidgetState extends State<CalendarCustomWidget> {
             String event = dataChunk.data[i]![0];
             int daysFromToday = dataChunk.data[i]![1];
 
-            var dateTime = currentDay
-                .add(Duration(days: daysFromToday))
-                .millisecondsSinceEpoch;
+            var dateTime = currentDay.add(Duration(days: daysFromToday)).millisecondsSinceEpoch;
             if (!_events.containsKey(dateTime)) {
               _events.putIfAbsent(dateTime, () => [event]);
             } else {
@@ -103,8 +101,7 @@ class _CalendarCustomWidgetState extends State<CalendarCustomWidget> {
         outsideDaysVisible: false,
       ),
       headerStyle: HeaderStyle(
-        formatButtonTextStyle:
-            const TextStyle().copyWith(color: Colors.white, fontSize: 15.0),
+        formatButtonTextStyle: const TextStyle().copyWith(color: Colors.white, fontSize: 15.0),
         formatButtonDecoration: BoxDecoration(
           color: Colors.deepOrange[400],
           borderRadius: BorderRadius.circular(16.0),
@@ -123,8 +120,7 @@ class _CalendarCustomWidgetState extends State<CalendarCustomWidget> {
           setState(() {
             _focusedDay = focusedDay;
             _selectedDay = selectedDay;
-            _selectedEvents =
-                _events[_selectedDay.millisecondsSinceEpoch] ?? [];
+            _selectedEvents = _events[_selectedDay.millisecondsSinceEpoch] ?? [];
           });
         }
       },
@@ -172,8 +168,7 @@ class _CalendarCustomWidgetState extends State<CalendarCustomWidget> {
       children: _selectedEvents
           .map((event) => Card(
                 color: Colors.orange[100],
-                margin:
-                    const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+                margin: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
                 child: ListTile(
                   leading: const Icon(FontAwesomeIcons.clock),
                   title: Text(event.toString()),

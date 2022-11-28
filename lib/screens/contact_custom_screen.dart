@@ -2,14 +2,13 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_jvx/data.dart';
-import 'package:flutter_jvx/services.dart';
+import 'package:flutter_jvx/flutter_jvx.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../widgets/custom_rounded_button.dart';
 
-class CustomHeaderAndFooterWidget extends StatelessWidget
-    implements PreferredSizeWidget {
+class CustomHeaderAndFooterWidget extends StatelessWidget implements PreferredSizeWidget {
   final String text;
 
   const CustomHeaderAndFooterWidget({
@@ -21,10 +20,7 @@ class CustomHeaderAndFooterWidget extends StatelessWidget
   Widget build(BuildContext context) {
     return Container(
         margin: const EdgeInsets.all(20.0),
-        child: Text(text,
-            style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Theme.of(context).primaryColor)));
+        child: Text(text, style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).primaryColor)));
   }
 
   @override
@@ -35,8 +31,7 @@ class CoCustomComponentWidget extends StatefulWidget {
   const CoCustomComponentWidget({Key? key}) : super(key: key);
 
   @override
-  State<CoCustomComponentWidget> createState() =>
-      _CoCustomComponentWidgetState();
+  State<CoCustomComponentWidget> createState() => _CoCustomComponentWidgetState();
 }
 
 class _CoCustomComponentWidgetState extends State<CoCustomComponentWidget> {
@@ -102,8 +97,7 @@ class _CoCustomComponentWidgetState extends State<CoCustomComponentWidget> {
             Expanded(
               child: CustomRoundedButton(
                 text: "WhatsApp",
-                icon:
-                    const Icon(FontAwesomeIcons.whatsapp, color: Colors.white),
+                icon: const Icon(FontAwesomeIcons.whatsapp, color: Colors.white),
                 onTap: () {
                   if (phone.isNotEmpty) {
                     if (phone.startsWith('0')) {
@@ -111,8 +105,7 @@ class _CoCustomComponentWidgetState extends State<CoCustomComponentWidget> {
                     }
 
                     if (Platform.isIOS || Platform.isAndroid) {
-                      launchUrl(
-                          Uri.parse("whatsapp://send?phone=$phone&text="));
+                      launchUrl(Uri.parse("whatsapp://send?phone=$phone&text="));
                     } else {
                       launchUrl(Uri.parse("whatsapp://wa.me/$phone/?text="));
                     }

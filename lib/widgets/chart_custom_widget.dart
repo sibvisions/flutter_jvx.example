@@ -1,7 +1,7 @@
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
 import 'package:flutter_jvx/data.dart';
-import 'package:flutter_jvx/services.dart';
+import 'package:flutter_jvx/flutter_jvx.dart';
 
 class ChartCustomWidget extends StatefulWidget {
   const ChartCustomWidget({Key? key}) : super(key: key);
@@ -25,8 +25,7 @@ class _ChartCustomWidgetState extends State<ChartCustomWidget> {
     const charts.Color(r: 152, g: 223, b: 88, a: 200),
     const charts.Color(r: 249, g: 221, b: 81, a: 210),
   ];
-  static const charts.Color DEFAULT_COLOR =
-      charts.Color(r: 25, g: 178, b: 249, a: 255);
+  static const charts.Color DEFAULT_COLOR = charts.Color(r: 25, g: 178, b: 249, a: 255);
 
   @override
   void initState() {
@@ -71,20 +70,18 @@ class _ChartCustomWidgetState extends State<ChartCustomWidget> {
       child: Scaffold(
         appBar: AppBar(
             leading: Container(),
-            flexibleSpace: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: const [
-                  TabBar(
-                    tabs: [
-                      Tab(
-                        text: 'Pie Chart',
-                      ),
-                      Tab(
-                        text: 'Bar Chart',
-                      ),
-                    ],
+            flexibleSpace: Column(mainAxisAlignment: MainAxisAlignment.end, children: const [
+              TabBar(
+                tabs: [
+                  Tab(
+                    text: 'Pie Chart',
                   ),
-                ])),
+                  Tab(
+                    text: 'Bar Chart',
+                  ),
+                ],
+              ),
+            ])),
         body: TabBarView(
           children: countries.isNotEmpty
               ? [
@@ -140,9 +137,8 @@ class BarChartWidget extends StatelessWidget {
           measureFn: (Country country, _) => country.litres,
           data: countries,
           labelAccessorFn: (Country country, _) => country.name,
-          colorFn: (Country country, index) => index! < color.length
-              ? color.elementAt(index)
-              : _ChartCustomWidgetState.DEFAULT_COLOR,
+          colorFn: (Country country, index) =>
+              index! < color.length ? color.elementAt(index) : _ChartCustomWidgetState.DEFAULT_COLOR,
         ),
       ],
       animate: animate,
@@ -172,20 +168,17 @@ class PieChartWidget extends StatelessWidget {
           measureFn: (Country country, _) => country.litres,
           data: countries,
           labelAccessorFn: (Country country, _) => country.name,
-          insideLabelStyleAccessorFn: (Country country, _) =>
-              charts.TextStyleSpec(
+          insideLabelStyleAccessorFn: (Country country, _) => charts.TextStyleSpec(
             fontSize: 12,
             color: charts.MaterialPalette.gray.shade800,
           ),
-          colorFn: (Country country, index) => index! < color.length
-              ? color.elementAt(index)
-              : _ChartCustomWidgetState.DEFAULT_COLOR,
+          colorFn: (Country country, index) =>
+              index! < color.length ? color.elementAt(index) : _ChartCustomWidgetState.DEFAULT_COLOR,
         ),
       ],
       animate: animate,
-      defaultRenderer: charts.ArcRendererConfig(arcRendererDecorators: [
-        charts.ArcLabelDecorator(labelPosition: charts.ArcLabelPosition.auto)
-      ]),
+      defaultRenderer: charts.ArcRendererConfig(
+          arcRendererDecorators: [charts.ArcLabelDecorator(labelPosition: charts.ArcLabelPosition.auto)]),
     );
   }
 }

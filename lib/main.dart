@@ -1,7 +1,3 @@
-import 'package:flutter_jvx/config/app_config.dart';
-import 'package:flutter_jvx/config/server_config.dart';
-import 'package:flutter_jvx/config/ui_config.dart';
-import 'package:flutter_jvx/config/version_config.dart';
 import 'package:flutter_jvx/flutter_jvx.dart';
 
 import 'example_custom_screen_manager.dart';

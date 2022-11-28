@@ -2,10 +2,9 @@ import 'dart:developer';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_jvx/services.dart';
+import 'package:flutter_jvx/flutter_jvx.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:geolocator/geolocator.dart';
-import "package:latlong2/latlong.dart";
 import 'package:url_launcher/url_launcher.dart';
 
 import 'custom_popup.dart';
@@ -70,8 +69,7 @@ class MapCustomWidgetState extends State<MapCustomWidget> {
   }
 
   void _launchMapsUrl() async {
-    const url =
-        "https://www.google.com/maps/search/?api=1&query=SIB Visions GmbH";
+    const url = "https://www.google.com/maps/search/?api=1&query=SIB Visions GmbH";
     await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
   }
 
@@ -85,8 +83,7 @@ class MapCustomWidgetState extends State<MapCustomWidget> {
     return Stack(
       children: [
         SizedBox(
-          height: MediaQuery.of(context).size.height -
-              AppBar().preferredSize.height,
+          height: MediaQuery.of(context).size.height - AppBar().preferredSize.height,
           child: FlutterMap(
             mapController: mapController,
             options: MapOptions(
@@ -200,9 +197,7 @@ class MapCustomWidgetState extends State<MapCustomWidget> {
                       getPosition().then((position) {
                         if (position != null) {
                           log(position.toString());
-                          mapController.move(
-                              LatLng(position.latitude, position.longitude),
-                              mapController.zoom);
+                          mapController.move(LatLng(position.latitude, position.longitude), mapController.zoom);
                         } else {
                           log("No last known location");
                         }
@@ -243,8 +238,7 @@ class MapCustomWidgetState extends State<MapCustomWidget> {
 
     if (permission == LocationPermission.deniedForever) {
       // Permissions are denied forever, handle appropriately.
-      return Future.error(
-          "Location permissions are permanently denied, we cannot request permissions.");
+      return Future.error("Location permissions are permanently denied, we cannot request permissions.");
     }
 
     return Geolocator.getLastKnownPosition();

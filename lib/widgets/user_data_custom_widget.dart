@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_jvx/services.dart';
+import 'package:flutter_jvx/flutter_jvx.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class UserDataCustomWidget extends StatelessWidget {
@@ -17,8 +17,7 @@ class UserDataCustomWidget extends StatelessWidget {
           ),
           CircleAvatar(
               radius: 70,
-              backgroundImage:
-                  profileImage != null ? MemoryImage(profileImage) : null,
+              backgroundImage: profileImage != null ? MemoryImage(profileImage) : null,
               child: profileImage != null
                   ? null
                   : Icon(
@@ -32,9 +31,7 @@ class UserDataCustomWidget extends StatelessWidget {
           Text(
             'User: ${IConfigService().getUserInfo()!.displayName!}',
             style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-                color: Theme.of(context).textTheme.bodyText1!.color),
+                fontWeight: FontWeight.bold, fontSize: 20, color: Theme.of(context).textTheme.bodyText1!.color),
           ),
           const Divider(
             height: 20,

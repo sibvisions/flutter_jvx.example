@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_jvx/commands.dart';
 import 'package:flutter_jvx/flutter_jvx.dart';
-import 'package:flutter_jvx/services.dart';
 
 /// This is an example login override with fallback logic
 class ExampleLogin extends DefaultLogin {
