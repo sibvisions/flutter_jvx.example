@@ -20,7 +20,7 @@ class ExampleLogin extends DefaultLogin {
           TextButton(
             onPressed: () => IUiService().routeToLogin(mode: LoginMode.Manual),
             child: Text(
-              FlutterJVx.translate("Back"),
+              FlutterUI.translate("Back"),
             ),
           )
         ],

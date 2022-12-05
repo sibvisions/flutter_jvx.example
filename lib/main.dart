@@ -4,7 +4,7 @@ import 'example_custom_screen_manager.dart';
 import 'example_login.dart';
 
 void main() async {
-  await FlutterJVx.start(FlutterJVx(
+  await FlutterUI.start(FlutterUI(
     appConfig: const AppConfig(
         title: "JVx Example",
         uiConfig: UiConfig(
