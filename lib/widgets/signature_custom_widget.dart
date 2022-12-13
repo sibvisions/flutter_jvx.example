@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_jvx/data.dart';
+import 'package:flutter_jvx/flutter_jvx.dart';
 import 'package:signature/signature.dart';
 
 class SignatureCustomWidget extends StatefulWidget {

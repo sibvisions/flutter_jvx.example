@@ -1,6 +1,5 @@
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
-import 'package:flutter_jvx/data.dart';
 import 'package:flutter_jvx/flutter_jvx.dart';
 
 class ChartCustomWidget extends StatefulWidget {

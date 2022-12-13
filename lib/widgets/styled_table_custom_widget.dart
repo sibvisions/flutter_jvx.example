@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_jvx/data.dart';
 import 'package:flutter_jvx/flutter_jvx.dart';
 
 class StyledTableCustomWidget extends StatefulWidget {
