@@ -20,7 +20,6 @@ class _CalendarCustomWidgetState extends State<CalendarCustomWidget> {
   static const String COLUMN_NAME_DAYS_FROM_TODAY = "DAYS_FROM_TODAY";
 
   final Map<int, List<String>> _events = {};
-  AnimationController? _animationController;
   DateTime _focusedDay = DateTime.now();
   DateTime _selectedDay = DateTime.now();
   List<String> _selectedEvents = [];
@@ -59,7 +58,6 @@ class _CalendarCustomWidgetState extends State<CalendarCustomWidget> {
 
   @override
   void dispose() {
-    _animationController?.dispose();
     IUiService().disposeDataSubscription(pSubscriber: this);
     super.dispose();
   }
