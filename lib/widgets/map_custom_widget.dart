@@ -44,7 +44,7 @@ class MapCustomWidgetState extends State<MapCustomWidget> {
   @override
   void initState() {
     super.initState();
-    apiKey = IConfigService().getAppConfig()?.startupParameters?["apiKey"];
+    apiKey = ConfigController().getAppConfig()?.startupParameters?["apiKey"];
   }
 
   Container popup() {

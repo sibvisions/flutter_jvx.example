@@ -7,7 +7,7 @@ class UserDataCustomWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var profileImage = IConfigService().getUserInfo()?.profileImage;
+    var profileImage = ConfigController().userInfo.value?.profileImage;
 
     return Center(
       child: Column(
@@ -29,7 +29,7 @@ class UserDataCustomWidget extends StatelessWidget {
             height: 15,
           ),
           Text(
-            'User: ${IConfigService().getUserInfo()!.displayName!}',
+            'User: ${ConfigController().userInfo.value!.displayName!}',
             style: TextStyle(
                 fontWeight: FontWeight.bold, fontSize: 20, color: Theme.of(context).textTheme.bodyText1!.color),
           ),
