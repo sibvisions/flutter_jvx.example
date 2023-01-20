@@ -11,7 +11,7 @@ import 'custom_popup.dart';
 import 'custom_rounded_button.dart';
 
 class MapCustomWidget extends StatefulWidget {
-  const MapCustomWidget({Key? key}) : super(key: key);
+  const MapCustomWidget({super.key});
 
   @override
   State<StatefulWidget> createState() => MapCustomWidgetState();
@@ -23,59 +23,10 @@ class MapCustomWidgetState extends State<MapCustomWidget> {
   MapController mapController = MapController();
   bool infoWindowVisible = false;
 
-  List<Marker> _buildMarker() {
-    return [
-      Marker(
-        point: initialPosition,
-        width: 279.0,
-        height: 121.0,
-        anchorPos: AnchorPos.align(AnchorAlign.top),
-        builder: (context) => GestureDetector(
-            onTap: () {
-              setState(() {
-                infoWindowVisible = !infoWindowVisible;
-              });
-            },
-            child: infoWindowVisible ? popup() : marker()),
-      ),
-    ];
-  }
-
   @override
   void initState() {
     super.initState();
-    apiKey = ConfigController().getAppConfig()?.startupParameters?["apiKey"];
-  }
-
-  Container popup() {
-    return Container(
-      alignment: Alignment.bottomCenter,
-      width: 279.0,
-      height: 121.0,
-      child: const CustomPopup(),
-    );
-  }
-
-  Container marker() {
-    return Container(
-      alignment: Alignment.bottomCenter,
-      width: 20,
-      height: 25,
-      child: Image.asset(
-        "assets/images/ic_marker.png",
-        height: 60,
-      ),
-    );
-  }
-
-  void _launchMapsUrl() async {
-    const url = "https://www.google.com/maps/search/?api=1&query=SIB Visions GmbH";
-    await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
-  }
-
-  void _launchCallUrl() async {
-    const url = "tel://+43 (0) 1 934 6009 0";
-    await launchUrl(Uri.parse(url));
+    apiKey = ConfigController().getAppConfig()?.startupParameters?['apiKey'];
   }
 
   @override
@@ -102,7 +53,7 @@ class MapCustomWidgetState extends State<MapCustomWidget> {
                 },
               ),
               MarkerLayer(
-                markers: _buildMarker(),
+                markers: _buildMarkers(),
               ),
             ],
           ),
@@ -220,6 +171,55 @@ class MapCustomWidgetState extends State<MapCustomWidget> {
   void dispose() {
     mapController.dispose();
     super.dispose();
+  }
+
+  List<Marker> _buildMarkers() {
+    return [
+      Marker(
+        point: initialPosition,
+        width: 279.0,
+        height: 121.0,
+        anchorPos: AnchorPos.align(AnchorAlign.top),
+        builder: (context) => GestureDetector(
+            onTap: () {
+              setState(() {
+                infoWindowVisible = !infoWindowVisible;
+              });
+            },
+            child: infoWindowVisible ? _buildPopup() : _buildMarker()),
+      ),
+    ];
+  }
+
+  Widget _buildPopup() {
+    return Container(
+      alignment: Alignment.bottomCenter,
+      width: 279.0,
+      height: 121.0,
+      child: const CustomPopup(),
+    );
+  }
+
+  Widget _buildMarker() {
+    return Container(
+      alignment: Alignment.bottomCenter,
+      width: 20,
+      height: 25,
+      child: Image.asset(
+        "assets/images/ic_marker.png",
+        height: 60,
+      ),
+    );
+  }
+
+  void _launchMapsUrl() async {
+    const url = "https://www.google.com/maps/search/?api=1&query=SIB Visions GmbH";
+    await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
+  }
+
+  void _launchCallUrl() async {
+    const url = "tel://+43 (0) 1 934 6009 0";
+    await launchUrl(Uri.parse(url));
   }
 
   Future<Position?> getPosition() async {

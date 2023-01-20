@@ -35,12 +35,12 @@ class ExampleCustomScreenManager extends AppManager {
     // The method is for setting the standard of each CellEditor or Component,
     // which is being used to build the screen.
     // An example for a panel
-    // creator.replaceComponent('Panel', getCustomComponent);
+    // creator.replaceComponent("Panel", getCustomComponent);
 
     registerScreen(CustomScreen(
       screenLongName: HELLO_COMP_ID,
       sendOpenScreenRequests: false,
-      screenTitle: 'Hello',
+      screenTitle: "Hello",
       menuItemModel: CustomMenuItem(
         screenLongName: HELLO_COMP_ID,
         label: "Hello",
@@ -80,7 +80,7 @@ class ExampleCustomScreenManager extends AppManager {
       screenLongName: CALENDAR_COMP_ID,
       menuItemModel: CustomMenuItem(
         screenLongName: CALENDAR_COMP_ID,
-        label: 'Calendar',
+        label: "Calendar",
         group: "Example",
         faIcon: FontAwesomeIcons.calendar,
       ),
@@ -91,7 +91,7 @@ class ExampleCustomScreenManager extends AppManager {
       screenLongName: CHART_COMP_ID,
       menuItemModel: CustomMenuItem(
         screenLongName: CHART_COMP_ID,
-        label: 'Charts',
+        label: "Charts",
         group: "Example",
         faIcon: FontAwesomeIcons.chartBar,
       ),
@@ -102,7 +102,7 @@ class ExampleCustomScreenManager extends AppManager {
       screenLongName: CONTACTS_COMP_ID,
       menuItemModel: CustomMenuItem(
         screenLongName: CONTACTS_COMP_ID,
-        label: 'Contacts',
+        label: "Contacts",
         group: "Example",
         faIcon: FontAwesomeIcons.userLarge,
       ),
@@ -113,10 +113,10 @@ class ExampleCustomScreenManager extends AppManager {
         )
       ],
       headerBuilder: (context) => const CustomHeaderAndFooterWidget(
-        text: 'This is a custom header',
+        text: "This is a custom header",
       ),
       footerBuilder: (context) => const CustomHeaderAndFooterWidget(
-        text: 'This is a custom footer',
+        text: "This is a custom footer",
       ),
     ));
 
@@ -125,7 +125,7 @@ class ExampleCustomScreenManager extends AppManager {
       sendOpenScreenRequests: false,
       menuItemModel: CustomMenuItem(
         screenLongName: MAP_COMP_ID,
-        label: 'Map',
+        label: "Map",
         group: "Example",
         faIcon: FontAwesomeIcons.mapLocationDot,
       ),
@@ -138,7 +138,7 @@ class ExampleCustomScreenManager extends AppManager {
       sendOpenScreenRequests: false,
       menuItemModel: CustomMenuItem(
         screenLongName: QR_SCANNER_COMP_ID,
-        label: 'QR Scanner',
+        label: "QR Scanner",
         group: "Example",
         faIcon: FontAwesomeIcons.qrcode,
       ),
@@ -149,13 +149,13 @@ class ExampleCustomScreenManager extends AppManager {
       screenLongName: SIGNATURE_COMP_ID,
       menuItemModel: CustomMenuItem(
         screenLongName: SIGNATURE_COMP_ID,
-        label: 'Signature',
+        label: "Signature",
         group: "Example",
         faIcon: FontAwesomeIcons.signature,
       ),
       replaceComponents: [
         CustomComponent(
-          componentName: 'signaturePanel',
+          componentName: "signaturePanel",
           componentBuilder: () => const SignatureCustomWidget(),
         ),
       ],
@@ -165,7 +165,7 @@ class ExampleCustomScreenManager extends AppManager {
       screenLongName: STYLED_TABLE_COMP_ID,
       menuItemModel: CustomMenuItem(
         screenLongName: STYLED_TABLE_COMP_ID,
-        label: 'Styled Table',
+        label: "Styled Table",
         group: "Example",
         faIcon: FontAwesomeIcons.table,
       ),
@@ -175,7 +175,7 @@ class ExampleCustomScreenManager extends AppManager {
     registerScreen(CustomScreen(
       screenLongName: TELEPHONE_CALL_COMP_ID,
       sendOpenScreenRequests: false,
-      screenTitle: 'Telephone',
+      screenTitle: "Telephone",
       menuItemModel: CustomMenuItem(
         screenLongName: TELEPHONE_CALL_COMP_ID,
         label: "Telephone",
@@ -191,7 +191,7 @@ class ExampleCustomScreenManager extends AppManager {
       sendOpenScreenRequests: false,
       menuItemModel: CustomMenuItem(
         screenLongName: USER_DATA_COMP_ID,
-        label: 'Userdata',
+        label: "Userdata",
         group: "Example",
         faIcon: FontAwesomeIcons.user,
       ),

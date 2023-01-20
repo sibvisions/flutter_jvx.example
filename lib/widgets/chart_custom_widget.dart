@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_jvx/flutter_jvx.dart';
 
 class ChartCustomWidget extends StatefulWidget {
-  const ChartCustomWidget({Key? key}) : super(key: key);
+  const ChartCustomWidget({super.key});
 
   @override
   State<ChartCustomWidget> createState() => _ChartCustomWidgetState();
@@ -57,12 +57,6 @@ class _ChartCustomWidgetState extends State<ChartCustomWidget> {
   }
 
   @override
-  void dispose() {
-    IUiService().disposeDataSubscription(pSubscriber: this);
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 2,
@@ -73,10 +67,10 @@ class _ChartCustomWidgetState extends State<ChartCustomWidget> {
               TabBar(
                 tabs: [
                   Tab(
-                    text: 'Pie Chart',
+                    text: "Pie Chart",
                   ),
                   Tab(
-                    text: 'Bar Chart',
+                    text: "Bar Chart",
                   ),
                 ],
               ),
@@ -103,6 +97,12 @@ class _ChartCustomWidgetState extends State<ChartCustomWidget> {
       ),
     );
   }
+
+  @override
+  void dispose() {
+    IUiService().disposeDataSubscription(pSubscriber: this);
+    super.dispose();
+  }
 }
 
 class Country {
@@ -111,16 +111,21 @@ class Country {
   final double litres;
   final double distance;
 
-  Country(this.id, this.name, this.litres, this.distance);
+  Country(
+    this.id,
+    this.name,
+    this.litres,
+    this.distance,
+  );
 }
 
 class BarChartWidget extends StatelessWidget {
   const BarChartWidget({
-    Key? key,
+    super.key,
     required this.countries,
     required this.color,
     required this.animate,
-  }) : super(key: key);
+  });
 
   final List<Country> countries;
   final List<charts.Color> color;
@@ -131,7 +136,7 @@ class BarChartWidget extends StatelessWidget {
     return charts.BarChart(
       [
         charts.Series<Country, String>(
-          id: 'Countries',
+          id: "Countries",
           domainFn: (Country country, _) => country.name,
           measureFn: (Country country, _) => country.litres,
           data: countries,
@@ -147,11 +152,11 @@ class BarChartWidget extends StatelessWidget {
 
 class PieChartWidget extends StatelessWidget {
   const PieChartWidget({
-    Key? key,
+    super.key,
     required this.countries,
     required this.color,
     required this.animate,
-  }) : super(key: key);
+  });
 
   final List<Country> countries;
   final List<charts.Color> color;
@@ -162,7 +167,7 @@ class PieChartWidget extends StatelessWidget {
     return charts.PieChart(
       [
         charts.Series<Country, int>(
-          id: 'Countries',
+          id: "Countries",
           domainFn: (Country country, _) => country.id,
           measureFn: (Country country, _) => country.litres,
           data: countries,
@@ -176,8 +181,9 @@ class PieChartWidget extends StatelessWidget {
         ),
       ],
       animate: animate,
-      defaultRenderer: charts.ArcRendererConfig(
-          arcRendererDecorators: [charts.ArcLabelDecorator(labelPosition: charts.ArcLabelPosition.auto)]),
+      defaultRenderer: charts.ArcRendererConfig(arcRendererDecorators: [
+        charts.ArcLabelDecorator(labelPosition: charts.ArcLabelPosition.auto),
+      ]),
     );
   }
 }

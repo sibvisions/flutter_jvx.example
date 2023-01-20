@@ -13,10 +13,10 @@ void main() async {
         ),
         requestTimeout: 10,
         serverConfig: ServerConfig(
-          baseUrl: 'http://172.20.0.119:8888/JVx.mobile/services/mobile',
-          appName: 'demo',
-          username: 'features',
-          password: 'features',
+          baseUrl: "http://172.20.0.119:8888/JVx.mobile/services/mobile",
+          appName: "demo",
+          username: "features",
+          password: "features",
         ),
         versionConfig: VersionConfig(
           commit: "070a55e2",

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_jvx/flutter_jvx.dart';
 
 class StyledTableCustomWidget extends StatefulWidget {
-  const StyledTableCustomWidget({Key? key}) : super(key: key);
+  const StyledTableCustomWidget({super.key});
 
   @override
   State<StyledTableCustomWidget> createState() => _StyledTableCustomWidgetState();
@@ -62,12 +62,6 @@ class _StyledTableCustomWidgetState extends State<StyledTableCustomWidget> {
   }
 
   @override
-  void dispose() {
-    IUiService().disposeDataSubscription(pSubscriber: this);
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Center(
       child: Column(
@@ -94,7 +88,7 @@ class _StyledTableCustomWidgetState extends State<StyledTableCustomWidget> {
                                 backgroundColor: Theme.of(context).primaryColor,
                                 minRadius: 40,
                                 child: Text(
-                                  '${contacts[index].firstname[0]}${contacts[index].lastname[0]}',
+                                  "${contacts[index].firstname[0]}${contacts[index].lastname[0]}",
                                   style: const TextStyle(fontSize: 40, color: Colors.white),
                                 ),
                               ),
@@ -105,7 +99,7 @@ class _StyledTableCustomWidgetState extends State<StyledTableCustomWidget> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              '${contacts[index].firstname} ${contacts[index].lastname}',
+                              "${contacts[index].firstname} ${contacts[index].lastname}",
                               style: Theme.of(context).textTheme.headline6,
                               overflow: TextOverflow.ellipsis,
                             ),
@@ -120,7 +114,7 @@ class _StyledTableCustomWidgetState extends State<StyledTableCustomWidget> {
                                 const SizedBox(width: 5),
                                 Expanded(
                                   child: Text(
-                                    '${contacts[index].street} ${contacts[index].streetNr}, ${contacts[index].zip} ${contacts[index].town}',
+                                    "${contacts[index].street} ${contacts[index].streetNr}, ${contacts[index].zip} ${contacts[index].town}",
                                     style: const TextStyle(color: Colors.grey, fontSize: 14),
                                     overflow: TextOverflow.ellipsis,
                                   ),
@@ -145,6 +139,12 @@ class _StyledTableCustomWidgetState extends State<StyledTableCustomWidget> {
       ),
     );
   }
+
+  @override
+  void dispose() {
+    IUiService().disposeDataSubscription(pSubscriber: this);
+    super.dispose();
+  }
 }
 
 class Contact {
@@ -157,5 +157,14 @@ class Contact {
   final String zip;
   final String town;
 
-  Contact(this.id, this.firstname, this.lastname, this.image, this.street, this.streetNr, this.zip, this.town);
+  Contact(
+    this.id,
+    this.firstname,
+    this.lastname,
+    this.image,
+    this.street,
+    this.streetNr,
+    this.zip,
+    this.town,
+  );
 }

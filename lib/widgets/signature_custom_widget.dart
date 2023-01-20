@@ -5,9 +5,7 @@ import 'package:flutter_jvx/flutter_jvx.dart';
 import 'package:signature/signature.dart';
 
 class SignatureCustomWidget extends StatefulWidget {
-  const SignatureCustomWidget({
-    Key? key,
-  }) : super(key: key);
+  const SignatureCustomWidget({super.key});
 
   @override
   State<SignatureCustomWidget> createState() => _SignatureCustomWidgetState();
@@ -32,7 +30,7 @@ class _SignatureCustomWidgetState extends State<SignatureCustomWidget> {
           children: [
             const SizedBox(height: 10),
             const Text(
-              'Sign here:',
+              "Sign here:",
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             Container(
@@ -48,7 +46,6 @@ class _SignatureCustomWidgetState extends State<SignatureCustomWidget> {
                 backgroundColor: Colors.transparent,
               ),
             ),
-            //CLEAR CANVAS
             Row(
               children: [
                 Expanded(

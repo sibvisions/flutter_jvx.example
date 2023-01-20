@@ -11,9 +11,9 @@ class CustomHeaderAndFooterWidget extends StatelessWidget implements PreferredSi
   final String text;
 
   const CustomHeaderAndFooterWidget({
-    Key? key,
+    super.key,
     required this.text,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class CustomHeaderAndFooterWidget extends StatelessWidget implements PreferredSi
 }
 
 class CoCustomComponentWidget extends StatefulWidget {
-  const CoCustomComponentWidget({Key? key}) : super(key: key);
+  const CoCustomComponentWidget({super.key});
 
   @override
   State<CoCustomComponentWidget> createState() => _CoCustomComponentWidgetState();
@@ -53,12 +53,6 @@ class _CoCustomComponentWidgetState extends State<CoCustomComponentWidget> {
         },
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    IUiService().disposeDataSubscription(pSubscriber: this);
-    super.dispose();
   }
 
   @override
@@ -99,8 +93,8 @@ class _CoCustomComponentWidgetState extends State<CoCustomComponentWidget> {
                 icon: const Icon(FontAwesomeIcons.whatsapp, color: Colors.white),
                 onTap: () {
                   if (phone.isNotEmpty) {
-                    if (phone.startsWith('0')) {
-                      phone = phone.replaceFirst('0', '43');
+                    if (phone.startsWith("0")) {
+                      phone = phone.replaceFirst("0", "43");
                     }
 
                     if (Platform.isIOS || Platform.isAndroid) {
@@ -116,5 +110,11 @@ class _CoCustomComponentWidgetState extends State<CoCustomComponentWidget> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    IUiService().disposeDataSubscription(pSubscriber: this);
+    super.dispose();
   }
 }

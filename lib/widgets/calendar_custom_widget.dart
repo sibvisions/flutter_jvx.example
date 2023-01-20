@@ -8,7 +8,7 @@ import 'package:table_calendar/table_calendar.dart';
 import 'custom_rounded_button.dart';
 
 class CalendarCustomWidget extends StatefulWidget {
-  const CalendarCustomWidget({Key? key}) : super(key: key);
+  const CalendarCustomWidget({super.key});
 
   @override
   State<CalendarCustomWidget> createState() => _CalendarCustomWidgetState();
@@ -57,12 +57,6 @@ class _CalendarCustomWidgetState extends State<CalendarCustomWidget> {
   }
 
   @override
-  void dispose() {
-    IUiService().disposeDataSubscription(pSubscriber: this);
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.max,
@@ -71,7 +65,7 @@ class _CalendarCustomWidgetState extends State<CalendarCustomWidget> {
         const SizedBox(height: 8.0),
         _buildButtons(),
         const SizedBox(height: 8.0),
-        const Text('Events:',
+        const Text("Events:",
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
@@ -82,7 +76,13 @@ class _CalendarCustomWidgetState extends State<CalendarCustomWidget> {
     );
   }
 
-  // Simple TableCalendar configuration (using Styles)
+  @override
+  void dispose() {
+    IUiService().disposeDataSubscription(pSubscriber: this);
+    super.dispose();
+  }
+
+  /// Simple TableCalendar configuration (using Styles)
   Widget _buildTableCalendar() {
     return TableCalendar<String>(
       rowHeight: 60,
@@ -130,8 +130,7 @@ class _CalendarCustomWidgetState extends State<CalendarCustomWidget> {
   }
 
   Widget _buildButtons() {
-    //final dateTime = _events.keys.elementAt(_events.length - 2);
-
+    // final dateTime = _events.keys.elementAt(_events.length - 2);
     return Column(
       children: [
         Row(
@@ -169,7 +168,7 @@ class _CalendarCustomWidgetState extends State<CalendarCustomWidget> {
                 child: ListTile(
                   leading: const Icon(FontAwesomeIcons.clock),
                   title: Text(event.toString()),
-                  onTap: () => log('$event tapped!'),
+                  onTap: () => log("$event tapped!"),
                 ),
               ))
           .toList(),

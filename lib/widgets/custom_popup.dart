@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CustomPopup extends StatelessWidget {
-  const CustomPopup({Key? key}) : super(key: key);
+  const CustomPopup({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +47,7 @@ class CustomPopup extends StatelessWidget {
                 SizedBox(width: 5),
                 Expanded(
                     child: Text(
-                  'SIB Visions GmbH',
+                  "SIB Visions GmbH",
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 20,

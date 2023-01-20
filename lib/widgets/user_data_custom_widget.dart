@@ -3,7 +3,7 @@ import 'package:flutter_jvx/flutter_jvx.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class UserDataCustomWidget extends StatelessWidget {
-  const UserDataCustomWidget({Key? key}) : super(key: key);
+  const UserDataCustomWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class UserDataCustomWidget extends StatelessWidget {
             height: 15,
           ),
           Text(
-            'User: ${ConfigController().userInfo.value!.displayName!}',
+            "User: ${ConfigController().userInfo.value!.displayName!}",
             style: TextStyle(
                 fontWeight: FontWeight.bold, fontSize: 20, color: Theme.of(context).textTheme.bodyText1!.color),
           ),
@@ -37,13 +37,13 @@ class UserDataCustomWidget extends StatelessWidget {
             height: 20,
             color: Colors.white,
           ),
-          Text('Roles: ',
+          Text("Roles: ",
               style: TextStyle(
                 color: Theme.of(context).textTheme.bodyText1!.color,
                 fontSize: 20,
               )),
           const SizedBox(height: 20),
-          Text([].join(', '), //TODO fix roles
+          Text([].join(", "), // TODO fix roles
               style: TextStyle(
                 color: Theme.of(context).textTheme.bodyText1!.color,
                 fontSize: 16,

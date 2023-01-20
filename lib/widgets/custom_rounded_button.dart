@@ -6,11 +6,11 @@ class CustomRoundedButton extends StatelessWidget {
   final Icon icon;
 
   const CustomRoundedButton({
+    super.key,
     required this.text,
     required this.icon,
     this.onTap,
-    Key? key,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

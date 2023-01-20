@@ -7,25 +7,25 @@ import 'package:url_launcher/url_launcher.dart';
 import 'custom_rounded_button.dart';
 
 class TelephoneCallCustomWidget extends StatelessWidget {
-  const TelephoneCallCustomWidget({Key? key}) : super(key: key);
+  const TelephoneCallCustomWidget({super.key});
 
-  _launchWhatsApp(String numberToCall, String text) async {
+  Future<void> _launchWhatsApp(String numberToCall, String text) async {
     String number = numberToCall;
 
-    if (number.startsWith('0')) {
-      number = number.replaceFirst('0', '43');
+    if (number.startsWith("0")) {
+      number = number.replaceFirst("0", "43");
     }
 
     if (Platform.isIOS || Platform.isAndroid) {
       await launchUrl(Uri.parse("whatsapp://send?phone=$number&text=${Uri.parse(text)}"));
     } else {
-      await launchUrl(Uri.parse('https://wa.me/$number/?text=${Uri.parse(text)}'));
+      await launchUrl(Uri.parse("https://wa.me/$number/?text=${Uri.parse(text)}"));
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    String numberToCall = '';
+    String numberToCall = "";
 
     return Column(
       children: [
@@ -53,7 +53,7 @@ class TelephoneCallCustomWidget extends StatelessWidget {
                       keyboardType: TextInputType.number,
                       textAlignVertical: TextAlignVertical.center,
                       decoration: const InputDecoration(
-                        labelText: 'Enter telephone number',
+                        labelText: "Enter telephone number",
                         labelStyle: TextStyle(color: Colors.white),
                         enabledBorder: UnderlineInputBorder(
                           borderSide: BorderSide(color: Colors.white),
