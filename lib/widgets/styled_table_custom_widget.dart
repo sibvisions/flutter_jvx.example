@@ -100,7 +100,7 @@ class _StyledTableCustomWidgetState extends State<StyledTableCustomWidget> {
                           children: [
                             Text(
                               "${contacts[index].firstname} ${contacts[index].lastname}",
-                              style: Theme.of(context).textTheme.headline6,
+                              style: Theme.of(context).textTheme.titleLarge,
                               overflow: TextOverflow.ellipsis,
                             ),
                             const SizedBox(height: 10),

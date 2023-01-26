@@ -12,7 +12,7 @@ class ExampleLogin extends DefaultLogin {
         children: [
           Text(
             "Not supported.",
-            style: Theme.of(context).textTheme.headline6,
+            style: Theme.of(context).textTheme.titleLarge,
             textAlign: TextAlign.center,
           ),
           const Padding(padding: EdgeInsets.symmetric(vertical: 5)),

@@ -31,7 +31,7 @@ class UserDataCustomWidget extends StatelessWidget {
           Text(
             "User: ${ConfigController().userInfo.value!.displayName!}",
             style: TextStyle(
-                fontWeight: FontWeight.bold, fontSize: 20, color: Theme.of(context).textTheme.bodyText1!.color),
+                fontWeight: FontWeight.bold, fontSize: 20, color: Theme.of(context).textTheme.bodyLarge!.color),
           ),
           const Divider(
             height: 20,
@@ -39,13 +39,13 @@ class UserDataCustomWidget extends StatelessWidget {
           ),
           Text("Roles: ",
               style: TextStyle(
-                color: Theme.of(context).textTheme.bodyText1!.color,
+                color: Theme.of(context).textTheme.bodyLarge!.color,
                 fontSize: 20,
               )),
           const SizedBox(height: 20),
           Text([].join(", "), // TODO fix roles
               style: TextStyle(
-                color: Theme.of(context).textTheme.bodyText1!.color,
+                color: Theme.of(context).textTheme.bodyLarge!.color,
                 fontSize: 16,
               )),
           const Divider(height: 20, color: Colors.white),
