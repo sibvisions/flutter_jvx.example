@@ -43,11 +43,13 @@ class UserDataCustomWidget extends StatelessWidget {
                 fontSize: 20,
               )),
           const SizedBox(height: 20),
-          Text([].join(", "), // TODO fix roles
-              style: TextStyle(
-                color: Theme.of(context).textTheme.bodyLarge!.color,
-                fontSize: 16,
-              )),
+          Text(
+            ConfigController().userInfo.value!.roles.join(", "),
+            style: TextStyle(
+              color: Theme.of(context).textTheme.bodyLarge!.color,
+              fontSize: 16,
+            ),
+          ),
           const Divider(height: 20, color: Colors.white),
         ],
       ),
