@@ -20,11 +20,17 @@ class _CalendarCustomWidgetState extends State<CalendarCustomWidget> {
   static const String COLUMN_NAME_DAYS_FROM_TODAY = "DAYS_FROM_TODAY";
 
   final Map<int, List<String>> _events = {};
-  DateTime _focusedDay = DateTime.now();
-  DateTime _selectedDay = DateTime.now();
+  DateTime _focusedDay = _getCurrentDay();
+  DateTime _selectedDay = _getCurrentDay();
   List<String> _selectedEvents = [];
 
   CalendarFormat _calendarFormat = CalendarFormat.month;
+
+  static DateTime _getCurrentDay() {
+    DateTime now = DateTime.now().toUtc();
+    DateTime currentDay = DateTime.utc(now.year, now.month, now.day);
+    return currentDay;
+  }
 
   @override
   void initState() {
@@ -37,8 +43,7 @@ class _CalendarCustomWidgetState extends State<CalendarCustomWidget> {
         dataColumns: [COLUMN_NAME_EVENT, COLUMN_NAME_DAYS_FROM_TODAY],
         onDataChunk: (DataChunk dataChunk) {
           _events.clear();
-          DateTime now = DateTime.now().toUtc();
-          DateTime currentDay = DateTime.utc(now.year, now.month, now.day);
+          DateTime currentDay = _getCurrentDay();
           for (int i = 0; i < dataChunk.data.length; i++) {
             String event = dataChunk.data[i]![0];
             int daysFromToday = dataChunk.data[i]![1];
@@ -50,6 +55,7 @@ class _CalendarCustomWidgetState extends State<CalendarCustomWidget> {
               _events[dateTime]!.add(event);
             }
           }
+          _selectedEvents = _events[currentDay.millisecondsSinceEpoch] ?? [];
           setState(() {});
         },
       ),
