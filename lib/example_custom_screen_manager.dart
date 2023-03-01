@@ -24,12 +24,12 @@ class ExampleCustomScreenManager extends AppManager {
       "com.sibvisions.apps.mobile.demo.screens.features.StyledTableWorkScreen:L1_MI_DOOPENWORKSCREEN_COM-SIB-APP-MOB-DEM-SCR-FEA-STYTABWORSCR";
   static const String CONTACTS_COMP_ID =
       "com.sibvisions.apps.mobile.demo.screens.features.ContactsWorkScreen:L1_MI_DOOPENWORKSCREEN_COM-SIB-APP-MOB-DEM-SCR-FEA-CONWORSCR";
-  static const String HELLO_COMP_ID = "HELLO_CUSTOM_SCREEN";
-  static const String TELEPHONE_CALL_COMP_ID = "TELEPHONE_CALL_SCREEN";
-  static const String MAP_COMP_ID = "MAP_SCREEN";
-  static const String QR_SCANNER_COMP_ID = "QR_SCANNER_SCREEN";
-  static const String USER_DATA_COMP_ID = "USER_DATA_SCREEN";
-  static const String ALTERING_COMP_ID = "ALTERING_COMP_ID";
+  static const String HELLO_ID = "Hello";
+  static const String TELEPHONE_CALL_ID = "Telephone";
+  static const String MAP_ID = "Map";
+  static const String QR_SCANNER_ID = "QR_Scanner";
+  static const String USER_DATA_ID = "UserData";
+  static const String ALTERING_ID = "AlteringScreen";
 
   ExampleCustomScreenManager() {
     // The method is for setting the standard of each CellEditor or Component,
@@ -37,165 +37,181 @@ class ExampleCustomScreenManager extends AppManager {
     // An example for a panel
     // creator.replaceComponent("Panel", getCustomComponent);
 
-    registerScreen(CustomScreen(
-      screenLongName: HELLO_COMP_ID,
-      sendOpenScreenRequests: false,
-      screenTitle: "Hello",
-      menuItemModel: CustomMenuItem(
-        screenLongName: HELLO_COMP_ID,
+    registerScreen(
+      CustomScreen(
+        key: HELLO_ID,
+        sendOpenScreenRequests: false,
+        screenTitle: "Hello",
+        screenBuilder: (context, screen) => const HelloCustomWidget(),
+      ),
+      menuItem: CustomMenuItem(
         label: "Hello",
         group: "Example",
+        // Shortcut for Font Awesome Icons
         // faIcon: FontAwesomeIcons.star,
-        iconBuilder: () => const CircleAvatar(
+        imageBuilder: (_) => const CircleAvatar(
           backgroundColor: Colors.transparent,
-          child: FaIcon(FontAwesomeIcons.ello),
+          child: FaIcon(FontAwesomeIcons.star),
         ),
       ),
-      screenBuilder: (context, screen) => const HelloCustomWidget(),
-    ));
+    );
 
-    registerScreen(CustomScreen(
-      screenLongName: ALTERING_COMP_ID,
-      sendOpenScreenRequests: false,
-      screenTitle: 'Altering Custom Screen',
-      menuItemModel: CustomMenuItem(
-        screenLongName: ALTERING_COMP_ID,
+    registerScreen(
+      CustomScreen(
+        key: ALTERING_ID,
+        sendOpenScreenRequests: false,
+        screenTitle: "Altering Custom Screen",
+        screenBuilder: (context, screen) => Container(
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: Colors.green,
+              width: 10,
+              style: BorderStyle.solid,
+            ),
+          ),
+          child: screen,
+        ),
+      ),
+      menuItem: CustomMenuItem(
         label: "Altering Custom Screen",
         group: "Example",
         faIcon: FontAwesomeIcons.airbnb,
       ),
-      screenBuilder: (context, screen) => Container(
-        decoration: BoxDecoration(
-          border: Border.all(
-            color: Colors.green,
-            width: 10,
-            style: BorderStyle.solid,
-          ),
-        ),
-        child: screen,
-      ),
-    ));
+    );
 
-    registerScreen(CustomScreen(
-      screenLongName: CALENDAR_COMP_ID,
-      menuItemModel: CustomMenuItem(
-        screenLongName: CALENDAR_COMP_ID,
+    registerScreen(
+      CustomScreen.online(
+        key: CALENDAR_COMP_ID,
+        screenBuilder: (context, screen) => const CalendarCustomWidget(),
+      ),
+      menuItem: CustomMenuItem(
         label: "Calendar",
         group: "Example",
         faIcon: FontAwesomeIcons.calendar,
       ),
-      screenBuilder: (context, screen) => const CalendarCustomWidget(),
-    ));
+    );
 
-    registerScreen(CustomScreen(
-      screenLongName: CHART_COMP_ID,
-      menuItemModel: CustomMenuItem(
-        screenLongName: CHART_COMP_ID,
+    registerScreen(
+      CustomScreen.online(
+        key: CHART_COMP_ID,
+        screenBuilder: (context, screen) => const ChartCustomWidget(),
+      ),
+      menuItem: CustomMenuItem(
         label: "Charts",
         group: "Example",
         faIcon: FontAwesomeIcons.chartBar,
       ),
-      screenBuilder: (context, screen) => const ChartCustomWidget(),
-    ));
+    );
 
-    registerScreen(CustomScreen(
-      screenLongName: CONTACTS_COMP_ID,
-      menuItemModel: CustomMenuItem(
-        screenLongName: CONTACTS_COMP_ID,
+    registerScreen(
+      CustomScreen.online(
+        key: CONTACTS_COMP_ID,
+        screenTitle: "Custom Contacts",
+        replaceComponents: [
+          CustomComponent(
+            componentName: "contactPanel",
+            componentBuilder: () => const CoCustomComponentWidget(),
+          )
+        ],
+        headerBuilder: (context) => const CustomHeaderAndFooterWidget(
+          text: "This is a custom header",
+        ),
+        footerBuilder: (context) => const CustomHeaderAndFooterWidget(
+          text: "This is a custom footer",
+        ),
+      ),
+      menuItem: CustomMenuItem(
         label: "Contacts",
         group: "Example",
         faIcon: FontAwesomeIcons.userLarge,
       ),
-      replaceComponents: [
-        CustomComponent(
-          componentName: "contactPanel",
-          componentBuilder: () => const CoCustomComponentWidget(),
-        )
-      ],
-      headerBuilder: (context) => const CustomHeaderAndFooterWidget(
-        text: "This is a custom header",
-      ),
-      footerBuilder: (context) => const CustomHeaderAndFooterWidget(
-        text: "This is a custom footer",
-      ),
-    ));
+    );
 
-    registerScreen(CustomScreen(
-      screenLongName: MAP_COMP_ID,
-      sendOpenScreenRequests: false,
-      menuItemModel: CustomMenuItem(
-        screenLongName: MAP_COMP_ID,
+    registerScreen(
+      CustomScreen(
+        key: MAP_ID,
+        screenTitle: "Map",
+        sendOpenScreenRequests: false,
+        screenBuilder: (context, screen) => const MapCustomWidget(),
+      ),
+      menuItem: CustomMenuItem(
         label: "Map",
         group: "Example",
         faIcon: FontAwesomeIcons.mapLocationDot,
       ),
-      screenBuilder: (context, screen) => const MapCustomWidget(),
-    ));
+    );
 
-    registerScreen(CustomScreen(
-      screenLongName: QR_SCANNER_COMP_ID,
-      showOffline: true,
-      sendOpenScreenRequests: false,
-      menuItemModel: CustomMenuItem(
-        screenLongName: QR_SCANNER_COMP_ID,
+    registerScreen(
+      CustomScreen(
+        key: QR_SCANNER_ID,
+        screenTitle: "Custom Scanner",
+        showOffline: true,
+        sendOpenScreenRequests: false,
+        screenBuilder: (context, screen) => const ScannerCustomWidget(),
+      ),
+      menuItem: CustomMenuItem(
         label: "QR Scanner",
         group: "Example",
         faIcon: FontAwesomeIcons.qrcode,
       ),
-      screenBuilder: (context, screen) => const ScannerCustomWidget(),
-    ));
+    );
 
-    registerScreen(CustomScreen(
-      screenLongName: SIGNATURE_COMP_ID,
-      menuItemModel: CustomMenuItem(
-        screenLongName: SIGNATURE_COMP_ID,
+    registerScreen(
+      CustomScreen.online(
+        key: SIGNATURE_COMP_ID,
+        replaceComponents: [
+          CustomComponent(
+            componentName: "signaturePanel",
+            componentBuilder: () => const SignatureCustomWidget(),
+          ),
+        ],
+      ),
+      menuItem: CustomMenuItem(
         label: "Signature",
         group: "Example",
         faIcon: FontAwesomeIcons.signature,
       ),
-      replaceComponents: [
-        CustomComponent(
-          componentName: "signaturePanel",
-          componentBuilder: () => const SignatureCustomWidget(),
-        ),
-      ],
-    ));
+    );
 
-    registerScreen(CustomScreen(
-      screenLongName: STYLED_TABLE_COMP_ID,
-      menuItemModel: CustomMenuItem(
-        screenLongName: STYLED_TABLE_COMP_ID,
+    registerScreen(
+      CustomScreen.online(
+        key: STYLED_TABLE_COMP_ID,
+        screenBuilder: (context, screen) => const StyledTableCustomWidget(),
+      ),
+      menuItem: CustomMenuItem(
         label: "Styled Table",
         group: "Example",
         faIcon: FontAwesomeIcons.table,
       ),
-      screenBuilder: (context, screen) => const StyledTableCustomWidget(),
-    ));
+    );
 
-    registerScreen(CustomScreen(
-      screenLongName: TELEPHONE_CALL_COMP_ID,
-      sendOpenScreenRequests: false,
-      screenTitle: "Telephone",
-      menuItemModel: CustomMenuItem(
-        screenLongName: TELEPHONE_CALL_COMP_ID,
+    registerScreen(
+      CustomScreen.online(
+        key: TELEPHONE_CALL_ID,
+        sendOpenScreenRequests: false,
+        screenTitle: "Telephone",
+        screenBuilder: (context, screen) => const TelephoneCallCustomWidget(),
+      ),
+      menuItem: CustomMenuItem(
         label: "Telephone",
         group: "Example",
         faIcon: FontAwesomeIcons.phone,
       ),
-      screenBuilder: (context, screen) => const TelephoneCallCustomWidget(),
-    ));
+    );
 
-    registerScreen(CustomScreen(
-      screenLongName: USER_DATA_COMP_ID,
-      showOffline: true,
-      sendOpenScreenRequests: false,
-      menuItemModel: CustomMenuItem(
-        screenLongName: USER_DATA_COMP_ID,
+    registerScreen(
+      CustomScreen(
+        key: USER_DATA_ID,
+        screenTitle: "User Data",
+        showOffline: true,
+        sendOpenScreenRequests: false,
+        screenBuilder: (context, screen) => const UserDataCustomWidget(),
+      ),
+      menuItem: CustomMenuItem(
         label: "Userdata",
         group: "Example",
         faIcon: FontAwesomeIcons.user,
       ),
-      screenBuilder: (context, screen) => const UserDataCustomWidget(),
-    ));
+    );
   }
 }

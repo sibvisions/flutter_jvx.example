@@ -1,17 +1,18 @@
 {
   "title": "JVx Example",
-  "requestTimeout": 25,
+  "requestTimeout": 25000,
   "uiConfig": {
     "showRememberMe": true,
     "rememberMeChecked": true
   },
-  "serverConfig": {
-    "baseUrl": "http://localhost:8888/JVx.mobile/services/mobile",
-    "appMode": "full",
-    "appName": "demo",
-    "username": "features",
-    "password": "features"
-  },
+  "serverConfigs": [
+    {
+      "baseUrl": "http://localhost:8888/JVx.mobile/services/mobile",
+      "appName": "demo",
+      "username": "features",
+      "password": "features"
+    }
+  ],
   "versionConfig": {
     "commit": "f63c85b2",
     "buildDate": 1659080940038
