@@ -17,7 +17,7 @@
     "commit": "f63c85b2",
     "buildDate": 1659080940038
   },
-  "startupParameters": {
+  "applicationParameters": {
     "apiKey": "<insert token here>"
   }
 }
