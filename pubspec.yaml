@@ -48,7 +48,7 @@ dependencies:
       ref: fix_flutter3.0
   flutter_map: ^4.0.0
   signature: ^5.1.0
-  mobile_scanner: ^2.0.0
+  mobile_scanner: ^3.2.0
   table_calendar: ^3.0.6
   geolocator: ^9.0.1
 

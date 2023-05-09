@@ -14,14 +14,13 @@ class ScannerCustomWidget extends StatefulWidget {
 }
 
 class _ScannerCustomWidgetState extends State<ScannerCustomWidget> {
-  Barcode? scanResult;
+  BarcodeCapture? scanResult;
 
   @override
   Widget build(BuildContext context) {
     return scanResult == null
         ? MobileScanner(
-            allowDuplicates: false,
-            onDetect: (barcode, args) {
+            onDetect: (barcode) {
               scanResult = barcode;
               setState(() {});
             },
@@ -65,7 +64,7 @@ class _ScannerCustomWidgetState extends State<ScannerCustomWidget> {
                           child: Padding(
                             padding: const EdgeInsets.all(8),
                             child: Text(
-                              scanResult?.rawValue ?? "Nothing scanned yet!",
+                              scanResult?.barcodes[0].rawValue ?? "Nothing scanned yet!",
                             ),
                           ),
                         ),
