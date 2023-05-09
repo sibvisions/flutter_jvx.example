@@ -5,35 +5,29 @@ class CustomPopup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.all(5.0),
-      width: 279.0,
-      height: 121.0,
-      child: Stack(
-        children: [
-          Container(
-            decoration: const BoxDecoration(
-              color: Colors.black54,
-              borderRadius: BorderRadius.all(Radius.circular(15)),
-            ),
-            margin: const EdgeInsets.only(top: 40.0),
-            padding: const EdgeInsets.all(5),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _buildNameAndLocation(),
-              ],
-            ),
+    return Stack(
+      children: [
+        Container(
+          decoration: const BoxDecoration(
+            color: Colors.black54,
+            borderRadius: BorderRadius.all(Radius.circular(15)),
           ),
-        ],
-      ),
+          padding: const EdgeInsets.all(5),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _buildNameAndLocation(),
+            ],
+          ),
+        ),
+      ],
     );
   }
 
   Expanded _buildNameAndLocation() {
     return Expanded(
-      child: Container(
-        margin: const EdgeInsets.only(left: 6.0, top: 8, right: 6.0),
+      child: Padding(
+        padding: const EdgeInsets.only(left: 6.0, top: 8, right: 6.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
