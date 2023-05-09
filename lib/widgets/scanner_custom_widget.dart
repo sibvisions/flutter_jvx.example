@@ -27,12 +27,8 @@ class _ScannerCustomWidgetState extends State<ScannerCustomWidget> {
           )
         : Column(
             children: [
+              const Spacer(),
               Expanded(
-                flex: 1,
-                child: Container(),
-              ),
-              Expanded(
-                flex: 1,
                 child: Container(
                   margin: const EdgeInsets.all(15),
                   decoration: BoxDecoration(
@@ -43,7 +39,6 @@ class _ScannerCustomWidgetState extends State<ScannerCustomWidget> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       const Expanded(
-                        flex: 1,
                         child: Align(
                           alignment: Alignment.center,
                           child: Padding(
@@ -76,9 +71,8 @@ class _ScannerCustomWidgetState extends State<ScannerCustomWidget> {
                           child: Row(
                             children: [
                               Expanded(
-                                flex: 1,
                                 child: CustomRoundedButton(
-                                    text: Text("Scan"),
+                                    text: const Text("Scan"),
                                     icon: const Icon(FontAwesomeIcons.qrcode, color: Colors.white),
                                     onTap: () {
                                       scanResult = null;
@@ -93,10 +87,7 @@ class _ScannerCustomWidgetState extends State<ScannerCustomWidget> {
                   ),
                 ),
               ),
-              Expanded(
-                flex: 1,
-                child: Container(),
-              ),
+              const Spacer(),
             ],
           );
   }
