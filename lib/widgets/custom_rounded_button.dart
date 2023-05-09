@@ -24,9 +24,9 @@ class CustomRoundedButton extends StatelessWidget {
         child: InkWell(
           onTap: onTap,
           child: IconTheme(
-            data: IconTheme.of(context).merge(IconThemeData(
+            data: IconTheme.of(context).copyWith(
               color: Theme.of(context).colorScheme.onPrimary,
-            )),
+            ),
             child: DefaultTextStyle(
               style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
               child: Column(
