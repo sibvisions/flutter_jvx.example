@@ -85,7 +85,7 @@ class _StyledTableCustomWidgetState extends State<StyledTableCustomWidget> {
                                 minRadius: 40,
                               )
                             : CircleAvatar(
-                                backgroundColor: Theme.of(context).primaryColor,
+                                backgroundColor: Theme.of(context).colorScheme.primary,
                                 minRadius: 40,
                                 child: Text(
                                   "${contacts[index].firstname[0]}${contacts[index].lastname[0]}",

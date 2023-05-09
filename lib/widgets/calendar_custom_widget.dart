@@ -101,7 +101,7 @@ class _CalendarCustomWidgetState extends State<CalendarCustomWidget> {
       eventLoader: (DateTime day) => _events[day] ?? [],
       startingDayOfWeek: StartingDayOfWeek.monday,
       calendarStyle: CalendarStyle(
-        rangeHighlightColor: Theme.of(context).primaryColor,
+        rangeHighlightColor: Theme.of(context).colorScheme.primary,
         todayTextStyle: TextStyle(color: Colors.deepOrange[200]),
         markerDecoration: BoxDecoration(color: Colors.deepOrange[700]),
         outsideDaysVisible: false,

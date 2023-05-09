@@ -37,7 +37,7 @@ class _SignatureCustomWidgetState extends State<SignatureCustomWidget> {
               margin: const EdgeInsets.all(15.0),
               padding: const EdgeInsets.all(3.0),
               decoration: BoxDecoration(
-                border: Border.all(color: Theme.of(context).primaryColor),
+                border: Border.all(color: Theme.of(context).colorScheme.primary),
                 color: Colors.white,
               ),
               child: Signature(
@@ -51,7 +51,7 @@ class _SignatureCustomWidgetState extends State<SignatureCustomWidget> {
                 Expanded(
                   child: IconButton(
                     icon: const Icon(Icons.save),
-                    color: Theme.of(context).primaryColor,
+                    color: Theme.of(context).colorScheme.primary,
                     onPressed: () async {
                       if (_controller.isNotEmpty) {
                         var data = await _controller.toPngBytes();
@@ -67,7 +67,7 @@ class _SignatureCustomWidgetState extends State<SignatureCustomWidget> {
                 Expanded(
                   child: IconButton(
                     icon: const Icon(Icons.delete),
-                    color: Theme.of(context).primaryColor,
+                    color: Theme.of(context).colorScheme.primary,
                     onPressed: () {
                       setState(() => _controller.clear());
                     },

@@ -43,7 +43,7 @@ class _TelephoneCallCustomWidgetState extends State<TelephoneCallCustomWidget> {
             margin: const EdgeInsets.all(15),
             padding: const EdgeInsets.all(15),
             decoration: BoxDecoration(
-              color: Theme.of(context).primaryColor,
+              color: Theme.of(context).colorScheme.primary,
               borderRadius: const BorderRadius.all(Radius.circular(15)),
             ),
             child: Column(

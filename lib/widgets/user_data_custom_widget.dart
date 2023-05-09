@@ -22,7 +22,7 @@ class UserDataCustomWidget extends StatelessWidget {
                   ? null
                   : Icon(
                       FontAwesomeIcons.userTie,
-                      color: Theme.of(context).primaryColor,
+                      color: Theme.of(context).colorScheme.primary,
                       size: 60,
                     )),
           const SizedBox(
