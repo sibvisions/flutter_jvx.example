@@ -5,12 +5,16 @@
     "showRememberMe": true,
     "rememberMeChecked": true
   },
+  "serverConfigsLocked": false,
+  "serverConfigsParametersHidden": false,
   "serverConfigs": [
     {
       "baseUrl": "http://localhost:8888/JVx.mobile/services/mobile",
       "appName": "demo",
       "username": "features",
-      "password": "features"
+      "password": "features",
+      "locked": false,
+      "parametersHidden": false
     }
   ],
   "versionConfig": {
