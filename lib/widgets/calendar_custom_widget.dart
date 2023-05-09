@@ -69,7 +69,10 @@ class _CalendarCustomWidgetState extends State<CalendarCustomWidget> {
       children: [
         _buildTableCalendar(),
         const SizedBox(height: 8.0),
-        _buildButtons(),
+        SizedBox(
+          height: 80,
+          child: _buildButtons(),
+        ),
         const SizedBox(height: 8.0),
         const Text("Events:",
             style: TextStyle(
@@ -137,29 +140,23 @@ class _CalendarCustomWidgetState extends State<CalendarCustomWidget> {
 
   Widget _buildButtons() {
     // final dateTime = _events.keys.elementAt(_events.length - 2);
-    return Column(
+    return Row(
+      mainAxisSize: MainAxisSize.max,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        Row(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            CustomRoundedButton(
-              text: "Month",
-              icon: const Icon(
-                FontAwesomeIcons.calendar,
-                color: Colors.white,
-              ),
-              onTap: () => _setCalendarFormat(CalendarFormat.month),
-            ),
-            CustomRoundedButton(
-              text: "Week",
-              icon: const Icon(
-                FontAwesomeIcons.calendarWeek,
-                color: Colors.white,
-              ),
-              onTap: () => _setCalendarFormat(CalendarFormat.week),
-            ),
-          ],
+        Expanded(
+          child: CustomRoundedButton(
+            text: const Text("Month"),
+            icon: const Icon(FontAwesomeIcons.calendar),
+            onTap: () => _setCalendarFormat(CalendarFormat.month),
+          ),
+        ),
+        Expanded(
+          child: CustomRoundedButton(
+            text: const Text("Week"),
+            icon: const Icon(FontAwesomeIcons.calendarWeek),
+            onTap: () => _setCalendarFormat(CalendarFormat.week),
+          ),
         ),
       ],
     );

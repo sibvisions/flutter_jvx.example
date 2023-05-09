@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 
 class CustomRoundedButton extends StatelessWidget {
   final Function()? onTap;
-  final String text;
   final Icon icon;
+  final Widget text;
+  final Color? color;
 
   const CustomRoundedButton({
     super.key,
-    required this.text,
-    required this.icon,
     this.onTap,
+    this.color,
+    required this.icon,
+    required this.text,
   });
 
   @override
@@ -18,19 +20,23 @@ class CustomRoundedButton extends StatelessWidget {
       decoration: const BoxDecoration(shape: BoxShape.circle),
       clipBehavior: Clip.hardEdge,
       child: Material(
-        color: Theme.of(context).primaryColor,
+        color: onTap != null ? (color ?? Theme.of(context).colorScheme.primary) : Colors.grey,
         child: InkWell(
-          splashColor: Colors.orange,
           onTap: onTap,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              icon,
-              Text(
-                text,
-                style: const TextStyle(color: Colors.white),
+          child: IconTheme(
+            data: IconTheme.of(context).merge(IconThemeData(
+              color: Theme.of(context).colorScheme.onPrimary,
+            )),
+            child: DefaultTextStyle(
+              style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  icon,
+                  text,
+                ],
               ),
-            ],
+            ),
           ),
         ),
       ),

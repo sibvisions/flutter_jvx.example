@@ -118,16 +118,16 @@ class MapCustomWidgetState extends State<MapCustomWidget> {
                       ),
                       Expanded(
                         child: CustomRoundedButton(
-                          text: "Maps",
-                          icon: const Icon(Icons.map, color: Colors.white),
+                          text: const Text("Maps"),
+                          icon: const Icon(Icons.map),
                           onTap: _launchMapsUrl,
                         ),
                       ),
                       const SizedBox(width: 10),
                       Expanded(
                         child: CustomRoundedButton(
-                          text: "Call",
-                          icon: const Icon(Icons.call, color: Colors.white),
+                          text: const Text("Call"),
+                          icon: const Icon(Icons.call),
                           onTap: _launchCallUrl,
                         ),
                       ),

@@ -65,8 +65,8 @@ class _CoCustomComponentWidgetState extends State<CoCustomComponentWidget> {
           children: [
             Expanded(
               child: CustomRoundedButton(
-                text: "Call",
-                icon: const Icon(Icons.call, color: Colors.white),
+                text: const Text("Call"),
+                icon: const Icon(Icons.call),
                 onTap: () {
                   if (phone.isNotEmpty) {
                     launchUrl(Uri.parse("tel://$phone"));
@@ -77,8 +77,8 @@ class _CoCustomComponentWidgetState extends State<CoCustomComponentWidget> {
             const SizedBox(width: 10),
             Expanded(
               child: CustomRoundedButton(
-                text: "SMS",
-                icon: const Icon(Icons.sms, color: Colors.white),
+                text: const Text("SMS"),
+                icon: const Icon(Icons.sms),
                 onTap: () {
                   if (phone.isNotEmpty) {
                     launchUrl(Uri.parse("sms://$phone"));
@@ -89,8 +89,8 @@ class _CoCustomComponentWidgetState extends State<CoCustomComponentWidget> {
             const SizedBox(width: 10),
             Expanded(
               child: CustomRoundedButton(
-                text: "WhatsApp",
-                icon: const Icon(FontAwesomeIcons.whatsapp, color: Colors.white),
+                text: const Text("WhatsApp"),
+                icon: const Icon(FontAwesomeIcons.whatsapp),
                 onTap: () {
                   if (phone.isNotEmpty) {
                     if (phone.startsWith("0")) {
