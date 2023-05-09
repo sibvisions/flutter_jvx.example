@@ -20,7 +20,7 @@ class MapCustomWidget extends StatefulWidget {
 class MapCustomWidgetState extends State<MapCustomWidget> {
   late final String? apiKey;
   final LatLng initialPosition = LatLng(48.247533, 16.380093);
-  MapController mapController = MapController();
+  final MapController mapController = MapController();
   bool infoWindowVisible = false;
 
   @override
@@ -54,6 +54,7 @@ class MapCustomWidgetState extends State<MapCustomWidget> {
               ),
               MarkerLayer(
                 markers: _buildMarkers(),
+                rotate: true,
               ),
             ],
           ),
@@ -79,57 +80,59 @@ class MapCustomWidgetState extends State<MapCustomWidget> {
               const SizedBox(height: 10),
               Container(
                 padding: const EdgeInsets.all(10),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
-                          Text(
-                            "SIB Visions GmbH",
-                            style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
+                child: IntrinsicHeight(
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Expanded(
+                        flex: 4,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: const [
+                            Text(
+                              "SIB Visions GmbH",
+                              style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
-                          ),
-                          SizedBox(height: 10),
-                          Text(
-                            "Wehlistraße 29",
-                            style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.black,
+                            SizedBox(height: 10),
+                            Text(
+                              "Wehlistraße 29",
+                              style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.black,
+                              ),
                             ),
-                          ),
-                          Text(
-                            "1200 Wien",
-                            style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.black,
+                            Text(
+                              "1200 Wien",
+                              style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.black,
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.only(top: 15),
-                      child: CustomRoundedButton(
-                        text: "Maps",
-                        icon: const Icon(Icons.map, color: Colors.white),
-                        onTap: _launchMapsUrl,
+                      Expanded(
+                        child: CustomRoundedButton(
+                          text: "Maps",
+                          icon: const Icon(Icons.map, color: Colors.white),
+                          onTap: _launchMapsUrl,
+                        ),
                       ),
-                    ),
-                    const SizedBox(width: 10),
-                    Container(
-                      margin: const EdgeInsets.only(top: 15),
-                      child: CustomRoundedButton(
-                        text: "Call",
-                        icon: const Icon(Icons.call, color: Colors.white),
-                        onTap: _launchCallUrl,
+                      const SizedBox(width: 10),
+                      Expanded(
+                        child: CustomRoundedButton(
+                          text: "Call",
+                          icon: const Icon(Icons.call, color: Colors.white),
+                          onTap: _launchCallUrl,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ],
@@ -152,8 +155,8 @@ class MapCustomWidgetState extends State<MapCustomWidget> {
                         } else {
                           log("No last known location");
                         }
-                      }).catchError((e) {
-                        log("Failed to obtain user location", error: e);
+                      }).catchError((e, stack) {
+                        log("Failed to obtain user location", error: e, stackTrace: stack);
                         return null;
                       });
                     },
@@ -174,40 +177,45 @@ class MapCustomWidgetState extends State<MapCustomWidget> {
   }
 
   List<Marker> _buildMarkers() {
+    Size effectiveSize = Size(
+      infoWindowVisible ? 279.0 : 60,
+      infoWindowVisible ? 81.0 : 60,
+    );
+
     return [
       Marker(
         point: initialPosition,
-        width: 279.0,
-        height: 121.0,
-        anchorPos: AnchorPos.align(AnchorAlign.top),
+        width: effectiveSize.width,
+        height: effectiveSize.height,
+        anchorPos: AnchorPos.exactly(Anchor(effectiveSize.width / 2, 0)),
+        rotateAlignment: Alignment.bottomCenter,
         builder: (context) => GestureDetector(
-            onTap: () {
-              setState(() {
-                infoWindowVisible = !infoWindowVisible;
-              });
-            },
-            child: infoWindowVisible ? _buildPopup() : _buildMarker()),
+          onTap: () => setState(() => infoWindowVisible = !infoWindowVisible),
+          child: infoWindowVisible ? _buildPopup(effectiveSize) : _buildMarker(effectiveSize),
+        ),
       ),
     ];
   }
 
-  Widget _buildPopup() {
-    return Container(
-      alignment: Alignment.bottomCenter,
-      width: 279.0,
-      height: 121.0,
-      child: const CustomPopup(),
-    );
+  Widget _buildPopup(Size size) {
+    return const CustomPopup();
   }
 
-  Widget _buildMarker() {
-    return Container(
+  Widget _buildMarker(Size size) {
+    return Align(
       alignment: Alignment.bottomCenter,
-      width: 20,
-      height: 25,
-      child: Image.asset(
-        "assets/images/ic_marker.png",
-        height: 60,
+      child: SizedBox(
+        height: size.height - 5,
+        width: size.width,
+        child: OverflowBox(
+          minHeight: size.height,
+          maxHeight: size.height,
+          alignment: Alignment.topCenter,
+          child: Image.asset(
+            "assets/images/ic_marker.png",
+            height: size.height,
+          ),
+        ),
       ),
     );
   }
@@ -241,6 +249,6 @@ class MapCustomWidgetState extends State<MapCustomWidget> {
       return Future.error("Location permissions are permanently denied, we cannot request permissions.");
     }
 
-    return Geolocator.getLastKnownPosition();
+    return await Geolocator.getLastKnownPosition();
   }
 }

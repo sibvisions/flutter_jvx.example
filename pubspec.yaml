@@ -46,7 +46,7 @@ dependencies:
       url: https://github.com/kennenfromchina/charts.git
       path: charts_flutter
       ref: fix_flutter3.0
-  flutter_map: ^3.0.0
+  flutter_map: ^4.0.0
   signature: ^5.1.0
   mobile_scanner: ^2.0.0
   table_calendar: ^3.0.6
