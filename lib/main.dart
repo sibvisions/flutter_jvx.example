@@ -2,6 +2,7 @@ import 'package:flutter_jvx/flutter_jvx.dart';
 
 import 'example_custom_screen_manager.dart';
 import 'example_login.dart';
+import 'splash.dart';
 
 void main() async {
   await FlutterUI.start(FlutterUI(
@@ -26,6 +27,7 @@ void main() async {
       ),
     ),
     appManager: ExampleCustomScreenManager(),
+    splashBuilder: (context, snapshot) => ExampleSplash(snapshot),
     loginBuilder: (context, mode) => ExampleLogin(mode: mode),
   ));
 }
