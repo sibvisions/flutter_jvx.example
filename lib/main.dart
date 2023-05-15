@@ -1,8 +1,8 @@
 import 'package:flutter_jvx/flutter_jvx.dart';
 
-import 'example_custom_screen_manager.dart';
-import 'example_login.dart';
-import 'splash.dart';
+import 'customization/login.dart';
+import 'customization/splash.dart';
+import 'screen_manager.dart';
 
 void main() async {
   await FlutterUI.start(FlutterUI(
