@@ -1,6 +1,6 @@
 {
   "title": "JVx Example",
-  "requestTimeout": 25000,
+  "connectTimeout": 25000,
   "uiConfig": {
     "showRememberMe": true,
     "rememberMeChecked": true

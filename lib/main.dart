@@ -12,7 +12,7 @@ void main() async {
         showRememberMe: true,
         rememberMeChecked: false,
       ),
-      requestTimeout: const Duration(seconds: 10),
+      connectTimeout: const Duration(seconds: 10),
       serverConfigs: [
         PredefinedServerConfig(
           baseUrl: Uri.parse("http://172.20.0.119:8888/JVx.mobile/services/mobile"),
