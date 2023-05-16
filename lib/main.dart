@@ -21,6 +21,15 @@ void main() async {
           password: "features",
         ),
       ],
+      logConfig: const LogConfig(
+        levels: LogLevelConfig(
+          general: Level.info,
+          api: Level.info,
+          command: Level.info,
+          ui: Level.info,
+          layout: Level.info,
+        ),
+      ),
       versionConfig: const VersionConfig(
         commit: "070a55e2",
         buildDate: "2021-09-26",
