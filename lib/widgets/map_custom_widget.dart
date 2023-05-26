@@ -26,7 +26,7 @@ class MapCustomWidgetState extends State<MapCustomWidget> {
   @override
   void initState() {
     super.initState();
-    apiKey = ConfigController().getAppConfig()?.applicationParameters?['apiKey'];
+    apiKey = IConfigService().getAppConfig()?.applicationParameters?['apiKey'];
   }
 
   @override

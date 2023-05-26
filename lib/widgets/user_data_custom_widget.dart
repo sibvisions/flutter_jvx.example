@@ -7,7 +7,7 @@ class UserDataCustomWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var profileImage = ConfigController().userInfo.value?.profileImage;
+    var profileImage = IConfigService().userInfo.value?.profileImage;
 
     return Center(
       child: Column(
@@ -16,35 +16,41 @@ class UserDataCustomWidget extends StatelessWidget {
             height: 20,
           ),
           CircleAvatar(
-              radius: 70,
-              backgroundImage: profileImage != null ? MemoryImage(profileImage) : null,
-              child: profileImage != null
-                  ? null
-                  : Icon(
-                      FontAwesomeIcons.userTie,
-                      color: Theme.of(context).colorScheme.primary,
-                      size: 60,
-                    )),
+            radius: 70,
+            backgroundImage: profileImage != null ? MemoryImage(profileImage) : null,
+            child: profileImage != null
+                ? null
+                : Icon(
+                    FontAwesomeIcons.userTie,
+                    color: Theme.of(context).colorScheme.primary,
+                    size: 60,
+                  ),
+          ),
           const SizedBox(
             height: 15,
           ),
           Text(
-            "User: ${ConfigController().userInfo.value!.displayName!}",
+            "User: ${IConfigService().userInfo.value!.displayName!}",
             style: TextStyle(
-                fontWeight: FontWeight.bold, fontSize: 20, color: Theme.of(context).textTheme.bodyLarge!.color),
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+              color: Theme.of(context).textTheme.bodyLarge!.color,
+            ),
           ),
           const Divider(
             height: 20,
             color: Colors.white,
           ),
-          Text("Roles: ",
-              style: TextStyle(
-                color: Theme.of(context).textTheme.bodyLarge!.color,
-                fontSize: 20,
-              )),
+          Text(
+            "Roles: ",
+            style: TextStyle(
+              color: Theme.of(context).textTheme.bodyLarge!.color,
+              fontSize: 20,
+            ),
+          ),
           const SizedBox(height: 20),
           Text(
-            ConfigController().userInfo.value!.roles.join(", "),
+            IConfigService().userInfo.value!.roles.join(", "),
             style: TextStyle(
               color: Theme.of(context).textTheme.bodyLarge!.color,
               fontSize: 16,

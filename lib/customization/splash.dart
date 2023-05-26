@@ -19,7 +19,7 @@ class ExampleSplash extends StatelessWidget {
           ),
           Center(
             child: Text(
-              ConfigController().title.value ?? "JVx Example",
+              IConfigService().title.value ?? "JVx Example",
               style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
             ),
           ),
