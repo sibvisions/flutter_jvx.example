@@ -1,6 +1,7 @@
 import 'package:flutter_jvx/flutter_jvx.dart';
 
 import 'customization/login.dart';
+import 'customization/menu.dart';
 import 'customization/splash.dart';
 import 'screen_manager.dart';
 
@@ -38,5 +39,9 @@ void main() async {
     appManager: ExampleCustomScreenManager(),
     splashBuilder: (context, snapshot) => ExampleSplash(snapshot),
     loginBuilder: (context, mode) => ExampleLogin(mode: mode),
+    menuBuilder: (context, key, mode, menuModel, onClick, grouped, sticky, groupOnlyOnMultiple) {
+      if (mode != MenuMode.GRID) return null;
+      return ExampleMenu(key: key, menuModel, onClick, grouped, sticky, groupOnlyOnMultiple);
+    },
   ));
 }
