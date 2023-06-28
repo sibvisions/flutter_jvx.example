@@ -109,8 +109,8 @@ class ExampleCustomScreenManager extends AppManager {
         screenTitle: "Custom Contacts",
         replaceComponents: [
           CustomComponent(
-            componentName: "contactPanel",
-            componentBuilder: () => const CoCustomComponentWidget(),
+            componentName: "Con-CG_NT_contacts",
+            componentBuilder: (context, model) => const CoCustomComponentWidget(),
           )
         ],
         headerBuilder: (context) => const CustomHeaderAndFooterWidget(
@@ -162,7 +162,7 @@ class ExampleCustomScreenManager extends AppManager {
         replaceComponents: [
           CustomComponent(
             componentName: "signaturePanel",
-            componentBuilder: () => const SignatureCustomWidget(),
+            componentBuilder: (context, model) => const SignatureCustomWidget(),
           ),
         ],
       ),
