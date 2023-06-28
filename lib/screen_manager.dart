@@ -111,6 +111,9 @@ class ExampleCustomScreenManager extends AppManager {
           CustomComponent(
             componentName: "Con-CG_NT_contacts",
             componentBuilder: (context, model) => const CoCustomComponentWidget(),
+            preferredSize: const Size(300, 300),
+            maxSize: const Size(100, 100),
+            minSize: const Size(50, 50),
           )
         ],
         headerBuilder: (context) => const CustomHeaderAndFooterWidget(
