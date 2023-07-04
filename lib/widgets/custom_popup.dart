@@ -25,14 +25,14 @@ class CustomPopup extends StatelessWidget {
   }
 
   Expanded _buildNameAndLocation() {
-    return Expanded(
+    return const Expanded(
       child: Padding(
-        padding: const EdgeInsets.only(left: 6.0, top: 8, right: 6.0),
+        padding: EdgeInsets.only(left: 6.0, top: 8, right: 6.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
-              children: const [
+              children: [
                 Icon(
                   Icons.work,
                   color: Colors.grey,
@@ -49,9 +49,9 @@ class CustomPopup extends StatelessWidget {
                 )),
               ],
             ),
-            const SizedBox(height: 5),
+            SizedBox(height: 5),
             Row(
-              children: const [
+              children: [
                 Icon(
                   Icons.location_on,
                   color: Colors.red,

@@ -63,18 +63,21 @@ class _ChartCustomWidgetState extends State<ChartCustomWidget> {
       child: Scaffold(
         appBar: AppBar(
             leading: Container(),
-            flexibleSpace: Column(mainAxisAlignment: MainAxisAlignment.end, children: const [
-              TabBar(
-                tabs: [
-                  Tab(
-                    text: "Pie Chart",
-                  ),
-                  Tab(
-                    text: "Bar Chart",
-                  ),
-                ],
-              ),
-            ])),
+            flexibleSpace: const Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                TabBar(
+                  tabs: [
+                    Tab(
+                      text: "Pie Chart",
+                    ),
+                    Tab(
+                      text: "Bar Chart",
+                    ),
+                  ],
+                ),
+              ],
+            )),
         body: TabBarView(
           children: countries.isNotEmpty
               ? [

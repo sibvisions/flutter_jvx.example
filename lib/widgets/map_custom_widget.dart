@@ -84,12 +84,12 @@ class MapCustomWidgetState extends State<MapCustomWidget> {
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      Expanded(
+                      const Expanded(
                         flex: 4,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
+                          children: [
                             Text(
                               "SIB Visions GmbH",
                               style: TextStyle(
