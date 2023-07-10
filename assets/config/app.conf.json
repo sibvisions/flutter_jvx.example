@@ -20,6 +20,9 @@
     }
   },
   "uiConfig": {
+    "hideLanguageSetting": false,
+    "hidePictureSizeSetting": false,
+    "hideThemeSetting": false,
     "showRememberMe": true,
     "rememberMeChecked": true
   },
