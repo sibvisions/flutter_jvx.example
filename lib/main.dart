@@ -5,8 +5,8 @@ import 'customization/menu.dart';
 import 'customization/splash.dart';
 import 'screen_manager.dart';
 
-void main() async {
-  await FlutterUI.start(FlutterUI(
+void main() {
+  FlutterUI.start(FlutterUI(
     appConfig: AppConfig(
       title: "JVx Example",
       uiConfig: const UiConfig(
