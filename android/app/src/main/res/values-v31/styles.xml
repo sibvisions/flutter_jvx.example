@@ -7,11 +7,10 @@
         <item name="android:windowDrawsSystemBarBackgrounds">false</item>
         <item name="android:windowLayoutInDisplayCutoutMode">shortEdges</item>
 
-        <item name="windowSplashScreenBackground">#E3E3E3</item>
-        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_j</item>
-        <item name="windowSplashScreenIconBackgroundColor">#DADADA</item>
-        <item name="postSplashScreenTheme">@style/NormalTheme</item>
-        <item name="windowSplashScreenAnimationDuration">300</item>
+        <item name="android:windowSplashScreenBackground">#E3E3E3</item>
+        <item name="android:windowSplashScreenAnimatedIcon">@drawable/ic_j</item>
+        <item name="android:windowSplashScreenIconBackgroundColor">#DADADA</item>
+        <item name="android:windowSplashScreenAnimationDuration">300</item>
         <item name="android:windowSplashScreenBrandingImage" tools:targetApi="S">
             @mipmap/branding_sib_visions
         </item>
