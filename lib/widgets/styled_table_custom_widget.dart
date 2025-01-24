@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_jvx/flutter_jvx.dart';
+import 'package:intl/intl.dart';
 
 class StyledTableCustomWidget extends StatefulWidget {
   const StyledTableCustomWidget({super.key});
@@ -11,15 +12,8 @@ class StyledTableCustomWidget extends StatefulWidget {
 }
 
 class _StyledTableCustomWidgetState extends State<StyledTableCustomWidget> {
-  static const String CONTACT_DATA_PROVIDER = "JVxMobileDemo/StyTab-2G/contacts#4";
-  static const String COLUMN_NAME_ID = "ID";
-  static const String COLUMN_NAME_FIRSTNAME = "FIRSTNAME";
-  static const String COLUMN_NAME_LASTNAME = "LASTNAME";
-  static const String COLUMN_NAME_STREET = "STREET";
-  static const String COLUMN_NAME_STREET_NO = "NR";
-  static const String COLUMN_NAME_ZIP = "ZIP";
-  static const String COLUMN_NAME_TOWN = "TOWN";
-  static const String COLUMN_NAME_IMAGE = "IMAGE";
+
+  static DateFormat dateFormat = DateFormat('ddMMyy');
 
   final List<Contact> contacts = [];
 
@@ -29,17 +23,21 @@ class _StyledTableCustomWidgetState extends State<StyledTableCustomWidget> {
     IUiService().registerDataSubscription(
       pDataSubscription: DataSubscription(
         subbedObj: this,
-        dataProvider: CONTACT_DATA_PROVIDER,
+        dataProvider: "JVxMobileDemo/StyTab-2G/contacts#4",
         from: 0,
         dataColumns: [
-          COLUMN_NAME_ID,
-          COLUMN_NAME_FIRSTNAME,
-          COLUMN_NAME_LASTNAME,
-          COLUMN_NAME_IMAGE,
-          COLUMN_NAME_STREET,
-          COLUMN_NAME_STREET_NO,
-          COLUMN_NAME_ZIP,
-          COLUMN_NAME_TOWN,
+          "ID",
+          "SALU_SALUTATION",
+          "ACTI_ACADEMIC_TITLE",
+          "FIRSTNAME",
+          "LASTNAME",
+          "IMAGE",
+          "STREET",
+          "NR",
+          "ZIP",
+          "TOWN",
+          "BIRTHDAY",
+          "SOCIALSECNR"
         ],
         onDataChunk: (DataChunk dataChunk) {
           contacts.clear();
@@ -53,6 +51,10 @@ class _StyledTableCustomWidgetState extends State<StyledTableCustomWidget> {
               dataChunk.data[i]![5],
               dataChunk.data[i]![6],
               dataChunk.data[i]![7],
+              dataChunk.data[i]![8],
+              dataChunk.data[i]![9],
+              dataChunk.data[i]![10],
+              dataChunk.data[i]![11],
             ));
           }
           setState(() {});
@@ -63,6 +65,7 @@ class _StyledTableCustomWidgetState extends State<StyledTableCustomWidget> {
 
   @override
   Widget build(BuildContext context) {
+
     return Center(
       child: Column(
         children: [
@@ -71,38 +74,53 @@ class _StyledTableCustomWidgetState extends State<StyledTableCustomWidget> {
             child: ListView.builder(
               itemBuilder: (ctx, index) {
                 return Card(
+                  color: Colors.white,
+                  margin: const EdgeInsets.only(left: 10, right: 10, bottom: 8 ),
                   child: Row(
                     children: [
-                      Container(
-                        margin: const EdgeInsets.symmetric(
-                          vertical: 10,
-                          horizontal: 15,
-                        ),
-                        padding: const EdgeInsets.all(10),
-                        child: contacts[index].image != null
-                            ? CircleAvatar(
-                                backgroundImage: MemoryImage(base64Decode(contacts[index].image!)),
-                                minRadius: 40,
-                              )
-                            : CircleAvatar(
-                                backgroundColor: Theme.of(context).colorScheme.primary,
-                                minRadius: 40,
-                                child: Text(
-                                  "${contacts[index].firstname[0]}${contacts[index].lastname[0]}",
-                                  style: const TextStyle(fontSize: 40, color: Colors.white),
-                                ),
-                              ),
-                      ),
-                      const VerticalDivider(),
+                      Container(color: Colors.grey.shade300,
+                          child:Container(
+                              margin: const EdgeInsets.only(top: 5, left: 5, bottom: 5, right: 5),
+                                  padding: const EdgeInsets.all(10),
+                                  child: contacts[index].image != null
+                                      ? CircleAvatar(
+                                          backgroundImage: MemoryImage(base64Decode(contacts[index].image!)),
+                                          minRadius: 45,
+                                        )
+                                      : CircleAvatar(
+                                          backgroundColor: Theme.of(context).colorScheme.primary,
+                                          minRadius: 45,
+                                          child: Text(
+                                            "${contacts[index].firstname[0]}${contacts[index].lastname[0]}",
+                                            style: const TextStyle(fontSize: 40, color: Colors.white),
+                                          ),
+                                        ),
+                                )),
+                      const SizedBox(width: 15),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            if (contacts[index].salutation != null)
+                              Text(
+                                "${contacts[index].salutation}",
+                                style: Theme
+                                    .of(context)
+                                    .textTheme
+                                    .titleLarge,
+                                overflow: TextOverflow.ellipsis,
+                              ),
                             Text(
-                              "${contacts[index].firstname} ${contacts[index].lastname}",
+                              "${contacts[index].academicTitle ?? ''}${contacts[index].academicTitle != null ? '. ' : ''}${contacts[index].firstname} ${contacts[index].lastname}",
                               style: Theme.of(context).textTheme.titleLarge,
                               overflow: TextOverflow.ellipsis,
                             ),
+                            if (contacts[index].socialSecNr != null && contacts[index].dob != null)
+                              Text(
+                                "(${dateFormat.format(contacts[index].dob!)}${contacts[index].socialSecNr})",
+                                style: const TextStyle(color: Colors.grey, fontSize: 12),
+                                overflow: TextOverflow.ellipsis,
+                              ),
                             const SizedBox(height: 10),
                             Row(
                               children: [
@@ -111,11 +129,11 @@ class _StyledTableCustomWidgetState extends State<StyledTableCustomWidget> {
                                   color: Colors.grey,
                                   size: 13.0,
                                 ),
-                                const SizedBox(width: 5),
+                                const SizedBox(width: 10),
                                 Expanded(
                                   child: Text(
                                     "${contacts[index].street} ${contacts[index].streetNr}, ${contacts[index].zip} ${contacts[index].town}",
-                                    style: const TextStyle(color: Colors.grey, fontSize: 14),
+                                    style: const TextStyle(color: Colors.black54, fontSize: 15),
                                     overflow: TextOverflow.ellipsis,
                                   ),
                                 ),
@@ -123,10 +141,6 @@ class _StyledTableCustomWidgetState extends State<StyledTableCustomWidget> {
                             )
                           ],
                         ),
-                      ),
-                      Container(
-                        alignment: Alignment.centerRight,
-                        child: const Icon(Icons.keyboard_arrow_right, color: Colors.black, size: 40.0),
                       ),
                     ],
                   ),
@@ -149,16 +163,22 @@ class _StyledTableCustomWidgetState extends State<StyledTableCustomWidget> {
 
 class Contact {
   final int id;
+  final String? salutation;
+  final String? academicTitle;
   final String firstname;
   final String lastname;
   final String? image;
-  final String street;
-  final String streetNr;
-  final String zip;
-  final String town;
+  final String? street;
+  final String? streetNr;
+  final String? zip;
+  final String? town;
+  final DateTime? dob;
+  final int? socialSecNr;
 
   Contact(
     this.id,
+    this.salutation,
+    this.academicTitle,
     this.firstname,
     this.lastname,
     this.image,
@@ -166,5 +186,7 @@ class Contact {
     this.streetNr,
     this.zip,
     this.town,
-  );
+    dob,
+    this.socialSecNr
+  ) : dob = DateTime.fromMillisecondsSinceEpoch(dob);
 }

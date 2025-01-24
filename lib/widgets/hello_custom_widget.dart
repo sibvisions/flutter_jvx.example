@@ -15,7 +15,7 @@ class _HelloCustomWidgetState extends State<HelloCustomWidget> {
       child: ElevatedButton(
         child: const Text("Press this to get back to the Menu"),
         onPressed: () {
-          context.beamBack();
+          context.beamToNamed("/home");
         },
       ),
     );

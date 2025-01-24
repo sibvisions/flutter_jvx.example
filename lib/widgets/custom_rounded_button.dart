@@ -20,15 +20,15 @@ class CustomRoundedButton extends StatelessWidget {
       decoration: const BoxDecoration(shape: BoxShape.circle),
       clipBehavior: Clip.hardEdge,
       child: Material(
-        color: onTap != null ? (color ?? Theme.of(context).colorScheme.primary) : Colors.grey,
+        color: onTap != null ? (color ?? Theme.of(context).colorScheme.primary) : Colors.grey.shade300,
         child: InkWell(
           onTap: onTap,
           child: IconTheme(
             data: IconTheme.of(context).copyWith(
-              color: Theme.of(context).colorScheme.onPrimary,
+              color: onTap != null ? Theme.of(context).colorScheme.onPrimary : Colors.grey.shade500,
             ),
             child: DefaultTextStyle(
-              style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
+              style: TextStyle(color: onTap != null ? Theme.of(context).colorScheme.onPrimary : Colors.grey.shade500),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

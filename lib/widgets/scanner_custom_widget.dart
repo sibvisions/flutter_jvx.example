@@ -4,8 +4,6 @@ import 'package:mobile_scanner/mobile_scanner.dart';
 
 import 'custom_rounded_button.dart';
 
-typedef QRCallback = void Function(Barcode barcode, MobileScannerArguments? arguments);
-
 class ScannerCustomWidget extends StatefulWidget {
   const ScannerCustomWidget({super.key});
 

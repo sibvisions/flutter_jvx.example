@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CustomPopup extends StatelessWidget {
   const CustomPopup({super.key});
@@ -8,9 +9,9 @@ class CustomPopup extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          decoration: const BoxDecoration(
-            color: Colors.black54,
-            borderRadius: BorderRadius.all(Radius.circular(15)),
+          decoration: BoxDecoration(
+            color: Colors.black.withAlpha(180),
+            borderRadius: const BorderRadius.all(Radius.circular(12)),
           ),
           padding: const EdgeInsets.all(5),
           child: Row(
@@ -25,47 +26,46 @@ class CustomPopup extends StatelessWidget {
   }
 
   Expanded _buildNameAndLocation() {
-    return const Expanded(
+    return Expanded(
       child: Padding(
-        padding: EdgeInsets.only(left: 6.0, top: 8, right: 6.0),
+        padding: const EdgeInsets.only(left: 6.0, top: 8, right: 6.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(
-                  Icons.work,
-                  color: Colors.grey,
-                  size: 20.0,
-                ),
-                SizedBox(width: 5),
-                Expanded(
-                    child: Text(
+                    Text(
                   "SIB Visions GmbH",
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 20,
+                    fontWeight: FontWeight.bold
                   ),
-                )),
+                ),
               ],
             ),
-            SizedBox(height: 5),
+            const SizedBox(height: 5),
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(
-                  Icons.location_on,
-                  color: Colors.red,
-                  size: 15.0,
-                ),
-                Text(
-                  "Wehlistraße 29 / Stiege 1 / 2. Stock",
-                  style: TextStyle(color: Colors.white),
-                ),
+                InkWell(onTap: launch,
+                  child: const Text("https://www.sibvisions.com",
+                                style: TextStyle(color: Colors.blueAccent,
+                                    fontWeight: FontWeight.bold,
+                                    decoration: TextDecoration.underline,
+                                    decorationColor: Colors.blueAccent),
+                              ),
+                )
               ],
             ),
           ],
         ),
       ),
     );
+  }
+
+  void launch() async {
+    await launchUrl(Uri.parse("https://www.sibvisions.com"));
   }
 }

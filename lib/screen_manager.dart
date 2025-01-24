@@ -14,16 +14,11 @@ import 'widgets/telephone_call_custom_widget.dart';
 import 'widgets/user_data_custom_widget.dart';
 
 class ExampleCustomScreenManager extends AppManager {
-  static const String CHART_COMP_ID =
-      "com.sibvisions.apps.mobile.demo.screens.features.ChartWorkScreen:L1_MI_DOOPENWORKSCREEN_COM-SIB-APP-MOB-DEM-SCR-FEA-CHAWORSCR";
-  static const String SIGNATURE_COMP_ID =
-      "com.sibvisions.apps.mobile.demo.screens.features.SignatureWorkScreen:L1_MI_DOOPENWORKSCREEN_COM-SIB-APP-MOB-DEM-SCR-FEA-SIGWORSCR";
-  static const String CALENDAR_COMP_ID =
-      "com.sibvisions.apps.mobile.demo.screens.features.CalendarWorkScreen:L1_MI_DOOPENWORKSCREEN_COM-SIB-APP-MOB-DEM-SCR-FEA-CALWORSCR";
-  static const String STYLED_TABLE_COMP_ID =
-      "com.sibvisions.apps.mobile.demo.screens.features.StyledTableWorkScreen:L1_MI_DOOPENWORKSCREEN_COM-SIB-APP-MOB-DEM-SCR-FEA-STYTABWORSCR";
-  static const String CONTACTS_COMP_ID =
-      "com.sibvisions.apps.mobile.demo.screens.features.ContactsWorkScreen:L1_MI_DOOPENWORKSCREEN_COM-SIB-APP-MOB-DEM-SCR-FEA-CONWORSCR";
+  static const String CHART_COMP_ID = "com.sibvisions.apps.mobile.demo.screens.features.ChartWorkScreen:L1_MI_DOOPENWORKSCREEN_COM-SIB-APP-MOB-DEM-SCR-FEA-CHAWORSCR";
+  static const String SIGNATURE_COMP_ID = "com.sibvisions.apps.mobile.demo.screens.features.SignatureWorkScreen:L1_MI_DOOPENWORKSCREEN_COM-SIB-APP-MOB-DEM-SCR-FEA-SIGWORSCR";
+  static const String CALENDAR_COMP_ID = "com.sibvisions.apps.mobile.demo.screens.features.CalendarWorkScreen:L1_MI_DOOPENWORKSCREEN_COM-SIB-APP-MOB-DEM-SCR-FEA-CALWORSCR";
+  static const String STYLED_TABLE_COMP_ID = "com.sibvisions.apps.mobile.demo.screens.features.StyledTableWorkScreen:L1_MI_DOOPENWORKSCREEN_COM-SIB-APP-MOB-DEM-SCR-FEA-STYTABWORSCR";
+  static const String CONTACTS_COMP_ID = "com.sibvisions.apps.mobile.demo.screens.features.ContactsWorkScreen:L1_MI_DOOPENWORKSCREEN_COM-SIB-APP-MOB-DEM-SCR-FEA-CONWORSCR";
   static const String HELLO_ID = "Hello";
   static const String TELEPHONE_CALL_ID = "Telephone";
   static const String MAP_ID = "Map";
@@ -62,15 +57,23 @@ class ExampleCustomScreenManager extends AppManager {
         sendOpenScreenRequests: false,
         screenTitle: "Altering Custom Screen",
         screenBuilder: (context, screen) => Container(
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: Colors.green,
-              width: 10,
-              style: BorderStyle.solid,
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: Colors.green,
+                width: 10,
+                style: BorderStyle.solid,
+              ),
             ),
-          ),
-          child: screen,
-        ),
+            child: Column(
+              children: [
+                Row(children: [Expanded(child: Container(color: Colors.grey.shade400,
+                  child: const Padding(padding: EdgeInsets.all(8),
+                        child: Text('Sub title of screen', style: TextStyle(fontWeight: FontWeight.w300),))))]),
+                //our screen is always an empty Container because we don't have such screen
+                //in the application, anyway in other cases it could be available
+                Expanded(child: screen ?? Container(color: Colors.white)),
+              ],
+            )),
       ),
       menuItem: CustomMenuItem(
         label: "Altering Custom Screen",
@@ -99,7 +102,7 @@ class ExampleCustomScreenManager extends AppManager {
       menuItem: CustomMenuItem(
         label: "Charts",
         group: "Example",
-        faIcon: FontAwesomeIcons.chartBar,
+        faIcon: FontAwesomeIcons.chartSimple,
       ),
     );
 
@@ -107,15 +110,13 @@ class ExampleCustomScreenManager extends AppManager {
       CustomScreen.online(
         key: CONTACTS_COMP_ID,
         screenTitle: "Custom Contacts",
-        replaceComponents: [
-          CustomComponent(
-            componentName: "Con-CG_NT_contacts",
-            componentBuilder: (context, model) => const CoCustomComponentWidget(),
-            preferredSize: const Size(300, 300),
-            maxSize: const Size(100, 100),
-            minSize: const Size(50, 50),
-          )
-        ],
+        screenBuilder: (context, screen) {
+          if (screen != null) {
+            return screen;
+          }
+
+          return Container(color: Colors.white);
+        },
         headerBuilder: (context) => const CustomHeaderAndFooterWidget(
           text: "This is a custom header",
         ),
@@ -129,6 +130,14 @@ class ExampleCustomScreenManager extends AppManager {
         faIcon: FontAwesomeIcons.userLarge,
       ),
     );
+
+    replaceComponent(CustomComponent(
+//        componentName: "Con-CG_NT_contacts-wrapper",
+        componentName: "Con-CG_NT_contacts",
+        componentBuilder: (context, model) => const CoCustomComponentWidget(),
+        preferredSize: const Size(300, 300),
+        maxSize: const Size(100, 100),
+        minSize: const Size(50, 50)));
 
     registerScreen(
       CustomScreen(
@@ -159,22 +168,16 @@ class ExampleCustomScreenManager extends AppManager {
       ),
     );
 
-    registerScreen(
-      CustomScreen.online(
-        key: SIGNATURE_COMP_ID,
-        replaceComponents: [
-          CustomComponent(
-            componentName: "signaturePanel",
-            componentBuilder: (context, model) => const SignatureCustomWidget(),
-          ),
-        ],
-      ),
-      menuItem: CustomMenuItem(
-        label: "Signature",
-        group: "Example",
-        faIcon: FontAwesomeIcons.signature,
-      ),
-    );
+    registerScreen(const CustomScreen.online(key: SIGNATURE_COMP_ID),
+        menuItem: CustomMenuItem(
+          label: "Signature",
+          group: "Example",
+          faIcon: FontAwesomeIcons.signature,
+        ));
+
+    replaceComponent(CustomComponent(
+        componentName: "signaturePanel",
+        componentBuilder: (context, model) => const SignatureCustomWidget()));
 
     registerScreen(
       CustomScreen.online(

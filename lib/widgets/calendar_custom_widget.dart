@@ -98,7 +98,7 @@ class _CalendarCustomWidgetState extends State<CalendarCustomWidget> {
       firstDay: DateTime.utc(DateTime.now().year - 20, 1, 1),
       lastDay: DateTime.utc(DateTime.now().year + 20, 12, 31),
       focusedDay: _focusedDay,
-      eventLoader: (DateTime day) => _events[day] ?? [],
+      eventLoader: (DateTime day) => _events[day.millisecondsSinceEpoch] ?? [],
       startingDayOfWeek: StartingDayOfWeek.monday,
       calendarStyle: CalendarStyle(
         rangeHighlightColor: Theme.of(context).colorScheme.primary,

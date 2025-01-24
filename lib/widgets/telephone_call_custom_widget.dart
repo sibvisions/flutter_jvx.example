@@ -17,22 +17,24 @@ class TelephoneCallCustomWidget extends StatefulWidget {
 class _TelephoneCallCustomWidgetState extends State<TelephoneCallCustomWidget> {
   final TextEditingController textController = TextEditingController();
 
-  Future<void> _launchWhatsApp(String number, String message) async {
-    if (number.startsWith("0")) {
-      number = number.replaceFirst("0", "43");
-    }
-
-    try {
-      if (Platform.isIOS || Platform.isAndroid) {
-        await launchUrl(Uri.parse("whatsapp://send?phone=$number&text=${Uri.parse(message)}"));
-      } else {
-        await launchUrl(Uri.parse("https://wa.me/$number/?text=${Uri.parse(message)}"));
+  @override
+  void initState() {
+    super.initState();
+    
+    textController.addListener(() {
+      if (textController.text.isNotEmpty) {
+        if (!textController.text.startsWith("+")) {
+          textController.text = "+43 ${textController.text}";
+          setState(() {});
+        }
+        else if (textController.text == "+43 " || textController.text == "+43") {
+          textController.text = "";
+          setState(() {});
+        }
       }
-    } catch (e, stack) {
-      log("Failed to launch WhatsApp", error: e, stackTrace: stack);
-    }
+    });
   }
-
+  
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -52,23 +54,32 @@ class _TelephoneCallCustomWidgetState extends State<TelephoneCallCustomWidget> {
                 Expanded(
                   child: TextField(
                     controller: textController,
-                    style: const TextStyle(color: Colors.white),
+                    style: const TextStyle(color: Colors.black),
                     keyboardType: TextInputType.phone,
                     textAlignVertical: TextAlignVertical.center,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
+                      prefix: Container(padding: const EdgeInsets.only(right: 5), child: Icon( Icons.call, size: 11, color: Colors.grey.shade800)),
+                      hintText: "+43",
                       labelText: "Enter telephone number",
-                      labelStyle: TextStyle(color: Colors.white),
+                      labelStyle: TextStyle(color: Colors.grey.shade800),
                       enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white),
+                        borderSide: BorderSide(color: Colors.grey.shade800),
                       ),
                       focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white),
+                        borderSide: BorderSide(color: Colors.grey.shade800),
                       ),
                       border: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white),
+                        borderSide: BorderSide(color: Colors.grey.shade800),
                       ),
                     ),
-                    onChanged: (value) => setState(() {}),
+                    onChanged: (value) {
+
+                      if (value.length == 1) {
+                        value = "+32";
+                      }
+
+                      setState(() {});
+                    }
                   ),
                 ),
                 Expanded(
@@ -78,38 +89,29 @@ class _TelephoneCallCustomWidgetState extends State<TelephoneCallCustomWidget> {
                       Expanded(
                         child: CustomRoundedButton(
                           color: Colors.white,
-                          text: const Text(
-                            "Call",
-                            style: TextStyle(color: Colors.black),
-                          ),
-                          icon: const Icon(Icons.call, color: Colors.black),
+                          text: const Text("Call"),
+                          icon: const Icon(Icons.call),
                           onTap: textController.text.isNotEmpty
-                              ? () => launchUrl(Uri.parse("tel://${textController.text}"))
+                              ? () => launchUrl(Uri.parse("tel://${_formatTelnr()}"))
                               : null,
                         ),
                       ),
                       Expanded(
                         child: CustomRoundedButton(
                           color: Colors.white,
-                          text: const Text(
-                            "SMS",
-                            style: TextStyle(color: Colors.black),
-                          ),
-                          icon: const Icon(Icons.sms, color: Colors.black),
+                          text: const Text("SMS",),
+                          icon: const Icon(Icons.sms),
                           onTap: textController.text.isNotEmpty
-                              ? () => launchUrl(Uri.parse("sms://${textController.text}"))
+                              ? () => launchUrl(Uri.parse("sms://${_formatTelnr()}"))
                               : null,
                         ),
                       ),
                       Expanded(
                         child: CustomRoundedButton(
                           color: Colors.white,
-                          text: const Text(
-                            "WhatsApp",
-                            style: TextStyle(color: Colors.black),
-                          ),
-                          icon: const Icon(FontAwesomeIcons.whatsapp, color: Colors.black),
-                          onTap: textController.text.isNotEmpty ? () => _launchWhatsApp(textController.text, "") : null,
+                          text: const Text("WhatsApp"),
+                          icon: const Icon(FontAwesomeIcons.whatsapp),
+                          onTap: textController.text.isNotEmpty ? () => _launchWhatsApp() : null,
                         ),
                       ),
                     ],
@@ -129,4 +131,31 @@ class _TelephoneCallCustomWidgetState extends State<TelephoneCallCustomWidget> {
     textController.dispose();
     super.dispose();
   }
+
+  String _formatTelnr() {
+    String text = textController.text;
+    if (text.startsWith("00")) {
+      text.replaceFirst("00", "+");
+    }
+//    text.replaceAll(from, replace)
+
+
+    return text;
+  }
+
+  Future<void> _launchWhatsApp(String number, String message) async {
+    if (number.startsWith("0")) {
+      number = number.replaceFirst("0", "43");
+    }
+
+    try {
+      if (Platform.isIOS || Platform.isAndroid) {
+        await launchUrl(Uri.parse("whatsapp://send?phone=$number&text=${Uri.parse(message)}"));
+      } else {
+        await launchUrl(Uri.parse("https://wa.me/$number/?text=${Uri.parse(message)}"));
+      }
+    } catch (e, stack) {
+      log("Failed to launch WhatsApp", error: e, stackTrace: stack);
+    }
+  }  
 }

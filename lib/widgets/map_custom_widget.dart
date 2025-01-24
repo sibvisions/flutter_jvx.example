@@ -18,15 +18,13 @@ class MapCustomWidget extends StatefulWidget {
 }
 
 class MapCustomWidgetState extends State<MapCustomWidget> {
-  late final String? apiKey;
-  final LatLng initialPosition = LatLng(48.247533, 16.380093);
-  final MapController mapController = MapController();
-  bool infoWindowVisible = false;
+  final LatLng _initialPosition = const LatLng(48.247533, 16.380093);
+  final MapController _mapController = MapController();
+  bool _infoWindowVisible = false;
 
   @override
   void initState() {
     super.initState();
-    apiKey = IConfigService().getAppConfig()?.applicationParameters?['apiKey'];
   }
 
   @override
@@ -36,21 +34,17 @@ class MapCustomWidgetState extends State<MapCustomWidget> {
         SizedBox(
           height: MediaQuery.of(context).size.height - AppBar().preferredSize.height,
           child: FlutterMap(
-            mapController: mapController,
+            mapController: _mapController,
             options: MapOptions(
-              center: initialPosition,
-              zoom: 15,
+              initialCenter: _initialPosition,
+              initialZoom: 16,
               minZoom: 0,
               maxZoom: 18,
             ),
             children: [
               TileLayer(
-                urlTemplate: "https://api.mapbox.com/styles/v1/"
-                    "{id}/tiles/{z}/{x}/{y}?access_token={accessToken}",
-                additionalOptions: {
-                  "id": "mapbox/streets-v11",
-                  "accessToken": apiKey ?? "",
-                },
+                urlTemplate: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                userAgentPackageName: "com.sibvisions.flutter_jvx.example",
               ),
               MarkerLayer(
                 markers: _buildMarkers(),
@@ -100,14 +94,14 @@ class MapCustomWidgetState extends State<MapCustomWidget> {
                             ),
                             SizedBox(height: 10),
                             Text(
-                              "Wehlistraße 29",
+                              "Wehlistreet 29",
                               style: TextStyle(
                                 fontSize: 20,
                                 color: Colors.black,
                               ),
                             ),
                             Text(
-                              "1200 Wien",
+                              "1200 Vienna",
                               style: TextStyle(
                                 fontSize: 20,
                                 color: Colors.black,
@@ -118,8 +112,8 @@ class MapCustomWidgetState extends State<MapCustomWidget> {
                       ),
                       Expanded(
                         child: CustomRoundedButton(
-                          text: const Text("Maps"),
-                          icon: const Icon(Icons.map),
+                          text: const Text("Info"),
+                          icon: const Icon(Icons.open_in_new),
                           onTap: _launchMapsUrl,
                         ),
                       ),
@@ -151,7 +145,8 @@ class MapCustomWidgetState extends State<MapCustomWidget> {
                       getPosition().then((position) {
                         if (position != null) {
                           log(position.toString());
-                          mapController.move(LatLng(position.latitude, position.longitude), mapController.zoom);
+                          _mapController.move(LatLng(position.latitude, position.longitude),
+                              _mapController.camera.zoom);
                         } else {
                           log("No last known location");
                         }
@@ -172,51 +167,40 @@ class MapCustomWidgetState extends State<MapCustomWidget> {
 
   @override
   void dispose() {
-    mapController.dispose();
+    _mapController.dispose();
+
     super.dispose();
   }
 
   List<Marker> _buildMarkers() {
+
     Size effectiveSize = Size(
-      infoWindowVisible ? 279.0 : 60,
-      infoWindowVisible ? 81.0 : 60,
+      _infoWindowVisible ? 279.0 : 60,
+      _infoWindowVisible ? 81.0 : 60,
     );
+
+    print("Info window visible: $_infoWindowVisible");
 
     return [
       Marker(
-        point: initialPosition,
         width: effectiveSize.width,
         height: effectiveSize.height,
-        anchorPos: AnchorPos.exactly(Anchor(effectiveSize.width / 2, 0)),
-        rotateAlignment: Alignment.bottomCenter,
-        builder: (context) => GestureDetector(
-          onTap: () => setState(() => infoWindowVisible = !infoWindowVisible),
-          child: infoWindowVisible ? _buildPopup(effectiveSize) : _buildMarker(effectiveSize),
-        ),
+        point: _initialPosition,
+        alignment: Alignment.topCenter,
+        child: GestureDetector(child: _infoWindowVisible ? _buildPopup() : _buildMarker(),
+        onTap: () => setState(() => _infoWindowVisible = !_infoWindowVisible)),
       ),
     ];
   }
 
-  Widget _buildPopup(Size size) {
+  Widget _buildPopup() {
     return const CustomPopup();
   }
 
-  Widget _buildMarker(Size size) {
-    return Align(
-      alignment: Alignment.bottomCenter,
-      child: SizedBox(
-        height: size.height - 5,
-        width: size.width,
-        child: OverflowBox(
-          minHeight: size.height,
-          maxHeight: size.height,
-          alignment: Alignment.topCenter,
-          child: Image.asset(
-            "assets/images/ic_marker.png",
-            height: size.height,
-          ),
-        ),
-      ),
+  Widget _buildMarker() {
+    return Image.asset(
+      "assets/images/ic_marker.png",
+      height: 60,
     );
   }
 
@@ -226,7 +210,7 @@ class MapCustomWidgetState extends State<MapCustomWidget> {
   }
 
   void _launchCallUrl() async {
-    const url = "tel://+43 (0) 1 934 6009 0";
+    const url = "tel://+43 (0) 1 934 6009";
     await launchUrl(Uri.parse(url));
   }
 

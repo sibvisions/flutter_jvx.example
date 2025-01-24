@@ -28,8 +28,8 @@ class ExampleMenu extends StatelessWidget {
           grouped: grouped,
           sticky: sticky,
           groupOnlyOnMultiple: groupOnlyOnMultiple,
-          mainAxisSpacing: 10,
-          crossAxisSpacing: 10,
+          mainAxisSpacing: 5,
+          crossAxisSpacing: 5,
         ),
       ],
     );

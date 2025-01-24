@@ -9,36 +9,41 @@ void main() {
   FlutterUI.start(FlutterUI(
     appConfig: AppConfig(
       title: "JVx Example",
+      privacyPolicy: Uri.tryParse("https://visionx.sibvisions.com/privacy-policy/"),
+      customAppsAllowed: true,
+      forceSingleAppMode: false,
       uiConfig: const UiConfig(
         showRememberMe: true,
-        rememberMeChecked: false,
       ),
-      connectTimeout: const Duration(seconds: 10),
       serverConfigs: [
         PredefinedServerConfig(
-          baseUrl: Uri.parse("http://172.20.0.119:8888/JVx.mobile/services/mobile"),
+          baseUrl: Uri.parse("http://localhost:8081/JVx.mobile/services/mobile"),
           appName: "demo",
           username: "features",
           password: "features",
+          icon: "https://upload.wikimedia.org/wikipedia/commons/a/a6/Jvx_2020.png",
+          locked: true,
+          parametersHidden: true
         ),
       ],
       logConfig: const LogConfig(
         levels: LogLevelConfig(
-          general: Level.info,
-          api: Level.info,
-          command: Level.info,
-          ui: Level.info,
-          layout: Level.info,
+          general: Level.error,
+          api: Level.error,
+          command: Level.error,
+          ui: Level.error,
+          layout: Level.error,
         ),
       ),
       versionConfig: const VersionConfig(
         commit: "070a55e2",
         buildDate: "2021-09-26",
+        buildNumber: -1
       ),
     ),
     appManager: ExampleCustomScreenManager(),
     splashBuilder: (context, snapshot) => ExampleSplash(snapshot),
-    loginBuilder: (context, mode) => ExampleLogin(mode: mode),
+    loginHandler: LoginHandler(builder: (context, mode) => ExampleLogin(mode: mode)),
     menuBuilder: (context, key, mode, menuModel, onClick, grouped, sticky, groupOnlyOnMultiple) {
       if (mode != MenuMode.GRID) return null;
       return ExampleMenu(key: key, menuModel, onClick, grouped, sticky, groupOnlyOnMultiple);
