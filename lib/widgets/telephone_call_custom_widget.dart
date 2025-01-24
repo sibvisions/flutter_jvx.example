@@ -11,7 +11,8 @@ class TelephoneCallCustomWidget extends StatefulWidget {
   const TelephoneCallCustomWidget({super.key});
 
   @override
-  State<TelephoneCallCustomWidget> createState() => _TelephoneCallCustomWidgetState();
+  State<TelephoneCallCustomWidget> createState() =>
+      _TelephoneCallCustomWidgetState();
 }
 
 class _TelephoneCallCustomWidgetState extends State<TelephoneCallCustomWidget> {
@@ -20,21 +21,21 @@ class _TelephoneCallCustomWidgetState extends State<TelephoneCallCustomWidget> {
   @override
   void initState() {
     super.initState();
-    
+
     _textController.addListener(() {
       if (_textController.text.isNotEmpty) {
         if (!_textController.text.startsWith("+")) {
           _textController.text = "+43 ${_textController.text}";
           setState(() {});
-        }
-        else if (_textController.text == "+43 " || _textController.text == "+43") {
+        } else if (_textController.text == "+43 " ||
+            _textController.text == "+43") {
           _textController.text = "";
           setState(() {});
         }
       }
     });
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -53,34 +54,29 @@ class _TelephoneCallCustomWidgetState extends State<TelephoneCallCustomWidget> {
               children: [
                 Expanded(
                   child: TextField(
-                    controller: _textController,
-                    style: const TextStyle(color: Colors.black),
-                    keyboardType: TextInputType.phone,
-                    textAlignVertical: TextAlignVertical.center,
-                    decoration: InputDecoration(
-                      prefix: Container(padding: const EdgeInsets.only(right: 5), child: Icon( Icons.call, size: 11, color: Colors.grey.shade800)),
-                      hintText: "+43",
-                      labelText: "Enter telephone number",
-                      labelStyle: TextStyle(color: Colors.grey.shade800),
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey.shade800),
+                      controller: _textController,
+                      style: const TextStyle(color: Colors.black),
+                      keyboardType: TextInputType.phone,
+                      textAlignVertical: TextAlignVertical.center,
+                      decoration: InputDecoration(
+                        prefix: Container(
+                            padding: const EdgeInsets.only(right: 5),
+                            child: Icon(Icons.call,
+                                size: 11, color: Colors.grey.shade800)),
+                        hintText: "+43",
+                        labelText: "Enter telephone number",
+                        labelStyle: TextStyle(color: Colors.grey.shade800),
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.grey.shade800),
+                        ),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.grey.shade800),
+                        ),
+                        border: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.grey.shade800),
+                        ),
                       ),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey.shade800),
-                      ),
-                      border: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey.shade800),
-                      ),
-                    ),
-                    onChanged: (value) {
-
-                      if (value.length == 1) {
-                        value = "+32";
-                      }
-
-                      setState(() {});
-                    }
-                  ),
+                      onChanged: (value) => setState(() {})),
                 ),
                 Expanded(
                   child: Row(
@@ -92,17 +88,21 @@ class _TelephoneCallCustomWidgetState extends State<TelephoneCallCustomWidget> {
                           text: const Text("Call"),
                           icon: const Icon(Icons.call),
                           onTap: _textController.text.isNotEmpty
-                              ? () => launchUrl(Uri.parse("tel://${_formatTelnr()}"))
+                              ? () => launchUrl(
+                                  Uri.parse("tel://${_formatTelNr()}"))
                               : null,
                         ),
                       ),
                       Expanded(
                         child: CustomRoundedButton(
                           color: Colors.white,
-                          text: const Text("SMS",),
+                          text: const Text(
+                            "SMS",
+                          ),
                           icon: const Icon(Icons.sms),
                           onTap: _textController.text.isNotEmpty
-                              ? () => launchUrl(Uri.parse("sms://${_formatTelnr()}"))
+                              ? () => launchUrl(
+                                  Uri.parse("sms://${_formatTelNr()}"))
                               : null,
                         ),
                       ),
@@ -111,7 +111,9 @@ class _TelephoneCallCustomWidgetState extends State<TelephoneCallCustomWidget> {
                           color: Colors.white,
                           text: const Text("WhatsApp"),
                           icon: const Icon(FontAwesomeIcons.whatsapp),
-                          onTap: _textController.text.isNotEmpty ? () => _launchWhatsApp() : null,
+                          onTap: _textController.text.isNotEmpty
+                              ? () => _launchWhatsApp()
+                              : null,
                         ),
                       ),
                     ],
@@ -132,7 +134,7 @@ class _TelephoneCallCustomWidgetState extends State<TelephoneCallCustomWidget> {
     super.dispose();
   }
 
-  String _formatTelnr() {
+  String _formatTelNr() {
     String text = _textController.text;
     if (text.startsWith("00")) {
       text = text.replaceFirst("00", "+");
@@ -144,17 +146,19 @@ class _TelephoneCallCustomWidgetState extends State<TelephoneCallCustomWidget> {
   }
 
   Future<void> _launchWhatsApp() async {
-    String number = _textController.text;
+    String number = _formatTelNr();
     String message = "Hello JVx";
 
     try {
       if (Platform.isIOS || Platform.isAndroid) {
-        await launchUrl(Uri.parse("whatsapp://send?phone=$number&text=${Uri.parse(message)}"));
+        await launchUrl(Uri.parse(
+            "whatsapp://send?phone=$number&text=${Uri.parse(message)}"));
       } else {
-        await launchUrl(Uri.parse("https://wa.me/$number/?text=${Uri.parse(message)}"));
+        await launchUrl(
+            Uri.parse("https://wa.me/$number/?text=${Uri.parse(message)}"));
       }
     } catch (e, stack) {
       log("Failed to launch WhatsApp", error: e, stackTrace: stack);
     }
-  }  
+  }
 }

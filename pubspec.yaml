@@ -34,9 +34,9 @@ dependencies:
     sdk: flutter
 
   flutter_jvx:
-    path: /Entwicklung/sibvisions/flutter_jvx
-#    git:
-#      url: https://github.com/sibvisions/flutter_jvx.git
+#    path: /Entwicklung/sibvisions/flutter_jvx
+    git:
+      url: https://github.com/sibvisions/flutter_jvx.git
 #      ref: main
 
   url_launcher: ^6.3.1

@@ -17,14 +17,13 @@ void main() {
       ),
       serverConfigs: [
         PredefinedServerConfig(
-          baseUrl: Uri.parse("http://localhost:8081/JVx.mobile/services/mobile"),
-          appName: "demo",
-          username: "features",
-          password: "features",
-          icon: "https://upload.wikimedia.org/wikipedia/commons/a/a6/Jvx_2020.png",
-          locked: true,
-          parametersHidden: true
-        ),
+            baseUrl: Uri.parse("http://localhost:8081/JVx.mobile/services/mobile"),
+            appName: "demo",
+            username: "features",
+            password: "features",
+            icon: "https://upload.wikimedia.org/wikipedia/commons/a/a6/Jvx_2020.png",
+            locked: true,
+            parametersHidden: true),
       ],
       logConfig: const LogConfig(
         levels: LogLevelConfig(
@@ -36,10 +35,9 @@ void main() {
         ),
       ),
       versionConfig: const VersionConfig(
-        commit: "070a55e2",
-        buildDate: "2021-09-26",
-        buildNumber: -1
-      ),
+          commit: "7195b2d",
+          buildDate: "2025-01-24",
+          buildNumber: -1),
     ),
     appManager: ExampleCustomScreenManager(),
     splashBuilder: (context, snapshot) => ExampleSplash(snapshot),
