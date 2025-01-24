@@ -15,20 +15,20 @@ class TelephoneCallCustomWidget extends StatefulWidget {
 }
 
 class _TelephoneCallCustomWidgetState extends State<TelephoneCallCustomWidget> {
-  final TextEditingController textController = TextEditingController();
+  final TextEditingController _textController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
     
-    textController.addListener(() {
-      if (textController.text.isNotEmpty) {
-        if (!textController.text.startsWith("+")) {
-          textController.text = "+43 ${textController.text}";
+    _textController.addListener(() {
+      if (_textController.text.isNotEmpty) {
+        if (!_textController.text.startsWith("+")) {
+          _textController.text = "+43 ${_textController.text}";
           setState(() {});
         }
-        else if (textController.text == "+43 " || textController.text == "+43") {
-          textController.text = "";
+        else if (_textController.text == "+43 " || _textController.text == "+43") {
+          _textController.text = "";
           setState(() {});
         }
       }
@@ -53,7 +53,7 @@ class _TelephoneCallCustomWidgetState extends State<TelephoneCallCustomWidget> {
               children: [
                 Expanded(
                   child: TextField(
-                    controller: textController,
+                    controller: _textController,
                     style: const TextStyle(color: Colors.black),
                     keyboardType: TextInputType.phone,
                     textAlignVertical: TextAlignVertical.center,
@@ -91,7 +91,7 @@ class _TelephoneCallCustomWidgetState extends State<TelephoneCallCustomWidget> {
                           color: Colors.white,
                           text: const Text("Call"),
                           icon: const Icon(Icons.call),
-                          onTap: textController.text.isNotEmpty
+                          onTap: _textController.text.isNotEmpty
                               ? () => launchUrl(Uri.parse("tel://${_formatTelnr()}"))
                               : null,
                         ),
@@ -101,7 +101,7 @@ class _TelephoneCallCustomWidgetState extends State<TelephoneCallCustomWidget> {
                           color: Colors.white,
                           text: const Text("SMS",),
                           icon: const Icon(Icons.sms),
-                          onTap: textController.text.isNotEmpty
+                          onTap: _textController.text.isNotEmpty
                               ? () => launchUrl(Uri.parse("sms://${_formatTelnr()}"))
                               : null,
                         ),
@@ -111,7 +111,7 @@ class _TelephoneCallCustomWidgetState extends State<TelephoneCallCustomWidget> {
                           color: Colors.white,
                           text: const Text("WhatsApp"),
                           icon: const Icon(FontAwesomeIcons.whatsapp),
-                          onTap: textController.text.isNotEmpty ? () => _launchWhatsApp() : null,
+                          onTap: _textController.text.isNotEmpty ? () => _launchWhatsApp() : null,
                         ),
                       ),
                     ],
@@ -128,25 +128,24 @@ class _TelephoneCallCustomWidgetState extends State<TelephoneCallCustomWidget> {
 
   @override
   void dispose() {
-    textController.dispose();
+    _textController.dispose();
     super.dispose();
   }
 
   String _formatTelnr() {
-    String text = textController.text;
+    String text = _textController.text;
     if (text.startsWith("00")) {
-      text.replaceFirst("00", "+");
+      text = text.replaceFirst("00", "+");
     }
-//    text.replaceAll(from, replace)
 
-
+    //no spaces
+    text = text.replaceAll(" ", "");
     return text;
   }
 
-  Future<void> _launchWhatsApp(String number, String message) async {
-    if (number.startsWith("0")) {
-      number = number.replaceFirst("0", "43");
-    }
+  Future<void> _launchWhatsApp() async {
+    String number = _textController.text;
+    String message = "Hello JVx";
 
     try {
       if (Platform.isIOS || Platform.isAndroid) {
