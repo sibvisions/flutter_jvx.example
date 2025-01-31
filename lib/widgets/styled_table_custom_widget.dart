@@ -186,7 +186,7 @@ class Contact {
     this.streetNr,
     this.zip,
     this.town,
-    dob,
+    int? dob,
     this.socialSecNr
-  ) : dob = DateTime.fromMillisecondsSinceEpoch(dob);
+  ) : dob = dob != null ? DateTime.fromMillisecondsSinceEpoch(dob) : null;
 }
