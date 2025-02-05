@@ -179,8 +179,6 @@ class MapCustomWidgetState extends State<MapCustomWidget> {
       _infoWindowVisible ? 81.0 : 60,
     );
 
-    print("Info window visible: $_infoWindowVisible");
-
     return [
       Marker(
         width: effectiveSize.width,
