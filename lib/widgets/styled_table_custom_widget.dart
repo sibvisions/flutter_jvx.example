@@ -132,7 +132,7 @@ class _StyledTableCustomWidgetState extends State<StyledTableCustomWidget> {
                                 const SizedBox(width: 10),
                                 Expanded(
                                   child: Text(
-                                    "${contacts[index].street} ${contacts[index].streetNr}, ${contacts[index].zip} ${contacts[index].town}",
+                                    contacts[index].formatAddress(),
                                     style: const TextStyle(color: Colors.black54, fontSize: 15),
                                     overflow: TextOverflow.ellipsis,
                                   ),
@@ -189,4 +189,25 @@ class Contact {
     int? dob,
     this.socialSecNr
   ) : dob = dob != null ? DateTime.fromMillisecondsSinceEpoch(dob) : null;
+
+  String formatAddress() {
+      String? address = _concat(street, streetNr);
+      address = _concat(address, zip, ", ");
+      address = _concat(address, town);
+
+      return address ?? "Address unknown";
+  }
+
+  String? _concat(String? first, String? second, [String delimiter = " "]) {
+      if (first != null && second != null) {
+          return "$first$delimiter$second";
+      }
+
+      if (first != null) {
+          return first;
+      }
+
+      return second;
+  }
+
 }
