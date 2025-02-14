@@ -39,8 +39,16 @@ The example application uses [Flutter JVx Client](https://github.com/sibvisions/
 
 ## Preview
 
-<img src="readme_images/login_classic.png" width="240" /> <img src="readme_images/login_modern.png" width="240" /> <img src="readme_images/menu_drawer.png" width="240" /> <img src="readme_images/overview.png" width="240" /> <img src="readme_images/form.png" width="240" />
+<img src="readme_images/login_classic.png" width="260"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="readme_images/login_modern.png" width="260" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="readme_images/menu_drawer.png" width="260" /> 
+<br/><br/>
+<img src="readme_images/overview.png" width="260" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="readme_images/form.png" width="260" />
 
 ## More Impressions
 
-<img src="readme_images/example1.png" width="240" />
+<img src="readme_images/example1.gif" width="260" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="readme_images/example2.gif" width="260" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="readme_images/example3.gif" width="260" />
+<br/><br/>
+<img src="readme_images/example4.gif" width="260" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="readme_images/example5_original.gif" width="260" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="readme_images/example5.gif" width="260" />
+<br/><br/>
+<img src="readme_images/example6.gif" width="260" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="readme_images/example7.gif" width="260" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="readme_images/example8.gif" width="260" />
+<br/><br/>
+<img src="readme_images/example9.gif" width="260" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="readme_images/example10.gif" width="260" />
