@@ -33,11 +33,13 @@ dependencies:
   flutter:
     sdk: flutter
 
+  intl: any # An exact version pin will be provided by the Flutter SDK
+
   flutter_jvx:
 #    path: /Entwicklung/sibvisions/flutter_jvx
     git:
       url: https://github.com/sibvisions/flutter_jvx.git
-#      ref: main
+      ref: main
 
   url_launcher: ^6.3.1
   font_awesome_flutter: ^10.8.0
@@ -50,6 +52,8 @@ dependencies:
   mobile_scanner: ^5.0.0
   table_calendar: ^3.2.0
   geolocator: ^13.0.0
+
+  avatars: ^3.0.0
 
 dependency_overrides:
   # table_calendar

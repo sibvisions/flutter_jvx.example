@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:avatars/avatars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_jvx/flutter_jvx.dart';
 import 'package:intl/intl.dart';
@@ -87,13 +88,9 @@ class _StyledTableCustomWidgetState extends State<StyledTableCustomWidget> {
                                           backgroundImage: MemoryImage(base64Decode(contacts[index].image!)),
                                           minRadius: 45,
                                         )
-                                      : CircleAvatar(
-                                          backgroundColor: Theme.of(context).colorScheme.primary,
-                                          minRadius: 45,
-                                          child: Text(
-                                            "${contacts[index].firstname[0]}${contacts[index].lastname[0]}",
-                                            style: const TextStyle(fontSize: 40, color: Colors.white),
-                                          ),
+                                      : Avatar(
+                                          shape: AvatarShape.circle(45),
+                                          name: "${contacts[index].firstname} ${contacts[index].lastname}"
                                         ),
                                 )),
                       const SizedBox(width: 15),
