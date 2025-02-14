@@ -39,9 +39,9 @@ The example application uses [Flutter JVx Client](https://github.com/sibvisions/
 
 ## Preview
 
-<img src="readme_images/login_classic.png" width="260"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="readme_images/login_modern.png" width="260" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="readme_images/menu_drawer.png" width="260" /> 
+<img src="readme_images/login_classic.png" width="250"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="readme_images/login_modern.png" width="250" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="readme_images/menu_drawer.png" width="250" /> 
 <br/><br/>
-<img src="readme_images/overview.png" width="260" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="readme_images/form.png" width="260" />
+<img src="readme_images/overview.png" width="250" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="readme_images/form.png" width="250" />
 
 ## More Impressions
 
