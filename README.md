@@ -10,21 +10,26 @@ This example application demonstrates using the [Flutter JVx Client](https://git
 
 ## Customizing
 
-The client uses a custom screen manager. It is defined in main.dart as screenManager property. The implementation can be found in ExampleCustomScreenManager class. The screen manager is responsible for menu customizing and for opening custom screens.
+The client uses a custom screen manager. It is defined in [main.dart](https://github.com/sibvisions/flutter_jvx.example/blob/main/lib/main.dart) as screenManager property. The implementation can be found in [ExampleCustomScreenManager](https://github.com/sibvisions/flutter_jvx.example/blob/main/lib/screen_manager.dart) class. The screen manager is responsible for menu customizing and for opening custom screens.
 
-The example implementation adds a three new screens to the menu:
+The example implementation adds a new screens to the menu:
 
-* Hello Custom Screen
-* Telephone Call Screen
-* Map Custom Screen
+* [Hello Custom Screen](https://github.com/sibvisions/flutter_jvx.example/blob/main/lib/widgets/hello_custom_widget.dart)
+* [Telephone Call Screen](https://github.com/sibvisions/flutter_jvx.example/blob/main/lib/widgets/telephone_call_custom_widget.dart)
+* [Map Custom Screen](https://github.com/sibvisions/flutter_jvx.example/blob/main/lib/widgets/map_custom_widget.dart)
+* [QR Scan Screen](https://github.com/sibvisions/flutter_jvx.example/blob/main/lib/widgets/scanner_custom_widget.dart)
+* [User Info Screen](https://github.com/sibvisions/flutter_jvx.example/blob/main/lib/widgets/user_data_custom_widget.dart)
 
-and changes the existing
+and changes existing screens
 
-* Charts
+* [Charts Screen](https://github.com/sibvisions/flutter_jvx.example/blob/main/lib/widgets/chart_custom_widget.dart)
+* [Calender Screen](https://github.com/sibvisions/flutter_jvx.example/blob/main/lib/widgets/calendar_custom_widget.dart)
+* [Signature Screen](https://github.com/sibvisions/flutter_jvx.example/blob/main/lib/widgets/signature_custom_widget.dart)
+* [Styled Table Screen](https://github.com/sibvisions/flutter_jvx.example/blob/main/lib/widgets/styled_table_custom_widget.dart)
+* [Contacts Screen](https://github.com/sibvisions/flutter_jvx.example/blob/main/lib/screens/contact_custom_screen.dart)
 
-screen. 
-
-The new screens are simple Flutter widgets and don't use the JVx API. The Charts screen uses the JVx API to retrieve data from the remote server and shows custom chart widgets.
+All new screens are standard Flutter widgets and don't use the JVx API.
+The changed screens use JVx API to retrieve data from the backend (Chart, Calendar, Signature, Styled Table) or simply replaces some components/widgets (Signature, Contacts) Screen.
 
 ## Dependencies
 
@@ -34,4 +39,8 @@ The example application uses [Flutter JVx Client](https://github.com/sibvisions/
 
 ## Preview
 
-<img src="readme_images/login.png" width="280" /> <img src="readme_images/menu.png" width="280" /> <img src="readme_images/userinfo.png" width="280" /> <img src="readme_images/piechart.png" width="280" /> <img src="readme_images/barchart.png" width="280" /> <img src="readme_images/contact.png" width="280" /> <img src="readme_images/form.png" width="280" />
+<img src="readme_images/login_classic.png" width="240" /> <img src="readme_images/login_modern.png" width="240" /> <img src="readme_images/menu_drawer.png" width="240" /> <img src="readme_images/overview.png" width="240" /> <img src="readme_images/form.png" width="240" />
+
+## More Impressions
+
+<img src="readme_images/example1.png" width="240" />
