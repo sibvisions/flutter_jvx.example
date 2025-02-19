@@ -47,7 +47,7 @@ dependencies:
   #community_charts:
   #  git: https://github.com/AdityaBirlaCapitalDigital/community_charts.git
 
-  flutter_map: ^7.0.0
+  flutter_map: ^8.0.0
   signature: ^5.5.0
   mobile_scanner: ^5.0.0
   table_calendar: ^3.2.0
