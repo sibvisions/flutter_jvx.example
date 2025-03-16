@@ -41,14 +41,14 @@ dependencies:
       url: https://github.com/sibvisions/flutter_jvx.git
       ref: main
 
-  url_launcher: ^6.3.1
+  url_launcher: ^6.3.0
   font_awesome_flutter: ^10.8.0
   community_charts_flutter: ^1.0.4
   #community_charts:
   #  git: https://github.com/AdityaBirlaCapitalDigital/community_charts.git
 
   flutter_map: ^8.0.0
-  signature: ^5.5.0
+  signature: ^6.0.0
   mobile_scanner: ^5.0.0
   table_calendar: ^3.2.0
   geolocator: ^13.0.0
