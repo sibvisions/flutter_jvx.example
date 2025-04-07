@@ -1,11 +1,11 @@
 {
     "name": "JVx Example",
-    "short_name": "Example",
+    "short_name": "JVx Example",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "JVx Example",
+    "description": "Example app for JVx' flutter UI.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

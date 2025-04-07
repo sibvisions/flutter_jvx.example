@@ -36,7 +36,7 @@
             <string>com.sibvisions.flutter_jvx_example</string>
             <key>CFBundleURLSchemes</key>
             <array>
-                <string>jvx</string>
+                <string>jvxe</string>
             </array>
         </dict>
     </array>
@@ -76,6 +76,6 @@
     <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
     <string>We would like to always access your location in order to be able to add data to your personal records.</string>
     <key>FlutterDeepLinkingEnabled</key>
-    <true/>
+    <false/>
 </dict>
 </plist>
