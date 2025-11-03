@@ -18,7 +18,7 @@ class MapCustomWidget extends StatefulWidget {
 }
 
 class MapCustomWidgetState extends State<MapCustomWidget> {
-  final LatLng _initialPosition = const LatLng(48.247533, 16.380093);
+  final LatLng _initialPosition = const LatLng(48.24510558120526, 16.45472667402766);
   final MapController _mapController = MapController();
   bool _infoWindowVisible = false;
 
@@ -46,6 +46,7 @@ class MapCustomWidgetState extends State<MapCustomWidget> {
                 urlTemplate: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
                 userAgentPackageName: "com.sibvisions.flutter_jvx.example",
               ),
+              BasicAttributionWidget(),
               MarkerLayer(
                 markers: _buildMarkers(),
                 rotate: true,
@@ -94,14 +95,14 @@ class MapCustomWidgetState extends State<MapCustomWidget> {
                             ),
                             SizedBox(height: 10),
                             Text(
-                              "Wehlistreet 29",
+                              "Hirschstettnerstr. 19",
                               style: TextStyle(
                                 fontSize: 20,
                                 color: Colors.black,
                               ),
                             ),
                             Text(
-                              "1200 Vienna",
+                              "1220 Vienna",
                               style: TextStyle(
                                 fontSize: 20,
                                 color: Colors.black,
