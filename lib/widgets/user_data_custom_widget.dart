@@ -117,7 +117,7 @@ class _TopPortion extends StatelessWidget {
                 if (profileImage == null)
                   CircleAvatar(
                     backgroundColor: Colors.grey.shade200,
-                    child: const Icon(FontAwesomeIcons.userTie, color: Colors.grey, size: 80),
+                    child: const FaIcon(FontAwesomeIcons.userTie, color: Colors.grey, size: 80),
                   ),
                 Positioned(
                   bottom: 0,

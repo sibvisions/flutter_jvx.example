@@ -42,7 +42,7 @@ dependencies:
       ref: main
 
   url_launcher: ^6.3.0
-  font_awesome_flutter: ^10.0.0
+  font_awesome_flutter: ^11.0.0
   community_charts_flutter: ^1.0.4
   #community_charts:
   #  git: https://github.com/AdityaBirlaCapitalDigital/community_charts.git
@@ -54,6 +54,8 @@ dependencies:
   geolocator: ^14.0.0
 
   avatars: ^3.0.0
+
+  graphic: ^2.0.0
 
 dependency_overrides:
   # table_calendar

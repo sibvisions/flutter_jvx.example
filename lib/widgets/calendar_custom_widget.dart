@@ -147,14 +147,14 @@ class _CalendarCustomWidgetState extends State<CalendarCustomWidget> {
         Expanded(
           child: CustomRoundedButton(
             text: const Text("Month"),
-            icon: const Icon(FontAwesomeIcons.calendar),
+            icon: const FaIcon(FontAwesomeIcons.calendar),
             onTap: () => _setCalendarFormat(CalendarFormat.month),
           ),
         ),
         Expanded(
           child: CustomRoundedButton(
             text: const Text("Week"),
-            icon: const Icon(FontAwesomeIcons.calendarWeek),
+            icon: const FaIcon(FontAwesomeIcons.calendarWeek),
             onTap: () => _setCalendarFormat(CalendarFormat.week),
           ),
         ),
@@ -169,7 +169,7 @@ class _CalendarCustomWidgetState extends State<CalendarCustomWidget> {
                 color: Colors.orange[100],
                 margin: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
                 child: ListTile(
-                  leading: const Icon(FontAwesomeIcons.clock),
+                  leading: const FaIcon(FontAwesomeIcons.clock),
                   title: Text(event.toString()),
                   onTap: () => log("$event tapped!"),
                 ),

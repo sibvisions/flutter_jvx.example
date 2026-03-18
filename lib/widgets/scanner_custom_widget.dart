@@ -71,7 +71,7 @@ class _ScannerCustomWidgetState extends State<ScannerCustomWidget> {
                               Expanded(
                                 child: CustomRoundedButton(
                                     text: const Text("Scan"),
-                                    icon: const Icon(FontAwesomeIcons.qrcode, color: Colors.white),
+                                    icon: const FaIcon(FontAwesomeIcons.qrcode, color: Colors.white),
                                     onTap: () {
                                       scanResult = null;
                                       setState(() {});

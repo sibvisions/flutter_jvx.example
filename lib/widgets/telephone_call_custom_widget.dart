@@ -110,7 +110,7 @@ class _TelephoneCallCustomWidgetState extends State<TelephoneCallCustomWidget> {
                         child: CustomRoundedButton(
                           color: Colors.white,
                           text: const Text("WhatsApp"),
-                          icon: const Icon(FontAwesomeIcons.whatsapp),
+                          icon: const FaIcon(FontAwesomeIcons.whatsapp),
                           onTap: _textController.text.isNotEmpty
                               ? () => _launchWhatsApp()
                               : null,

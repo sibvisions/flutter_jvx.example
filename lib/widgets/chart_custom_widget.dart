@@ -1,4 +1,8 @@
+import 'dart:async';
+import 'dart:math';
+
 import 'package:community_charts_flutter/community_charts_flutter.dart' as charts;
+import 'package:graphic/graphic.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_jvx/flutter_jvx.dart';
 
@@ -36,11 +40,31 @@ class _ChartCustomWidgetState extends State<ChartCustomWidget> with SingleTicker
 
   bool animate = true;
 
+  late final StreamController<Selected?> stream;
+
+  String? selectedIndex = "-";
+
   @override
   void initState() {
     _tabController = TabController(length: 2, vsync: this);
 
     super.initState();
+
+    stream = StreamController<Selected?>.broadcast();
+    stream.stream.listen((Selected? event)
+    {
+      int? index = event?['tap']?.first;
+
+      if (index != null) {
+        selectedIndex = "$index";
+      }
+      else {
+        selectedIndex = "-";
+      }
+
+      setState(() {});
+    },);
+
 
     IUiService().registerDataSubscription(
       pDataSubscription: DataSubscription(
@@ -62,6 +86,8 @@ class _ChartCustomWidgetState extends State<ChartCustomWidget> with SingleTicker
               dataChunk.data[i]![2],
               dataChunk.data[i]![3],
             ));
+
+            print("{'country': '${dataChunk.data[i]![1]}', 'litres': ${dataChunk.data[i]![2]}}");
           }
           setState(() {});
         },
@@ -73,13 +99,13 @@ class _ChartCustomWidgetState extends State<ChartCustomWidget> with SingleTicker
   Widget build(BuildContext context) {
 
     return Column(children: [
-      TabBar(controller: _tabController, tabs: const [
+      TabBar(controller: _tabController, tabs: [
         Tab(
           text: "Bar chart",
           icon: Icon(Icons.bar_chart),
         ),
         Tab(
-          text: "Pie chart",
+          text: "Pie chart ($selectedIndex)",
           icon: Icon(Icons.pie_chart),
         ),
       ]),
@@ -97,14 +123,16 @@ class _ChartCustomWidgetState extends State<ChartCustomWidget> with SingleTicker
                 countries: countries,
                 color: color,
                 animate: animate,
+                stream: stream,
               ),
-
           ]))
     ]);
   }
 
   @override
   void dispose() {
+    stream.close();
+
     IUiService().disposeDataSubscription(pSubscriber: this);
     super.dispose();
   }
@@ -163,14 +191,80 @@ class PieChartWidget extends StatelessWidget {
     required this.countries,
     required this.color,
     required this.animate,
+    required this.stream
   });
 
   final List<Country> countries;
   final List<charts.Color> color;
   final bool animate;
+  final StreamController<Selected?> stream;
 
   @override
   Widget build(BuildContext context) {
+
+    const List<Map<String, dynamic>> chartData = [
+      {'country': 'Lithuania: 0', 'litres': 501.9},
+      {'country': 'Czech Republic: 1', 'litres': 301.9},
+      {'country': 'Ireland: 2', 'litres': 201.9},
+      {'country': 'Germany: 3', 'litres': 165.8},
+      {'country': 'Australia: 4', 'litres': 139.9},
+      {'country': 'Austria: 5', 'litres': 128.3},
+      {'country': 'UK: 6', 'litres': 99.0},
+      {'country': 'Belgium: 7', 'litres': 60.0},
+      {'country': 'The Netherlands: 8', 'litres': 50.0}
+    ];
+
+    return Chart(
+      data: chartData,
+      padding: (size) => EdgeInsets.all(20),
+      variables: {
+        'name': Variable(
+          accessor: (Map map) => map['country'] as String,
+        ),
+        'value': Variable(
+          accessor: (Map map) => map['litres'] as num,
+        ),
+      },
+      transforms: [
+        Proportion(
+          variable: 'value',
+          as: 'pct',
+        )
+      ],
+      marks: [
+        IntervalMark(
+          elevation: ElevationEncode(value: 0),
+          position: Varset('pct') / Varset('name'),
+          shape: ShapeEncode(value: PieShape()),
+          label: LabelEncode(
+              encoder: (tuple) => Label(
+                tuple['name'].toString().length > 3 ? tuple['name'].toString().substring(0, 2) : tuple['name'].toString(),
+                LabelStyle(textStyle: TextStyle(color: JVxColors.LIGHTER_BLACK, fontSize: 12, fontWeight: FontWeight.w700), offset: Offset(0, -10))
+              )),
+          color: ColorEncode(
+              variable: 'name',
+              values: Defaults.colors20,
+              updaters: {
+                'tap': {
+                  true: (color) => JVxColors.darken(color, 0.05)
+                }
+              }
+              ),
+          modifiers: [StackModifier()],
+          selectionStream: stream,
+        )
+      ],
+     coord: PolarCoord(transposed: true, dimCount: 1, dimFill: 0.8),
+     selections: {
+       'tap': PointSelection(
+        on: {GestureType.tap},
+        dim: null,
+      ),
+     }
+    );
+
+
+
     return charts.PieChart<Object>(
       [
         charts.Series<Country, int>(
@@ -209,6 +303,7 @@ class PieChartWidget extends StatelessWidget {
         ])
     );
   }
+
 }
 
 class TickFormatterSpec implements charts.OrdinalTickFormatterSpec {
@@ -244,4 +339,27 @@ class OrdinalTickFormatter extends charts.SimpleTickFormatterBase<String> {
 
   @override
   int get hashCode => 31;
+}
+
+class PieShape extends RectShape {
+  PieShape({
+    super.borderRadius,
+    super.labelPosition = 1,
+  });
+
+  @override
+  Offset representPoint(List<Offset> position) {
+    // For pie charts, return the middle point of the arc
+    // This ensures tapping anywhere in the slice selects it
+    if (position.length == 2) {
+      // Calculate the middle angle
+      final middleAngle = (position[0].dy + position[1].dy) / 2;
+      // Use a radius that's in the middle of the slice
+      // dimFill controls the outer radius, so we use half of that
+      final middleRadius = 0.5;
+      return Offset(middleRadius, middleAngle);
+    }
+
+    return super.representPoint(position);
+  }
 }

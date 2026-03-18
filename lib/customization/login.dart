@@ -17,7 +17,7 @@ class ExampleLogin extends DefaultLogin {
           ),
           const Padding(padding: EdgeInsets.symmetric(vertical: 5)),
           TextButton(
-            onPressed: () => LoginPage.changeMode(mode: LoginMode.Manual),
+            onPressed: () => LoginPage.update(LoginData(mode: LoginMode.Manual)),
             child: Text(
               FlutterUI.translate("Back"),
             ),

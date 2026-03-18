@@ -90,7 +90,7 @@ class _CoCustomComponentWidgetState extends State<CoCustomComponentWidget> {
             Expanded(
               child: CustomRoundedButton(
                 text: const Text("WhatsApp"),
-                icon: const Icon(FontAwesomeIcons.whatsapp),
+                icon: const FaIcon(FontAwesomeIcons.whatsapp),
                 onTap: () {
                   if (phone.isNotEmpty) {
                     if (phone.startsWith("0")) {

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:typed_data';
 
 import 'package:avatars/avatars.dart';
 import 'package:flutter/material.dart';
@@ -85,7 +86,7 @@ class _StyledTableCustomWidgetState extends State<StyledTableCustomWidget> {
                                   padding: const EdgeInsets.all(10),
                                   child: contacts[index].image != null
                                       ? CircleAvatar(
-                                          backgroundImage: MemoryImage(base64Decode(contacts[index].image!)),
+                                          backgroundImage: MemoryImage(contacts[index].image!),
                                           minRadius: 45,
                                         )
                                       : Avatar(
@@ -164,7 +165,7 @@ class Contact {
   final String? academicTitle;
   final String firstname;
   final String lastname;
-  final String? image;
+  final Uint8List? image;
   final String? street;
   final String? streetNr;
   final String? zip;

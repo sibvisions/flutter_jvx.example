@@ -127,7 +127,7 @@ class ExampleCustomScreenManager extends AppManager {
       menuItem: CustomMenuItem(
         label: "Contacts",
         group: "Example",
-        faIcon: FontAwesomeIcons.userLarge,
+        faIcon: FontAwesomeIcons.user,
       ),
     );
 
