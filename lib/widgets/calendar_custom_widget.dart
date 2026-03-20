@@ -94,7 +94,7 @@ class _CalendarCustomWidgetState extends State<CalendarCustomWidget> {
   /// Simple TableCalendar configuration (using Styles)
   Widget _buildTableCalendar() {
     return TableCalendar<String>(
-      rowHeight: 60,
+      rowHeight: 45,
       firstDay: DateTime.utc(DateTime.now().year - 20, 1, 1),
       lastDay: DateTime.utc(DateTime.now().year + 20, 12, 31),
       focusedDay: _focusedDay,

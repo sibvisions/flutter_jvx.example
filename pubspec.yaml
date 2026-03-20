@@ -58,8 +58,9 @@ dependencies:
   graphic: ^2.0.0
 
 dependency_overrides:
-  # table_calendar
-#  intl: 0.17.0
+
+#  flutter_jvx:
+#    path: /Entwicklung/sibvisions/flutter_jvx
 
 dev_dependencies:
   flutter_test:
