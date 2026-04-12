@@ -17,7 +17,8 @@ void main() {
       ),
       serverConfigs: [
         PredefinedServerConfig(
-            baseUrl: Uri.parse("http://localhost:8081/JVx.mobile/services/mobile"),
+            baseUrl: Uri.parse("http://10.0.0.167:8081/JVx.mobile/services/mobile"),
+//            baseUrl: Uri.parse("http://172.16.0.10:8081/JVx.mobile/services/mobile"),
             appName: "demo",
             username: "features",
             password: "features",

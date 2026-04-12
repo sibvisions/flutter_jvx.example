@@ -43,7 +43,7 @@ class _CoCustomComponentWidgetState extends State<CoCustomComponentWidget> {
   void initState() {
     super.initState();
     IUiService().registerDataSubscription(
-      pDataSubscription: DataSubscription(
+      dataSubscription: DataSubscription(
         subbedObj: this,
         dataProvider: CONTACT_DATA_PROVIDER,
         dataColumns: [COLUMN_NAME_PHONE],
@@ -114,7 +114,7 @@ class _CoCustomComponentWidgetState extends State<CoCustomComponentWidget> {
 
   @override
   void dispose() {
-    IUiService().disposeDataSubscription(pSubscriber: this);
+    IUiService().disposeDataSubscription(subscriber: this);
     super.dispose();
   }
 }

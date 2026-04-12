@@ -36,7 +36,7 @@ class _CalendarCustomWidgetState extends State<CalendarCustomWidget> {
   void initState() {
     super.initState();
     IUiService().registerDataSubscription(
-      pDataSubscription: DataSubscription(
+      dataSubscription: DataSubscription(
         subbedObj: this,
         dataProvider: CONTACT_DATA_PROVIDER,
         from: 0,
@@ -87,7 +87,7 @@ class _CalendarCustomWidgetState extends State<CalendarCustomWidget> {
 
   @override
   void dispose() {
-    IUiService().disposeDataSubscription(pSubscriber: this);
+    IUiService().disposeDataSubscription(subscriber: this);
     super.dispose();
   }
 

@@ -33,7 +33,7 @@ class _SignatureCustomWidgetState extends State<SignatureCustomWidget> {
     super.initState();
 
     IUiService().registerDataSubscription(
-      pDataSubscription: DataSubscription(
+      dataSubscription: DataSubscription(
         subbedObj: this,
         dataProvider: CONTACT_DATA_PROVIDER,
         from: 0,
@@ -45,7 +45,7 @@ class _SignatureCustomWidgetState extends State<SignatureCustomWidget> {
 
   @override
   void dispose() {
-    IUiService().disposeDataSubscription(pSubscriber: this);
+    IUiService().disposeDataSubscription(subscriber: this);
 
     super.dispose();
   }
@@ -100,12 +100,12 @@ class _SignatureCustomWidgetState extends State<SignatureCustomWidget> {
                         color: Theme.of(context).colorScheme.primary,
                         onPressed: () async {
                           await DataBook.updateRecord(
-                              pDataProvider: CONTACT_DATA_PROVIDER,
-                              pColumnNames: [
+                              dataProvider: CONTACT_DATA_PROVIDER,
+                              columnNames: [
                                 COLUMN_NAME_SIGNATURE,
                                 COLUMN_NAME_SIGNATURE_POINTS
                               ],
-                              pValues: [
+                              values: [
                                 null,
                                 null
                               ]);
@@ -122,12 +122,12 @@ class _SignatureCustomWidgetState extends State<SignatureCustomWidget> {
                           if (_controller.isNotEmpty) {
                             var data = await _controller.toPngBytes();
                             await DataBook.updateRecord(
-                              pDataProvider: CONTACT_DATA_PROVIDER,
-                              pColumnNames: [
+                              dataProvider: CONTACT_DATA_PROVIDER,
+                              columnNames: [
                                 COLUMN_NAME_SIGNATURE,
                                 COLUMN_NAME_SIGNATURE_POINTS
                               ],
-                              pValues: [
+                              values: [
                                 base64Encode(data!),
                                 _toJson(_controller.points)
                               ],
@@ -178,16 +178,16 @@ class _SignatureCustomWidgetState extends State<SignatureCustomWidget> {
     return result;
   }
 
-  void _receiveDataChunk(DataChunk pDataChunk) {
-    dataChunk = pDataChunk;
+  void _receiveDataChunk(DataChunk newDataChunk) {
+    dataChunk = newDataChunk;
 
     _updateSelection();
   }
 
   /// Receives selected row
-  void _receiveSelectedRecord(DataRecord? pRecord) {
-    if (selectedIndex != pRecord?.index) {
-      selectedIndex = pRecord?.index;
+  void _receiveSelectedRecord(DataRecord? record) {
+    if (selectedIndex != record?.index) {
+      selectedIndex = record?.index;
 
       _updateSelection();
     }

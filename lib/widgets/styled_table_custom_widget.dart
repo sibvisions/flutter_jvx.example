@@ -23,7 +23,7 @@ class _StyledTableCustomWidgetState extends State<StyledTableCustomWidget> {
   void initState() {
     super.initState();
     IUiService().registerDataSubscription(
-      pDataSubscription: DataSubscription(
+      dataSubscription: DataSubscription(
         subbedObj: this,
         dataProvider: "JVxMobileDemo/StyTab-2G/contacts#4",
         from: 0,
@@ -154,7 +154,7 @@ class _StyledTableCustomWidgetState extends State<StyledTableCustomWidget> {
 
   @override
   void dispose() {
-    IUiService().disposeDataSubscription(pSubscriber: this);
+    IUiService().disposeDataSubscription(subscriber: this);
     super.dispose();
   }
 }

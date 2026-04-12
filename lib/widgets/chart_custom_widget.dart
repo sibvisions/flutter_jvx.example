@@ -67,7 +67,7 @@ class _ChartCustomWidgetState extends State<ChartCustomWidget> with SingleTicker
 
 
     IUiService().registerDataSubscription(
-      pDataSubscription: DataSubscription(
+      dataSubscription: DataSubscription(
         subbedObj: this,
         dataProvider: CHART_DATA_PROVIDER,
         from: 0,
@@ -133,7 +133,7 @@ class _ChartCustomWidgetState extends State<ChartCustomWidget> with SingleTicker
   void dispose() {
     stream.close();
 
-    IUiService().disposeDataSubscription(pSubscriber: this);
+    IUiService().disposeDataSubscription(subscriber: this);
     super.dispose();
   }
 }
